@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC14E817298B064F00A6540C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E816298B064F00A6540C /* CardView.swift */; };
+		EC14E819298B07C900A6540C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E818298B07C900A6540C /* HomeView.swift */; };
+		EC14E81B298B086E00A6540C /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E81A298B086E00A6540C /* MenuView.swift */; };
+		EC14E820298B0C3E00A6540C /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E81F298B0C3E00A6540C /* MenuItemView.swift */; };
+		EC14E823298C515E00A6540C /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = EC14E822298C515E00A6540C /* Factory */; };
+		EC14E825298C516F00A6540C /* MenuRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E824298C516F00A6540C /* MenuRepository.swift */; };
+		EC14E827298C527900A6540C /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
 		ECD845A9298AE51D0036454C /* GenericsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD845A8298AE51D0036454C /* GenericsAppApp.swift */; };
 		ECD845AB298AE51D0036454C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD845AA298AE51D0036454C /* ContentView.swift */; };
 		ECD845AD298AE51E0036454C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECD845AC298AE51E0036454C /* Assets.xcassets */; };
@@ -34,6 +41,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC14E816298B064F00A6540C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		EC14E818298B07C900A6540C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		EC14E81A298B086E00A6540C /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		EC14E81F298B0C3E00A6540C /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
+		EC14E824298C516F00A6540C /* MenuRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRepository.swift; sourceTree = "<group>"; };
+		EC14E826298C527900A6540C /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		ECD845A5298AE51D0036454C /* GenericsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD845A8298AE51D0036454C /* GenericsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsAppApp.swift; sourceTree = "<group>"; };
 		ECD845AA298AE51D0036454C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC14E823298C515E00A6540C /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +85,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC14E81C298B0C0600A6540C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				EC14E816298B064F00A6540C /* CardView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		EC14E81D298B0C1100A6540C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EC14E818298B07C900A6540C /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		EC14E81E298B0C1C00A6540C /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				EC14E81A298B086E00A6540C /* MenuView.swift */,
+				EC14E826298C527900A6540C /* MenuViewModel.swift */,
+				EC14E81F298B0C3E00A6540C /* MenuItemView.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		ECD8459C298AE51D0036454C = {
 			isa = PBXGroup;
 			children = (
@@ -96,8 +136,12 @@
 			children = (
 				ECD845A8298AE51D0036454C /* GenericsAppApp.swift */,
 				ECD845AA298AE51D0036454C /* ContentView.swift */,
+				EC14E81C298B0C0600A6540C /* Common */,
+				EC14E81D298B0C1100A6540C /* Home */,
+				EC14E81E298B0C1C00A6540C /* Menu */,
 				ECD845AC298AE51E0036454C /* Assets.xcassets */,
 				ECD845AE298AE51E0036454C /* Preview Content */,
+				EC14E824298C516F00A6540C /* MenuRepository.swift */,
 			);
 			path = GenericsApp;
 			sourceTree = "<group>";
@@ -143,6 +187,9 @@
 			dependencies = (
 			);
 			name = GenericsApp;
+			packageProductDependencies = (
+				EC14E822298C515E00A6540C /* Factory */,
+			);
 			productName = GenericsApp;
 			productReference = ECD845A5298AE51D0036454C /* GenericsApp.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +262,9 @@
 				Base,
 			);
 			mainGroup = ECD8459C298AE51D0036454C;
+			packageReferences = (
+				EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */,
+			);
 			productRefGroup = ECD845A6298AE51D0036454C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -257,8 +307,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC14E81B298B086E00A6540C /* MenuView.swift in Sources */,
 				ECD845AB298AE51D0036454C /* ContentView.swift in Sources */,
+				EC14E825298C516F00A6540C /* MenuRepository.swift in Sources */,
+				EC14E819298B07C900A6540C /* HomeView.swift in Sources */,
+				EC14E817298B064F00A6540C /* CardView.swift in Sources */,
+				EC14E820298B0C3E00A6540C /* MenuItemView.swift in Sources */,
 				ECD845A9298AE51D0036454C /* GenericsAppApp.swift in Sources */,
+				EC14E827298C527900A6540C /* MenuViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +639,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EC14E822298C515E00A6540C /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ECD8459D298AE51D0036454C /* Project object */;
 }

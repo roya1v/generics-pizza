@@ -11,7 +11,6 @@ struct CardView<Content>: View where Content: View {
 
     var content: () -> Content
 
-
     init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content
     }
