@@ -47,6 +47,7 @@
 		EC14E81F298B0C3E00A6540C /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
 		EC14E824298C516F00A6540C /* MenuRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRepository.swift; sourceTree = "<group>"; };
 		EC14E826298C527900A6540C /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		EC611F33299432A30000427A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ECD845A5298AE51D0036454C /* GenericsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD845A8298AE51D0036454C /* GenericsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsAppApp.swift; sourceTree = "<group>"; };
 		ECD845AA298AE51D0036454C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 				EC14E81A298B086E00A6540C /* MenuView.swift */,
 				EC14E826298C527900A6540C /* MenuViewModel.swift */,
 				EC14E81F298B0C3E00A6540C /* MenuItemView.swift */,
+				EC14E824298C516F00A6540C /* MenuRepository.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -134,6 +136,7 @@
 		ECD845A7298AE51D0036454C /* GenericsApp */ = {
 			isa = PBXGroup;
 			children = (
+				EC611F33299432A30000427A /* Info.plist */,
 				ECD845A8298AE51D0036454C /* GenericsAppApp.swift */,
 				ECD845AA298AE51D0036454C /* ContentView.swift */,
 				EC14E81C298B0C0600A6540C /* Common */,
@@ -141,7 +144,6 @@
 				EC14E81E298B0C1C00A6540C /* Menu */,
 				ECD845AC298AE51E0036454C /* Assets.xcassets */,
 				ECD845AE298AE51E0036454C /* Preview Content */,
-				EC14E824298C516F00A6540C /* MenuRepository.swift */,
 			);
 			path = GenericsApp;
 			sourceTree = "<group>";
@@ -476,6 +478,7 @@
 				DEVELOPMENT_TEAM = 4S3J7NRC9R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GenericsApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -505,6 +508,7 @@
 				DEVELOPMENT_TEAM = 4S3J7NRC9R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GenericsApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

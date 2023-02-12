@@ -6,18 +6,25 @@
 //
 
 import SwiftUI
+import Factory
 
 struct MenuItemView: View {
+    let name: String
+    let description: String
+
     var body: some View {
         CardView {
             VStack {
                 Image("menu_pizza")
                     .resizable()
                     .scaledToFit()
-                Text("Margarita simplita")
-                Text("Tomatoe souce, cheese and weird leaves")
-                    .font(.system(size: 12.0, weight: .regular))
-                    .foregroundColor(.gray)
+                Spacer()
+                VStack(alignment: .leading) {
+                    Text(name)
+                    Text(description)
+                        .font(.system(size: 12.0, weight: .regular))
+                        .foregroundColor(.gray)
+                }
             }
             .padding()
         }
@@ -26,6 +33,7 @@ struct MenuItemView: View {
 
 struct MenuItemView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView()
+        Container.menuRepository.register { MenuRepositoryMck() }
+        return MenuView()
     }
 }

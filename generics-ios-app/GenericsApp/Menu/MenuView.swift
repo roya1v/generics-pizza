@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Factory
 
 struct MenuView: View {
 
@@ -17,20 +18,25 @@ struct MenuView: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns) {
-                    ForEach(0...5, id: \.self) { smth in
-                        MenuItemView()
+                    ForEach(model.items) { item in
+                        MenuItemView(name: item.title,
+                                     description: item.description)
                     }
                 }
                 .padding()
             }
             .navigationTitle("Menu")
             .navigationBarTitleDisplayMode(.large)
+            .onAppear {
+                model.fetch()
+            }
         }
     }
 }
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView()
+        Container.menuRepository.register { MenuRepositoryMck() }
+        return MenuView()
     }
 }
