@@ -17,13 +17,17 @@ struct MenuView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                LazyVGrid(columns: columns) {
-                    ForEach(model.items) { item in
-                        MenuItemView(name: item.title,
-                                     description: item.description)
+                if model.isLoading {
+                    ProgressView()
+                } else {
+                    LazyVGrid(columns: columns) {
+                        ForEach(model.items) { item in
+                            MenuItemView(name: item.title,
+                                         description: item.description)
+                        }
                     }
+                    .padding()
                 }
-                .padding()
             }
             .navigationTitle("Menu")
             .navigationBarTitleDisplayMode(.large)

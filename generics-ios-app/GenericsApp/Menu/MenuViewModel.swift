@@ -8,18 +8,23 @@
 import Foundation
 import Factory
 
+@MainActor
 final class MenuViewModel: ObservableObject {
 
     @Injected(Container.menuRepository) private var repository
 
-    @Published var items = [MenuItem]()
-    @Published var isLoading = false
+    @Published private(set) var items = [MenuItem]()
+    @Published private(set) var isLoading = false
 
     func fetch() {
         isLoading = true
         Task {
-            items = try! await repository.fetchMenu()
-            isLoading = false
+            let newItems = try! await repository.fetchMenu()
+            try! await Task.sleep(for: .seconds(2))
+            await MainActor.run {
+                isLoading = false
+                items = newItems
+            }
         }
     }
 }
