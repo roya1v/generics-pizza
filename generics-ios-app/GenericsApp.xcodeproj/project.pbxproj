@@ -14,6 +14,13 @@
 		EC14E823298C515E00A6540C /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = EC14E822298C515E00A6540C /* Factory */; };
 		EC14E825298C516F00A6540C /* MenuRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E824298C516F00A6540C /* MenuRepository.swift */; };
 		EC14E827298C527900A6540C /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
+		ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */; };
+		ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8C299C2D7700F28299 /* ContentView.swift */; };
+		ECA92F8F299C2D7800F28299 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA92F8E299C2D7800F28299 /* Assets.xcassets */; };
+		ECA92F93299C2D7900F28299 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA92F92299C2D7900F28299 /* Preview Assets.xcassets */; };
+		ECA92F9D299C2D7900F28299 /* GenericsRestaurantsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F9C299C2D7900F28299 /* GenericsRestaurantsTests.swift */; };
+		ECA92FA7299C2D7900F28299 /* GenericsRestaurantsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FA6299C2D7900F28299 /* GenericsRestaurantsUITests.swift */; };
+		ECA92FA9299C2D7900F28299 /* GenericsRestaurantsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FA8299C2D7900F28299 /* GenericsRestaurantsUITestsLaunchTests.swift */; };
 		ECD845A9298AE51D0036454C /* GenericsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD845A8298AE51D0036454C /* GenericsAppApp.swift */; };
 		ECD845AB298AE51D0036454C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD845AA298AE51D0036454C /* ContentView.swift */; };
 		ECD845AD298AE51E0036454C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECD845AC298AE51E0036454C /* Assets.xcassets */; };
@@ -24,6 +31,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		ECA92F99299C2D7900F28299 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ECA92F87299C2D7700F28299;
+			remoteInfo = GenericsRestaurants;
+		};
+		ECA92FA3299C2D7900F28299 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ECA92F87299C2D7700F28299;
+			remoteInfo = GenericsRestaurants;
+		};
 		ECD845B6298AE51E0036454C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
@@ -48,6 +69,17 @@
 		EC14E824298C516F00A6540C /* MenuRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRepository.swift; sourceTree = "<group>"; };
 		EC14E826298C527900A6540C /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		EC611F33299432A30000427A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		ECA92F88299C2D7700F28299 /* GenericsRestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsRestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsRestaurantsApp.swift; sourceTree = "<group>"; };
+		ECA92F8C299C2D7700F28299 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		ECA92F8E299C2D7800F28299 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ECA92F90299C2D7900F28299 /* GenericsRestaurants.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GenericsRestaurants.entitlements; sourceTree = "<group>"; };
+		ECA92F92299C2D7900F28299 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		ECA92F98299C2D7900F28299 /* GenericsRestaurantsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsRestaurantsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECA92F9C299C2D7900F28299 /* GenericsRestaurantsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsRestaurantsTests.swift; sourceTree = "<group>"; };
+		ECA92FA2299C2D7900F28299 /* GenericsRestaurantsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsRestaurantsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECA92FA6299C2D7900F28299 /* GenericsRestaurantsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsRestaurantsUITests.swift; sourceTree = "<group>"; };
+		ECA92FA8299C2D7900F28299 /* GenericsRestaurantsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsRestaurantsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		ECD845A5298AE51D0036454C /* GenericsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD845A8298AE51D0036454C /* GenericsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsAppApp.swift; sourceTree = "<group>"; };
 		ECD845AA298AE51D0036454C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +93,27 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		ECA92F85299C2D7700F28299 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECA92F95299C2D7900F28299 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECA92F9F299C2D7900F28299 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ECD845A2298AE51D0036454C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -113,12 +166,52 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
+		ECA92F89299C2D7700F28299 /* GenericsRestaurants */ = {
+			isa = PBXGroup;
+			children = (
+				ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */,
+				ECA92F8C299C2D7700F28299 /* ContentView.swift */,
+				ECA92F8E299C2D7800F28299 /* Assets.xcassets */,
+				ECA92F90299C2D7900F28299 /* GenericsRestaurants.entitlements */,
+				ECA92F91299C2D7900F28299 /* Preview Content */,
+			);
+			path = GenericsRestaurants;
+			sourceTree = "<group>";
+		};
+		ECA92F91299C2D7900F28299 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				ECA92F92299C2D7900F28299 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		ECA92F9B299C2D7900F28299 /* GenericsRestaurantsTests */ = {
+			isa = PBXGroup;
+			children = (
+				ECA92F9C299C2D7900F28299 /* GenericsRestaurantsTests.swift */,
+			);
+			path = GenericsRestaurantsTests;
+			sourceTree = "<group>";
+		};
+		ECA92FA5299C2D7900F28299 /* GenericsRestaurantsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				ECA92FA6299C2D7900F28299 /* GenericsRestaurantsUITests.swift */,
+				ECA92FA8299C2D7900F28299 /* GenericsRestaurantsUITestsLaunchTests.swift */,
+			);
+			path = GenericsRestaurantsUITests;
+			sourceTree = "<group>";
+		};
 		ECD8459C298AE51D0036454C = {
 			isa = PBXGroup;
 			children = (
 				ECD845A7298AE51D0036454C /* GenericsApp */,
 				ECD845B8298AE51E0036454C /* GenericsAppTests */,
 				ECD845C2298AE51E0036454C /* GenericsAppUITests */,
+				ECA92F89299C2D7700F28299 /* GenericsRestaurants */,
+				ECA92F9B299C2D7900F28299 /* GenericsRestaurantsTests */,
+				ECA92FA5299C2D7900F28299 /* GenericsRestaurantsUITests */,
 				ECD845A6298AE51D0036454C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -129,6 +222,9 @@
 				ECD845A5298AE51D0036454C /* GenericsApp.app */,
 				ECD845B5298AE51E0036454C /* GenericsAppTests.xctest */,
 				ECD845BF298AE51E0036454C /* GenericsAppUITests.xctest */,
+				ECA92F88299C2D7700F28299 /* GenericsRestaurants.app */,
+				ECA92F98299C2D7900F28299 /* GenericsRestaurantsTests.xctest */,
+				ECA92FA2299C2D7900F28299 /* GenericsRestaurantsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -136,13 +232,13 @@
 		ECD845A7298AE51D0036454C /* GenericsApp */ = {
 			isa = PBXGroup;
 			children = (
-				EC611F33299432A30000427A /* Info.plist */,
 				ECD845A8298AE51D0036454C /* GenericsAppApp.swift */,
 				ECD845AA298AE51D0036454C /* ContentView.swift */,
 				EC14E81C298B0C0600A6540C /* Common */,
 				EC14E81D298B0C1100A6540C /* Home */,
 				EC14E81E298B0C1C00A6540C /* Menu */,
 				ECD845AC298AE51E0036454C /* Assets.xcassets */,
+				EC611F33299432A30000427A /* Info.plist */,
 				ECD845AE298AE51E0036454C /* Preview Content */,
 			);
 			path = GenericsApp;
@@ -176,6 +272,59 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		ECA92F87299C2D7700F28299 /* GenericsRestaurants */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECA92FAA299C2D7900F28299 /* Build configuration list for PBXNativeTarget "GenericsRestaurants" */;
+			buildPhases = (
+				ECA92F84299C2D7700F28299 /* Sources */,
+				ECA92F85299C2D7700F28299 /* Frameworks */,
+				ECA92F86299C2D7700F28299 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GenericsRestaurants;
+			productName = GenericsRestaurants;
+			productReference = ECA92F88299C2D7700F28299 /* GenericsRestaurants.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ECA92F97299C2D7900F28299 /* GenericsRestaurantsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECA92FAD299C2D7900F28299 /* Build configuration list for PBXNativeTarget "GenericsRestaurantsTests" */;
+			buildPhases = (
+				ECA92F94299C2D7900F28299 /* Sources */,
+				ECA92F95299C2D7900F28299 /* Frameworks */,
+				ECA92F96299C2D7900F28299 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ECA92F9A299C2D7900F28299 /* PBXTargetDependency */,
+			);
+			name = GenericsRestaurantsTests;
+			productName = GenericsRestaurantsTests;
+			productReference = ECA92F98299C2D7900F28299 /* GenericsRestaurantsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		ECA92FA1299C2D7900F28299 /* GenericsRestaurantsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ECA92FB0299C2D7900F28299 /* Build configuration list for PBXNativeTarget "GenericsRestaurantsUITests" */;
+			buildPhases = (
+				ECA92F9E299C2D7900F28299 /* Sources */,
+				ECA92F9F299C2D7900F28299 /* Frameworks */,
+				ECA92FA0299C2D7900F28299 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ECA92FA4299C2D7900F28299 /* PBXTargetDependency */,
+			);
+			name = GenericsRestaurantsUITests;
+			productName = GenericsRestaurantsUITests;
+			productReference = ECA92FA2299C2D7900F28299 /* GenericsRestaurantsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		ECD845A4298AE51D0036454C /* GenericsApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ECD845C9298AE51E0036454C /* Build configuration list for PBXNativeTarget "GenericsApp" */;
@@ -242,6 +391,17 @@
 				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
+					ECA92F87299C2D7700F28299 = {
+						CreatedOnToolsVersion = 14.1;
+					};
+					ECA92F97299C2D7900F28299 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = ECA92F87299C2D7700F28299;
+					};
+					ECA92FA1299C2D7900F28299 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = ECA92F87299C2D7700F28299;
+					};
 					ECD845A4298AE51D0036454C = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -274,11 +434,37 @@
 				ECD845A4298AE51D0036454C /* GenericsApp */,
 				ECD845B4298AE51E0036454C /* GenericsAppTests */,
 				ECD845BE298AE51E0036454C /* GenericsAppUITests */,
+				ECA92F87299C2D7700F28299 /* GenericsRestaurants */,
+				ECA92F97299C2D7900F28299 /* GenericsRestaurantsTests */,
+				ECA92FA1299C2D7900F28299 /* GenericsRestaurantsUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		ECA92F86299C2D7700F28299 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECA92F93299C2D7900F28299 /* Preview Assets.xcassets in Resources */,
+				ECA92F8F299C2D7800F28299 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECA92F96299C2D7900F28299 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECA92FA0299C2D7900F28299 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ECD845A3298AE51D0036454C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -305,6 +491,32 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		ECA92F84299C2D7700F28299 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */,
+				ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECA92F94299C2D7900F28299 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECA92F9D299C2D7900F28299 /* GenericsRestaurantsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ECA92F9E299C2D7900F28299 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECA92FA7299C2D7900F28299 /* GenericsRestaurantsUITests.swift in Sources */,
+				ECA92FA9299C2D7900F28299 /* GenericsRestaurantsUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ECD845A1298AE51D0036454C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -340,6 +552,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		ECA92F9A299C2D7900F28299 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ECA92F87299C2D7700F28299 /* GenericsRestaurants */;
+			targetProxy = ECA92F99299C2D7900F28299 /* PBXContainerItemProxy */;
+		};
+		ECA92FA4299C2D7900F28299 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ECA92F87299C2D7700F28299 /* GenericsRestaurants */;
+			targetProxy = ECA92FA3299C2D7900F28299 /* PBXContainerItemProxy */;
+		};
 		ECD845B7298AE51E0036454C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = ECD845A4298AE51D0036454C /* GenericsApp */;
@@ -353,6 +575,176 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		ECA92FAB299C2D7900F28299 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GenericsRestaurants/GenericsRestaurants.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"GenericsRestaurants/Preview Content\"";
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsRestaurants;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		ECA92FAC299C2D7900F28299 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GenericsRestaurants/GenericsRestaurants.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"GenericsRestaurants/Preview Content\"";
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsRestaurants;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		ECA92FAE299C2D7900F28299 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsRestaurantsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericsRestaurants.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GenericsRestaurants";
+			};
+			name = Debug;
+		};
+		ECA92FAF299C2D7900F28299 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsRestaurantsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericsRestaurants.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GenericsRestaurants";
+			};
+			name = Release;
+		};
+		ECA92FB1299C2D7900F28299 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsRestaurantsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GenericsRestaurants;
+			};
+			name = Debug;
+		};
+		ECA92FB2299C2D7900F28299 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsRestaurantsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GenericsRestaurants;
+			};
+			name = Release;
+		};
 		ECD845C7298AE51E0036454C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -492,9 +884,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -523,9 +918,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -608,6 +1006,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		ECA92FAA299C2D7900F28299 /* Build configuration list for PBXNativeTarget "GenericsRestaurants" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECA92FAB299C2D7900F28299 /* Debug */,
+				ECA92FAC299C2D7900F28299 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECA92FAD299C2D7900F28299 /* Build configuration list for PBXNativeTarget "GenericsRestaurantsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECA92FAE299C2D7900F28299 /* Debug */,
+				ECA92FAF299C2D7900F28299 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ECA92FB0299C2D7900F28299 /* Build configuration list for PBXNativeTarget "GenericsRestaurantsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECA92FB1299C2D7900F28299 /* Debug */,
+				ECA92FB2299C2D7900F28299 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		ECD845A0298AE51D0036454C /* Build configuration list for PBXProject "GenericsApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
