@@ -21,6 +21,10 @@
 		ECA92F9D299C2D7900F28299 /* GenericsRestaurantsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F9C299C2D7900F28299 /* GenericsRestaurantsTests.swift */; };
 		ECA92FA7299C2D7900F28299 /* GenericsRestaurantsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FA6299C2D7900F28299 /* GenericsRestaurantsUITests.swift */; };
 		ECA92FA9299C2D7900F28299 /* GenericsRestaurantsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FA8299C2D7900F28299 /* GenericsRestaurantsUITestsLaunchTests.swift */; };
+		ECA92FB4299D640500F28299 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FB3299D640500F28299 /* LoginView.swift */; };
+		ECA92FB7299D64E600F28299 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FB6299D64E600F28299 /* LoginViewModel.swift */; };
+		ECA92FBA299D652D00F28299 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = ECA92FB9299D652D00F28299 /* Factory */; };
+		ECA92FBC299D657000F28299 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */; };
 		ECD845A9298AE51D0036454C /* GenericsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD845A8298AE51D0036454C /* GenericsAppApp.swift */; };
 		ECD845AB298AE51D0036454C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD845AA298AE51D0036454C /* ContentView.swift */; };
 		ECD845AD298AE51E0036454C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECD845AC298AE51E0036454C /* Assets.xcassets */; };
@@ -80,6 +84,10 @@
 		ECA92FA2299C2D7900F28299 /* GenericsRestaurantsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsRestaurantsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA92FA6299C2D7900F28299 /* GenericsRestaurantsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsRestaurantsUITests.swift; sourceTree = "<group>"; };
 		ECA92FA8299C2D7900F28299 /* GenericsRestaurantsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsRestaurantsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		ECA92FB3299D640500F28299 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		ECA92FB6299D64E600F28299 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
+		ECA92FBD299D6D6400F28299 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ECD845A5298AE51D0036454C /* GenericsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD845A8298AE51D0036454C /* GenericsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsAppApp.swift; sourceTree = "<group>"; };
 		ECD845AA298AE51D0036454C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECA92FBA299D652D00F28299 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,8 +178,10 @@
 		ECA92F89299C2D7700F28299 /* GenericsRestaurants */ = {
 			isa = PBXGroup;
 			children = (
+				ECA92FBD299D6D6400F28299 /* Info.plist */,
 				ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */,
 				ECA92F8C299C2D7700F28299 /* ContentView.swift */,
+				ECA92FB5299D646000F28299 /* Login */,
 				ECA92F8E299C2D7800F28299 /* Assets.xcassets */,
 				ECA92F90299C2D7900F28299 /* GenericsRestaurants.entitlements */,
 				ECA92F91299C2D7900F28299 /* Preview Content */,
@@ -203,6 +214,23 @@
 			path = GenericsRestaurantsUITests;
 			sourceTree = "<group>";
 		};
+		ECA92FB5299D646000F28299 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				ECA92FB3299D640500F28299 /* LoginView.swift */,
+				ECA92FB6299D64E600F28299 /* LoginViewModel.swift */,
+				ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		ECA92FB8299D652D00F28299 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		ECD8459C298AE51D0036454C = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +241,7 @@
 				ECA92F9B299C2D7900F28299 /* GenericsRestaurantsTests */,
 				ECA92FA5299C2D7900F28299 /* GenericsRestaurantsUITests */,
 				ECD845A6298AE51D0036454C /* Products */,
+				ECA92FB8299D652D00F28299 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -285,6 +314,9 @@
 			dependencies = (
 			);
 			name = GenericsRestaurants;
+			packageProductDependencies = (
+				ECA92FB9299D652D00F28299 /* Factory */,
+			);
 			productName = GenericsRestaurants;
 			productReference = ECA92F88299C2D7700F28299 /* GenericsRestaurants.app */;
 			productType = "com.apple.product-type.application";
@@ -495,7 +527,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECA92FB7299D64E600F28299 /* LoginViewModel.swift in Sources */,
+				ECA92FB4299D640500F28299 /* LoginView.swift in Sources */,
 				ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */,
+				ECA92FBC299D657000F28299 /* AuthenticationRepository.swift in Sources */,
 				ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -588,6 +623,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GenericsRestaurants/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -628,6 +665,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GenericsRestaurants/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -1084,6 +1123,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		EC14E822298C515E00A6540C /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
+		ECA92FB9299D652D00F28299 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;

@@ -6,16 +6,26 @@
 //
 
 import SwiftUI
+import Combine
+import Factory
 
 struct ContentView: View {
+
+    @State var state: AuthenticationState = .loggedOut
+    @Injected(Container.authenticationRepository) private var repository
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        Group {
+            if state == .loggedOut {
+                LoginView()
+            } else {
+                Text("hello world")
+            }
+
         }
-        .padding()
+        .onReceive(repository.state) { state in
+            self.state = state
+        }
     }
 }
 

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "generics-pizza.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
