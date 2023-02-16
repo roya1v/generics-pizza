@@ -25,6 +25,7 @@
 		ECA92FB7299D64E600F28299 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FB6299D64E600F28299 /* LoginViewModel.swift */; };
 		ECA92FBA299D652D00F28299 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = ECA92FB9299D652D00F28299 /* Factory */; };
 		ECA92FBC299D657000F28299 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */; };
+		ECA92FC1299D721900F28299 /* GenericsHttp in Frameworks */ = {isa = PBXBuildFile; productRef = ECA92FC0299D721900F28299 /* GenericsHttp */; };
 		ECD845A9298AE51D0036454C /* GenericsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD845A8298AE51D0036454C /* GenericsAppApp.swift */; };
 		ECD845AB298AE51D0036454C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD845AA298AE51D0036454C /* ContentView.swift */; };
 		ECD845AD298AE51E0036454C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECD845AC298AE51E0036454C /* Assets.xcassets */; };
@@ -88,6 +89,7 @@
 		ECA92FB6299D64E600F28299 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
 		ECA92FBD299D6D6400F28299 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		ECA92FBF299D719000F28299 /* GenericsPackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GenericsPackage; sourceTree = "<group>"; };
 		ECD845A5298AE51D0036454C /* GenericsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD845A8298AE51D0036454C /* GenericsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsAppApp.swift; sourceTree = "<group>"; };
 		ECD845AA298AE51D0036454C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECA92FC1299D721900F28299 /* GenericsHttp in Frameworks */,
 				ECA92FBA299D652D00F28299 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,6 +237,7 @@
 		ECD8459C298AE51D0036454C = {
 			isa = PBXGroup;
 			children = (
+				ECA92FBF299D719000F28299 /* GenericsPackage */,
 				ECD845A7298AE51D0036454C /* GenericsApp */,
 				ECD845B8298AE51E0036454C /* GenericsAppTests */,
 				ECD845C2298AE51E0036454C /* GenericsAppUITests */,
@@ -316,6 +320,7 @@
 			name = GenericsRestaurants;
 			packageProductDependencies = (
 				ECA92FB9299D652D00F28299 /* Factory */,
+				ECA92FC0299D721900F28299 /* GenericsHttp */,
 			);
 			productName = GenericsRestaurants;
 			productReference = ECA92F88299C2D7700F28299 /* GenericsRestaurants.app */;
@@ -1131,6 +1136,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
+		};
+		ECA92FC0299D721900F28299 /* GenericsHttp */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GenericsHttp;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -8,6 +8,7 @@
 import Foundation
 import Factory
 import Combine
+import GenericsHttp
 
 extension Container {
     static let authenticationRepository = Factory(scope: .singleton) { AuthenticationRepositoryImpl() as AuthenticationRepository }
@@ -39,17 +40,16 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
 
     func login(email: String, password: String) async throws {
 
-        let token = String(format: "%@:%@", email, password).data(using: .utf8)!.base64EncodedData()
+        let response = try await GenericsHttp(baseURL: "http://localhost:8080")!
+            .add(path: "auth")
+            .add(path: "login")
+            .authorization(.basic(login: email, password: password))
+            .method(.post)
+            .perform()
 
-        var request = URLRequest(url: URL(string: baseURL + "/auth/login")!)
-        request.setValue("Basic \(String(data: token, encoding: .utf8)!)", forHTTPHeaderField: "Authorization")
-        request.httpMethod = "POST"
-
-        let stuff = try await URLSession.shared.data(for: request)
-        let respone = try JSONDecoder().decode(LoginResponse.self, from: stuff.0)
+        let respone = try JSONDecoder().decode(LoginResponse.self, from: response.0)
 
         print(respone.value)
-        stateSubject.send(.loggedIn)
     }
 }
 
