@@ -19,7 +19,7 @@ struct LoginView: View {
                 .resizable()
                 .scaledToFit()
             TextField("Email", text: $email)
-            TextField("Password", text: $password)
+            SecureField("Password", text: $password)
             if model.isLoading {
                 ProgressView()
             } else {
@@ -31,7 +31,7 @@ struct LoginView: View {
             }
         }
         .padding()
-        .frame(minWidth: 600.0, minHeight: 300.0)
+        .frame(minWidth: 300.0, maxWidth: 300.0, minHeight: 300.0)
     }
 }
 
