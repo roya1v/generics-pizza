@@ -22,6 +22,7 @@ enum AuthenticationState {
 protocol AuthenticationRepository {
     var state: AnyPublisher<AuthenticationState, Never> { get }
     func login(email: String, password: String) async throws
+    func reload()
 }
 
 final class AuthenticationRepositoryImpl: AuthenticationRepository {
@@ -38,6 +39,14 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
 
     private let baseURL = "http://localhost:8080"
 
+    func reload() {
+        if let _ = UserDefaults.standard.string(forKey: "auth-token") {
+            stateSubject.send(.loggedIn)
+        } else {
+            stateSubject.send(.loggedOut)
+        }
+    }
+
     func login(email: String, password: String) async throws {
 
         let response = try await GenericsHttp(baseURL: "http://localhost:8080")!
@@ -49,7 +58,9 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
 
         let respone = try JSONDecoder().decode(LoginResponse.self, from: response.0)
 
-        print(respone.value)
+        UserDefaults.standard.set(respone.value, forKey: "auth-token")
+
+        stateSubject.send(.loggedIn)
     }
 }
 
@@ -57,6 +68,8 @@ final class AuthenticationRepositoryMck: AuthenticationRepository {
     var state: AnyPublisher<AuthenticationState, Never> = PassthroughSubject().eraseToAnyPublisher()
 
     func login(email: String, password: String) async throws {
-        return
+    }
+
+    func reload() {
     }
 }

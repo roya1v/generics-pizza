@@ -26,6 +26,9 @@ struct ContentView: View {
         .onReceive(repository.state) { state in
             self.state = state
         }
+        .onAppear {
+            repository.reload()
+        }
     }
 }
 
