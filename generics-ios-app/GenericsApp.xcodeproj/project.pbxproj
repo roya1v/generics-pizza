@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EC14E817298B064F00A6540C /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E816298B064F00A6540C /* CardView.swift */; };
 		EC14E819298B07C900A6540C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E818298B07C900A6540C /* HomeView.swift */; };
 		EC14E81B298B086E00A6540C /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E81A298B086E00A6540C /* MenuView.swift */; };
 		EC14E820298B0C3E00A6540C /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E81F298B0C3E00A6540C /* MenuItemView.swift */; };
 		EC14E823298C515E00A6540C /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = EC14E822298C515E00A6540C /* Factory */; };
 		EC14E825298C516F00A6540C /* MenuRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E824298C516F00A6540C /* MenuRepository.swift */; };
 		EC14E827298C527900A6540C /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
+		EC7B6B7529B6814200A1B8D7 /* GenericsUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = EC7B6B7429B6814200A1B8D7 /* GenericsUIKit */; };
 		ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */; };
 		ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8C299C2D7700F28299 /* ContentView.swift */; };
 		ECA92F8F299C2D7800F28299 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA92F8E299C2D7800F28299 /* Assets.xcassets */; };
@@ -67,7 +67,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		EC14E816298B064F00A6540C /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		EC14E818298B07C900A6540C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EC14E81A298B086E00A6540C /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		EC14E81F298B0C3E00A6540C /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
@@ -131,6 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC14E823298C515E00A6540C /* Factory in Frameworks */,
+				EC7B6B7529B6814200A1B8D7 /* GenericsUIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,14 +151,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EC14E81C298B0C0600A6540C /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				EC14E816298B064F00A6540C /* CardView.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
 		EC14E81D298B0C1100A6540C /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,11 +173,11 @@
 		ECA92F89299C2D7700F28299 /* GenericsRestaurants */ = {
 			isa = PBXGroup;
 			children = (
-				ECA92FBD299D6D6400F28299 /* Info.plist */,
 				ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */,
 				ECA92F8C299C2D7700F28299 /* ContentView.swift */,
 				ECA92FB5299D646000F28299 /* Login */,
 				ECA92F8E299C2D7800F28299 /* Assets.xcassets */,
+				ECA92FBD299D6D6400F28299 /* Info.plist */,
 				ECA92F90299C2D7900F28299 /* GenericsRestaurants.entitlements */,
 				ECA92F91299C2D7900F28299 /* Preview Content */,
 			);
@@ -267,7 +259,6 @@
 			children = (
 				ECD845A8298AE51D0036454C /* GenericsAppApp.swift */,
 				ECD845AA298AE51D0036454C /* ContentView.swift */,
-				EC14E81C298B0C0600A6540C /* Common */,
 				EC14E81D298B0C1100A6540C /* Home */,
 				EC14E81E298B0C1C00A6540C /* Menu */,
 				ECD845AC298AE51E0036454C /* Assets.xcassets */,
@@ -377,6 +368,7 @@
 			name = GenericsApp;
 			packageProductDependencies = (
 				EC14E822298C515E00A6540C /* Factory */,
+				EC7B6B7429B6814200A1B8D7 /* GenericsUIKit */,
 			);
 			productName = GenericsApp;
 			productReference = ECD845A5298AE51D0036454C /* GenericsApp.app */;
@@ -565,7 +557,6 @@
 				ECD845AB298AE51D0036454C /* ContentView.swift in Sources */,
 				EC14E825298C516F00A6540C /* MenuRepository.swift in Sources */,
 				EC14E819298B07C900A6540C /* HomeView.swift in Sources */,
-				EC14E817298B064F00A6540C /* CardView.swift in Sources */,
 				EC14E820298B0C3E00A6540C /* MenuItemView.swift in Sources */,
 				ECD845A9298AE51D0036454C /* GenericsAppApp.swift in Sources */,
 				EC14E827298C527900A6540C /* MenuViewModel.swift in Sources */,
@@ -1131,6 +1122,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
+		};
+		EC7B6B7429B6814200A1B8D7 /* GenericsUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GenericsUIKit;
 		};
 		ECA92FB9299D652D00F28299 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;

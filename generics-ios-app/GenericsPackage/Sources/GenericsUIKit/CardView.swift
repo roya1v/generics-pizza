@@ -1,21 +1,21 @@
 //
 //  CardView.swift
-//  GenericsApp
+//  
 //
-//  Created by Mike Shevelinsky on 01/02/2023.
+//  Created by Mike Shevelinsky on 06/03/2023.
 //
 
 import SwiftUI
 
-struct CardView<Content>: View where Content: View {
+public struct CardView<Content>: View where Content: View {
 
     var content: () -> Content
 
-    init(@ViewBuilder content: @escaping () -> Content) {
+    public init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content
     }
 
-    var body: some View {
+    public var body: some View {
         content()
             .background(.white)
             .compositingGroup()

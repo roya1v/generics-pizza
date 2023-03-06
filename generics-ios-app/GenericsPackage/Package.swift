@@ -5,17 +5,23 @@ import PackageDescription
 
 let package = Package(
     name: "GenericsPackage",
-    platforms: [.iOS(.v13), .macOS(.v13)],
+    platforms: [.iOS(.v15), .macOS(.v13)],
     products: [
         .library(
             name: "GenericsHttp",
             targets: ["GenericsHttp"]),
+        .library(
+            name: "GenericsUIKit",
+            targets: ["GenericsUIKit"]),
     ],
     dependencies: [
     ],
     targets: [
         .target(
             name: "GenericsHttp",
+            dependencies: []),
+        .target(
+            name: "GenericsUIKit",
             dependencies: []),
     ]
 )
