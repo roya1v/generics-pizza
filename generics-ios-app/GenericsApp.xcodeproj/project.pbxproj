@@ -13,6 +13,7 @@
 		EC14E823298C515E00A6540C /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = EC14E822298C515E00A6540C /* Factory */; };
 		EC14E825298C516F00A6540C /* MenuRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E824298C516F00A6540C /* MenuRepository.swift */; };
 		EC14E827298C527900A6540C /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
+		EC42551F29BE3F5400E5F41A /* GenericsModels in Frameworks */ = {isa = PBXBuildFile; productRef = EC42551E29BE3F5400E5F41A /* GenericsModels */; };
 		EC7B6B7529B6814200A1B8D7 /* GenericsUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = EC7B6B7429B6814200A1B8D7 /* GenericsUIKit */; };
 		ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */; };
 		ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8C299C2D7700F28299 /* ContentView.swift */; };
@@ -129,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC42551F29BE3F5400E5F41A /* GenericsModels in Frameworks */,
 				EC14E823298C515E00A6540C /* Factory in Frameworks */,
 				EC7B6B7529B6814200A1B8D7 /* GenericsUIKit in Frameworks */,
 			);
@@ -369,6 +371,7 @@
 			packageProductDependencies = (
 				EC14E822298C515E00A6540C /* Factory */,
 				EC7B6B7429B6814200A1B8D7 /* GenericsUIKit */,
+				EC42551E29BE3F5400E5F41A /* GenericsModels */,
 			);
 			productName = GenericsApp;
 			productReference = ECD845A5298AE51D0036454C /* GenericsApp.app */;
@@ -1122,6 +1125,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
+		};
+		EC42551E29BE3F5400E5F41A /* GenericsModels */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GenericsModels;
 		};
 		EC7B6B7429B6814200A1B8D7 /* GenericsUIKit */ = {
 			isa = XCSwiftPackageProductDependency;

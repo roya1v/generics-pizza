@@ -9,6 +9,8 @@ import Foundation
 
 import Factory
 
+import GenericsModels
+
 extension Container {
     static let menuRepository = Factory<MenuRepository> { MenuRepositoryImp() }
 }
@@ -17,12 +19,12 @@ protocol MenuRepository {
     func fetchMenu() async throws -> [MenuItem]
 }
 
-struct MenuItem: Codable, Identifiable {
-    //let imageUrl: URL?
-    let id: UUID
-    let title: String
-    let description: String
-}
+//struct MenuItem: Codable, Identifiable {
+//    //let imageUrl: URL?
+//    let id: UUID
+//    let title: String
+//    let description: String
+//}
 
 class MenuRepositoryImp: MenuRepository {
 

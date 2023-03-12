@@ -7,6 +7,7 @@
 
 import Foundation
 import Factory
+import GenericsModels
 
 @MainActor
 final class MenuViewModel: ObservableObject {

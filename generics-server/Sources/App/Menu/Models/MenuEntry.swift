@@ -7,6 +7,7 @@
 
 import Fluent
 import Vapor
+import GenericsModels
 
 final class MenuEntry: Model, Content {
     static var schema = "menu"
@@ -33,5 +34,15 @@ final class MenuEntry: Model, Content {
         self.title = title
         self.description = description
         self.imageUrl = imageUrl
+    }
+
+    func getContent() -> MenuItem {
+        .init(id: id, title: title, description: description)
+    }
+}
+
+extension MenuItem: Content {
+    func getModel() -> MenuEntry {
+        .init(id: id, title: title, description: description, imageUrl: nil)
     }
 }
