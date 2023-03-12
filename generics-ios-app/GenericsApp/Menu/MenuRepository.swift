@@ -19,13 +19,6 @@ protocol MenuRepository {
     func fetchMenu() async throws -> [MenuItem]
 }
 
-//struct MenuItem: Codable, Identifiable {
-//    //let imageUrl: URL?
-//    let id: UUID
-//    let title: String
-//    let description: String
-//}
-
 class MenuRepositoryImp: MenuRepository {
 
     private let baseURL = "http://localhost:8080"
