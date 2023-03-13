@@ -15,6 +15,11 @@
 		EC14E827298C527900A6540C /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
 		EC42551F29BE3F5400E5F41A /* GenericsModels in Frameworks */ = {isa = PBXBuildFile; productRef = EC42551E29BE3F5400E5F41A /* GenericsModels */; };
 		EC7B6B7529B6814200A1B8D7 /* GenericsUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = EC7B6B7429B6814200A1B8D7 /* GenericsUIKit */; };
+		ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */; };
+		ECA5E7F129BFC6F300D9E85F /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7F029BFC6F300D9E85F /* MenuView.swift */; };
+		ECA5E7F329BFC71800D9E85F /* NowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7F229BFC71800D9E85F /* NowView.swift */; };
+		ECA5E7F729BFC8BB00D9E85F /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7F629BFC8BB00D9E85F /* MenuViewModel.swift */; };
+		ECA5E7F929BFC8F600D9E85F /* GenericsModels in Frameworks */ = {isa = PBXBuildFile; productRef = ECA5E7F829BFC8F600D9E85F /* GenericsModels */; };
 		ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */; };
 		ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8C299C2D7700F28299 /* ContentView.swift */; };
 		ECA92F8F299C2D7800F28299 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA92F8E299C2D7800F28299 /* Assets.xcassets */; };
@@ -74,6 +79,10 @@
 		EC14E824298C516F00A6540C /* MenuRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRepository.swift; sourceTree = "<group>"; };
 		EC14E826298C527900A6540C /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		EC611F33299432A30000427A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		ECA5E7F029BFC6F300D9E85F /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		ECA5E7F229BFC71800D9E85F /* NowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowView.swift; sourceTree = "<group>"; };
+		ECA5E7F629BFC8BB00D9E85F /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		ECA92F88299C2D7700F28299 /* GenericsRestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsRestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsRestaurantsApp.swift; sourceTree = "<group>"; };
 		ECA92F8C299C2D7700F28299 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -107,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECA5E7F929BFC8F600D9E85F /* GenericsModels in Frameworks */,
 				ECA92FC1299D721900F28299 /* GenericsHttp in Frameworks */,
 				ECA92FBA299D652D00F28299 /* Factory in Frameworks */,
 			);
@@ -172,11 +182,31 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
+		ECA5E7F429BFC87400D9E85F /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				ECA5E7F029BFC6F300D9E85F /* MenuView.swift */,
+				ECA5E7F629BFC8BB00D9E85F /* MenuViewModel.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		ECA5E7F529BFC88300D9E85F /* Now */ = {
+			isa = PBXGroup;
+			children = (
+				ECA5E7F229BFC71800D9E85F /* NowView.swift */,
+			);
+			path = Now;
+			sourceTree = "<group>";
+		};
 		ECA92F89299C2D7700F28299 /* GenericsRestaurants */ = {
 			isa = PBXGroup;
 			children = (
 				ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */,
 				ECA92F8C299C2D7700F28299 /* ContentView.swift */,
+				ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */,
+				ECA5E7F529BFC88300D9E85F /* Now */,
+				ECA5E7F429BFC87400D9E85F /* Menu */,
 				ECA92FB5299D646000F28299 /* Login */,
 				ECA92F8E299C2D7800F28299 /* Assets.xcassets */,
 				ECA92FBD299D6D6400F28299 /* Info.plist */,
@@ -314,6 +344,7 @@
 			packageProductDependencies = (
 				ECA92FB9299D652D00F28299 /* Factory */,
 				ECA92FC0299D721900F28299 /* GenericsHttp */,
+				ECA5E7F829BFC8F600D9E85F /* GenericsModels */,
 			);
 			productName = GenericsRestaurants;
 			productReference = ECA92F88299C2D7700F28299 /* GenericsRestaurants.app */;
@@ -527,11 +558,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECA5E7F129BFC6F300D9E85F /* MenuView.swift in Sources */,
 				ECA92FB7299D64E600F28299 /* LoginViewModel.swift in Sources */,
+				ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */,
+				ECA5E7F729BFC8BB00D9E85F /* MenuViewModel.swift in Sources */,
 				ECA92FB4299D640500F28299 /* LoginView.swift in Sources */,
 				ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */,
 				ECA92FBC299D657000F28299 /* AuthenticationRepository.swift in Sources */,
 				ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */,
+				ECA5E7F329BFC71800D9E85F /* NowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1133,6 +1168,10 @@
 		EC7B6B7429B6814200A1B8D7 /* GenericsUIKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GenericsUIKit;
+		};
+		ECA5E7F829BFC8F600D9E85F /* GenericsModels */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GenericsModels;
 		};
 		ECA92FB9299D652D00F28299 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;

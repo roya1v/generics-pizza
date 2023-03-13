@@ -19,9 +19,9 @@ struct ContentView: View {
             if state == .loggedOut {
                 LoginView()
             } else {
-                Text("hello world")
+                DashboardView()
+                    .padding()
             }
-
         }
         .onReceive(repository.state) { state in
             self.state = state
