@@ -20,7 +20,6 @@ struct ContentView: View {
                 LoginView()
             } else {
                 DashboardView()
-                    .padding()
             }
         }
         .onReceive(repository.state) { state in

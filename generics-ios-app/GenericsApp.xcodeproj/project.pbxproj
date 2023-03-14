@@ -18,8 +18,10 @@
 		ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */; };
 		ECA5E7F129BFC6F300D9E85F /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7F029BFC6F300D9E85F /* MenuView.swift */; };
 		ECA5E7F329BFC71800D9E85F /* NowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7F229BFC71800D9E85F /* NowView.swift */; };
-		ECA5E7F729BFC8BB00D9E85F /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7F629BFC8BB00D9E85F /* MenuViewModel.swift */; };
 		ECA5E7F929BFC8F600D9E85F /* GenericsModels in Frameworks */ = {isa = PBXBuildFile; productRef = ECA5E7F829BFC8F600D9E85F /* GenericsModels */; };
+		ECA5E7FA29BFCC3200D9E85F /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */; };
+		ECA5E7FB29BFCC3500D9E85F /* MenuRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E824298C516F00A6540C /* MenuRepository.swift */; };
+		ECA5E7FC29C0F14900D9E85F /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
 		ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */; };
 		ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8C299C2D7700F28299 /* ContentView.swift */; };
 		ECA92F8F299C2D7800F28299 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA92F8E299C2D7800F28299 /* Assets.xcassets */; };
@@ -82,7 +84,6 @@
 		ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		ECA5E7F029BFC6F300D9E85F /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		ECA5E7F229BFC71800D9E85F /* NowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowView.swift; sourceTree = "<group>"; };
-		ECA5E7F629BFC8BB00D9E85F /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		ECA92F88299C2D7700F28299 /* GenericsRestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsRestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsRestaurantsApp.swift; sourceTree = "<group>"; };
 		ECA92F8C299C2D7700F28299 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -186,7 +187,6 @@
 			isa = PBXGroup;
 			children = (
 				ECA5E7F029BFC6F300D9E85F /* MenuView.swift */,
-				ECA5E7F629BFC8BB00D9E85F /* MenuViewModel.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -560,8 +560,9 @@
 			files = (
 				ECA5E7F129BFC6F300D9E85F /* MenuView.swift in Sources */,
 				ECA92FB7299D64E600F28299 /* LoginViewModel.swift in Sources */,
+				ECA5E7FB29BFCC3500D9E85F /* MenuRepository.swift in Sources */,
+				ECA5E7FC29C0F14900D9E85F /* MenuViewModel.swift in Sources */,
 				ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */,
-				ECA5E7F729BFC8BB00D9E85F /* MenuViewModel.swift in Sources */,
 				ECA92FB4299D640500F28299 /* LoginView.swift in Sources */,
 				ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */,
 				ECA92FBC299D657000F28299 /* AuthenticationRepository.swift in Sources */,
@@ -592,6 +593,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC14E81B298B086E00A6540C /* MenuView.swift in Sources */,
+				ECA5E7FA29BFCC3200D9E85F /* AuthenticationRepository.swift in Sources */,
 				ECD845AB298AE51D0036454C /* ContentView.swift in Sources */,
 				EC14E825298C516F00A6540C /* MenuRepository.swift in Sources */,
 				EC14E819298B07C900A6540C /* HomeView.swift in Sources */,

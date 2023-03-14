@@ -7,17 +7,29 @@
 
 import SwiftUI
 
+enum Items: String {
+    case now
+    case menu
+}
+
 struct DashboardView: View {
+
+    @State private var selected: Items = .now
+
+
     var body: some View {
-        TabView {
-            NowView()
-                .tabItem {
-                    Text("Now")
-                }
-            MenuView()
-                .tabItem {
-                    Text("Menu")
-                }
+        NavigationSplitView {
+            List([Items.now, .menu], id: \.rawValue,
+                 selection: $selected) { item in
+                NavigationLink(item.rawValue, value: item)
+            }
+        } detail: {
+            switch selected {
+            case .now:
+                NowView()
+            case .menu:
+                MenuView()
+            }
         }
     }
 }

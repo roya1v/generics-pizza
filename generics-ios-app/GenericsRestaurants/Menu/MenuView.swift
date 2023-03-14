@@ -6,15 +6,46 @@
 //
 
 import SwiftUI
+import Factory
 
 struct MenuView: View {
+    let columns = [GridItem(.flexible()), GridItem(.flexible())]
+
+    @StateObject var model = MenuViewModel()
+
+    @Environment(\.openWindow) var openWindow
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            if model.isLoading {
+                ProgressView()
+            } else {
+                table
+            }
+        }
+        .onAppear {
+            model.fetch()
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Button("New") {
+                    openWindow(id: "new-pizza")
+                }
+            }
+        }
+    }
+
+    var table: some View {
+        Table(model.items) {
+            TableColumn("Title", value: \.title)
+            TableColumn("Description", value: \.description)
+        }
     }
 }
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView()
+        Container.menuRepository.register { MenuRepositoryMck() }
+        return MenuView()
     }
 }
