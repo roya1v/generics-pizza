@@ -19,7 +19,7 @@ enum AuthenticationState {
     case loggedOut
 }
 
-protocol AuthenticationRepository {
+protocol AuthenticationRepository: AuthorizationDelegate {
     var state: AnyPublisher<AuthenticationState, Never> { get }
     func login(email: String, password: String) async throws
     func reload()
@@ -62,6 +62,14 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
 
         stateSubject.send(.loggedIn)
     }
+
+    func getAuthorization() throws -> GenericsHttp.Authorization {
+        guard let token = UserDefaults.standard.string(forKey: "auth-token") else {
+            fatalError()
+        }
+
+        return .bearer(token: token)
+    }
 }
 
 final class AuthenticationRepositoryMck: AuthenticationRepository {
@@ -71,5 +79,9 @@ final class AuthenticationRepositoryMck: AuthenticationRepository {
     }
 
     func reload() {
+    }
+
+    func getAuthorization() throws -> GenericsHttp.Authorization {
+        fatalError()
     }
 }

@@ -13,8 +13,8 @@ struct GenericsRestaurantsApp: App {
         WindowGroup {
             ContentView()
         }
-        WindowGroup("New pizza", id: "new-pizza") {
-            Text("Hello world!")
+        Window("New pizza", id: "new-pizza") {
+            NewMenuItemView()
         }
     }
 }

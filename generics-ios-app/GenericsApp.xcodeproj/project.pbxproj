@@ -14,6 +14,7 @@
 		EC14E825298C516F00A6540C /* MenuRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E824298C516F00A6540C /* MenuRepository.swift */; };
 		EC14E827298C527900A6540C /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
 		EC42551F29BE3F5400E5F41A /* GenericsModels in Frameworks */ = {isa = PBXBuildFile; productRef = EC42551E29BE3F5400E5F41A /* GenericsModels */; };
+		EC63164E29C259FF00BF52E0 /* NewMenuItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC63164D29C259FF00BF52E0 /* NewMenuItemViewModel.swift */; };
 		EC7B6B7529B6814200A1B8D7 /* GenericsUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = EC7B6B7429B6814200A1B8D7 /* GenericsUIKit */; };
 		ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */; };
 		ECA5E7F129BFC6F300D9E85F /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7F029BFC6F300D9E85F /* MenuView.swift */; };
@@ -22,6 +23,7 @@
 		ECA5E7FA29BFCC3200D9E85F /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */; };
 		ECA5E7FB29BFCC3500D9E85F /* MenuRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E824298C516F00A6540C /* MenuRepository.swift */; };
 		ECA5E7FC29C0F14900D9E85F /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
+		ECA5E7FE29C0FBE200D9E85F /* NewMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7FD29C0FBE200D9E85F /* NewMenuItemView.swift */; };
 		ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */; };
 		ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8C299C2D7700F28299 /* ContentView.swift */; };
 		ECA92F8F299C2D7800F28299 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA92F8E299C2D7800F28299 /* Assets.xcassets */; };
@@ -81,9 +83,11 @@
 		EC14E824298C516F00A6540C /* MenuRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRepository.swift; sourceTree = "<group>"; };
 		EC14E826298C527900A6540C /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		EC611F33299432A30000427A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		EC63164D29C259FF00BF52E0 /* NewMenuItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuItemViewModel.swift; sourceTree = "<group>"; };
 		ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		ECA5E7F029BFC6F300D9E85F /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		ECA5E7F229BFC71800D9E85F /* NowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowView.swift; sourceTree = "<group>"; };
+		ECA5E7FD29C0FBE200D9E85F /* NewMenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuItemView.swift; sourceTree = "<group>"; };
 		ECA92F88299C2D7700F28299 /* GenericsRestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsRestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsRestaurantsApp.swift; sourceTree = "<group>"; };
 		ECA92F8C299C2D7700F28299 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -183,9 +187,19 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
+		EC63164C29C259E900BF52E0 /* NewMenuItem */ = {
+			isa = PBXGroup;
+			children = (
+				ECA5E7FD29C0FBE200D9E85F /* NewMenuItemView.swift */,
+				EC63164D29C259FF00BF52E0 /* NewMenuItemViewModel.swift */,
+			);
+			path = NewMenuItem;
+			sourceTree = "<group>";
+		};
 		ECA5E7F429BFC87400D9E85F /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				EC63164C29C259E900BF52E0 /* NewMenuItem */,
 				ECA5E7F029BFC6F300D9E85F /* MenuView.swift */,
 			);
 			path = Menu;
@@ -561,7 +575,9 @@
 				ECA5E7F129BFC6F300D9E85F /* MenuView.swift in Sources */,
 				ECA92FB7299D64E600F28299 /* LoginViewModel.swift in Sources */,
 				ECA5E7FB29BFCC3500D9E85F /* MenuRepository.swift in Sources */,
+				EC63164E29C259FF00BF52E0 /* NewMenuItemViewModel.swift in Sources */,
 				ECA5E7FC29C0F14900D9E85F /* MenuViewModel.swift in Sources */,
+				ECA5E7FE29C0FBE200D9E85F /* NewMenuItemView.swift in Sources */,
 				ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */,
 				ECA92FB4299D640500F28299 /* LoginView.swift in Sources */,
 				ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */,
@@ -671,7 +687,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -713,7 +729,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;

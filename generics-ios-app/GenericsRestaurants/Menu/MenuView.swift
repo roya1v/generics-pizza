@@ -27,12 +27,13 @@ struct MenuView: View {
             model.fetch()
         }
         .toolbar {
-            ToolbarItem(placement: .principal) {
+            ToolbarItem(placement: .automatic) {
                 Button("New") {
                     openWindow(id: "new-pizza")
                 }
             }
         }
+        .navigationTitle("Menu")
     }
 
     var table: some View {
