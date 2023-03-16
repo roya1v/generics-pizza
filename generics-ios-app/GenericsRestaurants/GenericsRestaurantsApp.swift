@@ -16,5 +16,6 @@ struct GenericsRestaurantsApp: App {
         Window("New pizza", id: "new-pizza") {
             NewMenuItemView()
         }
+        .windowResizability(.contentSize)
     }
 }
