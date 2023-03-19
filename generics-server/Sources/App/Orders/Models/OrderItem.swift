@@ -10,7 +10,7 @@ import Vapor
 import GenericsModels
 
 final class OrderItem: Model, Content {
-    static var schema = "ordered_items"
+    static var schema = "order_items"
 
     @ID(key: .id)
     var id: UUID?
