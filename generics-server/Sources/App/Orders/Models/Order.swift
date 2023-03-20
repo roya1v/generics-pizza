@@ -20,14 +20,11 @@ final class Order: Model, Content {
 
     @Children(for: \.$order)
     var items: [OrderItem]
-    
 
     init() { }
-}
 
-enum OrderState: String, Codable {
-    case new
-    case inProgress
-    case inDelivery
-    case finished
+    public init(id: UUID? = nil, state: OrderState) {
+        self.id = id
+        self.state = state
+    }
 }

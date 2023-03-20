@@ -15,6 +15,8 @@ public func configure(_ app: Application) throws {
     app.migrations.add(User.Migration())
     app.migrations.add(UserToken.Migration())
     app.migrations.add(MenuEntry.Migration())
+    app.migrations.add(Order.Migration())
+    app.migrations.add(OrderItem.Migration())
 
     // register routes
     try routes(app)

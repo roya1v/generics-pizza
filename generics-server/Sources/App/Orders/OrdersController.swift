@@ -21,11 +21,27 @@ class OrdersController: RouteCollection {
     }
 
     func getCurrent(req: Request) async throws -> [Order] {
-        throw Abort(.notImplemented)
+        try req.auth.require(User.self)
+        return try await Order.query(on: req.db)
+            .filter(\.$state != .finished)
+            .all()
     }
 
     func new(req: Request) async throws -> Order {
-        throw Abort(.notImplemented)
+        let orderModel = try req.content.decode(OrderModel.self)
+
+        let order = Order(state: .new)
+
+        try await order.save(on: req.db)
+
+        for item in orderModel.items {
+            let orderItem = OrderItem(item: item.id!)
+
+            try await order.$items.create(orderItem, on: req.db)
+        }
+
+        try await order.$items.load(on: req.db)
+        return order
     }
 
     var clients = [String: WebSocket]()

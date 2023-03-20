@@ -22,4 +22,15 @@ final class OrderItem: Model, Content {
     var order: Order
 
     init() { }
+
+    public init(id: UUID? = nil, item: MenuEntry, order: Order) {
+        self.id = id
+        self.item = item
+        self.order = order
+    }
+
+    public init(id: UUID? = nil, item: UUID) {
+        self.id = id
+        self.$item.id = item
+    }
 }
