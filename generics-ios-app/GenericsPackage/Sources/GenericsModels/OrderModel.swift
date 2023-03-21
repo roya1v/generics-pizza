@@ -8,15 +8,15 @@
 import Foundation
 
 public struct OrderModel: Codable, Identifiable {
-    public init(id: UUID? = nil, items: [MenuItem], status: OrderState? = nil) {
+    public init(id: UUID? = nil, items: [MenuItem], state: OrderState? = nil) {
         self.id = id
         self.items = items
-        self.status = status
+        self.state = state
     }
 
     public let id: UUID?
     public let items: [MenuItem]
-    public let status: OrderState?
+    public let state: OrderState?
 }
 
 public enum OrderState: String, Codable {

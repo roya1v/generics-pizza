@@ -27,4 +27,22 @@ final class Order: Model, Content {
         self.id = id
         self.state = state
     }
+
+    func getContent() -> OrderModel {
+        .init(id: id, items: items.map { $0.item.getContent() }, state: state)
+    }
+}
+
+extension Order: Hashable {
+    static func == (lhs: Order, rhs: Order) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self))
+    }
+}
+
+extension OrderModel: Content {
+    
 }
