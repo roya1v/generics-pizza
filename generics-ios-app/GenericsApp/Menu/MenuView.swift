@@ -7,12 +7,15 @@
 
 import SwiftUI
 import Factory
+import GenericsModels
 
 struct MenuView: View {
 
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
 
     @StateObject var model = MenuViewModel()
+
+    @State var shownItem: MenuItem?
 
     var body: some View {
         NavigationView {
@@ -24,6 +27,9 @@ struct MenuView: View {
                         ForEach(model.items) { item in
                             MenuItemView(name: item.title,
                                          description: item.description)
+                            .onTapGesture {
+                                shownItem = item
+                            }
                         }
                     }
                     .padding()
@@ -33,6 +39,9 @@ struct MenuView: View {
             .navigationBarTitleDisplayMode(.large)
             .onAppear {
                 model.fetch()
+            }
+            .sheet(item: $shownItem) { test in
+                    MenuItemDetailView(item: test)
             }
         }
     }
