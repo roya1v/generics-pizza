@@ -19,16 +19,26 @@ public struct UpdateMessage: Codable {
 
 public enum OrderMessages {
     case update(message: UpdateMessage)
-
+    case accepted
 
 }
 
 public extension OrderMessages {
+
+    private var messagePrefix: String {
+        switch self {
+        case .update(_):
+            return "update-"
+        case .accepted:
+            return "accepted"
+        }
+    }
+
     static func parse(from message: String) -> OrderMessages? {
         if message.hasPrefix("update-") {
             var data = message
             data.removeFirst(7)
-            let test = try! JSONDecoder().decode(UpdateMessage.self, from: data.data(using: .utf8)!)
+            let test = try! JSONDecoder().decode(UpdateMessage.self, fromString: data)
             return .update(message: test)
         }
         return nil
@@ -38,7 +48,23 @@ public extension OrderMessages {
         let encoder = JSONEncoder()
         switch self {
         case .update(let message):
-            return "update-\(String(data: try! encoder.encode(message), encoding: .utf8)!)"
+            return "update-\(try! encoder.encodeToString(message))"
+        case .accepted:
+            return messagePrefix
         }
+    }
+}
+
+fileprivate extension JSONDecoder {
+    func decode<T>(_ type: T.Type, fromString string: String) throws -> T where T : Decodable {
+        let data = string.data(using: .utf8)
+        return try decode(type, from: data!)
+    }
+}
+
+fileprivate extension JSONEncoder {
+    func encodeToString<T>(_ value: T) throws -> String where T : Encodable {
+        let data = try encode(value)
+        return String(data: data, encoding: .utf8)!
     }
 }

@@ -73,7 +73,10 @@ class OrdersController: RouteCollection {
                 case .update(let message):
                     if let client = self.clients[message.id] {
                         client.send(command.encode())
+                        ws.send(OrderMessages.accepted.encode())
                     }
+                case .accepted:
+                    return
                 }
             }
         }
