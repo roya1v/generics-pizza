@@ -19,6 +19,10 @@ struct ContentView: View {
                 .tabItem {
                     Label("Menu", systemImage: "menucard")
                 }
+            CartView()
+                .tabItem {
+                    Label("Cart", systemImage: "cart")
+                }
         }
     }
 }
