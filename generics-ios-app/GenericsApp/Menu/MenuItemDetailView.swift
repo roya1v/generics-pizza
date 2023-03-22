@@ -7,10 +7,13 @@
 
 import SwiftUI
 import GenericsModels
+import Factory
 
 struct MenuItemDetailView: View {
 
     let item: MenuItem
+    @Environment(\.presentationMode) var presentationMode
+    @Injected(Container.orderRepository) var repository
 
     var body: some View {
         VStack {
@@ -23,7 +26,8 @@ struct MenuItemDetailView: View {
             Text(item.description)
             Spacer()
             Button {
-                print("ye")
+                repository.add(item: item)
+                presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("Add to cart")
             }

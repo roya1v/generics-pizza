@@ -6,10 +6,32 @@
 //
 
 import SwiftUI
+import Factory
 
 struct CartView: View {
+
+    @ObservedObject var model = CartViewModel()
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            Section("Items") {
+                ForEach(model.items) { item in
+                    Text(item.title)
+                }
+            }
+            Button {
+                model.placeOrder()
+            } label: {
+                Text("Place order")
+            }
+
+            ForEach(model.events, id: \.self) { item in
+                Text(item)
+            }
+        }
+        .onAppear {
+            model.fetch()
+        }
     }
 }
 
