@@ -18,6 +18,7 @@ extension Container {
 protocol OrderRepository {
     func add(item: MenuItem)
     func placeOrder() async throws -> AnyPublisher<String, Never>
+    var items: [MenuItem] { get }
 }
 
 final class OrderRepositoryImpl: OrderRepository {
