@@ -82,3 +82,18 @@ final class OrderRepositoryImpl: OrderRepository {
         return try JSONDecoder().decode(OrderModel.self, from: response.0)
     }
 }
+
+final class OrderRepositoryMck: OrderRepository {
+    func add(item: GenericsModels.MenuItem) {
+    }
+
+    func placeOrder() async throws -> AnyPublisher<String, Never> {
+        fatalError()
+    }
+
+    var items: [MenuItem] = [
+        .init(id: .init(), title: "Margarita simplita", description: "Tomatoe souce, cheese and weird leaves"),
+        .init(id: .init(), title: "Pepperoni Meroni", description: "Tomatoe souce, cheese and weird leaves"),
+        .init(id: .init(), title: "Super pepperoni", description: "Tomatoe souce, cheese and weird leaves")
+    ]
+}
