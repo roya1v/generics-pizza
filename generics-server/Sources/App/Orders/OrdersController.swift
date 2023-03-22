@@ -9,7 +9,11 @@ import Fluent
 import Vapor
 import GenericsModels
 
-class OrdersController: RouteCollection {
+final class OrdersController: RouteCollection {
+
+    private var clients = [UUID: WebSocket]()
+    private var admins = [WebSocket]()
+
     func boot(routes: RoutesBuilder) throws {
         let order = routes.grouped("order")
         let authenticated = order.grouped(UserToken.authenticator())
@@ -42,10 +46,12 @@ class OrdersController: RouteCollection {
         for item in order.items {
             try await item.$item.load(on: req.db)
         }
+        for admin in admins {
+            try await admin.send(NewOrder(order: order.getContent()).encode() ?? "")
+        }
+
         return order.getContent()
     }
-
-    var clients = [UUID: WebSocket]()
 
     func orderActivity(req: Request, ws: WebSocket) async {
         guard let order = try? await Order.find(req.parameters.get("orderId"), on: req.db) else {
@@ -67,17 +73,18 @@ class OrdersController: RouteCollection {
             return
         }
 
+        admins.append(ws)
+
         ws.onText { ws, text in
-            if let command = OrderMessages.parse(from: text) {
-                switch command {
-                case .update(let message):
-                    if let client = self.clients[message.id] {
-                        client.send(command.encode())
-                        ws.send(OrderMessages.accepted.encode())
-                    }
-                case .accepted:
-                    return
+            switch OrderMessageType.decode(from: text) {
+            case .update:
+                if let message = UpdateMessage.decodeMessage(from: text),
+                   let client = self.clients[message.id] {
+                    client.send(text)
+                    ws.send(BasicOrderMessage.accepted().encode() ?? "error")
                 }
+            default:
+                fatalError()
             }
         }
     }
