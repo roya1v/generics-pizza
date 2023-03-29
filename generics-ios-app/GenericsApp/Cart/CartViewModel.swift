@@ -11,24 +11,35 @@ import Factory
 import Combine
 
 final class CartViewModel: ObservableObject {
-    @Published var items = [MenuItem]()
 
-    @Injected(Container.orderRepository) var repository
+    enum State {
+        case readyForOrder
+        case loading
+        case inOrderState(state: OrderState)
+    }
 
+    @Published private(set) var items = [MenuItem]()
+    @Published private(set) var state: State = .readyForOrder
+
+    @Injected(Container.orderRepository) private var repository
     private var cancellable = Set<AnyCancellable>()
-
-    @Published var events = [String]()
 
     func fetch() {
         items = repository.items
     }
 
     func placeOrder() {
+        state = .loading
         Task {
             try! await repository.placeOrder()
                 .receive(on: DispatchQueue.main)
-                .sink { text in
-                    self.events.append(text.encode()!)
+                .sink { [weak self] message in
+                    switch message {
+                    case .update(_, let newState):
+                        self?.state = .inOrderState(state: newState)
+                    default:
+                        fatalError("Not implemented")
+                    }
                 }
                 .store(in: &cancellable)
         }

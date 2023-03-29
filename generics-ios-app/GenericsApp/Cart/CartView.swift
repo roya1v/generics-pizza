@@ -19,14 +19,28 @@ struct CartView: View {
                     Text(item.title)
                 }
             }
-            Button {
-                model.placeOrder()
-            } label: {
-                Text("Place order")
-            }
-
-            ForEach(model.events, id: \.self) { item in
-                Text(item)
+            switch model.state {
+            case .readyForOrder:
+                Button {
+                    model.placeOrder()
+                } label: {
+                    Text("Place order")
+                }
+            case .loading:
+                ProgressView()
+            case .inOrderState(let state):
+                switch state {
+                case .new:
+                    Text("We have just received your order!")
+                case .inProgress:
+                    Text("Our team is working on your order!")
+                case .readyForDelivery:
+                    Text("One of our drivers will soon deliver your order!")
+                case .inDelivery:
+                    Text("Your order is being delivered!")
+                case .finished:
+                    Text("Enjoy your food!")
+                }
             }
         }
         .onAppear {
