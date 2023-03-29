@@ -68,10 +68,11 @@ final class OrderRepositoryImpl: OrderRepository {
         let response = try await GenericsHttp(baseURL: "http://localhost:8080")!
             .add(path: "order")
             .method(.post)
-            .body(OrderModel(items: items))
+            .body(OrderModel(createdAt: nil, items: items))
             .perform()
-
-        return try JSONDecoder().decode(OrderModel.self, from: response.0)
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return try decoder.decode(OrderModel.self, from: response.0)
     }
 }
 

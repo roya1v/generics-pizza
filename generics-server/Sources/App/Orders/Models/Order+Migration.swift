@@ -16,6 +16,7 @@ extension Order {
             try await database.schema("orders")
                 .id()
                 .field("state", .string, .required)
+                .field("created_at", .double)
                 .create()
         }
 

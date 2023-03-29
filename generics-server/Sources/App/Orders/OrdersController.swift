@@ -47,7 +47,7 @@ final class OrdersController: RouteCollection {
             try await item.$item.load(on: req.db)
         }
         for admin in admins {
-            try await admin.send(OrderMessage.newOrder(order: order.getContent()).encode() ?? "")
+            try? await admin.send(OrderMessage.newOrder(order: order.getContent()).encode() ?? "")
         }
 
         return order.getContent()
@@ -75,15 +75,28 @@ final class OrdersController: RouteCollection {
 
         admins.append(ws)
 
+        try? await Order.query(on: req.db)
+            .filter(\.$state != .finished)
+            .with(\.$items) { $0.with(\.$item) }
+            .all()
+            .map { $0.getContent() }
+            .forEach({ order in
+                ws.send(OrderMessage.newOrder(order: order).encode() ?? "")
+            })
+
         ws.onText { ws, text in
             let message = try? OrderMessage.decode(from: text)
             switch message {
             case .newOrder(_):
                 fatalError()
-            case .update(let id, _):
-                if let client = self.clients[id] {
-                    client.send(text)
-                    ws.send(OrderMessage.accepted.encode() ?? "")
+            case .update(let id, let state):
+                if let order = try? await Order.find(id, on: req.db) {
+                    order.state = state
+                    try? await order.save(on: req.db)
+                    if let client = self.clients[id] {
+                        try? await client.send(text)
+                    }
+                    try? await ws.send(text)
                 }
             case .accepted:
                 fatalError()

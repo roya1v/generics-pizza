@@ -15,6 +15,9 @@ final class Order: Model, Content {
     @ID(key: .id)
     var id: UUID?
 
+    @Timestamp(key: "created_at", on: .create, format: .unix)
+    var createdAt: Date?
+
     @Enum(key: "state")
     var state: OrderState
 
@@ -29,7 +32,7 @@ final class Order: Model, Content {
     }
 
     func getContent() -> OrderModel {
-        .init(id: id, items: items.map { $0.item.getContent() }, state: state)
+        .init(id: id, createdAt: createdAt, items: items.map { $0.item.getContent() }, state: state)
     }
 }
 
