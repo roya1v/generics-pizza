@@ -28,7 +28,7 @@ final class CartViewModel: ObservableObject {
             try! await repository.placeOrder()
                 .receive(on: DispatchQueue.main)
                 .sink { text in
-                    self.events.append(text)
+                    self.events.append(text.encode()!)
                 }
                 .store(in: &cancellable)
         }

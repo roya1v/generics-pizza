@@ -17,7 +17,7 @@ extension Container {
 
 protocol OrderRepository {
     func add(item: MenuItem)
-    func placeOrder() async throws -> AnyPublisher<String, Never>
+    func placeOrder() async throws -> AnyPublisher<OrderMessage, Never>
     var items: [MenuItem] { get }
 }
 
@@ -27,13 +27,13 @@ final class OrderRepositoryImpl: OrderRepository {
 
     private var socket: URLSessionWebSocketTask?
 
-    private let messages = PassthroughSubject<String, Never>()
+    private let messages = PassthroughSubject<OrderMessage, Never>()
 
     func add(item: MenuItem) {
         items.append(item)
     }
 
-    func placeOrder() async throws -> AnyPublisher<String, Never> {
+    func placeOrder() async throws -> AnyPublisher<OrderMessage, Never> {
         let order = try await makeOrderRequest()
 
         socket = URLSession.shared
@@ -52,16 +52,8 @@ final class OrderRepositoryImpl: OrderRepository {
             case .success(let success2):
                 switch success2 {
                 case .string(let data):
-                    if let type = OrderMessageType.decode(from: data) {
-                        switch type {
-                        case .update:
-                            self.messages.send(data)
-                        case .accepted:
-                            return
-                        case .newOrder:
-                            return
-                        }
-                    }
+                    let message = try! OrderMessage.decode(from: data)
+                    self.messages.send(message)
                 default:
                     return
                 }
@@ -84,10 +76,10 @@ final class OrderRepositoryImpl: OrderRepository {
 }
 
 final class OrderRepositoryMck: OrderRepository {
-    func add(item: GenericsModels.MenuItem) {
+    func add(item: MenuItem) {
     }
 
-    func placeOrder() async throws -> AnyPublisher<String, Never> {
+    func placeOrder() async throws -> AnyPublisher<OrderMessage, Never> {
         fatalError()
     }
 

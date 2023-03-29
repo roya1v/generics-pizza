@@ -47,7 +47,7 @@ final class OrdersController: RouteCollection {
             try await item.$item.load(on: req.db)
         }
         for admin in admins {
-            try await admin.send(NewOrder(order: order.getContent()).encode() ?? "")
+            try await admin.send(OrderMessage.newOrder(order: order.getContent()).encode() ?? "")
         }
 
         return order.getContent()
@@ -76,14 +76,18 @@ final class OrdersController: RouteCollection {
         admins.append(ws)
 
         ws.onText { ws, text in
-            switch OrderMessageType.decode(from: text) {
-            case .update:
-                if let message = UpdateMessage.decodeMessage(from: text),
-                   let client = self.clients[message.id] {
+            let message = try? OrderMessage.decode(from: text)
+            switch message {
+            case .newOrder(_):
+                fatalError()
+            case .update(let id, _):
+                if let client = self.clients[id] {
                     client.send(text)
-                    ws.send(BasicOrderMessage.accepted().encode() ?? "error")
+                    ws.send(OrderMessage.accepted.encode() ?? "")
                 }
-            default:
+            case .accepted:
+                fatalError()
+            case .none:
                 fatalError()
             }
         }
