@@ -8,6 +8,7 @@
 import Foundation
 import Factory
 import GenericsModels
+import GenericsUI
 
 @MainActor
 final class MenuViewModel: ObservableObject {
@@ -15,18 +16,21 @@ final class MenuViewModel: ObservableObject {
     @Injected(Container.menuRepository) private var repository
 
     @Published private(set) var items = [MenuItem]()
-    @Published private(set) var isLoading = false
+    @Published private(set) var state: ViewState = .ready
 
     func fetch() {
         if items.isEmpty {
-            isLoading = true
+            state = .loading
         }
         Task {
-            let newItems = try! await repository.fetchMenu()
-            try! await Task.sleep(for: .seconds(2))
-            await MainActor.run {
-                isLoading = false
-                items = newItems
+            do {
+                let newItems = try await repository.fetchMenu()
+                await MainActor.run {
+                    state = .ready
+                    items = newItems
+                }
+            } catch {
+                state = .error
             }
         }
     }

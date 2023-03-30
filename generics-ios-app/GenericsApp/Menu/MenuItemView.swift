@@ -30,6 +30,7 @@ struct MenuItemView: View {
                         .font(.system(size: 16.0, weight: .bold))
                         .padding(4.0)
                 }
+                .frame(maxHeight: 100.0)
             }
             .padding()
         }

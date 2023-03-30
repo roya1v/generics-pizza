@@ -23,21 +23,13 @@ struct MenuView: View {
                 Color(.systemGray6)
                     .ignoresSafeArea()
                 ScrollView {
-                    if model.isLoading {
+                    switch model.state {
+                    case .loading:
                         ProgressView()
-                    } else {
-                        LazyVGrid(columns: columns) {
-                            ForEach(model.items) { item in
-                                MenuItemView(name: item.title,
-                                             description: item.description)
-                                .padding(.all, 4.0)
-                                .onTapGesture {
-                                    shownItem = item
-                                }
-                            }
-                        }
-                        .padding()
-
+                    case .ready:
+                        menu
+                    case .error:
+                        Text("Something didn't work out :(")
                     }
                 }
                 .navigationTitle("Menu")
@@ -51,6 +43,20 @@ struct MenuView: View {
             }
 
         }
+    }
+
+    var menu: some View {
+        LazyVGrid(columns: columns) {
+            ForEach(model.items) { item in
+                MenuItemView(name: item.title,
+                             description: item.description)
+                .padding(.all, 4.0)
+                .onTapGesture {
+                    shownItem = item
+                }
+            }
+        }
+        .padding()
     }
 }
 
