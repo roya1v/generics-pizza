@@ -30,9 +30,9 @@ struct CartView: View {
                                 VStack(alignment: .leading) {
                                     Text(item.title)
                                     Text(item.description)
-                                        .font(.caption2)
+                                        .font(.genericsCaption)
+                                        .foregroundColor(.gray)
                                         .lineLimit(1)
-                                        .foregroundColor(Color.gray)
                                 }
                             }
                         }

@@ -23,9 +23,12 @@ struct MenuItemView: View {
                 VStack(alignment: .leading) {
                     Text(name)
                     Text(description)
-                        .font(.system(size: 12.0, weight: .regular))
+                        .font(.genericsCaption)
                         .foregroundColor(.gray)
-                        .lineLimit(3)
+                        .lineLimit(2)
+                    Text("13.99$")
+                        .font(.system(size: 16.0, weight: .bold))
+                        .padding(4.0)
                 }
             }
             .padding()

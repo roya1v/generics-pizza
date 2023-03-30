@@ -30,6 +30,7 @@ struct MenuView: View {
                             ForEach(model.items) { item in
                                 MenuItemView(name: item.title,
                                              description: item.description)
+                                .padding(.all, 4.0)
                                 .onTapGesture {
                                     shownItem = item
                                 }
