@@ -20,7 +20,6 @@ public struct CardView<Content>: View where Content: View {
             .background(.white)
             .compositingGroup()
             .cornerRadius(16.0)
-            .shadow(radius: 8.0)
     }
 }
 
@@ -30,5 +29,7 @@ struct CardView_Previews: PreviewProvider {
             Text("Demo")
                 .padding()
         }
+        .padding()
+        .background(Color(.systemGray6))
     }
 }

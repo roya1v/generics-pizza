@@ -25,6 +25,7 @@ struct MenuItemView: View {
                     Text(description)
                         .font(.system(size: 12.0, weight: .regular))
                         .foregroundColor(.gray)
+                        .lineLimit(3)
                 }
             }
             .padding()

@@ -19,30 +19,36 @@ struct MenuView: View {
 
     var body: some View {
         NavigationView {
-            ScrollView {
-                if model.isLoading {
-                    ProgressView()
-                } else {
-                    LazyVGrid(columns: columns) {
-                        ForEach(model.items) { item in
-                            MenuItemView(name: item.title,
-                                         description: item.description)
-                            .onTapGesture {
-                                shownItem = item
+            ZStack {
+                Color(.systemGray6)
+                    .ignoresSafeArea()
+                ScrollView {
+                    if model.isLoading {
+                        ProgressView()
+                    } else {
+                        LazyVGrid(columns: columns) {
+                            ForEach(model.items) { item in
+                                MenuItemView(name: item.title,
+                                             description: item.description)
+                                .onTapGesture {
+                                    shownItem = item
+                                }
                             }
                         }
+                        .padding()
+
                     }
-                    .padding()
+                }
+                .navigationTitle("Menu")
+                .navigationBarTitleDisplayMode(.large)
+                .onAppear {
+                    model.fetch()
+                }
+                .sheet(item: $shownItem) { test in
+                        MenuItemDetailView(item: test)
                 }
             }
-            .navigationTitle("Menu")
-            .navigationBarTitleDisplayMode(.large)
-            .onAppear {
-                model.fetch()
-            }
-            .sheet(item: $shownItem) { test in
-                    MenuItemDetailView(item: test)
-            }
+
         }
     }
 }

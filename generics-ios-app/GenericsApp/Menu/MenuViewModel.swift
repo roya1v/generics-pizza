@@ -18,7 +18,9 @@ final class MenuViewModel: ObservableObject {
     @Published private(set) var isLoading = false
 
     func fetch() {
-        isLoading = true
+        if items.isEmpty {
+            isLoading = true
+        }
         Task {
             let newItems = try! await repository.fetchMenu()
             try! await Task.sleep(for: .seconds(2))
