@@ -11,8 +11,8 @@ let package = Package(
             name: "GenericsHttp",
             targets: ["GenericsHttp"]),
         .library(
-            name: "GenericsUIKit",
-            targets: ["GenericsUIKit"]),
+            name: "GenericsUI",
+            targets: ["GenericsUI"]),
         .library(
             name: "GenericsModels",
             targets: ["GenericsModels"]),
@@ -24,7 +24,7 @@ let package = Package(
             name: "GenericsHttp",
             dependencies: []),
         .target(
-            name: "GenericsUIKit",
+            name: "GenericsUI",
             dependencies: []),
         .target(
             name: "GenericsModels",

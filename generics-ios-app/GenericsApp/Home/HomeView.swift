@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import GenericsUIKit
+import GenericsUI
 
 struct HomeView: View {
 

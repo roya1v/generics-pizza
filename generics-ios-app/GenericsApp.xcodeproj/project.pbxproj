@@ -15,12 +15,12 @@
 		EC14E827298C527900A6540C /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
 		EC42551F29BE3F5400E5F41A /* GenericsModels in Frameworks */ = {isa = PBXBuildFile; productRef = EC42551E29BE3F5400E5F41A /* GenericsModels */; };
 		EC63164E29C259FF00BF52E0 /* NewMenuItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC63164D29C259FF00BF52E0 /* NewMenuItemViewModel.swift */; };
+		EC6382CA29D61B98003A864E /* GenericsUI in Frameworks */ = {isa = PBXBuildFile; productRef = EC6382C929D61B98003A864E /* GenericsUI */; };
 		EC688C2029CA380E00450D2E /* GenericsHttp in Frameworks */ = {isa = PBXBuildFile; productRef = EC688C1F29CA380E00450D2E /* GenericsHttp */; };
 		EC688C2329CA38D900450D2E /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2229CA38D900450D2E /* CartView.swift */; };
 		EC688C2529CA390B00450D2E /* OrderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2429CA390B00450D2E /* OrderRepository.swift */; };
 		EC688C2729CA3C0100450D2E /* MenuItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2629CA3C0100450D2E /* MenuItemDetailView.swift */; };
 		EC688C2929CA462E00450D2E /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2829CA462E00450D2E /* CartViewModel.swift */; };
-		EC7B6B7529B6814200A1B8D7 /* GenericsUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = EC7B6B7429B6814200A1B8D7 /* GenericsUIKit */; };
 		ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */; };
 		ECA5E7F129BFC6F300D9E85F /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7F029BFC6F300D9E85F /* MenuView.swift */; };
 		ECA5E7F329BFC71800D9E85F /* NowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7F229BFC71800D9E85F /* NowView.swift */; };
@@ -158,10 +158,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC6382CA29D61B98003A864E /* GenericsUI in Frameworks */,
 				EC688C2029CA380E00450D2E /* GenericsHttp in Frameworks */,
 				EC42551F29BE3F5400E5F41A /* GenericsModels in Frameworks */,
 				EC14E823298C515E00A6540C /* Factory in Frameworks */,
-				EC7B6B7529B6814200A1B8D7 /* GenericsUIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,9 +443,9 @@
 			name = GenericsApp;
 			packageProductDependencies = (
 				EC14E822298C515E00A6540C /* Factory */,
-				EC7B6B7429B6814200A1B8D7 /* GenericsUIKit */,
 				EC42551E29BE3F5400E5F41A /* GenericsModels */,
 				EC688C1F29CA380E00450D2E /* GenericsHttp */,
+				EC6382C929D61B98003A864E /* GenericsUI */,
 			);
 			productName = GenericsApp;
 			productReference = ECD845A5298AE51D0036454C /* GenericsApp.app */;
@@ -1218,13 +1218,13 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = GenericsModels;
 		};
+		EC6382C929D61B98003A864E /* GenericsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GenericsUI;
+		};
 		EC688C1F29CA380E00450D2E /* GenericsHttp */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GenericsHttp;
-		};
-		EC7B6B7429B6814200A1B8D7 /* GenericsUIKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = GenericsUIKit;
 		};
 		ECA5E7F829BFC8F600D9E85F /* GenericsModels */ = {
 			isa = XCSwiftPackageProductDependency;
