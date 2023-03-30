@@ -30,6 +30,8 @@ struct CardView_Previews: PreviewProvider {
                 .padding()
         }
         .padding()
+        #if os(iOS)
         .background(Color(.systemGray6))
+        #endif
     }
 }

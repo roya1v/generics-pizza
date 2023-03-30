@@ -16,6 +16,7 @@
 		EC42551F29BE3F5400E5F41A /* GenericsModels in Frameworks */ = {isa = PBXBuildFile; productRef = EC42551E29BE3F5400E5F41A /* GenericsModels */; };
 		EC63164E29C259FF00BF52E0 /* NewMenuItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC63164D29C259FF00BF52E0 /* NewMenuItemViewModel.swift */; };
 		EC6382CA29D61B98003A864E /* GenericsUI in Frameworks */ = {isa = PBXBuildFile; productRef = EC6382C929D61B98003A864E /* GenericsUI */; };
+		EC6382CC29D6220C003A864E /* GenericsUI in Frameworks */ = {isa = PBXBuildFile; productRef = EC6382CB29D6220C003A864E /* GenericsUI */; };
 		EC688C2029CA380E00450D2E /* GenericsHttp in Frameworks */ = {isa = PBXBuildFile; productRef = EC688C1F29CA380E00450D2E /* GenericsHttp */; };
 		EC688C2329CA38D900450D2E /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2229CA38D900450D2E /* CartView.swift */; };
 		EC688C2529CA390B00450D2E /* OrderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2429CA390B00450D2E /* OrderRepository.swift */; };
@@ -134,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC6382CC29D6220C003A864E /* GenericsUI in Frameworks */,
 				ECA5E7F929BFC8F600D9E85F /* GenericsModels in Frameworks */,
 				ECA92FC1299D721900F28299 /* GenericsHttp in Frameworks */,
 				ECA92FBA299D652D00F28299 /* Factory in Frameworks */,
@@ -387,6 +389,7 @@
 				ECA92FB9299D652D00F28299 /* Factory */,
 				ECA92FC0299D721900F28299 /* GenericsHttp */,
 				ECA5E7F829BFC8F600D9E85F /* GenericsModels */,
+				EC6382CB29D6220C003A864E /* GenericsUI */,
 			);
 			productName = GenericsRestaurants;
 			productReference = ECA92F88299C2D7700F28299 /* GenericsRestaurants.app */;
@@ -1219,6 +1222,10 @@
 			productName = GenericsModels;
 		};
 		EC6382C929D61B98003A864E /* GenericsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GenericsUI;
+		};
+		EC6382CB29D6220C003A864E /* GenericsUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GenericsUI;
 		};

@@ -17,10 +17,13 @@ struct MenuView: View {
 
     var body: some View {
         VStack {
-            if model.isLoading {
+            switch model.state {
+            case .loading:
                 ProgressView()
-            } else {
+            case .ready:
                 table
+            case .error:
+                Text("Error occured")
             }
         }
         .onAppear {
