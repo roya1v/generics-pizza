@@ -16,6 +16,7 @@ final class CartViewModel: ObservableObject {
         case readyForOrder
         case loading
         case inOrderState(state: OrderState)
+        case error
     }
 
     @Published private(set) var items = [MenuItem]()
@@ -31,17 +32,21 @@ final class CartViewModel: ObservableObject {
     func placeOrder() {
         state = .loading
         Task {
-            try! await repository.placeOrder()
-                .receive(on: DispatchQueue.main)
-                .sink { [weak self] message in
-                    switch message {
-                    case .update(_, let newState):
-                        self?.state = .inOrderState(state: newState)
-                    default:
-                        fatalError("Not implemented")
+            do {
+                try await repository.placeOrder()
+                    .receive(on: DispatchQueue.main)
+                    .sink { [weak self] message in
+                        switch message {
+                        case .update(_, let newState):
+                            self?.state = .inOrderState(state: newState)
+                        default:
+                            fatalError("Not implemented")
+                        }
                     }
-                }
-                .store(in: &cancellable)
+                    .store(in: &cancellable)
+            } catch {
+                state = .error
+            }
         }
     }
 }
