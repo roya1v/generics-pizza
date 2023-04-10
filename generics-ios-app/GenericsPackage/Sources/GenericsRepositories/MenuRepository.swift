@@ -6,27 +6,31 @@
 //
 
 import Foundation
-import Factory
 import GenericsModels
 import GenericsHttp
 
-extension Container {
-    static let menuRepository = Factory<MenuRepository> { MenuRepositoryImp() }
-}
-
-protocol MenuRepository {
+public protocol MenuRepository {
     func fetchMenu() async throws -> [MenuItem]
     func create(item: MenuItem) async throws
     var authDelegate: AuthorizationDelegate? { get set}
+}
+
+
+public func buildMenuRepository(url: String) -> MenuRepository {
+    MenuRepositoryImp()
+}
+
+public func mockMenuRepository() -> MenuRepository {
+    MenuRepositoryMck()
 }
 
 final class MenuRepositoryImp: MenuRepository {
 
     private let baseURL = "http://localhost:8080"
 
-    var authDelegate: AuthorizationDelegate?
+    public var authDelegate: AuthorizationDelegate?
 
-    func fetchMenu() async throws -> [MenuItem] {
+    public func fetchMenu() async throws -> [MenuItem] {
         let response = try await GenericsHttp(baseURL: baseURL)!
             .add(path: "menu")
             .method(.get)
@@ -35,7 +39,7 @@ final class MenuRepositoryImp: MenuRepository {
         return try JSONDecoder().decode([MenuItem].self, from: response.0)
     }
 
-    func create(item: MenuItem) async throws {
+    public func create(item: MenuItem) async throws {
         let response = try await GenericsHttp(baseURL: baseURL)!
             .add(path: "menu")
             .method(.post)

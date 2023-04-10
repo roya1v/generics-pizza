@@ -8,6 +8,7 @@
 import SwiftUI
 import Factory
 import GenericsUI
+import GenericsRepositories
 
 struct MenuItemView: View {
     let name: String
@@ -55,7 +56,7 @@ struct MenuItemView: View {
 
 struct MenuItemView_Previews: PreviewProvider {
     static var previews: some View {
-        Container.menuRepository.register { MenuRepositoryMck() }
+        Container.menuRepository.register { mockMenuRepository() }
         return MenuView()
     }
 }

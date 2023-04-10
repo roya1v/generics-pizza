@@ -11,7 +11,6 @@
 		EC14E81B298B086E00A6540C /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E81A298B086E00A6540C /* MenuView.swift */; };
 		EC14E820298B0C3E00A6540C /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E81F298B0C3E00A6540C /* MenuItemView.swift */; };
 		EC14E823298C515E00A6540C /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = EC14E822298C515E00A6540C /* Factory */; };
-		EC14E825298C516F00A6540C /* MenuRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E824298C516F00A6540C /* MenuRepository.swift */; };
 		EC14E827298C527900A6540C /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
 		EC42551F29BE3F5400E5F41A /* GenericsModels in Frameworks */ = {isa = PBXBuildFile; productRef = EC42551E29BE3F5400E5F41A /* GenericsModels */; };
 		EC63164E29C259FF00BF52E0 /* NewMenuItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC63164D29C259FF00BF52E0 /* NewMenuItemViewModel.swift */; };
@@ -19,7 +18,6 @@
 		EC6382CC29D6220C003A864E /* GenericsUI in Frameworks */ = {isa = PBXBuildFile; productRef = EC6382CB29D6220C003A864E /* GenericsUI */; };
 		EC688C2029CA380E00450D2E /* GenericsHttp in Frameworks */ = {isa = PBXBuildFile; productRef = EC688C1F29CA380E00450D2E /* GenericsHttp */; };
 		EC688C2329CA38D900450D2E /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2229CA38D900450D2E /* CartView.swift */; };
-		EC688C2529CA390B00450D2E /* OrderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2429CA390B00450D2E /* OrderRepository.swift */; };
 		EC688C2729CA3C0100450D2E /* MenuItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2629CA3C0100450D2E /* MenuItemDetailView.swift */; };
 		EC688C2929CA462E00450D2E /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2829CA462E00450D2E /* CartViewModel.swift */; };
 		ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */; };
@@ -27,7 +25,6 @@
 		ECA5E7F329BFC71800D9E85F /* NowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7F229BFC71800D9E85F /* NowView.swift */; };
 		ECA5E7F929BFC8F600D9E85F /* GenericsModels in Frameworks */ = {isa = PBXBuildFile; productRef = ECA5E7F829BFC8F600D9E85F /* GenericsModels */; };
 		ECA5E7FA29BFCC3200D9E85F /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */; };
-		ECA5E7FB29BFCC3500D9E85F /* MenuRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E824298C516F00A6540C /* MenuRepository.swift */; };
 		ECA5E7FC29C0F14900D9E85F /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
 		ECA5E7FE29C0FBE200D9E85F /* NewMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7FD29C0FBE200D9E85F /* NewMenuItemView.swift */; };
 		ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */; };
@@ -44,6 +41,9 @@
 		ECA92FC1299D721900F28299 /* GenericsHttp in Frameworks */ = {isa = PBXBuildFile; productRef = ECA92FC0299D721900F28299 /* GenericsHttp */; };
 		ECCE5BAE29D4AD50009AB280 /* OrderRestaurantRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCE5BAD29D4AD50009AB280 /* OrderRestaurantRepository.swift */; };
 		ECCE5BB029D4B09D009AB280 /* NowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCE5BAF29D4B09D009AB280 /* NowViewModel.swift */; };
+		ECD079F129E45CCD00914593 /* Container+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD079F029E45CCD00914593 /* Container+Repositories.swift */; };
+		ECD079F329E45D0000914593 /* GenericsRepositories in Frameworks */ = {isa = PBXBuildFile; productRef = ECD079F229E45D0000914593 /* GenericsRepositories */; };
+		ECD079F529E45D0600914593 /* GenericsRepositories in Frameworks */ = {isa = PBXBuildFile; productRef = ECD079F429E45D0600914593 /* GenericsRepositories */; };
 		ECD845A9298AE51D0036454C /* GenericsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD845A8298AE51D0036454C /* GenericsAppApp.swift */; };
 		ECD845AB298AE51D0036454C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD845AA298AE51D0036454C /* ContentView.swift */; };
 		ECD845AD298AE51E0036454C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECD845AC298AE51E0036454C /* Assets.xcassets */; };
@@ -88,12 +88,10 @@
 		EC14E818298B07C900A6540C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EC14E81A298B086E00A6540C /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		EC14E81F298B0C3E00A6540C /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
-		EC14E824298C516F00A6540C /* MenuRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRepository.swift; sourceTree = "<group>"; };
 		EC14E826298C527900A6540C /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		EC611F33299432A30000427A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EC63164D29C259FF00BF52E0 /* NewMenuItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuItemViewModel.swift; sourceTree = "<group>"; };
 		EC688C2229CA38D900450D2E /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
-		EC688C2429CA390B00450D2E /* OrderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRepository.swift; sourceTree = "<group>"; };
 		EC688C2629CA3C0100450D2E /* MenuItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemDetailView.swift; sourceTree = "<group>"; };
 		EC688C2829CA462E00450D2E /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
@@ -118,6 +116,7 @@
 		ECA92FBF299D719000F28299 /* GenericsPackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GenericsPackage; sourceTree = "<group>"; };
 		ECCE5BAD29D4AD50009AB280 /* OrderRestaurantRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRestaurantRepository.swift; sourceTree = "<group>"; };
 		ECCE5BAF29D4B09D009AB280 /* NowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowViewModel.swift; sourceTree = "<group>"; };
+		ECD079F029E45CCD00914593 /* Container+Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Repositories.swift"; sourceTree = "<group>"; };
 		ECD845A5298AE51D0036454C /* GenericsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECD845A8298AE51D0036454C /* GenericsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsAppApp.swift; sourceTree = "<group>"; };
 		ECD845AA298AE51D0036454C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -139,6 +138,7 @@
 				ECA5E7F929BFC8F600D9E85F /* GenericsModels in Frameworks */,
 				ECA92FC1299D721900F28299 /* GenericsHttp in Frameworks */,
 				ECA92FBA299D652D00F28299 /* Factory in Frameworks */,
+				ECD079F529E45D0600914593 /* GenericsRepositories in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +164,7 @@
 				EC688C2029CA380E00450D2E /* GenericsHttp in Frameworks */,
 				EC42551F29BE3F5400E5F41A /* GenericsModels in Frameworks */,
 				EC14E823298C515E00A6540C /* Factory in Frameworks */,
+				ECD079F329E45D0000914593 /* GenericsRepositories in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,7 +200,6 @@
 				EC14E826298C527900A6540C /* MenuViewModel.swift */,
 				EC14E81F298B0C3E00A6540C /* MenuItemView.swift */,
 				EC688C2629CA3C0100450D2E /* MenuItemDetailView.swift */,
-				EC14E824298C516F00A6540C /* MenuRepository.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -218,7 +218,6 @@
 			children = (
 				EC688C2229CA38D900450D2E /* CartView.swift */,
 				EC688C2829CA462E00450D2E /* CartViewModel.swift */,
-				EC688C2429CA390B00450D2E /* OrderRepository.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -337,6 +336,7 @@
 				EC14E81D298B0C1100A6540C /* Home */,
 				EC14E81E298B0C1C00A6540C /* Menu */,
 				EC688C2129CA38C100450D2E /* Cart */,
+				ECD079F029E45CCD00914593 /* Container+Repositories.swift */,
 				ECD845AC298AE51E0036454C /* Assets.xcassets */,
 				EC611F33299432A30000427A /* Info.plist */,
 				ECD845AE298AE51E0036454C /* Preview Content */,
@@ -390,6 +390,7 @@
 				ECA92FC0299D721900F28299 /* GenericsHttp */,
 				ECA5E7F829BFC8F600D9E85F /* GenericsModels */,
 				EC6382CB29D6220C003A864E /* GenericsUI */,
+				ECD079F429E45D0600914593 /* GenericsRepositories */,
 			);
 			productName = GenericsRestaurants;
 			productReference = ECA92F88299C2D7700F28299 /* GenericsRestaurants.app */;
@@ -449,6 +450,7 @@
 				EC42551E29BE3F5400E5F41A /* GenericsModels */,
 				EC688C1F29CA380E00450D2E /* GenericsHttp */,
 				EC6382C929D61B98003A864E /* GenericsUI */,
+				ECD079F229E45D0000914593 /* GenericsRepositories */,
 			);
 			productName = GenericsApp;
 			productReference = ECD845A5298AE51D0036454C /* GenericsApp.app */;
@@ -606,7 +608,6 @@
 			files = (
 				ECA5E7F129BFC6F300D9E85F /* MenuView.swift in Sources */,
 				ECA92FB7299D64E600F28299 /* LoginViewModel.swift in Sources */,
-				ECA5E7FB29BFCC3500D9E85F /* MenuRepository.swift in Sources */,
 				EC63164E29C259FF00BF52E0 /* NewMenuItemViewModel.swift in Sources */,
 				ECA5E7FC29C0F14900D9E85F /* MenuViewModel.swift in Sources */,
 				ECA5E7FE29C0FBE200D9E85F /* NewMenuItemView.swift in Sources */,
@@ -643,12 +644,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC688C2929CA462E00450D2E /* CartViewModel.swift in Sources */,
+				ECD079F129E45CCD00914593 /* Container+Repositories.swift in Sources */,
 				EC688C2329CA38D900450D2E /* CartView.swift in Sources */,
 				EC14E81B298B086E00A6540C /* MenuView.swift in Sources */,
-				EC688C2529CA390B00450D2E /* OrderRepository.swift in Sources */,
 				ECA5E7FA29BFCC3200D9E85F /* AuthenticationRepository.swift in Sources */,
 				ECD845AB298AE51D0036454C /* ContentView.swift in Sources */,
-				EC14E825298C516F00A6540C /* MenuRepository.swift in Sources */,
 				EC14E819298B07C900A6540C /* HomeView.swift in Sources */,
 				EC688C2729CA3C0100450D2E /* MenuItemDetailView.swift in Sources */,
 				EC14E820298B0C3E00A6540C /* MenuItemView.swift in Sources */,
@@ -1245,6 +1245,14 @@
 		ECA92FC0299D721900F28299 /* GenericsHttp */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GenericsHttp;
+		};
+		ECD079F229E45D0000914593 /* GenericsRepositories */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GenericsRepositories;
+		};
+		ECD079F429E45D0600914593 /* GenericsRepositories */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GenericsRepositories;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -8,18 +8,23 @@
 import Foundation
 import GenericsModels
 import GenericsHttp
-import Factory
 import Combine
 
-extension Container {
-    static let orderRepository = Factory(scope: .singleton) { OrderRepositoryImpl() as OrderRepository }
-}
-
-protocol OrderRepository {
+public protocol OrderRepository {
     func add(item: MenuItem)
     func placeOrder() async throws -> AnyPublisher<OrderMessage, Never>
     var items: [MenuItem] { get }
 }
+
+
+public func buildOrderRepository(url: String) -> OrderRepository {
+    OrderRepositoryImpl()
+}
+
+public func mockOrderRepository() -> OrderRepository {
+    OrderRepositoryMck()
+}
+
 
 final class OrderRepositoryImpl: OrderRepository {
 

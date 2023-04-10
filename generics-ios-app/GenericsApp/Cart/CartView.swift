@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Factory
+import GenericsRepositories
 
 struct CartView: View {
 
@@ -82,7 +83,7 @@ struct CartView: View {
 
 struct CartView_Previews: PreviewProvider {
     static var previews: some View {
-        Container.orderRepository.register { OrderRepositoryMck() }
+        Container.orderRepository.register { mockOrderRepository() }
         return CartView()
     }
 }

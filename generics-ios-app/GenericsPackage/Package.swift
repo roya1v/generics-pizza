@@ -16,6 +16,9 @@ let package = Package(
         .library(
             name: "GenericsModels",
             targets: ["GenericsModels"]),
+        .library(
+            name: "GenericsRepositories",
+            targets: ["GenericsRepositories"])
     ],
     dependencies: [
     ],
@@ -29,5 +32,8 @@ let package = Package(
         .target(
             name: "GenericsModels",
             dependencies: []),
+        .target(
+            name: "GenericsRepositories",
+            dependencies: ["GenericsModels", "GenericsHttp"]),
     ]
 )
