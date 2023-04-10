@@ -75,6 +75,7 @@ public class GenericsHttp {
         return self
     }
 
+    @discardableResult
     public func perform() async throws -> (Data, URLResponse) {
         let url = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
         var request = URLRequest(url: url.url!)

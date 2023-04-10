@@ -23,6 +23,7 @@ protocol AuthenticationRepository: AuthorizationDelegate {
     var state: AnyPublisher<AuthenticationState, Never> { get }
     func login(email: String, password: String) async throws
     func reload()
+    func signOut() async throws
 }
 
 final class AuthenticationRepositoryImpl: AuthenticationRepository {
@@ -70,6 +71,17 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
 
         return .bearer(token: token)
     }
+
+    func signOut() async throws {
+        try await GenericsHttp(baseURL: "http://localhost:8080")!
+            .add(path: "auth")
+            .add(path: "signout")
+            .authorizationDelegate(self)
+            .method(.post)
+            .perform()
+        UserDefaults.standard.set(nil, forKey: "auth-token")
+        stateSubject.send(.loggedOut)
+    }
 }
 
 final class AuthenticationRepositoryMck: AuthenticationRepository {
@@ -83,5 +95,8 @@ final class AuthenticationRepositoryMck: AuthenticationRepository {
 
     func getAuthorization() throws -> GenericsHttp.Authorization {
         fatalError()
+    }
+
+    func signOut() async throws {
     }
 }

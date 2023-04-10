@@ -13,10 +13,11 @@ struct AuthenticationController: RouteCollection {
         let auth = routes.grouped("auth")
         auth.post("user", use: create)
 
-        auth.grouped(UserToken.authenticator()).get("user", use: me)
+        auth.grouped(User.authenticator()).post("login", use: login)
 
-        auth.grouped(User.authenticator())
-            .post("login", use: login)
+        let authenticated = auth.grouped(UserToken.authenticator())
+        authenticated.get("user", use: me)
+        authenticated.post("signout", use: signOut)
     }
 
     func create(req: Request) async throws -> User {
@@ -42,5 +43,19 @@ struct AuthenticationController: RouteCollection {
 
     func me(req: Request) async throws -> User {
         try req.auth.require(User.self)
+    }
+
+    func signOut(req: Request) async throws -> HTTPResponseStatus {
+        let user = try req.auth.require(User.self)
+        if let id = user.id,
+           let token = try await
+            UserToken.query(on: req.db)
+                .with(\.$user)
+                .filter(\.$user.$id == id)
+                .first() {
+            try await token.delete(on: req.db)
+            return .ok
+        }
+        return .internalServerError
     }
 }
