@@ -15,6 +15,10 @@ struct MenuItemDetailView: View {
     @Environment(\.presentationMode) var presentationMode
     @Injected(Container.orderRepository) var repository
 
+    var imageURL: URL {
+        URL(string: "http://localhost:8080/menu/\(item.id!)")!
+    }
+
     var body: some View {
         VStack {
             HStack {
@@ -22,10 +26,24 @@ struct MenuItemDetailView: View {
                     .font(.largeTitle)
                 Spacer()
             }
-            Image("menu_pizza")
-                .resizable()
-                .scaledToFit()
-                .padding()
+            AsyncImage(url: imageURL) { phase in
+                switch phase {
+                case .empty:
+                    Image("menu_pizza")
+                        .resizable()
+                        .scaledToFit()
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFit()
+                case .failure(_):
+                    Image("menu_pizza")
+                        .resizable()
+                        .scaledToFit()
+                @unknown default:
+                    fatalError()
+                }
+            }
             Divider()
             Text(item.description)
             Spacer()

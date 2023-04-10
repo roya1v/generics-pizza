@@ -12,13 +12,29 @@ import GenericsUI
 struct MenuItemView: View {
     let name: String
     let description: String
+    let imageURL: URL?
 
     var body: some View {
         CardView {
             VStack {
-                Image("menu_pizza")
-                    .resizable()
-                    .scaledToFit()
+                AsyncImage(url: imageURL) { phase in
+                    switch phase {
+                    case .empty:
+                        Image("menu_pizza")
+                            .resizable()
+                            .scaledToFit()
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    case .failure(_):
+                        Image("menu_pizza")
+                            .resizable()
+                            .scaledToFit()
+                    @unknown default:
+                        fatalError()
+                    }
+                }
                 Spacer()
                 VStack(alignment: .leading) {
                     Text(name)

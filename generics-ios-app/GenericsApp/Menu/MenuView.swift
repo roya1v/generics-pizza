@@ -49,7 +49,8 @@ struct MenuView: View {
         LazyVGrid(columns: columns) {
             ForEach(model.items) { item in
                 MenuItemView(name: item.title,
-                             description: item.description)
+                             description: item.description,
+                             imageURL: URL(string: "http://localhost:8080/menu/\(item.id!.uuidString)")!)
                 .padding(.all, 4.0)
                 .onTapGesture {
                     shownItem = item

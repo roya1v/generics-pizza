@@ -11,6 +11,7 @@ let package = Package(
         .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
         .package(path: "../generics-ios-app/GenericsPackage"),
+        .package(url: "https://github.com/kylef/PathKit", from: "1.0.1")
     ],
     targets: [
         .target(
@@ -19,7 +20,8 @@ let package = Package(
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
                 .product(name: "Vapor", package: "vapor"),
-                .product(name: "GenericsModels", package: "GenericsPackage")
+                .product(name: "GenericsModels", package: "GenericsPackage"),
+                .product(name: "PathKit", package: "PathKit")
             ],
             swiftSettings: [
                 // Enable better optimizations when building in Release configuration. Despite the use of

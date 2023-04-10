@@ -8,12 +8,16 @@
 import Fluent
 import Vapor
 import GenericsModels
+import PathKit
 
 struct MenuController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         let menu = routes.grouped("menu")
         menu.get(use: index)
         menu.grouped(UserToken.authenticator()).post(use: create)
+        menu.group(":itemID") { item in
+            item.get(use: image)
+        }
     }
 
     func index(req: Request) async throws -> [MenuItem] {
@@ -21,6 +25,19 @@ struct MenuController: RouteCollection {
             .query(on: req.db)
             .all()
             .map { $0.getContent() }
+    }
+
+    func image(req: Request) async throws -> Response {
+        guard let menuItem = try await MenuEntry.find(req.parameters.get("itemID"), on: req.db),
+              let id = menuItem.id else {
+            throw Abort(.notFound)
+        }
+
+        let imageData = try (Path.current + "images" + "\(id.uuidString).png").read()
+        let resp = Response()
+        resp.body = Response.Body(data: imageData)
+
+        return resp
     }
 
     func create(req: Request) async throws -> MenuItem {
