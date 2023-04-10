@@ -12,7 +12,7 @@ import Combine
 
 final class NowViewModel: ObservableObject {
 
-    @Injected(Container.orderRepository) var repository
+    @Injected(Container.orderRestaurantRepository) var repository
     @Injected(Container.authenticationRepository) private var authRepository
 
     @Published var orders = [OrderModel]()

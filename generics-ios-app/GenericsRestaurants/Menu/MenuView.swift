@@ -7,10 +7,9 @@
 
 import SwiftUI
 import Factory
+import GenericsRepositories
 
 struct MenuView: View {
-    let columns = [GridItem(.flexible()), GridItem(.flexible())]
-
     @StateObject var model = MenuViewModel()
 
     @Environment(\.openWindow) var openWindow
@@ -49,7 +48,7 @@ struct MenuView: View {
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        Container.menuRepository.register { MenuRepositoryMck() }
+        Container.menuRepository.register { mockMenuRepository() }
         return MenuView()
     }
 }

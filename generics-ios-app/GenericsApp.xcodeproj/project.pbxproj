@@ -44,6 +44,7 @@
 		ECD079F129E45CCD00914593 /* Container+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD079F029E45CCD00914593 /* Container+Repositories.swift */; };
 		ECD079F329E45D0000914593 /* GenericsRepositories in Frameworks */ = {isa = PBXBuildFile; productRef = ECD079F229E45D0000914593 /* GenericsRepositories */; };
 		ECD079F529E45D0600914593 /* GenericsRepositories in Frameworks */ = {isa = PBXBuildFile; productRef = ECD079F429E45D0600914593 /* GenericsRepositories */; };
+		ECD079F629E47BA400914593 /* Container+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD079F029E45CCD00914593 /* Container+Repositories.swift */; };
 		ECD845A9298AE51D0036454C /* GenericsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD845A8298AE51D0036454C /* GenericsAppApp.swift */; };
 		ECD845AB298AE51D0036454C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD845AA298AE51D0036454C /* ContentView.swift */; };
 		ECD845AD298AE51E0036454C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECD845AC298AE51E0036454C /* Assets.xcassets */; };
@@ -609,6 +610,7 @@
 				ECA5E7F129BFC6F300D9E85F /* MenuView.swift in Sources */,
 				ECA92FB7299D64E600F28299 /* LoginViewModel.swift in Sources */,
 				EC63164E29C259FF00BF52E0 /* NewMenuItemViewModel.swift in Sources */,
+				ECD079F629E47BA400914593 /* Container+Repositories.swift in Sources */,
 				ECA5E7FC29C0F14900D9E85F /* MenuViewModel.swift in Sources */,
 				ECA5E7FE29C0FBE200D9E85F /* NewMenuItemView.swift in Sources */,
 				ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */,

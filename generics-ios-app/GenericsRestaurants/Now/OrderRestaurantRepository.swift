@@ -12,7 +12,7 @@ import Factory
 import GenericsHttp
 
 extension Container {
-    static let orderRepository = Factory(scope: .singleton) { OrderRestaurantRepositoryImpl() as OrderRestaurantRepository }
+    static let orderRestaurantRepository = Factory(scope: .singleton) { OrderRestaurantRepositoryImpl() as OrderRestaurantRepository }
 }
 
 protocol OrderRestaurantRepository {

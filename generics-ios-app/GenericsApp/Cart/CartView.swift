@@ -14,7 +14,7 @@ struct CartView: View {
     @ObservedObject var model = CartViewModel()
 
     var body: some View {
-        Group {
+        NavigationView {
             if model.items.isEmpty {
                 Text("You have to first add items to your cart!")
                     .font(.largeTitle)
@@ -38,22 +38,41 @@ struct CartView: View {
                             }
                         }
                     }
-                    switch model.state {
-                    case .readyForOrder:
-                        Button {
-                            model.placeOrder()
-                        } label: {
-                            Text("Place order")
+                    Section("Details") {
+                        VStack {
+                            HStack {
+                                Text("Subtotal")
+                                    .font(.genericsCaption)
+                                Spacer()
+                                Text("14.44$")
+                                    .font(.genericsCaption)
+                            }
+                            Divider()
+                            HStack {
+                                Text("Total")
+                                Spacer()
+                                Text("14.44$")
+                            }
                         }
-                    case .loading:
-                        ProgressView()
-                    case .inOrderState(_):
-                        liveOrder
-                    case .error:
-                        Text("Something didn't work out :(")
+                        switch model.state {
+                        case .readyForOrder:
+                            Button {
+                                model.placeOrder()
+                            } label: {
+                                Text("Place order")
+                            }
+                        case .loading:
+                            ProgressView()
+                        case .inOrderState(_):
+                            liveOrder
+                        case .error:
+                            Text("Something didn't work out :(")
+                        }
                     }
                 }
+                .navigationTitle("My cart")
             }
+
         }
         .onAppear {
             model.fetch()

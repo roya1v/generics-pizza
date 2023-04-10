@@ -48,7 +48,7 @@ struct NowView: View {
 
 struct NowView_Previews: PreviewProvider {
     static var previews: some View {
-        Container.orderRepository.register { OrderRestaurantRepositoryMck() }
+        Container.orderRestaurantRepository.register { OrderRestaurantRepositoryMck() }
         return NowView()
     }
 }
