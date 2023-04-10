@@ -9,26 +9,29 @@ import Foundation
 import GenericsModels
 import GenericsHttp
 
-public protocol MenuRepository {
-    func fetchMenu() async throws -> [MenuItem]
-    func create(item: MenuItem) async throws
-    var authDelegate: AuthorizationDelegate? { get set}
-}
-
-
 public func buildMenuRepository(url: String) -> MenuRepository {
-    MenuRepositoryImp()
+    MenuRepositoryImp(baseURL: url)
 }
 
 public func mockMenuRepository() -> MenuRepository {
     MenuRepositoryMck()
 }
 
+public protocol MenuRepository {
+    func fetchMenu() async throws -> [MenuItem]
+    func create(item: MenuItem) async throws
+    var authDelegate: AuthorizationDelegate? { get set}
+}
+
 final class MenuRepositoryImp: MenuRepository {
 
-    private let baseURL = "http://localhost:8080"
+    private let baseURL: String
 
     public var authDelegate: AuthorizationDelegate?
+
+    init(baseURL: String) {
+        self.baseURL = baseURL
+    }
 
     public func fetchMenu() async throws -> [MenuItem] {
         let response = try await GenericsHttp(baseURL: baseURL)!

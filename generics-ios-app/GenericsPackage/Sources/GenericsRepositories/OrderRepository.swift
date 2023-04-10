@@ -10,29 +10,31 @@ import GenericsModels
 import GenericsHttp
 import Combine
 
-public protocol OrderRepository {
-    func add(item: MenuItem)
-    func placeOrder() async throws -> AnyPublisher<OrderMessage, Never>
-    var items: [MenuItem] { get }
-}
-
-
 public func buildOrderRepository(url: String) -> OrderRepository {
-    OrderRepositoryImpl()
+    OrderRepositoryImpl(baseURL: url)
 }
 
 public func mockOrderRepository() -> OrderRepository {
     OrderRepositoryMck()
 }
 
+public protocol OrderRepository {
+    func add(item: MenuItem)
+    func placeOrder() async throws -> AnyPublisher<OrderMessage, Never>
+    var items: [MenuItem] { get }
+}
 
 final class OrderRepositoryImpl: OrderRepository {
 
     var items = [MenuItem]()
 
     private var socket: URLSessionWebSocketTask?
-
     private let messages = PassthroughSubject<OrderMessage, Never>()
+    private let baseURL: String
+
+    init(baseURL: String) {
+        self.baseURL = baseURL
+    }
 
     func add(item: MenuItem) {
         items.append(item)
@@ -62,7 +64,7 @@ final class OrderRepositoryImpl: OrderRepository {
                 default:
                     return
                 }
-            case .failure(let failure):
+            case .failure(_):
                 return
             }
             self.receive()
@@ -70,7 +72,7 @@ final class OrderRepositoryImpl: OrderRepository {
     }
 
     private func makeOrderRequest() async throws -> OrderModel {
-        let response = try await GenericsHttp(baseURL: "http://localhost:8080")!
+        let response = try await GenericsHttp(baseURL: baseURL)!
             .add(path: "order")
             .method(.post)
             .body(OrderModel(createdAt: nil, items: items))
