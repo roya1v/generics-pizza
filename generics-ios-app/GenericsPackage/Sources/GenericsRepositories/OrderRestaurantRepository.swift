@@ -8,27 +8,34 @@
 import Foundation
 import Combine
 import GenericsModels
-import Factory
 import GenericsHttp
 
-extension Container {
-    static let orderRestaurantRepository = Factory(scope: .singleton) { OrderRestaurantRepositoryImpl() as OrderRestaurantRepository }
+public func buildOrderRestaurantRepository(url: String) -> OrderRestaurantRepository {
+    OrderRestaurantRepositoryImpl(baseURL: url)
 }
 
-protocol OrderRestaurantRepository {
+public func mockOrderRestaurantRepository() -> OrderRestaurantRepository {
+    OrderRestaurantRepositoryMck()
+}
+
+public protocol OrderRestaurantRepository {
     func getFeed() async throws -> AnyPublisher<OrderMessage, Never>
     func send(message: OrderMessage) async throws
     var authDelegate: AuthorizationDelegate? { get set}
 }
 
-
 final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
-
-    private let feed = PassthroughSubject<OrderMessage, Never>()
 
     var authDelegate: AuthorizationDelegate?
 
     private var socket: URLSessionWebSocketTask?
+    private let feed = PassthroughSubject<OrderMessage, Never>()
+
+    private let baseURL: String
+
+    init(baseURL: String) {
+        self.baseURL = baseURL
+    }
 
     func getFeed() async throws -> AnyPublisher<OrderMessage, Never> {
         let currentOrders = try await getCurrentOrders()
@@ -38,27 +45,17 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
 
         var req = URLRequest(url: URL(string: "ws://localhost:8080/order/activity/")!)
 
-
-
-        var auth = try authDelegate?.getAuthorization()
-
-        switch auth {
-        case .basic(_, _):
-            fatalError()
+        switch try authDelegate?.getAuthorization() {
         case .bearer(let token):
             req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         default:
             fatalError()
         }
 
-        socket = URLSession.shared
-            .webSocketTask(with: req)
-
+        socket = URLSession.shared.webSocketTask(with: req)
 
         receive()
         socket?.resume()
-        return feed.eraseToAnyPublisher()
-
         return feed.eraseToAnyPublisher()
     }
 
@@ -78,7 +75,7 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
                 default:
                     return
                 }
-            case .failure(let failure):
+            case .failure(_):
                 return
             }
             self.receive()
@@ -86,7 +83,7 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
     }
 
     private func getCurrentOrders() async throws -> [OrderModel] {
-        let response = try await GenericsHttp(baseURL: "http://localhost:8080")!
+        let response = try await GenericsHttp(baseURL: baseURL)!
             .add(path: "order")
             .add(path: "current")
             .method(.get)
@@ -100,13 +97,13 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
 }
 
 final class OrderRestaurantRepositoryMck: OrderRestaurantRepository {
+
+    var authDelegate: AuthorizationDelegate?
+
     func getFeed() async throws -> AnyPublisher<OrderMessage, Never> {
         return Just<OrderMessage>(.newOrder(order: .init(id: UUID(), createdAt: .now, items: [], state: .new))).eraseToAnyPublisher()
     }
 
     func send(message: OrderMessage) async throws {
-
     }
-
-    var authDelegate: AuthorizationDelegate?
 }

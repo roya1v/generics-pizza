@@ -7,6 +7,7 @@
 
 import SwiftUI
 import GenericsModels
+import GenericsRepositories
 import Factory
 
 struct NowView: View {
@@ -48,7 +49,7 @@ struct NowView: View {
 
 struct NowView_Previews: PreviewProvider {
     static var previews: some View {
-        Container.orderRestaurantRepository.register { OrderRestaurantRepositoryMck() }
+        Container.orderRestaurantRepository.register { mockOrderRestaurantRepository() }
         return NowView()
     }
 }
