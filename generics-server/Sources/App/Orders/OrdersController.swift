@@ -17,7 +17,8 @@ final class OrdersController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         let order = routes.grouped("order")
         let authenticated = order.grouped(UserToken.authenticator())
-        authenticated.grouped("current").get(use: getCurrent)
+        authenticated.get("current", use: getCurrent)
+        authenticated.get("history", use: getHistory)
         order.post(use: new)
 
         order.grouped("activity").grouped(":orderId").webSocket(onUpgrade: orderActivity)
@@ -28,6 +29,15 @@ final class OrdersController: RouteCollection {
         try req.auth.require(User.self)
         return try await Order.query(on: req.db)
             .filter(\.$state != .finished)
+            .with(\.$items) { $0.with(\.$item) }
+            .all()
+            .map { $0.getContent() }
+    }
+
+    func getHistory(req: Request) async throws -> [OrderModel] {
+        try req.auth.require(User.self)
+        return try await Order.query(on: req.db)
+            .filter(\.$state == .finished)
             .with(\.$items) { $0.with(\.$item) }
             .all()
             .map { $0.getContent() }
