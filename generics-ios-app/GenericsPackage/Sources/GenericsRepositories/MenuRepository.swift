@@ -34,12 +34,11 @@ final class MenuRepositoryImp: MenuRepository {
     }
 
     public func fetchMenu() async throws -> [MenuItem] {
-        let response = try await GenericsHttp(baseURL: baseURL)!
+         return try await GenericsHttp(baseURL: baseURL)!
             .add(path: "menu")
             .method(.get)
+            .decode(to: [MenuItem].self)
             .perform()
-
-        return try JSONDecoder().decode([MenuItem].self, from: response.0)
     }
 
     public func create(item: MenuItem) async throws {

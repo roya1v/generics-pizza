@@ -44,7 +44,11 @@ public class GenericsHttp {
             return nil
         }
     }
-
+    
+    public init(baseURL: URL) {
+        self.baseURL = baseURL
+    }
+    
     public func add(path: String) -> Self {
         if #available(iOS 16.0, *) {
             baseURL = baseURL.appending(path: path)
@@ -74,7 +78,17 @@ public class GenericsHttp {
         headers["Content-Type"] = "application/json"
         return self
     }
-
+    
+    public func decode<Response: Decodable>(to type: Response.Type) -> GenericsDecodedHttp<Response> {
+        return GenericsDecodedHttp<Response>(baseURL: baseURL,
+                                             pathComponents: pathComponents,
+                                             auth: auth,
+                                             method: method,
+                                             body: body,
+                                             headers: headers,
+                                             authDelegate: authDelegate)
+    }
+    
     @discardableResult
     public func perform() async throws -> (Data, URLResponse) {
         let url = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
@@ -106,6 +120,36 @@ public class GenericsHttp {
         case .notNeeded:
             return
         }
+    }
+}
+
+public class GenericsDecodedHttp<Response: Decodable>: GenericsHttp {
+    
+    init(baseURL: URL,
+         pathComponents: [String],
+         auth: Authorization?,
+         method: Method,
+         body: Data?,
+         headers: [String: String],
+         authDelegate: AuthorizationDelegate?) {
+        super.init(baseURL: baseURL)
+        self.pathComponents = pathComponents
+        self.auth = auth
+        self.method = method
+        self.body = body
+        self.headers = headers
+        self.authDelegate = authDelegate
+    }
+    
+    @_disfavoredOverload
+    public override func perform() async throws -> (Data, URLResponse) {
+        try await super.perform()
+    }
+    
+    public func perform() async throws -> Response {
+        let response = try await super.perform()
+        
+        return try JSONDecoder().decode(Response.self, from: response.0)
     }
 }
 
