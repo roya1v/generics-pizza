@@ -42,14 +42,13 @@ final class MenuRepositoryImp: MenuRepository {
     }
 
     public func create(item: MenuItem) async throws {
-        let response = try await GenericsHttp(baseURL: baseURL)!
+        try await GenericsHttp(baseURL: baseURL)!
             .add(path: "menu")
             .method(.post)
             .authorizationDelegate(authDelegate!)
             .body(item)
+            .decode(to: MenuItem.self)
             .perform()
-
-        _ = try JSONDecoder().decode(MenuItem.self, from: response.0)
     }
 }
 

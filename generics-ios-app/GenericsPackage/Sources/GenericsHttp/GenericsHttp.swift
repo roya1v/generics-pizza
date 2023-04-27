@@ -142,10 +142,12 @@ public class GenericsDecodedHttp<Response: Decodable>: GenericsHttp {
     }
     
     @_disfavoredOverload
+    @discardableResult
     public override func perform() async throws -> (Data, URLResponse) {
         try await super.perform()
     }
-    
+
+    @discardableResult
     public func perform() async throws -> Response {
         let response = try await super.perform()
         
