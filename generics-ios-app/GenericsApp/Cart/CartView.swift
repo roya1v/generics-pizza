@@ -75,7 +75,8 @@ struct CartView: View {
                     }
                     Section {
                         NavigationLink {
-                            Text("Address view")
+                            AddressSwiftUIView()
+                                .ignoresSafeArea()
                         } label: {
                             SelectorCardView(caption: "Your delivery address",
                                              icon: "location",
