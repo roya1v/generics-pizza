@@ -8,10 +8,13 @@
 import SwiftUI
 import Factory
 import GenericsRepositories
+import GenericsUI
 
 struct CartView: View {
 
     @ObservedObject var model = CartViewModel()
+
+    @State var count = 0
 
     var body: some View {
         NavigationView {
@@ -21,32 +24,47 @@ struct CartView: View {
                     .multilineTextAlignment(.center)
             } else {
                 List {
-                    Section("Items") {
+                    Section {
                         ForEach(model.items) { item in
                             HStack {
                                 Image("menu_pizza")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 40.0, height: 40.0)
+                                    .frame(width: 80.0, height: 80.0)
                                 VStack(alignment: .leading) {
                                     Text(item.title)
                                     Text(item.description)
                                         .font(.genericsCaption)
                                         .foregroundColor(.gray)
                                         .lineLimit(1)
+                                    HStack {
+                                        Text("$13.99")
+                                        Spacer()
+                                    }
+                                    .padding(2.0)
                                 }
+
                             }
                         }
                     }
-                    Section("Details") {
+                    Section {
                         VStack {
                             HStack {
                                 Text("Subtotal")
-                                    .font(.genericsCaption)
                                 Spacer()
                                 Text("14.44$")
-                                    .font(.genericsCaption)
+
                             }
+                            .foregroundColor(Color.gray)
+                            .font(.genericsCaption)
+                            HStack {
+                                Text("Delivery")
+                                Spacer()
+                                Text("14.44$")
+
+                            }
+                            .foregroundColor(Color.gray)
+                            .font(.genericsCaption)
                             Divider()
                             HStack {
                                 Text("Total")
@@ -54,13 +72,27 @@ struct CartView: View {
                                 Text("14.44$")
                             }
                         }
+                    }
+                    Section {
+                        NavigationLink {
+                            Text("Address view")
+                        } label: {
+                            SelectorCardView(caption: "Your delivery address",
+                                             icon: "location",
+                                             text: "1234 Generic's street Warsaw")
+                        }
+                        NavigationLink {
+                            Text("Payment view")
+                        } label: {
+                            SelectorCardView(caption: "Payment method",
+                                             icon: "creditcard",
+                                             text: "Cash")
+                        }
+                    }
+                    Section {
                         switch model.state {
                         case .readyForOrder:
-                            Button {
-                                model.placeOrder()
-                            } label: {
-                                Text("Place order")
-                            }
+                            orderButton
                         case .loading:
                             ProgressView()
                         case .inOrderState(_):
@@ -72,7 +104,6 @@ struct CartView: View {
                 }
                 .navigationTitle("My cart")
             }
-
         }
         .onAppear {
             model.fetch()
@@ -98,6 +129,24 @@ struct CartView: View {
             Text("Something didn't work out :(")
         }
     }
+
+    @ViewBuilder
+    var orderButton: some View {
+        Button {
+            model.placeOrder()
+        } label: {
+            Text("Place order")
+                .font(.headline)
+                .padding()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                        .contentShape(Rectangle())
+                        .foregroundColor(Color.white)
+                        .background(Color.black)
+
+        }
+            .listRowInsets(EdgeInsets())
+
+    }
 }
 
 struct CartView_Previews: PreviewProvider {
@@ -106,3 +155,25 @@ struct CartView_Previews: PreviewProvider {
         return CartView()
     }
 }
+
+struct SelectorCardView: View {
+
+    let caption: String
+    let icon: String
+    let text: String
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(caption)
+                .font(.genericsCaption)
+                .foregroundColor(Color.gray)
+                .padding(1.0)
+            HStack {
+                Image(systemName: icon)
+                    .foregroundColor(Color.gray)
+                Text(text)
+            }
+        }
+    }
+}
+
