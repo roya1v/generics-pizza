@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		01C9DFB32A0AE0E2001DC47D /* AddressSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFB22A0AE0E2001DC47D /* AddressSheetView.swift */; };
+		01C9DFBB2A0AF16B001DC47D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */; };
+		01C9DFBD2A0AF16B001DC47D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFBC2A0AF16B001DC47D /* SceneDelegate.swift */; };
+		01C9DFBF2A0AF16B001DC47D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFBE2A0AF16B001DC47D /* ViewController.swift */; };
+		01C9DFC22A0AF16B001DC47D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C9DFC02A0AF16B001DC47D /* Main.storyboard */; };
+		01C9DFC42A0AF16D001DC47D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C9DFC32A0AF16D001DC47D /* Assets.xcassets */; };
+		01C9DFC72A0AF16D001DC47D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C9DFC52A0AF16D001DC47D /* LaunchScreen.storyboard */; };
+		01C9DFD22A0AF16D001DC47D /* GenericsDriverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFD12A0AF16D001DC47D /* GenericsDriverTests.swift */; };
+		01C9DFDC2A0AF16E001DC47D /* GenericsDriverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFDB2A0AF16E001DC47D /* GenericsDriverUITests.swift */; };
+		01C9DFDE2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFDD2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift */; };
 		01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA4F2A09735800C622CC /* AddressViewController.swift */; };
 		01FFEA522A0974D900C622CC /* AddressSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */; };
 		EC14E819298B07C900A6540C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E818298B07C900A6540C /* HomeView.swift */; };
@@ -57,6 +66,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		01C9DFCE2A0AF16D001DC47D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01C9DFB72A0AF16B001DC47D;
+			remoteInfo = GenericsDriver;
+		};
+		01C9DFD82A0AF16E001DC47D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01C9DFB72A0AF16B001DC47D;
+			remoteInfo = GenericsDriver;
+		};
 		ECA92F99299C2D7900F28299 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
@@ -89,6 +112,19 @@
 
 /* Begin PBXFileReference section */
 		01C9DFB22A0AE0E2001DC47D /* AddressSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSheetView.swift; sourceTree = "<group>"; };
+		01C9DFB82A0AF16B001DC47D /* GenericsDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		01C9DFBC2A0AF16B001DC47D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		01C9DFBE2A0AF16B001DC47D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		01C9DFC12A0AF16B001DC47D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		01C9DFC32A0AF16D001DC47D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		01C9DFC62A0AF16D001DC47D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		01C9DFC82A0AF16D001DC47D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01C9DFCD2A0AF16D001DC47D /* GenericsDriverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsDriverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		01C9DFD12A0AF16D001DC47D /* GenericsDriverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsDriverTests.swift; sourceTree = "<group>"; };
+		01C9DFD72A0AF16E001DC47D /* GenericsDriverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsDriverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		01C9DFDB2A0AF16E001DC47D /* GenericsDriverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsDriverUITests.swift; sourceTree = "<group>"; };
+		01C9DFDD2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsDriverUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		01FFEA4F2A09735800C622CC /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSwiftUIView.swift; sourceTree = "<group>"; };
 		EC14E818298B07C900A6540C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -136,6 +172,27 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		01C9DFB52A0AF16B001DC47D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C9DFCA2A0AF16D001DC47D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C9DFD42A0AF16D001DC47D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ECA92F85299C2D7700F28299 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -191,6 +248,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01C9DFB92A0AF16B001DC47D /* GenericsDriver */ = {
+			isa = PBXGroup;
+			children = (
+				01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */,
+				01C9DFBC2A0AF16B001DC47D /* SceneDelegate.swift */,
+				01C9DFBE2A0AF16B001DC47D /* ViewController.swift */,
+				01C9DFC02A0AF16B001DC47D /* Main.storyboard */,
+				01C9DFC32A0AF16D001DC47D /* Assets.xcassets */,
+				01C9DFC52A0AF16D001DC47D /* LaunchScreen.storyboard */,
+				01C9DFC82A0AF16D001DC47D /* Info.plist */,
+			);
+			path = GenericsDriver;
+			sourceTree = "<group>";
+		};
+		01C9DFD02A0AF16D001DC47D /* GenericsDriverTests */ = {
+			isa = PBXGroup;
+			children = (
+				01C9DFD12A0AF16D001DC47D /* GenericsDriverTests.swift */,
+			);
+			path = GenericsDriverTests;
+			sourceTree = "<group>";
+		};
+		01C9DFDA2A0AF16E001DC47D /* GenericsDriverUITests */ = {
+			isa = PBXGroup;
+			children = (
+				01C9DFDB2A0AF16E001DC47D /* GenericsDriverUITests.swift */,
+				01C9DFDD2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift */,
+			);
+			path = GenericsDriverUITests;
+			sourceTree = "<group>";
+		};
 		01FFEA4C2A096F7000C622CC /* Address */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +415,9 @@
 				ECA92F89299C2D7700F28299 /* GenericsRestaurants */,
 				ECA92F9B299C2D7900F28299 /* GenericsRestaurantsTests */,
 				ECA92FA5299C2D7900F28299 /* GenericsRestaurantsUITests */,
+				01C9DFB92A0AF16B001DC47D /* GenericsDriver */,
+				01C9DFD02A0AF16D001DC47D /* GenericsDriverTests */,
+				01C9DFDA2A0AF16E001DC47D /* GenericsDriverUITests */,
 				ECD845A6298AE51D0036454C /* Products */,
 				ECA92FB8299D652D00F28299 /* Frameworks */,
 			);
@@ -341,6 +432,9 @@
 				ECA92F88299C2D7700F28299 /* GenericsRestaurants.app */,
 				ECA92F98299C2D7900F28299 /* GenericsRestaurantsTests.xctest */,
 				ECA92FA2299C2D7900F28299 /* GenericsRestaurantsUITests.xctest */,
+				01C9DFB82A0AF16B001DC47D /* GenericsDriver.app */,
+				01C9DFCD2A0AF16D001DC47D /* GenericsDriverTests.xctest */,
+				01C9DFD72A0AF16E001DC47D /* GenericsDriverUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -389,6 +483,59 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		01C9DFB72A0AF16B001DC47D /* GenericsDriver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01C9DFDF2A0AF16E001DC47D /* Build configuration list for PBXNativeTarget "GenericsDriver" */;
+			buildPhases = (
+				01C9DFB42A0AF16B001DC47D /* Sources */,
+				01C9DFB52A0AF16B001DC47D /* Frameworks */,
+				01C9DFB62A0AF16B001DC47D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GenericsDriver;
+			productName = GenericsDriver;
+			productReference = 01C9DFB82A0AF16B001DC47D /* GenericsDriver.app */;
+			productType = "com.apple.product-type.application";
+		};
+		01C9DFCC2A0AF16D001DC47D /* GenericsDriverTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01C9DFE22A0AF16E001DC47D /* Build configuration list for PBXNativeTarget "GenericsDriverTests" */;
+			buildPhases = (
+				01C9DFC92A0AF16D001DC47D /* Sources */,
+				01C9DFCA2A0AF16D001DC47D /* Frameworks */,
+				01C9DFCB2A0AF16D001DC47D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01C9DFCF2A0AF16D001DC47D /* PBXTargetDependency */,
+			);
+			name = GenericsDriverTests;
+			productName = GenericsDriverTests;
+			productReference = 01C9DFCD2A0AF16D001DC47D /* GenericsDriverTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		01C9DFD62A0AF16D001DC47D /* GenericsDriverUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01C9DFE52A0AF16E001DC47D /* Build configuration list for PBXNativeTarget "GenericsDriverUITests" */;
+			buildPhases = (
+				01C9DFD32A0AF16D001DC47D /* Sources */,
+				01C9DFD42A0AF16D001DC47D /* Frameworks */,
+				01C9DFD52A0AF16D001DC47D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01C9DFD92A0AF16E001DC47D /* PBXTargetDependency */,
+			);
+			name = GenericsDriverUITests;
+			productName = GenericsDriverUITests;
+			productReference = 01C9DFD72A0AF16E001DC47D /* GenericsDriverUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		ECA92F87299C2D7700F28299 /* GenericsRestaurants */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ECA92FAA299C2D7900F28299 /* Build configuration list for PBXNativeTarget "GenericsRestaurants" */;
@@ -516,9 +663,20 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1410;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
+					01C9DFB72A0AF16B001DC47D = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					01C9DFCC2A0AF16D001DC47D = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 01C9DFB72A0AF16B001DC47D;
+					};
+					01C9DFD62A0AF16D001DC47D = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = 01C9DFB72A0AF16B001DC47D;
+					};
 					ECA92F87299C2D7700F28299 = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -565,11 +723,38 @@
 				ECA92F87299C2D7700F28299 /* GenericsRestaurants */,
 				ECA92F97299C2D7900F28299 /* GenericsRestaurantsTests */,
 				ECA92FA1299C2D7900F28299 /* GenericsRestaurantsUITests */,
+				01C9DFB72A0AF16B001DC47D /* GenericsDriver */,
+				01C9DFCC2A0AF16D001DC47D /* GenericsDriverTests */,
+				01C9DFD62A0AF16D001DC47D /* GenericsDriverUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		01C9DFB62A0AF16B001DC47D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01C9DFC72A0AF16D001DC47D /* LaunchScreen.storyboard in Resources */,
+				01C9DFC42A0AF16D001DC47D /* Assets.xcassets in Resources */,
+				01C9DFC22A0AF16B001DC47D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C9DFCB2A0AF16D001DC47D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C9DFD52A0AF16D001DC47D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ECA92F86299C2D7700F28299 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -619,6 +804,33 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		01C9DFB42A0AF16B001DC47D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01C9DFBF2A0AF16B001DC47D /* ViewController.swift in Sources */,
+				01C9DFBB2A0AF16B001DC47D /* AppDelegate.swift in Sources */,
+				01C9DFBD2A0AF16B001DC47D /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C9DFC92A0AF16D001DC47D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01C9DFD22A0AF16D001DC47D /* GenericsDriverTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C9DFD32A0AF16D001DC47D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01C9DFDE2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift in Sources */,
+				01C9DFDC2A0AF16E001DC47D /* GenericsDriverUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ECA92F84299C2D7700F28299 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -697,6 +909,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		01C9DFCF2A0AF16D001DC47D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01C9DFB72A0AF16B001DC47D /* GenericsDriver */;
+			targetProxy = 01C9DFCE2A0AF16D001DC47D /* PBXContainerItemProxy */;
+		};
+		01C9DFD92A0AF16E001DC47D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01C9DFB72A0AF16B001DC47D /* GenericsDriver */;
+			targetProxy = 01C9DFD82A0AF16E001DC47D /* PBXContainerItemProxy */;
+		};
 		ECA92F9A299C2D7900F28299 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = ECA92F87299C2D7700F28299 /* GenericsRestaurants */;
@@ -719,7 +941,156 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		01C9DFC02A0AF16B001DC47D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01C9DFC12A0AF16B001DC47D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		01C9DFC52A0AF16D001DC47D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01C9DFC62A0AF16D001DC47D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		01C9DFE02A0AF16E001DC47D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GenericsDriver/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsDriver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		01C9DFE12A0AF16E001DC47D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GenericsDriver/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsDriver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		01C9DFE32A0AF16E001DC47D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsDriverTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericsDriver.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GenericsDriver";
+			};
+			name = Debug;
+		};
+		01C9DFE42A0AF16E001DC47D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsDriverTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericsDriver.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GenericsDriver";
+			};
+			name = Release;
+		};
+		01C9DFE62A0AF16E001DC47D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsDriverUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GenericsDriver;
+			};
+			name = Debug;
+		};
+		01C9DFE72A0AF16E001DC47D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsDriverUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = GenericsDriver;
+			};
+			name = Release;
+		};
 		ECA92FAB299C2D7900F28299 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1155,6 +1526,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		01C9DFDF2A0AF16E001DC47D /* Build configuration list for PBXNativeTarget "GenericsDriver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01C9DFE02A0AF16E001DC47D /* Debug */,
+				01C9DFE12A0AF16E001DC47D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01C9DFE22A0AF16E001DC47D /* Build configuration list for PBXNativeTarget "GenericsDriverTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01C9DFE32A0AF16E001DC47D /* Debug */,
+				01C9DFE42A0AF16E001DC47D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01C9DFE52A0AF16E001DC47D /* Build configuration list for PBXNativeTarget "GenericsDriverUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01C9DFE62A0AF16E001DC47D /* Debug */,
+				01C9DFE72A0AF16E001DC47D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		ECA92FAA299C2D7900F28299 /* Build configuration list for PBXNativeTarget "GenericsRestaurants" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
