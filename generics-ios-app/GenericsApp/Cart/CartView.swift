@@ -77,6 +77,7 @@ struct CartView: View {
                         NavigationLink {
                             AddressSwiftUIView()
                                 .ignoresSafeArea()
+                                .toolbar(.hidden, for: .navigationBar)
                         } label: {
                             SelectorCardView(caption: "Your delivery address",
                                              icon: "location",
