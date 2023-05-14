@@ -12,10 +12,8 @@ import GenericsUI
 
 struct CartView: View {
 
-    @ObservedObject var model = CartViewModel()
-
-    @State var count = 0
-
+    @StateObject var model = CartViewModel()
+    // Fix for tab bar not reappering
     @State var dumbFix = false
 
     var body: some View {
@@ -57,16 +55,16 @@ struct CartView: View {
                                 .toolbar(dumbFix ? .hidden : .automatic,
                                          for: .tabBar)
                         } label: {
-                            SelectorCardView(caption: "Your delivery address",
-                                             icon: "location",
-                                             text: "Select your address")
+                            SelectorView(caption: "Your delivery address",
+                                         icon: "location",
+                                         text: "Select your address")
                         }
                         NavigationLink {
                             Text("Payment view")
                         } label: {
-                            SelectorCardView(caption: "Payment method",
-                                             icon: "creditcard",
-                                             text: "Cash")
+                            SelectorView(caption: "Payment method",
+                                         icon: "creditcard",
+                                         text: "Cash")
                         }
                     }
                     Section {
@@ -94,8 +92,6 @@ struct CartView: View {
                                 Text("14.44$")
                             }
                         }
-
-
                     }
                     Section {
                         switch model.state {
@@ -146,14 +142,13 @@ struct CartView: View {
             Text("Place order")
                 .font(.headline)
                 .padding()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                        .contentShape(Rectangle())
-                        .foregroundColor(Color.white)
-                        .background(Color.black)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                .contentShape(Rectangle())
+                .foregroundColor(Color.white)
+                .background(Color.black)
 
         }
-            .listRowInsets(EdgeInsets())
-
+        .listRowInsets(EdgeInsets())
     }
 }
 
@@ -163,25 +158,3 @@ struct CartView_Previews: PreviewProvider {
         return CartView()
     }
 }
-
-struct SelectorCardView: View {
-
-    let caption: String
-    let icon: String
-    let text: String
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(caption)
-                .font(.genericsCaption)
-                .foregroundColor(Color.gray)
-                .padding(1.0)
-            HStack {
-                Image(systemName: icon)
-                    .foregroundColor(Color.gray)
-                Text(text)
-            }
-        }
-    }
-}
-

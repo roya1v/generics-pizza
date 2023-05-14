@@ -170,8 +170,4 @@ final class AddressSheetView: UIView {
         routeFinishStep.image = UIImage(named: "location_icon")
         routeFinishStep.isHidden = false
     }
-
-    func hideSteps() {
-
-    }
 }

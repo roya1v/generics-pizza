@@ -44,13 +44,19 @@ final class AddressViewController: UIViewController {
         return view
     }()
 
-    let model = AddressViewModel()
+    private let model: AddressViewModel
+    private var cancellable = Set<AnyCancellable>()
 
-    var popMe: (() -> Void)?
+    private var constraint: NSLayoutConstraint! = nil
 
-    var constraint: NSLayoutConstraint! = nil
+    init(model: AddressViewModel) {
+        self.model = model
+        super.init(nibName: nil, bundle: nil)
+    }
 
-    var cancellable = Set<AnyCancellable>()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,45 +106,26 @@ final class AddressViewController: UIViewController {
         ])
 
         closeButtonView.addAction(.init(handler: { action in
-            self.popMe?()
+            self.model.closeTapped()
         }), for: .touchUpInside)
 
         addressSheetView.addressTextChanged.debounce(for: .seconds(2), scheduler: DispatchQueue.main).sink { value in
-            self.geocoder.geocodeAddressString(value ?? "") {
-                    (placemarks, error) in
-                    guard error == nil else {
-                        print("Geocoding error: \(error!)")
-                        return
-                    }
-                let place = placemarks!.first!
-                self.mapView.setRegion(.init(center: place.location!.coordinate, latitudinalMeters: 500.0, longitudinalMeters: 500.0), animated: true)
-                //placemarks!.first!.
-                let formatter = CNPostalAddressFormatter()
-                let addressString = formatter.string(from: place.postalAddress!)
-                self.addressSheetView.finishAddress = addressString
-                }
+            self.model.addressFieldChanged(to: value)
         }.store(in: &cancellable)
 
         addressSheetView.addressTextSubmited.sink { value in
-            self.geocoder.geocodeAddressString(value ?? "") {
-                    (placemarks, error) in
-                    guard error == nil else {
-                        print("Geocoding error: \(error!)")
-                        return
-                    }
-                let place = placemarks!.first!
-                self.mapView.setRegion(.init(center: place.location!.coordinate, latitudinalMeters: 500.0, longitudinalMeters: 500.0), animated: true)
-                //placemarks!.first!.
-                let formatter = CNPostalAddressFormatter()
-                let addressString = formatter.string(from: place.postalAddress!)
-                self.addressSheetView.finishAddress = addressString
-                }
+            self.model.addressFieldChanged(to: value)
         }.store(in: &cancellable)
 
         model.$finishAddress.receive(on: DispatchQueue.main).sink { address in
             self.addressSheetView.finishAddress = address
         }.store(in: &cancellable)
 
+        model.$mapRegion.receive(on: DispatchQueue.main).sink { region in
+            if let region {
+                self.mapView.setRegion(region, animated: true)
+            }
+        }.store(in: &cancellable)
     }
 }
 

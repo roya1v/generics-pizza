@@ -11,20 +11,18 @@ struct AddressSwiftUIView: UIViewControllerRepresentable {
     @Environment(\.dismiss) var dismiss
     @Binding var dumbFix: Bool
 
-
     func makeUIViewController(context: Context) -> AddressViewController {
-        let vc = AddressViewController()
-        dumbFix = true
-
-        vc.popMe = {
+        let model = AddressViewModel {
             dumbFix = false
             self.dismiss()
         }
+        let vc = AddressViewController(model: model)
+        dumbFix = true
+
         return vc
     }
 
     func updateUIViewController(_ uiViewController: AddressViewController, context: Context) {
-
     }
 }
 
