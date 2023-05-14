@@ -19,7 +19,15 @@ final class AddressViewController: UIViewController {
     }()
 
     private let closeButtonView: UIButton = {
-        let view = UIButton(frame: .zero)
+        var filled = UIButton.Configuration.filled()
+        filled.image = UIImage(systemName: "chevron.left")
+        filled.buttonSize = .medium
+        filled.baseBackgroundColor = .systemBackground
+        filled.baseForegroundColor = .black
+        filled.imagePadding = 16.0
+        filled.imagePlacement = .all
+
+        let view = UIButton(configuration: filled)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -36,6 +44,8 @@ final class AddressViewController: UIViewController {
         return view
     }()
 
+    let model = AddressViewModel()
+
     var popMe: (() -> Void)?
 
     var constraint: NSLayoutConstraint! = nil
@@ -46,6 +56,11 @@ final class AddressViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         mapView.delegate = self
     }
 
@@ -60,11 +75,20 @@ final class AddressViewController: UIViewController {
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
+        view.addSubview(pinView)
+        NSLayoutConstraint.activate([
+            pinView.bottomAnchor.constraint(equalTo: view.centerYAnchor),
+            pinView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pinView.heightAnchor.constraint(equalToConstant: 48.0),
+            pinView.widthAnchor.constraint(equalToConstant: 40.0)
+        ])
+        pinView.image = UIImage(systemName: "mappin")
+        pinView.tintColor = .systemRed
+
         view.addSubview(addressSheetView)
         NSLayoutConstraint.activate([
             addressSheetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            addressSheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            //addressSheetView.heightAnchor.constraint(equalToConstant: 300.0)
+            addressSheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         constraint = addressSheetView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         constraint.isActive = true
@@ -75,12 +99,11 @@ final class AddressViewController: UIViewController {
             closeButtonView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8.0),
         ])
 
-        closeButtonView.backgroundColor = .white
-        closeButtonView.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        closeButtonView.tintColor = .black
-        closeButtonView.configuration?.contentInsets = .init(top: 18.0, leading: 18.0, bottom: 18.0, trailing: 18.0)
+        closeButtonView.addAction(.init(handler: { action in
+            self.popMe?()
+        }), for: .touchUpInside)
 
-        addressSheetView.texting.debounce(for: .seconds(2), scheduler: DispatchQueue.main).sink { value in
+        addressSheetView.addressTextChanged.debounce(for: .seconds(2), scheduler: DispatchQueue.main).sink { value in
             self.geocoder.geocodeAddressString(value ?? "") {
                     (placemarks, error) in
                     guard error == nil else {
@@ -92,42 +115,48 @@ final class AddressViewController: UIViewController {
                 //placemarks!.first!.
                 let formatter = CNPostalAddressFormatter()
                 let addressString = formatter.string(from: place.postalAddress!)
-                self.addressSheetView.routeFinishStep.subtitleText = addressString
+                self.addressSheetView.finishAddress = addressString
                 }
         }.store(in: &cancellable)
 
-        view.addSubview(pinView)
-        NSLayoutConstraint.activate([
-            pinView.bottomAnchor.constraint(equalTo: view.centerYAnchor),
-            pinView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pinView.heightAnchor.constraint(equalToConstant: 80.0),
-            pinView.widthAnchor.constraint(equalTo: pinView.heightAnchor)
-        ])
-        pinView.image = UIImage(systemName: "mappin")
+        addressSheetView.addressTextSubmited.sink { value in
+            self.geocoder.geocodeAddressString(value ?? "") {
+                    (placemarks, error) in
+                    guard error == nil else {
+                        print("Geocoding error: \(error!)")
+                        return
+                    }
+                let place = placemarks!.first!
+                self.mapView.setRegion(.init(center: place.location!.coordinate, latitudinalMeters: 500.0, longitudinalMeters: 500.0), animated: true)
+                //placemarks!.first!.
+                let formatter = CNPostalAddressFormatter()
+                let addressString = formatter.string(from: place.postalAddress!)
+                self.addressSheetView.finishAddress = addressString
+                }
+        }.store(in: &cancellable)
+
+        model.$finishAddress.receive(on: DispatchQueue.main).sink { address in
+            self.addressSheetView.finishAddress = address
+        }.store(in: &cancellable)
+
     }
 }
 
 extension AddressViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         self.constraint.constant = 200
-        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
+        view.endEditing(true)
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: .curveEaseInOut) {
             self.view.layoutIfNeeded()
         }
     }
 
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         constraint.constant = 0
-        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseOut) {
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: .curveEaseInOut) {
             self.view.layoutIfNeeded()
         }
 
-
-        geocoder.reverseGeocodeLocation(CLLocation(latitude: mapView.region.center.latitude, longitude: mapView.region.center.longitude)) { places, error in
-            let place = places!.first!
-            let formatter = CNPostalAddressFormatter()
-            let addressString = formatter.string(from: place.postalAddress!)
-            self.addressSheetView.routeFinishStep.subtitleText = addressString
-            self.addressSheetView.addressTextField.text = addressString
-        }
+        model.mapMoved(to: mapView.region.center)
     }
 }

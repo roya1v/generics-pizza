@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct AddressSwiftUIView: UIViewControllerRepresentable {
-
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
+    @Binding var dumbFix: Bool
 
 
     func makeUIViewController(context: Context) -> AddressViewController {
         let vc = AddressViewController()
+        dumbFix = true
 
         vc.popMe = {
-            self.presentationMode.wrappedValue.dismiss()
+            dumbFix = false
+            self.dismiss()
         }
         return vc
     }
@@ -28,7 +30,7 @@ struct AddressSwiftUIView: UIViewControllerRepresentable {
 
 struct AddressSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        AddressSwiftUIView()
+        AddressSwiftUIView(dumbFix: .constant(true))
             .ignoresSafeArea()
     }
 }

@@ -16,6 +16,8 @@ struct CartView: View {
 
     @State var count = 0
 
+    @State var dumbFix = false
+
     var body: some View {
         NavigationView {
             if model.items.isEmpty {
@@ -48,6 +50,26 @@ struct CartView: View {
                         }
                     }
                     Section {
+                        NavigationLink {
+                            AddressSwiftUIView(dumbFix: $dumbFix)
+                                .ignoresSafeArea()
+                                .toolbar(.hidden, for: .navigationBar)
+                                .toolbar(dumbFix ? .hidden : .automatic,
+                                         for: .tabBar)
+                        } label: {
+                            SelectorCardView(caption: "Your delivery address",
+                                             icon: "location",
+                                             text: "Select your address")
+                        }
+                        NavigationLink {
+                            Text("Payment view")
+                        } label: {
+                            SelectorCardView(caption: "Payment method",
+                                             icon: "creditcard",
+                                             text: "Cash")
+                        }
+                    }
+                    Section {
                         VStack {
                             HStack {
                                 Text("Subtotal")
@@ -72,24 +94,8 @@ struct CartView: View {
                                 Text("14.44$")
                             }
                         }
-                    }
-                    Section {
-                        NavigationLink {
-                            AddressSwiftUIView()
-                                .ignoresSafeArea()
-                                .toolbar(.hidden, for: .navigationBar)
-                        } label: {
-                            SelectorCardView(caption: "Your delivery address",
-                                             icon: "location",
-                                             text: "1234 Generic's street Warsaw")
-                        }
-                        NavigationLink {
-                            Text("Payment view")
-                        } label: {
-                            SelectorCardView(caption: "Payment method",
-                                             icon: "creditcard",
-                                             text: "Cash")
-                        }
+
+
                     }
                     Section {
                         switch model.state {

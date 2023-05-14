@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import GenericsUI
 
 final class AddressSheetView: UIView {
 
@@ -22,7 +23,13 @@ final class AddressSheetView: UIView {
         return view
     }()
 
-    let addressTextField: UITextField = {
+    private let captionLabel: UILabel = {
+        let view = UILabel(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    private let addressTextField: UITextField = {
         let view = UITextField(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -34,16 +41,58 @@ final class AddressSheetView: UIView {
         return view
     }()
 
-    let routeFinishStep: RouteStepView = {
+    private let routeFinishStep: RouteStepView = {
         let view = RouteStepView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    var texting = PassthroughSubject<String?, Never>()
+    var addressTextChanged = PassthroughSubject<String?, Never>()
+    var addressTextSubmited = PassthroughSubject<String?, Never>()
+
+    var addressTextFieldValue: String? {
+        get {
+            addressTextField.text
+        }
+        set {
+            addressTextField.text = newValue
+        }
+    }
+
+    var startAddress: String? {
+        didSet {
+            if let finishAddress {
+                routeStartStep.subtitleText = finishAddress
+                showSteps()
+
+            } else {
+                routeStartStep.isHidden = true
+            }
+        }
+    }
+
+    var finishAddress: String? {
+        didSet {
+            if let finishAddress {
+                routeFinishStep.subtitleText = finishAddress
+                showSteps()
+            } else {
+                routeFinishStep.isHidden = true
+            }
+        }
+    }
 
     init() {
         super.init(frame: .zero)
+
+        setupView()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func setupView() {
         backgroundColor = .white
         layer.cornerRadius = 32.0
 
@@ -56,26 +105,49 @@ final class AddressSheetView: UIView {
         titleView.text = "Delivery address"
         titleView.font = .preferredFont(forTextStyle: .title1)
 
-        addSubview(submitButton)
-        NSLayoutConstraint.activate([
-            submitButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
-            submitButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
-            submitButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
-            submitButton.heightAnchor.constraint(equalToConstant: 64.0)
-        ])
-        submitButton.setTitleColor(.white, for: .normal)
-        submitButton.setTitle("Submit", for: .normal)
-        submitButton.backgroundColor = .black
-        submitButton.layer.cornerRadius = 32.0
-
         addSubview(addressTextField)
         NSLayoutConstraint.activate([
             addressTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
             addressTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
             addressTextField.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 16.0),
+            addressTextField.bottomAnchor.constraint(lessThanOrEqualTo: keyboardLayoutGuide.topAnchor, constant: -16.0)
         ])
         addressTextField.borderStyle = .roundedRect
+        addressTextField.addAction(.init(handler: { action in
+            self.addressTextChanged.send(self.addressTextField.text)
+        }), for: .editingChanged)
+        addressTextField.addAction(.init(handler: { action in
+            self.addressTextSubmited.send(self.addressTextField.text)
+            self.addressTextField.resignFirstResponder()
+        }), for: .primaryActionTriggered)
 
+        addSubview(submitButton)
+        NSLayoutConstraint.activate([
+            submitButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
+            submitButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
+            submitButton.heightAnchor.constraint(equalToConstant: 64.0),
+            submitButton.topAnchor.constraint(greaterThanOrEqualTo: addressTextField.bottomAnchor, constant: 16.0)
+        ])
+        submitButton.setTitleColor(.white, for: .normal)
+        submitButton.setTitle("Submit", for: .normal)
+        submitButton.backgroundColor = .black
+        submitButton.layer.cornerRadius = 32.0
+        submitButton.isEnabled = false
+
+        addSubview(captionLabel)
+        NSLayoutConstraint.activate([
+            captionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32.0),
+            captionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32.0),
+            captionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            captionLabel.topAnchor.constraint(equalTo: submitButton.bottomAnchor, constant: 8.0),
+        ])
+        captionLabel.text = "Your driver will receive both the pin location and address"
+        captionLabel.font = .preferredFont(forTextStyle: .caption1)
+        captionLabel.textAlignment = .center
+        captionLabel.numberOfLines = 0
+    }
+
+    func showSteps() {
         addSubview(routeStartStep)
         NSLayoutConstraint.activate([
             routeStartStep.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
@@ -83,8 +155,9 @@ final class AddressSheetView: UIView {
             routeStartStep.topAnchor.constraint(equalTo: addressTextField.bottomAnchor, constant: 16.0)
         ])
         routeStartStep.titleText = "Restaurant"
-        routeStartStep.subtitleText = "Generic's street 8"
+        routeStartStep.subtitleText = " "
         routeStartStep.image = UIImage(named: "destination_icon")
+        routeStartStep.isHidden = false
 
         addSubview(routeFinishStep)
         NSLayoutConstraint.activate([
@@ -94,108 +167,11 @@ final class AddressSheetView: UIView {
             routeFinishStep.bottomAnchor.constraint(equalTo: submitButton.topAnchor, constant: -16.0)
         ])
         routeFinishStep.titleText = "You"
-        routeFinishStep.subtitleText = "Generic's street 9"
         routeFinishStep.image = UIImage(named: "location_icon")
-
-        addressTextField.addAction(.init(handler: { action in
-            self.texting.send(self.addressTextField.text)
-        }), for: .editingChanged)
+        routeFinishStep.isHidden = false
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
+    func hideSteps() {
 
-
-final class RouteStepView: UIView {
-
-    private let imageView: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    private let titleView: UILabel = {
-        let view = UILabel(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    private let subtitleView: UILabel = {
-        let view = UILabel(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    var titleText: String? {
-        get {
-            titleView.text
-        }
-        set {
-            titleView.text = newValue
-        }
-    }
-
-    var subtitleText: String? {
-        get {
-            subtitleView.text
-        }
-        set {
-            subtitleView.text = newValue
-        }
-    }
-
-    var image: UIImage? {
-        get {
-            imageView.image
-        }
-        set {
-            imageView.image = newValue
-        }
-    }
-
-    init() {
-        super.init(frame: .zero)
-
-        addSubview(imageView)
-        NSLayoutConstraint.activate([
-            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor),
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            //imageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1.0 / 5.0)
-        ])
-        imageView.backgroundColor = .red
-        imageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        imageView.layer.cornerRadius = 16.0
-        imageView.layer.masksToBounds = true
-
-        addSubview(titleView)
-        NSLayoutConstraint.activate([
-            titleView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8.0),
-            titleView.topAnchor.constraint(equalTo: topAnchor, constant: 4.0),
-            titleView.trailingAnchor.constraint(equalTo: trailingAnchor),
-        ])
-
-        titleView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        //titleView.font = .preferredFont(forTextStyle: .title2)
-
-        addSubview(subtitleView)
-        NSLayoutConstraint.activate([
-            subtitleView.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8.0),
-            subtitleView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 2.0),
-            subtitleView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            subtitleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4.0)
-        ])
-
-        subtitleView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        subtitleView.textColor = .systemGray
-
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

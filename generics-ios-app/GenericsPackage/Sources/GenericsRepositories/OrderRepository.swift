@@ -34,10 +34,16 @@ final class OrderRepositoryImpl: OrderRepository {
 
     init(baseURL: String) {
         self.baseURL = baseURL
+        if let data = UserDefaults.standard.data(forKey: "order-items") {
+            items = (try? PropertyListDecoder().decode([MenuItem].self, from: data)) ?? []
+        }
     }
 
     func add(item: MenuItem) {
         items.append(item)
+        if let data = try? PropertyListEncoder().encode(items) {
+            UserDefaults.standard.setValue(data, forKey: "order-items")
+        }
     }
 
     func placeOrder() async throws -> AnyPublisher<OrderMessage, Never> {
