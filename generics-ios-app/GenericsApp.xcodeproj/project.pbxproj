@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		010A85E82A11282100354E7D /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010A85E72A11282100354E7D /* AddressViewModel.swift */; };
+		018A6AA22A1212770015D716 /* SwiftlyHttp in Frameworks */ = {isa = PBXBuildFile; productRef = 018A6AA12A1212770015D716 /* SwiftlyHttp */; };
+		018A6AA42A1212820015D716 /* SwiftlyHttp in Frameworks */ = {isa = PBXBuildFile; productRef = 018A6AA32A1212820015D716 /* SwiftlyHttp */; };
 		01C9DFB32A0AE0E2001DC47D /* AddressSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFB22A0AE0E2001DC47D /* AddressSheetView.swift */; };
 		01C9DFBB2A0AF16B001DC47D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */; };
 		01C9DFBD2A0AF16B001DC47D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFBC2A0AF16B001DC47D /* SceneDelegate.swift */; };
@@ -29,7 +31,6 @@
 		EC63164E29C259FF00BF52E0 /* NewMenuItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC63164D29C259FF00BF52E0 /* NewMenuItemViewModel.swift */; };
 		EC6382CA29D61B98003A864E /* GenericsUI in Frameworks */ = {isa = PBXBuildFile; productRef = EC6382C929D61B98003A864E /* GenericsUI */; };
 		EC6382CC29D6220C003A864E /* GenericsUI in Frameworks */ = {isa = PBXBuildFile; productRef = EC6382CB29D6220C003A864E /* GenericsUI */; };
-		EC688C2029CA380E00450D2E /* GenericsHttp in Frameworks */ = {isa = PBXBuildFile; productRef = EC688C1F29CA380E00450D2E /* GenericsHttp */; };
 		EC688C2329CA38D900450D2E /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2229CA38D900450D2E /* CartView.swift */; };
 		EC688C2729CA3C0100450D2E /* MenuItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2629CA3C0100450D2E /* MenuItemDetailView.swift */; };
 		EC688C2929CA462E00450D2E /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2829CA462E00450D2E /* CartViewModel.swift */; };
@@ -51,7 +52,6 @@
 		ECA92FB7299D64E600F28299 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FB6299D64E600F28299 /* LoginViewModel.swift */; };
 		ECA92FBA299D652D00F28299 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = ECA92FB9299D652D00F28299 /* Factory */; };
 		ECA92FBC299D657000F28299 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */; };
-		ECA92FC1299D721900F28299 /* GenericsHttp in Frameworks */ = {isa = PBXBuildFile; productRef = ECA92FC0299D721900F28299 /* GenericsHttp */; };
 		ECCE5BB029D4B09D009AB280 /* NowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCE5BAF29D4B09D009AB280 /* NowViewModel.swift */; };
 		ECD079F129E45CCD00914593 /* Container+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD079F029E45CCD00914593 /* Container+Repositories.swift */; };
 		ECD079F329E45D0000914593 /* GenericsRepositories in Frameworks */ = {isa = PBXBuildFile; productRef = ECD079F229E45D0000914593 /* GenericsRepositories */; };
@@ -200,8 +200,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC6382CC29D6220C003A864E /* GenericsUI in Frameworks */,
+				018A6AA42A1212820015D716 /* SwiftlyHttp in Frameworks */,
 				ECA5E7F929BFC8F600D9E85F /* GenericsModels in Frameworks */,
-				ECA92FC1299D721900F28299 /* GenericsHttp in Frameworks */,
 				ECA92FBA299D652D00F28299 /* Factory in Frameworks */,
 				ECD079F529E45D0600914593 /* GenericsRepositories in Frameworks */,
 			);
@@ -226,7 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC6382CA29D61B98003A864E /* GenericsUI in Frameworks */,
-				EC688C2029CA380E00450D2E /* GenericsHttp in Frameworks */,
+				018A6AA22A1212770015D716 /* SwiftlyHttp in Frameworks */,
 				EC42551F29BE3F5400E5F41A /* GenericsModels in Frameworks */,
 				EC14E823298C515E00A6540C /* Factory in Frameworks */,
 				ECD079F329E45D0000914593 /* GenericsRepositories in Frameworks */,
@@ -554,10 +554,10 @@
 			name = GenericsRestaurants;
 			packageProductDependencies = (
 				ECA92FB9299D652D00F28299 /* Factory */,
-				ECA92FC0299D721900F28299 /* GenericsHttp */,
 				ECA5E7F829BFC8F600D9E85F /* GenericsModels */,
 				EC6382CB29D6220C003A864E /* GenericsUI */,
 				ECD079F429E45D0600914593 /* GenericsRepositories */,
+				018A6AA32A1212820015D716 /* SwiftlyHttp */,
 			);
 			productName = GenericsRestaurants;
 			productReference = ECA92F88299C2D7700F28299 /* GenericsRestaurants.app */;
@@ -615,9 +615,9 @@
 			packageProductDependencies = (
 				EC14E822298C515E00A6540C /* Factory */,
 				EC42551E29BE3F5400E5F41A /* GenericsModels */,
-				EC688C1F29CA380E00450D2E /* GenericsHttp */,
 				EC6382C929D61B98003A864E /* GenericsUI */,
 				ECD079F229E45D0000914593 /* GenericsRepositories */,
+				018A6AA12A1212770015D716 /* SwiftlyHttp */,
 			);
 			productName = GenericsApp;
 			productReference = ECD845A5298AE51D0036454C /* GenericsApp.app */;
@@ -715,6 +715,7 @@
 			mainGroup = ECD8459C298AE51D0036454C;
 			packageReferences = (
 				EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */,
+				018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */,
 			);
 			productRefGroup = ECD845A6298AE51D0036454C /* Products */;
 			projectDirPath = "";
@@ -1623,6 +1624,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/roya1v/SwiftlyHttp";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Factory";
@@ -1634,6 +1643,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		018A6AA12A1212770015D716 /* SwiftlyHttp */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */;
+			productName = SwiftlyHttp;
+		};
+		018A6AA32A1212820015D716 /* SwiftlyHttp */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */;
+			productName = SwiftlyHttp;
+		};
 		EC14E822298C515E00A6540C /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */;
@@ -1651,10 +1670,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = GenericsUI;
 		};
-		EC688C1F29CA380E00450D2E /* GenericsHttp */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = GenericsHttp;
-		};
 		ECA5E7F829BFC8F600D9E85F /* GenericsModels */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GenericsModels;
@@ -1663,10 +1678,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
-		};
-		ECA92FC0299D721900F28299 /* GenericsHttp */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = GenericsHttp;
 		};
 		ECD079F229E45D0000914593 /* GenericsRepositories */ = {
 			isa = XCSwiftPackageProductDependency;

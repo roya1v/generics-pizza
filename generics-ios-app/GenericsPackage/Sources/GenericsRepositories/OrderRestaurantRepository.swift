@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 import GenericsModels
-import GenericsHttp
+import SwiftlyHttp
 
 public func buildOrderRestaurantRepository(url: String) -> OrderRestaurantRepository {
     OrderRestaurantRepositoryImpl(baseURL: url)
@@ -83,7 +83,7 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
     }
 
     private func getCurrentOrders() async throws -> [OrderModel] {
-        let response = try await GenericsHttp(baseURL: baseURL)!
+        let response = try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "order")
             .add(path: "current")
             .method(.get)

@@ -7,7 +7,7 @@
 
 import Foundation
 import GenericsModels
-import GenericsHttp
+import SwiftlyHttp
 
 public func buildMenuRepository(url: String) -> MenuRepository {
     MenuRepositoryImp(baseURL: url)
@@ -34,7 +34,7 @@ final class MenuRepositoryImp: MenuRepository {
     }
 
     public func fetchMenu() async throws -> [MenuItem] {
-         return try await GenericsHttp(baseURL: baseURL)!
+         return try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "menu")
             .method(.get)
             .decode(to: [MenuItem].self)
@@ -42,7 +42,7 @@ final class MenuRepositoryImp: MenuRepository {
     }
 
     public func create(item: MenuItem) async throws {
-        try await GenericsHttp(baseURL: baseURL)!
+        try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "menu")
             .method(.post)
             .authorizationDelegate(authDelegate!)

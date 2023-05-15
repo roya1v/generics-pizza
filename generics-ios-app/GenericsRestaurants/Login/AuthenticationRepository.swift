@@ -8,7 +8,7 @@
 import Foundation
 import Factory
 import Combine
-import GenericsHttp
+import SwiftlyHttp
 
 extension Container {
     static let authenticationRepository = Factory(scope: .singleton) { AuthenticationRepositoryImpl() as AuthenticationRepository }
@@ -50,7 +50,7 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
 
     func login(email: String, password: String) async throws {
 
-        let response = try await GenericsHttp(baseURL: "http://localhost:8080")!
+        let response = try await SwiftlyHttp(baseURL: "http://localhost:8080")!
             .add(path: "auth")
             .add(path: "login")
             .authorization(.basic(login: email, password: password))
@@ -64,7 +64,7 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
         stateSubject.send(.loggedIn)
     }
 
-    func getAuthorization() throws -> GenericsHttp.Authorization {
+    func getAuthorization() throws -> SwiftlyHttp.Authorization {
         guard let token = UserDefaults.standard.string(forKey: "auth-token") else {
             fatalError()
         }
@@ -73,7 +73,7 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
     }
 
     func signOut() async throws {
-        try await GenericsHttp(baseURL: "http://localhost:8080")!
+        try await SwiftlyHttp(baseURL: "http://localhost:8080")!
             .add(path: "auth")
             .add(path: "signout")
             .authorizationDelegate(self)
@@ -93,7 +93,7 @@ final class AuthenticationRepositoryMck: AuthenticationRepository {
     func reload() {
     }
 
-    func getAuthorization() throws -> GenericsHttp.Authorization {
+    func getAuthorization() throws -> SwiftlyHttp.Authorization {
         fatalError()
     }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 import GenericsModels
-import GenericsHttp
+import SwiftlyHttp
 import Combine
 
 public func buildOrderRepository(url: String) -> OrderRepository {
@@ -78,7 +78,7 @@ final class OrderRepositoryImpl: OrderRepository {
     }
 
     private func makeOrderRequest() async throws -> OrderModel {
-        let response = try await GenericsHttp(baseURL: baseURL)!
+        let response = try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "order")
             .method(.post)
             .body(OrderModel(createdAt: nil, items: items))

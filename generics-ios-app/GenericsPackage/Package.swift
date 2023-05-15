@@ -8,9 +8,6 @@ let package = Package(
     platforms: [.iOS(.v15), .macOS(.v13)],
     products: [
         .library(
-            name: "GenericsHttp",
-            targets: ["GenericsHttp"]),
-        .library(
             name: "GenericsUI",
             targets: ["GenericsUI"]),
         .library(
@@ -21,11 +18,9 @@ let package = Package(
             targets: ["GenericsRepositories"])
     ],
     dependencies: [
+        .package(url: "https://github.com/roya1v/SwiftlyHttp", branch: "main")
     ],
     targets: [
-        .target(
-            name: "GenericsHttp",
-            dependencies: []),
         .target(
             name: "GenericsUI",
             dependencies: []),
@@ -34,6 +29,6 @@ let package = Package(
             dependencies: []),
         .target(
             name: "GenericsRepositories",
-            dependencies: ["GenericsModels", "GenericsHttp"]),
+            dependencies: ["GenericsModels", "SwiftlyHttp"]),
     ]
 )
