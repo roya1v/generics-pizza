@@ -24,25 +24,30 @@ final class MenuEntry: Model, Content {
     @Field(key: "image_url")
     var imageUrl: String?
 
+    @Field(key: "price")
+    var price: Int
+
     init() { }
 
     init(id: UUID? = nil,
          title: String,
          description: String,
+         price: Int,
          imageUrl: String? = nil) {
         self.id = id
         self.title = title
         self.description = description
+        self.price = price
         self.imageUrl = imageUrl
     }
 
     func getContent() -> MenuItem {
-        .init(id: id, title: title, description: description)
+        .init(id: id, title: title, description: description, price: price)
     }
 }
 
 extension MenuItem: Content {
     func getModel() -> MenuEntry {
-        .init(id: id, title: title, description: description, imageUrl: nil)
+        .init(id: id, title: title, description: description, price: price, imageUrl: nil)
     }
 }
