@@ -29,7 +29,7 @@ struct MenuItemDetailView: View {
             AsyncImage(url: imageURL) { phase in
                 switch phase {
                 case .empty:
-                    Image("menu_pizza")
+                    Image("pizzza_placeholder")
                         .resizable()
                         .scaledToFit()
                 case .success(let image):
@@ -37,7 +37,7 @@ struct MenuItemDetailView: View {
                         .resizable()
                         .scaledToFit()
                 case .failure(_):
-                    Image("menu_pizza")
+                    Image("pizzza_placeholder")
                         .resizable()
                         .scaledToFit()
                 @unknown default:

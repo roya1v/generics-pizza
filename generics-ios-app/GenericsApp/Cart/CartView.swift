@@ -27,7 +27,7 @@ struct CartView: View {
                     Section {
                         ForEach(model.items) { item in
                             HStack {
-                                Image("menu_pizza")
+                                Image("pizzza_placeholder")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 80.0, height: 80.0)
