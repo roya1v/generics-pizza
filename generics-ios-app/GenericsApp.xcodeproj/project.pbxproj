@@ -260,25 +260,27 @@
 				01C9DFC32A0AF16D001DC47D /* Assets.xcassets */,
 				01C9DFC52A0AF16D001DC47D /* LaunchScreen.storyboard */,
 				01C9DFC82A0AF16D001DC47D /* Info.plist */,
+				01C9DFD02A0AF16D001DC47D /* Tests */,
+				01C9DFDA2A0AF16E001DC47D /* UITests */,
 			);
 			path = GenericsDriver;
 			sourceTree = "<group>";
 		};
-		01C9DFD02A0AF16D001DC47D /* GenericsDriverTests */ = {
+		01C9DFD02A0AF16D001DC47D /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				01C9DFD12A0AF16D001DC47D /* GenericsDriverTests.swift */,
 			);
-			path = GenericsDriverTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
-		01C9DFDA2A0AF16E001DC47D /* GenericsDriverUITests */ = {
+		01C9DFDA2A0AF16E001DC47D /* UITests */ = {
 			isa = PBXGroup;
 			children = (
 				01C9DFDB2A0AF16E001DC47D /* GenericsDriverUITests.swift */,
 				01C9DFDD2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift */,
 			);
-			path = GenericsDriverUITests;
+			path = UITests;
 			sourceTree = "<group>";
 		};
 		01FFEA4C2A096F7000C622CC /* Address */ = {
@@ -362,6 +364,8 @@
 				ECA92FBD299D6D6400F28299 /* Info.plist */,
 				ECA92F90299C2D7900F28299 /* GenericsRestaurants.entitlements */,
 				ECA92F91299C2D7900F28299 /* Preview Content */,
+				ECA92F9B299C2D7900F28299 /* Tests */,
+				ECA92FA5299C2D7900F28299 /* UITests */,
 			);
 			path = GenericsRestaurants;
 			sourceTree = "<group>";
@@ -374,21 +378,21 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		ECA92F9B299C2D7900F28299 /* GenericsRestaurantsTests */ = {
+		ECA92F9B299C2D7900F28299 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				ECA92F9C299C2D7900F28299 /* GenericsRestaurantsTests.swift */,
 			);
-			path = GenericsRestaurantsTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
-		ECA92FA5299C2D7900F28299 /* GenericsRestaurantsUITests */ = {
+		ECA92FA5299C2D7900F28299 /* UITests */ = {
 			isa = PBXGroup;
 			children = (
 				ECA92FA6299C2D7900F28299 /* GenericsRestaurantsUITests.swift */,
 				ECA92FA8299C2D7900F28299 /* GenericsRestaurantsUITestsLaunchTests.swift */,
 			);
-			path = GenericsRestaurantsUITests;
+			path = UITests;
 			sourceTree = "<group>";
 		};
 		ECA92FB5299D646000F28299 /* Login */ = {
@@ -411,16 +415,10 @@
 		ECD8459C298AE51D0036454C = {
 			isa = PBXGroup;
 			children = (
-				ECA92FBF299D719000F28299 /* GenericsPackage */,
 				ECD845A7298AE51D0036454C /* GenericsApp */,
-				ECD845B8298AE51E0036454C /* GenericsAppTests */,
-				ECD845C2298AE51E0036454C /* GenericsAppUITests */,
 				ECA92F89299C2D7700F28299 /* GenericsRestaurants */,
-				ECA92F9B299C2D7900F28299 /* GenericsRestaurantsTests */,
-				ECA92FA5299C2D7900F28299 /* GenericsRestaurantsUITests */,
 				01C9DFB92A0AF16B001DC47D /* GenericsDriver */,
-				01C9DFD02A0AF16D001DC47D /* GenericsDriverTests */,
-				01C9DFDA2A0AF16E001DC47D /* GenericsDriverUITests */,
+				ECA92FBF299D719000F28299 /* GenericsPackage */,
 				ECD845A6298AE51D0036454C /* Products */,
 				ECA92FB8299D652D00F28299 /* Frameworks */,
 			);
@@ -454,6 +452,8 @@
 				ECD845AC298AE51E0036454C /* Assets.xcassets */,
 				EC611F33299432A30000427A /* Info.plist */,
 				ECD845AE298AE51E0036454C /* Preview Content */,
+				ECD845B8298AE51E0036454C /* Tests */,
+				ECD845C2298AE51E0036454C /* UITests */,
 			);
 			path = GenericsApp;
 			sourceTree = "<group>";
@@ -466,21 +466,21 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		ECD845B8298AE51E0036454C /* GenericsAppTests */ = {
+		ECD845B8298AE51E0036454C /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				ECD845B9298AE51E0036454C /* GenericsAppTests.swift */,
 			);
-			path = GenericsAppTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
-		ECD845C2298AE51E0036454C /* GenericsAppUITests */ = {
+		ECD845C2298AE51E0036454C /* UITests */ = {
 			isa = PBXGroup;
 			children = (
 				ECD845C3298AE51E0036454C /* GenericsAppUITests.swift */,
 				ECD845C5298AE51E0036454C /* GenericsAppUITestsLaunchTests.swift */,
 			);
-			path = GenericsAppUITests;
+			path = UITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
