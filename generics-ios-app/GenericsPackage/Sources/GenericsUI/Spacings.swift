@@ -5,7 +5,11 @@
 //  Created by Mike Shevelinsky on 14/05/2023.
 //
 
+#if os(iOS)
 import UIKit
+#else
+import AppKit
+#endif
 
 public extension CGFloat {
 

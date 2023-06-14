@@ -8,6 +8,7 @@
 import SwiftUI
 import Factory
 import GenericsRepositories
+import GenericsModels
 
 struct MenuView: View {
     @StateObject var model = MenuViewModel()
@@ -39,9 +40,34 @@ struct MenuView: View {
     }
 
     var table: some View {
-        Table(model.items) {
-            TableColumn("Title", value: \.title)
-            TableColumn("Description", value: \.description)
+        List {
+            ForEach(model.items) { item in
+                listRow(for: item)
+            }
+        }
+        .listStyle(.inset(alternatesRowBackgrounds: true))
+    }
+
+    func listRow(for item: MenuItem) -> some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(item.title)
+                    .font(.title2)
+                Text(item.description)
+                    .font(.caption)
+            }
+            Spacer()
+            Text("\(item.price)")
+                .bold()
+                .padding()
+            Button {
+
+            } label: {
+                Text("Edit")
+                    .underline()
+            }
+            .buttonStyle(.link)
+            .padding()
         }
     }
 }

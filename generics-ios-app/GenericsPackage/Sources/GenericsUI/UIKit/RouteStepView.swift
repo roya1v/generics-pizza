@@ -5,6 +5,10 @@
 //  Created by Mike Shevelinsky on 14/05/2023.
 //
 
+#if os(iOS)
+
+
+
 import UIKit
 
 final public class RouteStepView: UIView {
@@ -99,3 +103,5 @@ final public class RouteStepView: UIView {
         subtitleView.textColor = .systemGray
     }
 }
+
+#endif

@@ -235,6 +235,15 @@
       }
     },
     {
+      "identity" : "swiftlyhttp",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/roya1v/SwiftlyHttp",
+      "state" : {
+        "branch" : "main",
+        "revision" : "9de3ddf12a7158ab2bd5bb715a31b1ff6e954cdf"
+      }
+    },
+    {
       "identity" : "vapor",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/vapor.git",
