@@ -49,4 +49,16 @@ final class CartViewModel: ObservableObject {
             }
         }
     }
+
+    func remove(_ item: MenuItem) {
+        if let index = items.firstIndex(of: item) {
+            items.remove(at: index)
+        }
+    }
+}
+
+extension MenuItem: Equatable {
+    public static func == (lhs: MenuItem, rhs: MenuItem) -> Bool {
+        lhs.id == rhs.id
+    }
 }

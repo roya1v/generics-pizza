@@ -57,9 +57,9 @@ final class MenuRepositoryMck: MenuRepository {
     var authDelegate: AuthorizationDelegate?
 
     func fetchMenu() async throws -> [MenuItem] {
-        [.init(id: .init(), title: "Margarita simplita", description: "Tomatoe souce, cheese and weird leaves"),
-         .init(id: .init(), title: "Pepperoni Meroni", description: "Tomatoe souce, cheese and weird leaves"),
-         .init(id: .init(), title: "Super pepperoni", description: "Tomatoe souce, cheese and weird leaves")
+        [.init(id: .init(), title: "Margarita simplita", description: "Tomatoe souce, cheese and weird leaves", price: 100),
+         .init(id: .init(), title: "Pepperoni Meroni", description: "Tomatoe souce, cheese and weird leaves", price: 100),
+         .init(id: .init(), title: "Super pepperoni", description: "Tomatoe souce, cheese and weird leaves", price: 100)
         ]
     }
 

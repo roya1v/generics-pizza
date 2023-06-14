@@ -13,6 +13,7 @@ import GenericsRepositories
 struct MenuItemView: View {
     let name: String
     let description: String
+    let price: String
     let imageURL: URL?
 
     var body: some View {
@@ -43,7 +44,7 @@ struct MenuItemView: View {
                         .font(.genericsCaption)
                         .foregroundColor(.gray)
                         .lineLimit(2)
-                    Text("13.99$")
+                    Text(price)
                         .font(.system(size: 16.0, weight: .bold))
                         .padding(4.0)
                 }

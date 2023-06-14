@@ -43,8 +43,15 @@ struct CartView: View {
                                     }
                                     .padding(2.0)
                                 }
+                                Button {
+                                    model.remove(item)
+                                } label: {
+                                    Image(systemName: "minus.circle.fill")
+                                        .foregroundColor(Color.red)
+                                }
 
                             }
+
                         }
                     }
                     Section {
