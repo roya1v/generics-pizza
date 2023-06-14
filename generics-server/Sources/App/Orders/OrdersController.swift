@@ -16,6 +16,7 @@ final class OrdersController: RouteCollection {
 
     func boot(routes: RoutesBuilder) throws {
         let order = routes.grouped("order")
+        order.get("check_price", use: checkPrice)
         let authenticated = order.grouped(UserToken.authenticator())
         authenticated.get("current", use: getCurrent)
         authenticated.get("history", use: getHistory)
@@ -41,6 +42,10 @@ final class OrdersController: RouteCollection {
             .with(\.$items) { $0.with(\.$item) }
             .all()
             .map { $0.getContent() }
+    }
+
+    func checkPrice(req: Request) async throws -> Int {
+        try req.content.decode(OrderModel.self).items.reduce(0, {$0 + $1.price})
     }
 
     func new(req: Request) async throws -> OrderModel {

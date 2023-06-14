@@ -17,7 +17,7 @@ extension MenuEntry {
                 .id()
                 .field("title", .string, .required)
                 .field("description", .string, .required)
-                .field("price", .int8, .required)
+                .field("price", .int, .required)
                 .field("image_url", .string)
                 .create()
         }
