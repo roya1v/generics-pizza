@@ -20,6 +20,7 @@ public func mockOrderRepository() -> OrderRepository {
 
 public protocol OrderRepository {
     func add(item: MenuItem)
+    func checkPrice() async throws -> Int
     func placeOrder() async throws -> AnyPublisher<OrderMessage, Never>
     var items: [MenuItem] { get }
 }
@@ -44,6 +45,17 @@ final class OrderRepositoryImpl: OrderRepository {
         if let data = try? PropertyListEncoder().encode(items) {
             UserDefaults.standard.setValue(data, forKey: "order-items")
         }
+    }
+
+    func checkPrice() async throws -> Int {
+        let response = try await SwiftlyHttp(baseURL: baseURL)!
+            .add(path: "order")
+            .add(path: "check_price")
+            .method(.post)
+            .body(OrderModel(createdAt: nil, items: items))
+            .decode(to: Int.self)
+            .perform()
+        return response
     }
 
     func placeOrder() async throws -> AnyPublisher<OrderMessage, Never> {
@@ -91,6 +103,10 @@ final class OrderRepositoryImpl: OrderRepository {
 
 final class OrderRepositoryMck: OrderRepository {
     func add(item: MenuItem) {
+    }
+
+    func checkPrice() async throws -> Int {
+        fatalError()
     }
 
     func placeOrder() async throws -> AnyPublisher<OrderMessage, Never> {

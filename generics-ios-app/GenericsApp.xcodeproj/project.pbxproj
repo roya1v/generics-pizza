@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		010A85E82A11282100354E7D /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010A85E72A11282100354E7D /* AddressViewModel.swift */; };
+		016934142A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */; };
 		018A6AA22A1212770015D716 /* SwiftlyHttp in Frameworks */ = {isa = PBXBuildFile; productRef = 018A6AA12A1212770015D716 /* SwiftlyHttp */; };
 		018A6AA42A1212820015D716 /* SwiftlyHttp in Frameworks */ = {isa = PBXBuildFile; productRef = 018A6AA32A1212820015D716 /* SwiftlyHttp */; };
 		01C9DFB32A0AE0E2001DC47D /* AddressSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFB22A0AE0E2001DC47D /* AddressSheetView.swift */; };
@@ -113,6 +114,7 @@
 
 /* Begin PBXFileReference section */
 		010A85E72A11282100354E7D /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
+		016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuItem+formattedPrice.swift"; sourceTree = "<group>"; };
 		01C9DFB22A0AE0E2001DC47D /* AddressSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSheetView.swift; sourceTree = "<group>"; };
 		01C9DFB82A0AF16B001DC47D /* GenericsDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 				ECD845AE298AE51E0036454C /* Preview Content */,
 				ECD845B8298AE51E0036454C /* Tests */,
 				ECD845C2298AE51E0036454C /* UITests */,
+				016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */,
 			);
 			path = GenericsApp;
 			sourceTree = "<group>";
@@ -876,6 +879,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				016934142A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift in Sources */,
 				EC688C2929CA462E00450D2E /* CartViewModel.swift in Sources */,
 				ECD079F129E45CCD00914593 /* Container+Repositories.swift in Sources */,
 				EC688C2329CA38D900450D2E /* CartView.swift in Sources */,

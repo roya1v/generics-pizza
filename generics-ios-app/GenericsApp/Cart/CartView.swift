@@ -38,7 +38,7 @@ struct CartView: View {
                                         .foregroundColor(.gray)
                                         .lineLimit(1)
                                     HStack {
-                                        Text("$13.99")
+                                        Text("\(item.formattedPrice())")
                                         Spacer()
                                     }
                                     .padding(2.0)
@@ -76,27 +76,21 @@ struct CartView: View {
                     }
                     Section {
                         VStack {
-                            HStack {
-                                Text("Subtotal")
-                                Spacer()
-                                Text("14.44$")
+                            ForEach(model.subtotal.dropLast(1), id: \.0) { pair in
+                                HStack {
+                                    Text(pair.0)
+                                    Spacer()
+                                    Text(pair.1)
 
+                                }
+                                .foregroundColor(Color.gray)
+                                .font(.genericsCaption)
                             }
-                            .foregroundColor(Color.gray)
-                            .font(.genericsCaption)
-                            HStack {
-                                Text("Delivery")
-                                Spacer()
-                                Text("14.44$")
-
-                            }
-                            .foregroundColor(Color.gray)
-                            .font(.genericsCaption)
                             Divider()
                             HStack {
-                                Text("Total")
+                                Text(model.subtotal.last!.0)
                                 Spacer()
-                                Text("14.44$")
+                                Text(model.subtotal.last!.1)
                             }
                         }
                     }

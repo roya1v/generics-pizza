@@ -49,7 +49,8 @@ struct MenuView: View {
             ForEach(model.items) { item in
                 MenuItemView(name: item.title,
                              description: item.description,
-                             price: "\(item.price)", imageURL: URL(string: "http://localhost:8080/menu/\(item.id!.uuidString)")!)
+                             price: item.formattedPrice(),
+                             imageURL: URL(string: "http://localhost:8080/menu/\(item.id!.uuidString)")!)
                 .padding(.all, 4.0)
                 .onTapGesture {
                     shownItem = item

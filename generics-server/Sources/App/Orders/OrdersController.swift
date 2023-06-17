@@ -16,7 +16,7 @@ final class OrdersController: RouteCollection {
 
     func boot(routes: RoutesBuilder) throws {
         let order = routes.grouped("order")
-        order.get("check_price", use: checkPrice)
+        order.post("check_price", use: checkPrice)
         let authenticated = order.grouped(UserToken.authenticator())
         authenticated.get("current", use: getCurrent)
         authenticated.get("history", use: getHistory)
