@@ -8,6 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		010A85E82A11282100354E7D /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010A85E72A11282100354E7D /* AddressViewModel.swift */; };
+		01389B3C2A4363F2009DE998 /* GenericsUI.docc in Sources */ = {isa = PBXBuildFile; fileRef = 01389B3B2A4363F2009DE998 /* GenericsUI.docc */; };
+		01389B422A4363F3009DE998 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
+		01389B492A4363F3009DE998 /* GenericsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B482A4363F3009DE998 /* GenericsUITests.swift */; };
+		01389B4A2A4363F3009DE998 /* GenericsUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 01389B3A2A4363F2009DE998 /* GenericsUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01389B4D2A4363F3009DE998 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
+		01389B4E2A4363F3009DE998 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01389B5B2A43641E009DE998 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B562A43641E009DE998 /* CardView.swift */; };
+		01389B5C2A43641E009DE998 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B572A43641E009DE998 /* ViewState.swift */; };
+		01389B5D2A43641E009DE998 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B582A43641E009DE998 /* Font+.swift */; };
+		01389B5E2A43641E009DE998 /* SelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B592A43641E009DE998 /* SelectorView.swift */; };
+		01389B5F2A43641E009DE998 /* Spacings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B5A2A43641E009DE998 /* Spacings.swift */; };
+		01389B692A43643C009DE998 /* GenericsUIKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 01389B682A43643C009DE998 /* GenericsUIKit.docc */; };
+		01389B6F2A43643C009DE998 /* GenericsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; };
+		01389B762A43643C009DE998 /* GenericsUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B752A43643C009DE998 /* GenericsUIKitTests.swift */; };
+		01389B772A43643C009DE998 /* GenericsUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 01389B672A43643C009DE998 /* GenericsUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01389B7A2A43643C009DE998 /* GenericsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; };
+		01389B7B2A43643C009DE998 /* GenericsUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01389B832A436444009DE998 /* RouteStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B822A436444009DE998 /* RouteStepView.swift */; };
+		01389B842A436478009DE998 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
+		01389B852A436478009DE998 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01389B892A436530009DE998 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; platformFilter = ios; };
+		01389B8A2A436530009DE998 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01389B8D2A436530009DE998 /* GenericsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; platformFilter = ios; };
+		01389B8E2A436530009DE998 /* GenericsUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		016934142A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */; };
 		018A6AA22A1212770015D716 /* SwiftlyHttp in Frameworks */ = {isa = PBXBuildFile; productRef = 018A6AA12A1212770015D716 /* SwiftlyHttp */; };
 		018A6AA42A1212820015D716 /* SwiftlyHttp in Frameworks */ = {isa = PBXBuildFile; productRef = 018A6AA32A1212820015D716 /* SwiftlyHttp */; };
@@ -30,8 +54,6 @@
 		EC14E827298C527900A6540C /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
 		EC42551F29BE3F5400E5F41A /* GenericsModels in Frameworks */ = {isa = PBXBuildFile; productRef = EC42551E29BE3F5400E5F41A /* GenericsModels */; };
 		EC63164E29C259FF00BF52E0 /* NewMenuItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC63164D29C259FF00BF52E0 /* NewMenuItemViewModel.swift */; };
-		EC6382CA29D61B98003A864E /* GenericsUI in Frameworks */ = {isa = PBXBuildFile; productRef = EC6382C929D61B98003A864E /* GenericsUI */; };
-		EC6382CC29D6220C003A864E /* GenericsUI in Frameworks */ = {isa = PBXBuildFile; productRef = EC6382CB29D6220C003A864E /* GenericsUI */; };
 		EC688C2329CA38D900450D2E /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2229CA38D900450D2E /* CartView.swift */; };
 		EC688C2729CA3C0100450D2E /* MenuItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2629CA3C0100450D2E /* MenuItemDetailView.swift */; };
 		EC688C2929CA462E00450D2E /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2829CA462E00450D2E /* CartViewModel.swift */; };
@@ -68,6 +90,69 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		01389B432A4363F3009DE998 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01389B372A4363F2009DE998;
+			remoteInfo = GenericsUI;
+		};
+		01389B452A4363F3009DE998 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ECD845A4298AE51D0036454C;
+			remoteInfo = GenericsApp;
+		};
+		01389B4B2A4363F3009DE998 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01389B372A4363F2009DE998;
+			remoteInfo = GenericsUI;
+		};
+		01389B702A43643C009DE998 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01389B642A43643C009DE998;
+			remoteInfo = GenericsUIKit;
+		};
+		01389B722A43643C009DE998 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ECD845A4298AE51D0036454C;
+			remoteInfo = GenericsApp;
+		};
+		01389B782A43643C009DE998 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01389B642A43643C009DE998;
+			remoteInfo = GenericsUIKit;
+		};
+		01389B862A436478009DE998 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01389B372A4363F2009DE998;
+			remoteInfo = GenericsUI;
+		};
+		01389B8B2A436530009DE998 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01389B372A4363F2009DE998;
+			remoteInfo = GenericsUI;
+		};
+		01389B8F2A436530009DE998 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01389B642A43643C009DE998;
+			remoteInfo = GenericsUIKit;
+		};
 		01C9DFCE2A0AF16D001DC47D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
@@ -112,8 +197,62 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		01389B4F2A4363F3009DE998 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				01389B4E2A4363F3009DE998 /* GenericsUI.framework in Embed Frameworks */,
+				01389B7B2A43643C009DE998 /* GenericsUIKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01389B882A436478009DE998 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				01389B852A436478009DE998 /* GenericsUI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01389B912A436530009DE998 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				01389B8A2A436530009DE998 /* GenericsUI.framework in Embed Frameworks */,
+				01389B8E2A436530009DE998 /* GenericsUIKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		010A85E72A11282100354E7D /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
+		01389B382A4363F2009DE998 /* GenericsUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GenericsUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		01389B3A2A4363F2009DE998 /* GenericsUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenericsUI.h; sourceTree = "<group>"; };
+		01389B3B2A4363F2009DE998 /* GenericsUI.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = GenericsUI.docc; sourceTree = "<group>"; };
+		01389B412A4363F3009DE998 /* GenericsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		01389B482A4363F3009DE998 /* GenericsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsUITests.swift; sourceTree = "<group>"; };
+		01389B562A43641E009DE998 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		01389B572A43641E009DE998 /* ViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
+		01389B582A43641E009DE998 /* Font+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
+		01389B592A43641E009DE998 /* SelectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectorView.swift; sourceTree = "<group>"; };
+		01389B5A2A43641E009DE998 /* Spacings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spacings.swift; sourceTree = "<group>"; };
+		01389B652A43643C009DE998 /* GenericsUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GenericsUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		01389B672A43643C009DE998 /* GenericsUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenericsUIKit.h; sourceTree = "<group>"; };
+		01389B682A43643C009DE998 /* GenericsUIKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = GenericsUIKit.docc; sourceTree = "<group>"; };
+		01389B6E2A43643C009DE998 /* GenericsUIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsUIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		01389B752A43643C009DE998 /* GenericsUIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsUIKitTests.swift; sourceTree = "<group>"; };
+		01389B822A436444009DE998 /* RouteStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStepView.swift; sourceTree = "<group>"; };
 		016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuItem+formattedPrice.swift"; sourceTree = "<group>"; };
 		01C9DFB22A0AE0E2001DC47D /* AddressSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSheetView.swift; sourceTree = "<group>"; };
 		01C9DFB82A0AF16B001DC47D /* GenericsDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +315,37 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		01389B352A4363F2009DE998 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01389B3E2A4363F3009DE998 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01389B422A4363F3009DE998 /* GenericsUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01389B622A43643C009DE998 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01389B842A436478009DE998 /* GenericsUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01389B6B2A43643C009DE998 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01389B6F2A43643C009DE998 /* GenericsUIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		01C9DFB52A0AF16B001DC47D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -201,10 +371,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC6382CC29D6220C003A864E /* GenericsUI in Frameworks */,
 				018A6AA42A1212820015D716 /* SwiftlyHttp in Frameworks */,
+				01389B8D2A436530009DE998 /* GenericsUIKit.framework in Frameworks */,
 				ECA5E7F929BFC8F600D9E85F /* GenericsModels in Frameworks */,
 				ECA92FBA299D652D00F28299 /* Factory in Frameworks */,
+				01389B892A436530009DE998 /* GenericsUI.framework in Frameworks */,
 				ECD079F529E45D0600914593 /* GenericsRepositories in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,7 +398,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC6382CA29D61B98003A864E /* GenericsUI in Frameworks */,
+				01389B4D2A4363F3009DE998 /* GenericsUI.framework in Frameworks */,
+				01389B7A2A43643C009DE998 /* GenericsUIKit.framework in Frameworks */,
 				018A6AA22A1212770015D716 /* SwiftlyHttp in Frameworks */,
 				EC42551F29BE3F5400E5F41A /* GenericsModels in Frameworks */,
 				EC14E823298C515E00A6540C /* Factory in Frameworks */,
@@ -252,6 +424,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01389B392A4363F2009DE998 /* GenericsUI */ = {
+			isa = PBXGroup;
+			children = (
+				01389B562A43641E009DE998 /* CardView.swift */,
+				01389B582A43641E009DE998 /* Font+.swift */,
+				01389B592A43641E009DE998 /* SelectorView.swift */,
+				01389B5A2A43641E009DE998 /* Spacings.swift */,
+				01389B572A43641E009DE998 /* ViewState.swift */,
+				01389B3A2A4363F2009DE998 /* GenericsUI.h */,
+				01389B3B2A4363F2009DE998 /* GenericsUI.docc */,
+			);
+			path = GenericsUI;
+			sourceTree = "<group>";
+		};
+		01389B472A4363F3009DE998 /* GenericsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				01389B482A4363F3009DE998 /* GenericsUITests.swift */,
+			);
+			path = GenericsUITests;
+			sourceTree = "<group>";
+		};
+		01389B662A43643C009DE998 /* GenericsUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				01389B822A436444009DE998 /* RouteStepView.swift */,
+				01389B672A43643C009DE998 /* GenericsUIKit.h */,
+				01389B682A43643C009DE998 /* GenericsUIKit.docc */,
+			);
+			path = GenericsUIKit;
+			sourceTree = "<group>";
+		};
+		01389B742A43643C009DE998 /* GenericsUIKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				01389B752A43643C009DE998 /* GenericsUIKitTests.swift */,
+			);
+			path = GenericsUIKitTests;
+			sourceTree = "<group>";
+		};
 		01C9DFB92A0AF16B001DC47D /* GenericsDriver */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,6 +633,10 @@
 				ECA92F89299C2D7700F28299 /* GenericsRestaurants */,
 				01C9DFB92A0AF16B001DC47D /* GenericsDriver */,
 				ECA92FBF299D719000F28299 /* GenericsPackage */,
+				01389B392A4363F2009DE998 /* GenericsUI */,
+				01389B472A4363F3009DE998 /* GenericsUITests */,
+				01389B662A43643C009DE998 /* GenericsUIKit */,
+				01389B742A43643C009DE998 /* GenericsUIKitTests */,
 				ECD845A6298AE51D0036454C /* Products */,
 				ECA92FB8299D652D00F28299 /* Frameworks */,
 			);
@@ -438,6 +654,10 @@
 				01C9DFB82A0AF16B001DC47D /* GenericsDriver.app */,
 				01C9DFCD2A0AF16D001DC47D /* GenericsDriverTests.xctest */,
 				01C9DFD72A0AF16E001DC47D /* GenericsDriverUITests.xctest */,
+				01389B382A4363F2009DE998 /* GenericsUI.framework */,
+				01389B412A4363F3009DE998 /* GenericsUITests.xctest */,
+				01389B652A43643C009DE998 /* GenericsUIKit.framework */,
+				01389B6E2A43643C009DE998 /* GenericsUIKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -488,7 +708,102 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		01389B332A4363F2009DE998 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01389B4A2A4363F3009DE998 /* GenericsUI.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01389B602A43643C009DE998 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01389B772A43643C009DE998 /* GenericsUIKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		01389B372A4363F2009DE998 /* GenericsUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01389B542A4363F3009DE998 /* Build configuration list for PBXNativeTarget "GenericsUI" */;
+			buildPhases = (
+				01389B332A4363F2009DE998 /* Headers */,
+				01389B342A4363F2009DE998 /* Sources */,
+				01389B352A4363F2009DE998 /* Frameworks */,
+				01389B362A4363F2009DE998 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GenericsUI;
+			productName = GenericsUI;
+			productReference = 01389B382A4363F2009DE998 /* GenericsUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		01389B402A4363F3009DE998 /* GenericsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01389B552A4363F3009DE998 /* Build configuration list for PBXNativeTarget "GenericsUITests" */;
+			buildPhases = (
+				01389B3D2A4363F3009DE998 /* Sources */,
+				01389B3E2A4363F3009DE998 /* Frameworks */,
+				01389B3F2A4363F3009DE998 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01389B442A4363F3009DE998 /* PBXTargetDependency */,
+				01389B462A4363F3009DE998 /* PBXTargetDependency */,
+			);
+			name = GenericsUITests;
+			productName = GenericsUITests;
+			productReference = 01389B412A4363F3009DE998 /* GenericsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		01389B642A43643C009DE998 /* GenericsUIKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01389B7C2A43643C009DE998 /* Build configuration list for PBXNativeTarget "GenericsUIKit" */;
+			buildPhases = (
+				01389B602A43643C009DE998 /* Headers */,
+				01389B612A43643C009DE998 /* Sources */,
+				01389B622A43643C009DE998 /* Frameworks */,
+				01389B632A43643C009DE998 /* Resources */,
+				01389B882A436478009DE998 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01389B872A436478009DE998 /* PBXTargetDependency */,
+			);
+			name = GenericsUIKit;
+			productName = GenericsUIKit;
+			productReference = 01389B652A43643C009DE998 /* GenericsUIKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		01389B6D2A43643C009DE998 /* GenericsUIKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01389B7F2A43643C009DE998 /* Build configuration list for PBXNativeTarget "GenericsUIKitTests" */;
+			buildPhases = (
+				01389B6A2A43643C009DE998 /* Sources */,
+				01389B6B2A43643C009DE998 /* Frameworks */,
+				01389B6C2A43643C009DE998 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01389B712A43643C009DE998 /* PBXTargetDependency */,
+				01389B732A43643C009DE998 /* PBXTargetDependency */,
+			);
+			name = GenericsUIKitTests;
+			productName = GenericsUIKitTests;
+			productReference = 01389B6E2A43643C009DE998 /* GenericsUIKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		01C9DFB72A0AF16B001DC47D /* GenericsDriver */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01C9DFDF2A0AF16E001DC47D /* Build configuration list for PBXNativeTarget "GenericsDriver" */;
@@ -549,16 +864,18 @@
 				ECA92F84299C2D7700F28299 /* Sources */,
 				ECA92F85299C2D7700F28299 /* Frameworks */,
 				ECA92F86299C2D7700F28299 /* Resources */,
+				01389B912A436530009DE998 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				01389B8C2A436530009DE998 /* PBXTargetDependency */,
+				01389B902A436530009DE998 /* PBXTargetDependency */,
 			);
 			name = GenericsRestaurants;
 			packageProductDependencies = (
 				ECA92FB9299D652D00F28299 /* Factory */,
 				ECA5E7F829BFC8F600D9E85F /* GenericsModels */,
-				EC6382CB29D6220C003A864E /* GenericsUI */,
 				ECD079F429E45D0600914593 /* GenericsRepositories */,
 				018A6AA32A1212820015D716 /* SwiftlyHttp */,
 			);
@@ -609,16 +926,18 @@
 				ECD845A1298AE51D0036454C /* Sources */,
 				ECD845A2298AE51D0036454C /* Frameworks */,
 				ECD845A3298AE51D0036454C /* Resources */,
+				01389B4F2A4363F3009DE998 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				01389B4C2A4363F3009DE998 /* PBXTargetDependency */,
+				01389B792A43643C009DE998 /* PBXTargetDependency */,
 			);
 			name = GenericsApp;
 			packageProductDependencies = (
 				EC14E822298C515E00A6540C /* Factory */,
 				EC42551E29BE3F5400E5F41A /* GenericsModels */,
-				EC6382C929D61B98003A864E /* GenericsUI */,
 				ECD079F229E45D0000914593 /* GenericsRepositories */,
 				018A6AA12A1212770015D716 /* SwiftlyHttp */,
 			);
@@ -672,6 +991,20 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
+					01389B372A4363F2009DE998 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					01389B402A4363F3009DE998 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = ECD845A4298AE51D0036454C;
+					};
+					01389B642A43643C009DE998 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					01389B6D2A43643C009DE998 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = ECD845A4298AE51D0036454C;
+					};
 					01C9DFB72A0AF16B001DC47D = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -733,11 +1066,43 @@
 				01C9DFB72A0AF16B001DC47D /* GenericsDriver */,
 				01C9DFCC2A0AF16D001DC47D /* GenericsDriverTests */,
 				01C9DFD62A0AF16D001DC47D /* GenericsDriverUITests */,
+				01389B372A4363F2009DE998 /* GenericsUI */,
+				01389B402A4363F3009DE998 /* GenericsUITests */,
+				01389B642A43643C009DE998 /* GenericsUIKit */,
+				01389B6D2A43643C009DE998 /* GenericsUIKitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		01389B362A4363F2009DE998 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01389B3F2A4363F3009DE998 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01389B632A43643C009DE998 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01389B6C2A43643C009DE998 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		01C9DFB62A0AF16B001DC47D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -811,6 +1176,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		01389B342A4363F2009DE998 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01389B5D2A43641E009DE998 /* Font+.swift in Sources */,
+				01389B5F2A43641E009DE998 /* Spacings.swift in Sources */,
+				01389B5B2A43641E009DE998 /* CardView.swift in Sources */,
+				01389B3C2A4363F2009DE998 /* GenericsUI.docc in Sources */,
+				01389B5C2A43641E009DE998 /* ViewState.swift in Sources */,
+				01389B5E2A43641E009DE998 /* SelectorView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01389B3D2A4363F3009DE998 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01389B492A4363F3009DE998 /* GenericsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01389B612A43643C009DE998 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01389B832A436444009DE998 /* RouteStepView.swift in Sources */,
+				01389B692A43643C009DE998 /* GenericsUIKit.docc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01389B6A2A43643C009DE998 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01389B762A43643C009DE998 /* GenericsUIKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		01C9DFB42A0AF16B001DC47D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -918,6 +1321,53 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		01389B442A4363F3009DE998 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01389B372A4363F2009DE998 /* GenericsUI */;
+			targetProxy = 01389B432A4363F3009DE998 /* PBXContainerItemProxy */;
+		};
+		01389B462A4363F3009DE998 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ECD845A4298AE51D0036454C /* GenericsApp */;
+			targetProxy = 01389B452A4363F3009DE998 /* PBXContainerItemProxy */;
+		};
+		01389B4C2A4363F3009DE998 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01389B372A4363F2009DE998 /* GenericsUI */;
+			targetProxy = 01389B4B2A4363F3009DE998 /* PBXContainerItemProxy */;
+		};
+		01389B712A43643C009DE998 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01389B642A43643C009DE998 /* GenericsUIKit */;
+			targetProxy = 01389B702A43643C009DE998 /* PBXContainerItemProxy */;
+		};
+		01389B732A43643C009DE998 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ECD845A4298AE51D0036454C /* GenericsApp */;
+			targetProxy = 01389B722A43643C009DE998 /* PBXContainerItemProxy */;
+		};
+		01389B792A43643C009DE998 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01389B642A43643C009DE998 /* GenericsUIKit */;
+			targetProxy = 01389B782A43643C009DE998 /* PBXContainerItemProxy */;
+		};
+		01389B872A436478009DE998 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01389B372A4363F2009DE998 /* GenericsUI */;
+			targetProxy = 01389B862A436478009DE998 /* PBXContainerItemProxy */;
+		};
+		01389B8C2A436530009DE998 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 01389B372A4363F2009DE998 /* GenericsUI */;
+			targetProxy = 01389B8B2A436530009DE998 /* PBXContainerItemProxy */;
+		};
+		01389B902A436530009DE998 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 01389B642A43643C009DE998 /* GenericsUIKit */;
+			targetProxy = 01389B8F2A436530009DE998 /* PBXContainerItemProxy */;
+		};
 		01C9DFCF2A0AF16D001DC47D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 01C9DFB72A0AF16B001DC47D /* GenericsDriver */;
@@ -970,6 +1420,218 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		01389B502A4363F3009DE998 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		01389B512A4363F3009DE998 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		01389B522A4363F3009DE998 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericsApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GenericsApp";
+			};
+			name = Debug;
+		};
+		01389B532A4363F3009DE998 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericsApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GenericsApp";
+			};
+			name = Release;
+		};
+		01389B7D2A43643C009DE998 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsUIKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		01389B7E2A43643C009DE998 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsUIKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		01389B802A43643C009DE998 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsUIKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericsApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GenericsApp";
+			};
+			name = Debug;
+		};
+		01389B812A43643C009DE998 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsUIKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericsApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GenericsApp";
+			};
+			name = Release;
+		};
 		01C9DFE02A0AF16E001DC47D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1391,6 +2053,7 @@
 		ECD845CA298AE51E0036454C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1425,6 +2088,7 @@
 		ECD845CB298AE51E0036454C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1535,6 +2199,42 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		01389B542A4363F3009DE998 /* Build configuration list for PBXNativeTarget "GenericsUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01389B502A4363F3009DE998 /* Debug */,
+				01389B512A4363F3009DE998 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01389B552A4363F3009DE998 /* Build configuration list for PBXNativeTarget "GenericsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01389B522A4363F3009DE998 /* Debug */,
+				01389B532A4363F3009DE998 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01389B7C2A43643C009DE998 /* Build configuration list for PBXNativeTarget "GenericsUIKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01389B7D2A43643C009DE998 /* Debug */,
+				01389B7E2A43643C009DE998 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01389B7F2A43643C009DE998 /* Build configuration list for PBXNativeTarget "GenericsUIKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01389B802A43643C009DE998 /* Debug */,
+				01389B812A43643C009DE998 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		01C9DFDF2A0AF16E001DC47D /* Build configuration list for PBXNativeTarget "GenericsDriver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1665,14 +2365,6 @@
 		EC42551E29BE3F5400E5F41A /* GenericsModels */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GenericsModels;
-		};
-		EC6382C929D61B98003A864E /* GenericsUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = GenericsUI;
-		};
-		EC6382CB29D6220C003A864E /* GenericsUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = GenericsUI;
 		};
 		ECA5E7F829BFC8F600D9E85F /* GenericsModels */ = {
 			isa = XCSwiftPackageProductDependency;
