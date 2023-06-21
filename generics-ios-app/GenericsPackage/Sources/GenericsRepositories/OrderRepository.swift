@@ -21,7 +21,7 @@ public func mockOrderRepository() -> OrderRepository {
 public protocol OrderRepository {
     func add(item: MenuItem)
     func checkPrice() async throws -> Int
-    func placeOrder() async throws -> AnyPublisher<OrderMessage, Never>
+    func placeOrder() async throws -> AnyPublisher<OrderMessage, Error>
     var items: [MenuItem] { get }
 }
 
@@ -29,7 +29,7 @@ final class OrderRepositoryImpl: OrderRepository {
 
     var items = [MenuItem]()
 
-    private var socket: URLSessionWebSocketTask?
+    private var socket: SwiftlyWebSocketConnection?
     private let messages = PassthroughSubject<OrderMessage, Never>()
     private let baseURL: String
 
@@ -58,35 +58,26 @@ final class OrderRepositoryImpl: OrderRepository {
         return response
     }
 
-    func placeOrder() async throws -> AnyPublisher<OrderMessage, Never> {
+    func placeOrder() async throws -> AnyPublisher<OrderMessage, Error> {
         let order = try await makeOrderRequest()
 
-        socket = URLSession.shared
-            .webSocketTask(with: URL(string: "ws://localhost:8080/order/activity/\(order.id!.uuidString)")!)
+        socket = SwiftlyHttp(baseURL: "ws://localhost:8080")!
+            .add(path: "order")
+            .add(path: "activity")
+            .add(path: order.id!.uuidString)
+            .websocket()
 
-
-        receive()
-        socket?.resume()
-        return messages.eraseToAnyPublisher()
-    }
-
-    private func receive() {
-        socket?.receive(completionHandler: { result in
-            print(result)
-            switch result {
-            case .success(let success2):
-                switch success2 {
-                case .string(let data):
-                    let message = try! OrderMessage.decode(from: data)
-                    self.messages.send(message)
-                default:
-                    return
+        return socket!
+            .messagePublisher
+            .compactMap({
+                if case let .string(message) = $0 {
+                    return message
+                } else {
+                    return nil
                 }
-            case .failure(_):
-                return
-            }
-            self.receive()
-        })
+            })
+            .tryMap(OrderMessage.decode)
+            .eraseToAnyPublisher()
     }
 
     private func makeOrderRequest() async throws -> OrderModel {
@@ -109,7 +100,7 @@ final class OrderRepositoryMck: OrderRepository {
         fatalError()
     }
 
-    func placeOrder() async throws -> AnyPublisher<OrderMessage, Never> {
+    func placeOrder() async throws -> AnyPublisher<OrderMessage, Error> {
         fatalError()
     }
 

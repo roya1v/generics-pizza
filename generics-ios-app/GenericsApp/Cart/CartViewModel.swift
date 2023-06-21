@@ -44,6 +44,7 @@ final class CartViewModel: ObservableObject {
         Task {
             do {
                 try await repository.placeOrder()
+                    .assertNoFailure()
                     .receive(on: DispatchQueue.main)
                     .sink { [weak self] message in
                         switch message {

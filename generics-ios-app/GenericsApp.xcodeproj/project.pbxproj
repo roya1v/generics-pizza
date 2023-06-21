@@ -13,7 +13,7 @@
 		01389B492A4363F3009DE998 /* GenericsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B482A4363F3009DE998 /* GenericsUITests.swift */; };
 		01389B4A2A4363F3009DE998 /* GenericsUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 01389B3A2A4363F2009DE998 /* GenericsUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		01389B4D2A4363F3009DE998 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
-		01389B4E2A4363F3009DE998 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01389B4E2A4363F3009DE998 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		01389B5B2A43641E009DE998 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B562A43641E009DE998 /* CardView.swift */; };
 		01389B5C2A43641E009DE998 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B572A43641E009DE998 /* ViewState.swift */; };
 		01389B5D2A43641E009DE998 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B582A43641E009DE998 /* Font+.swift */; };
@@ -24,14 +24,12 @@
 		01389B762A43643C009DE998 /* GenericsUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B752A43643C009DE998 /* GenericsUIKitTests.swift */; };
 		01389B772A43643C009DE998 /* GenericsUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 01389B672A43643C009DE998 /* GenericsUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		01389B7A2A43643C009DE998 /* GenericsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; };
-		01389B7B2A43643C009DE998 /* GenericsUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01389B7B2A43643C009DE998 /* GenericsUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		01389B832A436444009DE998 /* RouteStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B822A436444009DE998 /* RouteStepView.swift */; };
 		01389B842A436478009DE998 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
 		01389B852A436478009DE998 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		01389B892A436530009DE998 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; platformFilter = ios; };
+		01389B892A436530009DE998 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
 		01389B8A2A436530009DE998 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		01389B8D2A436530009DE998 /* GenericsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; platformFilter = ios; };
-		01389B8E2A436530009DE998 /* GenericsUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		016934142A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */; };
 		018A6AA22A1212770015D716 /* SwiftlyHttp in Frameworks */ = {isa = PBXBuildFile; productRef = 018A6AA12A1212770015D716 /* SwiftlyHttp */; };
 		018A6AA42A1212820015D716 /* SwiftlyHttp in Frameworks */ = {isa = PBXBuildFile; productRef = 018A6AA32A1212820015D716 /* SwiftlyHttp */; };
@@ -146,13 +144,6 @@
 			remoteGlobalIDString = 01389B372A4363F2009DE998;
 			remoteInfo = GenericsUI;
 		};
-		01389B8F2A436530009DE998 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 01389B642A43643C009DE998;
-			remoteInfo = GenericsUIKit;
-		};
 		01C9DFCE2A0AF16D001DC47D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
@@ -228,7 +219,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				01389B8A2A436530009DE998 /* GenericsUI.framework in Embed Frameworks */,
-				01389B8E2A436530009DE998 /* GenericsUIKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,7 +363,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				018A6AA42A1212820015D716 /* SwiftlyHttp in Frameworks */,
-				01389B8D2A436530009DE998 /* GenericsUIKit.framework in Frameworks */,
 				ECA5E7F929BFC8F600D9E85F /* GenericsModels in Frameworks */,
 				ECA92FBA299D652D00F28299 /* Factory in Frameworks */,
 				01389B892A436530009DE998 /* GenericsUI.framework in Frameworks */,
@@ -872,7 +861,6 @@
 			);
 			dependencies = (
 				01389B8C2A436530009DE998 /* PBXTargetDependency */,
-				01389B902A436530009DE998 /* PBXTargetDependency */,
 			);
 			name = GenericsRestaurants;
 			packageProductDependencies = (
@@ -1360,15 +1348,8 @@
 		};
 		01389B8C2A436530009DE998 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = 01389B372A4363F2009DE998 /* GenericsUI */;
 			targetProxy = 01389B8B2A436530009DE998 /* PBXContainerItemProxy */;
-		};
-		01389B902A436530009DE998 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			platformFilter = ios;
-			target = 01389B642A43643C009DE998 /* GenericsUIKit */;
-			targetProxy = 01389B8F2A436530009DE998 /* PBXContainerItemProxy */;
 		};
 		01C9DFCF2A0AF16D001DC47D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1442,12 +1423,16 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1476,12 +1461,16 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1554,6 +1543,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1588,6 +1580,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1773,7 +1768,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GenericsRestaurants/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1815,7 +1810,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GenericsRestaurants/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
