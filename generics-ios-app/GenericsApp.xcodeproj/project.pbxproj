@@ -253,6 +253,7 @@
 		01389B6E2A43643C009DE998 /* GenericsUIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsUIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01389B752A43643C009DE998 /* GenericsUIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsUIKitTests.swift; sourceTree = "<group>"; };
 		01389B822A436444009DE998 /* RouteStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStepView.swift; sourceTree = "<group>"; };
+		01389B922A43660D009DE998 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuItem+formattedPrice.swift"; sourceTree = "<group>"; };
 		01C9DFB22A0AE0E2001DC47D /* AddressSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSheetView.swift; sourceTree = "<group>"; };
 		01C9DFB82A0AF16B001DC47D /* GenericsDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -629,6 +630,7 @@
 		ECD8459C298AE51D0036454C = {
 			isa = PBXGroup;
 			children = (
+				01389B922A43660D009DE998 /* README.md */,
 				ECD845A7298AE51D0036454C /* GenericsApp */,
 				ECA92F89299C2D7700F28299 /* GenericsRestaurants */,
 				01C9DFB92A0AF16B001DC47D /* GenericsDriver */,
