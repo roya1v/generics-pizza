@@ -76,21 +76,24 @@ struct CartView: View {
                     }
                     Section {
                         VStack {
-                            ForEach(model.subtotal.dropLast(1), id: \.0) { pair in
-                                HStack {
-                                    Text(pair.0)
-                                    Spacer()
-                                    Text(pair.1)
+                            ForEach(model.subtotal, id: \.name) { part in
+                                if part.isSecondary {
+                                    HStack {
+                                        Text(part.name)
+                                        Spacer()
+                                        Text(part.formattedPrice())
 
+                                    }
+                                    .foregroundColor(Color.gray)
+                                    .font(.genericsCaption)
+                                } else {
+                                    Divider()
+                                    HStack {
+                                        Text(part.name)
+                                        Spacer()
+                                        Text(part.formattedPrice())
+                                    }
                                 }
-                                .foregroundColor(Color.gray)
-                                .font(.genericsCaption)
-                            }
-                            Divider()
-                            HStack {
-                                Text(model.subtotal.last!.0)
-                                Spacer()
-                                Text(model.subtotal.last!.1)
                             }
                         }
                     }

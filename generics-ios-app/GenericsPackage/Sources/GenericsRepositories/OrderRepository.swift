@@ -20,7 +20,7 @@ public func mockOrderRepository() -> OrderRepository {
 
 public protocol OrderRepository {
     func add(item: MenuItem)
-    func checkPrice() async throws -> Int
+    func checkPrice() async throws -> [SubtotalModel]
     func placeOrder() async throws -> AnyPublisher<OrderMessage, Error>
     var items: [MenuItem] { get }
 }
@@ -47,15 +47,14 @@ final class OrderRepositoryImpl: OrderRepository {
         }
     }
 
-    func checkPrice() async throws -> Int {
-        let response = try await SwiftlyHttp(baseURL: baseURL)!
+    func checkPrice() async throws -> [SubtotalModel] {
+        try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "order")
             .add(path: "check_price")
             .method(.post)
             .body(OrderModel(createdAt: nil, items: items))
-            .decode(to: Int.self)
+            .decode(to: [SubtotalModel].self)
             .perform()
-        return response
     }
 
     func placeOrder() async throws -> AnyPublisher<OrderMessage, Error> {
@@ -96,7 +95,7 @@ final class OrderRepositoryMck: OrderRepository {
     func add(item: MenuItem) {
     }
 
-    func checkPrice() async throws -> Int {
+    func checkPrice() async throws -> [SubtotalModel] {
         fatalError()
     }
 

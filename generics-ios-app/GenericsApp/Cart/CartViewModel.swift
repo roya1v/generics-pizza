@@ -20,7 +20,7 @@ final class CartViewModel: ObservableObject {
     }
 
     @Published private(set) var items = [MenuItem]()
-    @Published private(set) var subtotal = [(String, String)]()
+    @Published private(set) var subtotal = [SubtotalModel]()
     @Published private(set) var state: State = .readyForOrder
 
     @Injected(Container.orderRepository) private var repository
@@ -28,12 +28,10 @@ final class CartViewModel: ObservableObject {
 
     func fetch() {
         items = repository.items
-        subtotal = items.map { ($0.title, $0.formattedPrice()) }
-        // TODO: Refactor this stuff
         Task {
             if let total = try? await repository.checkPrice() {
                 DispatchQueue.main.async {
-                    self.subtotal.append(("Total", "\(String(format: "%.2f$", Double(total) / 100))"))
+                    self.subtotal = total
                 }
             }
         }
