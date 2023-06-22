@@ -33,22 +33,27 @@ final class MenuRepositoryImp: MenuRepository {
         self.baseURL = baseURL
     }
 
+    // MARK: - MenuRepository
+
     public func fetchMenu() async throws -> [MenuItem] {
-         return try await SwiftlyHttp(baseURL: baseURL)!
-            .add(path: "menu")
+         return try await getRequest()
             .method(.get)
             .decode(to: [MenuItem].self)
             .perform()
     }
 
     public func create(item: MenuItem) async throws {
-        try await SwiftlyHttp(baseURL: baseURL)!
-            .add(path: "menu")
+        try await getRequest()
             .method(.post)
             .authorizationDelegate(authDelegate!)
             .body(item)
             .decode(to: MenuItem.self)
             .perform()
+    }
+
+    private func getRequest() -> SwiftlyHttp {
+        SwiftlyHttp(baseURL: baseURL)!
+            .add(path: "menu")
     }
 }
 

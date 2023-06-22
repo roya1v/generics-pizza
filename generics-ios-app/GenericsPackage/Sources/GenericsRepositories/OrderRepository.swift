@@ -40,6 +40,8 @@ final class OrderRepositoryImpl: OrderRepository {
         }
     }
 
+    // MARK: - OrderRepository
+
     func add(item: MenuItem) {
         items.append(item)
         if let data = try? PropertyListEncoder().encode(items) {
@@ -48,8 +50,7 @@ final class OrderRepositoryImpl: OrderRepository {
     }
 
     func checkPrice() async throws -> [SubtotalModel] {
-        try await SwiftlyHttp(baseURL: baseURL)!
-            .add(path: "order")
+        try await getRequest()
             .add(path: "check_price")
             .method(.post)
             .body(OrderModel(createdAt: nil, items: items))
@@ -80,14 +81,18 @@ final class OrderRepositoryImpl: OrderRepository {
     }
 
     private func makeOrderRequest() async throws -> OrderModel {
-        let response = try await SwiftlyHttp(baseURL: baseURL)!
-            .add(path: "order")
+        let response = try await getRequest()
             .method(.post)
             .body(OrderModel(createdAt: nil, items: items))
             .perform()
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         return try decoder.decode(OrderModel.self, from: response.0)
+    }
+
+    private func getRequest() -> SwiftlyHttp {
+        SwiftlyHttp(baseURL: baseURL)!
+            .add(path: "order")
     }
 }
 
