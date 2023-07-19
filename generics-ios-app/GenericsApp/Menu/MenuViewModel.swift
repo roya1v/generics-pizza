@@ -2,7 +2,7 @@
 //  MenuViewModel.swift
 //  GenericsApp
 //
-//  Created by Mike Shevelinsky on 02/02/2023.
+//  Created by Mike S. on 02/02/2023.
 //
 
 import Foundation

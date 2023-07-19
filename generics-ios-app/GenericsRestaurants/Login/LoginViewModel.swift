@@ -2,7 +2,7 @@
 //  LoginViewModel.swift
 //  GenericsRestaurants
 //
-//  Created by Mike Shevelinsky on 15/02/2023.
+//  Created by Mike S. on 15/02/2023.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  GenericsUITests.swift
 //  GenericsUITests
 //
-//  Created by Mike Shevelinsky on 21/06/2023.
+//  Created by Mike S. on 21/06/2023.
 //
 
 import XCTest

@@ -2,7 +2,7 @@
 //  AddressViewModel.swift
 //  GenericsApp
 //
-//  Created by Mike Shevelinsky on 14/05/2023.
+//  Created by Mike S. on 14/05/2023.
 //
 
 import Foundation

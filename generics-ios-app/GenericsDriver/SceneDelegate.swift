@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  GenericsDriver
 //
-//  Created by Mike Shevelinsky on 09/05/2023.
+//  Created by Mike S. on 09/05/2023.
 //
 
 import UIKit

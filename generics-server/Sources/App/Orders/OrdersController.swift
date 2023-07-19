@@ -26,6 +26,7 @@ final class OrdersController: RouteCollection {
         order.grouped("activity").grouped(UserToken.authenticator()).webSocket(onUpgrade: adminActivity)
     }
 
+    /// Get currently unfinished orders
     func getCurrent(req: Request) async throws -> [OrderModel] {
         try req.auth.require(User.self)
         return try await Order.query(on: req.db)
@@ -35,6 +36,7 @@ final class OrdersController: RouteCollection {
             .map { $0.getContent() }
     }
 
+    /// Get all finished orders
     func getHistory(req: Request) async throws -> [OrderModel] {
         try req.auth.require(User.self)
         return try await Order.query(on: req.db)
@@ -44,6 +46,7 @@ final class OrdersController: RouteCollection {
             .map { $0.getContent() }
     }
 
+    /// Check price for order
     func checkPrice(req: Request) async throws -> [Subtotal] {
         let sum = try req.content.decode(OrderModel.self).items.reduce(0, {$0 + $1.price})
         return [
@@ -53,6 +56,7 @@ final class OrdersController: RouteCollection {
         ]
     }
 
+    /// Make a new order
     func new(req: Request) async throws -> OrderModel {
         let orderModel = try req.content.decode(OrderModel.self)
 
@@ -73,6 +77,7 @@ final class OrdersController: RouteCollection {
         return order.getContent()
     }
 
+    /// Connect to order activity as a customer
     func orderActivity(req: Request, ws: WebSocket) async {
         guard let order = try? await Order.find(req.parameters.get("orderId"), on: req.db) else {
             try? await ws.close()
@@ -84,6 +89,7 @@ final class OrdersController: RouteCollection {
         }
     }
 
+    /// Connect to order activity as an admin
     func adminActivity(req: Request, ws: WebSocket) async {
         do {
             try req.auth.require(User.self)

@@ -2,7 +2,7 @@
 //  GenericsAppTests.swift
 //  GenericsAppTests
 //
-//  Created by Mike Shevelinsky on 01/02/2023.
+//  Created by Mike S. on 01/02/2023.
 //
 
 import XCTest

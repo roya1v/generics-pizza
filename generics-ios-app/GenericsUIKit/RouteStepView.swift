@@ -2,7 +2,7 @@
 //  RouteStepView.swift
 //  
 //
-//  Created by Mike Shevelinsky on 14/05/2023.
+//  Created by Mike S. on 14/05/2023.
 //
 
 #if os(iOS)

@@ -2,7 +2,7 @@
 //  MenuItem+formattedPrice.swift
 //  GenericsApp
 //
-//  Created by Mike Shevelinsky on 17/06/2023.
+//  Created by Mike S. on 17/06/2023.
 //
 
 import Foundation

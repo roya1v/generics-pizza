@@ -2,7 +2,7 @@
 //  CardView.swift
 //  
 //
-//  Created by Mike Shevelinsky on 06/03/2023.
+//  Created by Mike S. on 06/03/2023.
 //
 
 import SwiftUI

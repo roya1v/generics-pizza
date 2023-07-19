@@ -20,6 +20,7 @@ struct MenuController: RouteCollection {
         }
     }
 
+    /// Get all menu items
     func index(req: Request) async throws -> [MenuItem] {
         try await MenuEntry
             .query(on: req.db)
@@ -27,6 +28,7 @@ struct MenuController: RouteCollection {
             .map { $0.getContent() }
     }
 
+    /// Get image for a menu item
     func image(req: Request) async throws -> Response {
         guard let menuItem = try await MenuEntry.find(req.parameters.get("itemID"), on: req.db),
               let id = menuItem.id else {
@@ -40,6 +42,7 @@ struct MenuController: RouteCollection {
         return resp
     }
 
+    /// Create a menu item
     func create(req: Request) async throws -> MenuItem {
         try req.auth.require(User.self)
         let entry = try req.content.decode(MenuItem.self)
