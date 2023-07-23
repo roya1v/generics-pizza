@@ -11,6 +11,7 @@ import Factory
 enum Items: String {
     case now
     case menu
+    case userFeed
 
     var label: String {
         switch self {
@@ -18,6 +19,8 @@ enum Items: String {
             return "Now"
         case .menu:
             return "Menu"
+        case .userFeed:
+            return "User feed"
         }
     }
 }
@@ -29,7 +32,7 @@ struct DashboardView: View {
 
     var body: some View {
         NavigationSplitView {
-            List([Items.now, .menu], id: \.rawValue,
+            List([Items.now, .menu, .userFeed], id: \.rawValue,
                  selection: $selected) { item in
                 NavigationLink(item.label, value: item)
             }
@@ -48,6 +51,8 @@ struct DashboardView: View {
                 NowView()
             case .menu:
                 MenuView()
+            case .userFeed:
+                UserFeedView()
             }
         }
     }
