@@ -13,69 +13,29 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                CardView {
-                    VStack {
-                        Image("pizza")
-                            .resizable()
-                            .scaledToFit()
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("Lorem ipsum")
-                                    .font(.title)
-                                Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit... ")
-                                    .multilineTextAlignment(.leading)
-                            }
-                            Button("CTA") {
-                                print("CTA")
-                            }
-                            .buttonStyle(.bordered)
-                        }
-                        .padding([.leading, .trailing, .bottom], 10.0)
-                    }
-                }
-                .padding()
+                BigImageCardView(title: "Lorem ipsum",
+                                 subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit... ",
+                                 ctaTitle: "CTA") {
+                    Image("pizza")
+                        .resizable()
+                        .scaledToFit()
+                } action: {
 
-                CardView {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Lorem ipsum")
-                                .font(.title)
-                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit... ")
-                                .font(.caption)
-                                .multilineTextAlignment(.leading)
-                        }
-                        Button("CTA") {
-                            print("CTA")
-                        }
-                        .buttonStyle(.bordered)
-                    }
-                    .padding()
                 }
-                .padding()
+                .padding([.leading, .trailing])
 
-                CardView {
-                    VStack(alignment: .leading) {
-                        Text("Lorem ipsum")
-                            .font(.title)
-                        HStack {
-                            Image("menu_pizza")
-                                .resizable()
-                                .scaledToFit()
-                            Image("menu_pizza")
-                                .resizable()
-                                .scaledToFit()
-                            Image("menu_pizza")
-                                .resizable()
-                                .scaledToFit()
-                            Image("menu_pizza")
-                                .resizable()
-                                .scaledToFit()
-                        }
-                    }
-                    .padding([.leading, .trailing, .bottom], 10.0)
+                CtaCardView(title: "Lorem ipsum",
+                            subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit... ",
+                            ctaTitle: "CTA") {
+
                 }
-                .padding()
+                .padding([.leading, .trailing])
+
+                CarouselCardView()
+                .padding([.leading, .trailing])
+
             }
+
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(.systemGray6))
             .navigationTitle("Welcome back")

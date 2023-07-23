@@ -30,6 +30,9 @@
 		01389B852A436478009DE998 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01389B892A436530009DE998 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
 		01389B8A2A436530009DE998 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0148E8202A6D2A010011ACE4 /* CtaCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E81F2A6D2A010011ACE4 /* CtaCardView.swift */; };
+		0148E8222A6D2B160011ACE4 /* BigImageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E8212A6D2B160011ACE4 /* BigImageCardView.swift */; };
+		0148E8242A6D2D320011ACE4 /* CarouselCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E8232A6D2D320011ACE4 /* CarouselCardView.swift */; };
 		016934142A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */; };
 		018A6AA22A1212770015D716 /* SwiftlyHttp in Frameworks */ = {isa = PBXBuildFile; productRef = 018A6AA12A1212770015D716 /* SwiftlyHttp */; };
 		018A6AA42A1212820015D716 /* SwiftlyHttp in Frameworks */ = {isa = PBXBuildFile; productRef = 018A6AA32A1212820015D716 /* SwiftlyHttp */; };
@@ -244,6 +247,9 @@
 		01389B752A43643C009DE998 /* GenericsUIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsUIKitTests.swift; sourceTree = "<group>"; };
 		01389B822A436444009DE998 /* RouteStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStepView.swift; sourceTree = "<group>"; };
 		01389B922A43660D009DE998 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		0148E81F2A6D2A010011ACE4 /* CtaCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtaCardView.swift; sourceTree = "<group>"; };
+		0148E8212A6D2B160011ACE4 /* BigImageCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigImageCardView.swift; sourceTree = "<group>"; };
+		0148E8232A6D2D320011ACE4 /* CarouselCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCardView.swift; sourceTree = "<group>"; };
 		016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuItem+formattedPrice.swift"; sourceTree = "<group>"; };
 		01C9DFB22A0AE0E2001DC47D /* AddressSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSheetView.swift; sourceTree = "<group>"; };
 		01C9DFB82A0AF16B001DC47D /* GenericsDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -454,6 +460,16 @@
 			path = GenericsUIKitTests;
 			sourceTree = "<group>";
 		};
+		0148E81E2A6D29EE0011ACE4 /* FeedCards */ = {
+			isa = PBXGroup;
+			children = (
+				0148E81F2A6D2A010011ACE4 /* CtaCardView.swift */,
+				0148E8212A6D2B160011ACE4 /* BigImageCardView.swift */,
+				0148E8232A6D2D320011ACE4 /* CarouselCardView.swift */,
+			);
+			path = FeedCards;
+			sourceTree = "<group>";
+		};
 		01C9DFB92A0AF16B001DC47D /* GenericsDriver */ = {
 			isa = PBXGroup;
 			children = (
@@ -501,6 +517,7 @@
 		EC14E81D298B0C1100A6540C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0148E81E2A6D29EE0011ACE4 /* FeedCards */,
 				EC14E818298B07C900A6540C /* HomeView.swift */,
 			);
 			path = Home;
@@ -1277,10 +1294,13 @@
 				ECD079F129E45CCD00914593 /* Container+Repositories.swift in Sources */,
 				EC688C2329CA38D900450D2E /* CartView.swift in Sources */,
 				01FFEA522A0974D900C622CC /* AddressSwiftUIView.swift in Sources */,
+				0148E8242A6D2D320011ACE4 /* CarouselCardView.swift in Sources */,
 				01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */,
 				EC14E81B298B086E00A6540C /* MenuView.swift in Sources */,
+				0148E8222A6D2B160011ACE4 /* BigImageCardView.swift in Sources */,
 				ECA5E7FA29BFCC3200D9E85F /* AuthenticationRepository.swift in Sources */,
 				ECD845AB298AE51D0036454C /* ContentView.swift in Sources */,
+				0148E8202A6D2A010011ACE4 /* CtaCardView.swift in Sources */,
 				010A85E82A11282100354E7D /* AddressViewModel.swift in Sources */,
 				EC14E819298B07C900A6540C /* HomeView.swift in Sources */,
 				EC688C2729CA3C0100450D2E /* MenuItemDetailView.swift in Sources */,
