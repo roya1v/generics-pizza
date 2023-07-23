@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		010A85E82A11282100354E7D /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010A85E72A11282100354E7D /* AddressViewModel.swift */; };
+		010D5D8A2A6DB09E00903CD3 /* MapNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */; };
 		01389B3C2A4363F2009DE998 /* GenericsUI.docc in Sources */ = {isa = PBXBuildFile; fileRef = 01389B3B2A4363F2009DE998 /* GenericsUI.docc */; };
 		01389B422A4363F3009DE998 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
 		01389B492A4363F3009DE998 /* GenericsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B482A4363F3009DE998 /* GenericsUITests.swift */; };
@@ -234,6 +235,7 @@
 
 /* Begin PBXFileReference section */
 		010A85E72A11282100354E7D /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
+		010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNavigationViewController.swift; sourceTree = "<group>"; };
 		01389B382A4363F2009DE998 /* GenericsUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GenericsUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		01389B3A2A4363F2009DE998 /* GenericsUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenericsUI.h; sourceTree = "<group>"; };
 		01389B3B2A4363F2009DE998 /* GenericsUI.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = GenericsUI.docc; sourceTree = "<group>"; };
@@ -488,6 +490,7 @@
 			children = (
 				01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */,
 				01C9DFBC2A0AF16B001DC47D /* SceneDelegate.swift */,
+				010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */,
 				01C9DFBE2A0AF16B001DC47D /* ViewController.swift */,
 				01C9DFC02A0AF16B001DC47D /* Main.storyboard */,
 				01C9DFC32A0AF16D001DC47D /* Assets.xcassets */,
@@ -1242,6 +1245,7 @@
 				01C9DFBF2A0AF16B001DC47D /* ViewController.swift in Sources */,
 				01C9DFBB2A0AF16B001DC47D /* AppDelegate.swift in Sources */,
 				01C9DFBD2A0AF16B001DC47D /* SceneDelegate.swift in Sources */,
+				010D5D8A2A6DB09E00903CD3 /* MapNavigationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
