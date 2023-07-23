@@ -15,17 +15,16 @@ struct UserFeedView: View {
 
     var body: some View {
         HStack {
-            Spacer()
             deviceView
+                .frame(maxWidth: .infinity)
                 .dropDestination(for: FeedCardType.self) { items, location in
                     cards += items
                     return true
                 }
                 .padding()
-            Spacer()
             libraryView
+                .frame(maxWidth: .infinity)
                 .padding()
-            Spacer()
         }
     }
 
@@ -34,16 +33,14 @@ struct UserFeedView: View {
         ScrollView {
             VStack(alignment: .leading) {
                 Text("Library")
-                VStack {
-                    ForEach(library, id: \.self) { cardType in
-                        getCardView(for: cardType)
-                            .draggable(cardType)
-                    }
-                    Spacer()
+                ForEach(library, id: \.self) { cardType in
+                    getCardView(for: cardType)
+                        .draggable(cardType)
                 }
+                Spacer()
+
             }
         }
-        .frame(width: 200.0)
     }
 
     @ViewBuilder
@@ -51,20 +48,39 @@ struct UserFeedView: View {
         ScrollView {
             VStack(alignment: .leading) {
                 Text("On device")
-                VStack {
-                    ForEach(cards, id: \.self) { cardType in
-                        getCardView(for: cardType)
-                            .contextMenu {
-                                Button("Delete") {
-                                    cards.removeAll { $0 == cardType }
+                ForEach(cards, id: \.self) { cardType in
+                    getCardView(for: cardType)
+                        .contextMenu {
+                            if let index = cards.firstIndex(of: cardType),
+                               index > 0 {
+                                Button("Move up") {
+                                    let card = cards[index]
+                                    cards.remove(at: index)
+                                    cards.insert(card, at: index - 1)
                                 }
                             }
-                    }
+
+                            if let index = cards.firstIndex(of: cardType),
+                               index < cards.count - 1 {
+                                Button("Move down") {
+                                    let card = cards[index]
+                                    cards.remove(at: index)
+                                    cards.insert(card, at: index + 1)
+                                }
+                            }
+
+                            Button("Edit") {
+                                cards.removeAll { $0 == cardType }
+                            }
+                            Button("Delete") {
+                                cards.removeAll { $0 == cardType }
+                            }
+                        }
+
                     Spacer()
                 }
             }
         }
-        .frame(width: 200.0)
     }
 }
 
@@ -77,28 +93,48 @@ struct UserFeedView_Previews: PreviewProvider {
 
 func getCardView(for cardType: FeedCardType) -> some View {
     switch cardType {
-    case let .bigImage(title, subtitle, _):
-        return AnyView(BigImageCardView(title: title, subtitle: subtitle, ctaTitle: "CTA") {
-            Image("pizza")
-                .resizable()
-                .scaledToFit()
-        } action: {
+    case let .bigImage(title, subtitle, imageSource, cta):
+        if let cta {
+            return AnyView(BigImageCardView(title: title, subtitle: subtitle, ctaTitle: cta.label) {
+                if case let .local(imageName) = imageSource {
+                    return Image(imageName)
+                        .resizable()
+                        .scaledToFit()
+                } else {
+                    fatalError()
+                }
+            } action: {
 
-        })
+            })
+        } else {
+            return AnyView(BigImageCardView(title: title, subtitle: subtitle, ctaTitle: nil) {
+                Image("pizza")
+                    .resizable()
+                    .scaledToFit()
+            } action: {})
+        }
+
     case .carousel:
         return AnyView(CarouselCardView())
-    case let .cta(title, subtitle, _):
-        return AnyView(CtaCardView(title: title, subtitle: subtitle, ctaTitle: "CTA") {
-
-        })
+    case let .cta(title, subtitle, cta):
+        return AnyView(CtaCardView(title: title, subtitle: subtitle, ctaTitle: cta.label) {})
     }
 }
 
 extension FeedCardType: CaseIterable {
     public static var allCases: [FeedCardType] {
         [.carousel(title: "Lorem ipsum"),
-         .bigImage(title: "Lorem ipsum", subtitle: "Lorem ipsum", ctaDestination: .menu),
-         .cta(title: "Lorem ipsum", subtitle: "Lorem ipsum", ctaDestination: .menu)
+         .bigImage(title: "Lorem ipsum",
+                   subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit... ",
+                   image: .local(name: "pizza"),
+                   ctaDestination: .menu),
+         .bigImage(title: "Lorem ipsum",
+                   subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit... ",
+                   image: .local(name: "pizza"),
+                   ctaDestination: nil),
+         .cta(title: "Lorem ipsum",
+              subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit... ",
+              ctaDestination: .menu)
 
         ]
     }

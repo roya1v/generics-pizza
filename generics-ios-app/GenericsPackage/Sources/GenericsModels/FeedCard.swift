@@ -12,14 +12,14 @@ public enum FeedCardType: Codable, Equatable, Hashable {
 
     case bigImage(title: String,
                   subtitle: String,
+                  image: ImageSource,
                   ctaDestination: CtaDestination?)
     case cta(title: String,
              subtitle: String,
              ctaDestination: CtaDestination)
 
-
     enum CodingKeys: String, CodingKey {
-        case type, title, subtitle, ctaDestination
+        case type, title, subtitle, ctaDestination, image
     }
 
     public init(from decoder: Decoder) throws {
@@ -34,7 +34,8 @@ public enum FeedCardType: Codable, Equatable, Hashable {
             let title = try container.decode(String.self, forKey: .title)
             let subtitle = try container.decode(String.self, forKey: .subtitle)
             let ctaDestination = try container.decodeIfPresent(CtaDestination.self, forKey: .ctaDestination)
-            self = .bigImage(title: title, subtitle: subtitle, ctaDestination: ctaDestination)
+            let imageSource = try container.decode(ImageSource.self, forKey: .image)
+            self = .bigImage(title: title, subtitle: subtitle, image: imageSource, ctaDestination: ctaDestination)
         case "cta":
             let title = try container.decode(String.self, forKey: .title)
             let subtitle = try container.decode(String.self, forKey: .subtitle)
@@ -57,10 +58,11 @@ public enum FeedCardType: Codable, Equatable, Hashable {
         case .carousel(let title):
             try container.encode("carousel", forKey: .type)
             try container.encode(title, forKey: .title)
-        case .bigImage(let title, let subtitle, let ctaDestination):
+        case .bigImage(let title, let subtitle, let imageSource, let ctaDestination):
             try container.encode("bigImage", forKey: .type)
             try container.encode(title, forKey: .title)
             try container.encode(subtitle, forKey: .subtitle)
+            try container.encode(imageSource, forKey: .image)
             try container.encodeIfPresent(ctaDestination, forKey: .ctaDestination)
         case .cta(let title, let subtitle, let ctaDestination):
             try container.encode("cta", forKey: .type)
@@ -73,4 +75,16 @@ public enum FeedCardType: Codable, Equatable, Hashable {
 
 public enum CtaDestination: String, Codable {
     case menu
+
+    public var label: String {
+        switch self {
+        case .menu:
+            return "Menu"
+        }
+    }
+}
+
+public enum ImageSource: Codable, Equatable, Hashable {
+    case local(name: String)
+    case remote(url: URL)
 }
