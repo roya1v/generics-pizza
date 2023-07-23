@@ -84,7 +84,7 @@ final class OrdersController: RouteCollection {
             return
         }
         clients[order.id!] = ws
-        ws.onClose.whenComplete { [weak self] result in
+        ws.onClose.whenComplete { [weak self] _ in
             self?.clients.removeValue(forKey: order.id!)
         }
     }
@@ -113,7 +113,7 @@ final class OrdersController: RouteCollection {
         ws.onText { ws, text in
             let message = try? OrderMessage.decode(from: text)
             switch message {
-            case .newOrder(_):
+            case .newOrder:
                 fatalError()
             case .update(let id, let state):
                 if let order = try? await Order.find(id, on: req.db) {

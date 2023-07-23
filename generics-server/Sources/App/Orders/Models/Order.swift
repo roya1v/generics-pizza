@@ -47,5 +47,5 @@ extension Order: Hashable {
 }
 
 extension OrderModel: Content {
-    
+
 }

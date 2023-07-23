@@ -39,4 +39,3 @@ extension UserToken: ModelTokenAuthenticatable {
         true
     }
 }
-

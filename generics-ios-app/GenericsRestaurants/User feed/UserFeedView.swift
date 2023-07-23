@@ -90,7 +90,6 @@ struct UserFeedView_Previews: PreviewProvider {
     }
 }
 
-
 func getCardView(for cardType: FeedCardType) -> some View {
     switch cardType {
     case let .bigImage(title, subtitle, imageSource, cta):
