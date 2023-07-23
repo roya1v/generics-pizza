@@ -12,7 +12,8 @@ import GenericsModels
 final class OrdersController: RouteCollection {
 
     private var clients = [UUID: WebSocket]()
-    private var admins = [WebSocket]()
+    private var restaurants = [WebSocket]()
+    private var drivers = [WebSocket]()
 
     func boot(routes: RoutesBuilder) throws {
         let order = routes.grouped("order")
@@ -23,7 +24,7 @@ final class OrdersController: RouteCollection {
         order.post(use: new)
 
         order.grouped("activity").grouped(":orderId").webSocket(onUpgrade: orderActivity)
-        order.grouped("activity").grouped(UserToken.authenticator()).webSocket(onUpgrade: adminActivity)
+        order.grouped("activity").grouped(UserToken.authenticator()).webSocket(onUpgrade: restaurantActivity)
     }
 
     /// Get currently unfinished orders
@@ -70,7 +71,7 @@ final class OrdersController: RouteCollection {
         for item in order.items {
             try await item.$item.load(on: req.db)
         }
-        for admin in admins {
+        for admin in restaurants {
             try? await admin.send(OrderMessage.newOrder(order: order.getContent()).encode() ?? "")
         }
 
@@ -89,8 +90,8 @@ final class OrdersController: RouteCollection {
         }
     }
 
-    /// Connect to order activity as an admin
-    func adminActivity(req: Request, ws: WebSocket) async {
+    /// Connect to order activity as a restaurant
+    func restaurantActivity(req: Request, ws: WebSocket) async {
         do {
             try req.auth.require(User.self)
         } catch {
@@ -99,10 +100,53 @@ final class OrdersController: RouteCollection {
             return
         }
 
-        admins.append(ws)
+        restaurants.append(ws)
 
         try? await Order.query(on: req.db)
             .filter(\.$state != .finished)
+            .with(\.$items) { $0.with(\.$item) }
+            .all()
+            .map { $0.getContent() }
+            .forEach({ order in
+                ws.send(OrderMessage.newOrder(order: order).encode() ?? "")
+            })
+
+        ws.onText { ws, text in
+            let message = try? OrderMessage.decode(from: text)
+            switch message {
+            case .newOrder:
+                fatalError()
+            case .update(let id, let state):
+                if let order = try? await Order.find(id, on: req.db) {
+                    order.state = state
+                    try? await order.save(on: req.db)
+                    if let client = self.clients[id] {
+                        try? await client.send(text)
+                    }
+                    try? await ws.send(text)
+                }
+            case .accepted:
+                fatalError()
+            case .none:
+                fatalError()
+            }
+        }
+    }
+
+    /// Connect to order activity as a driver
+    func driverActivity(req: Request, ws: WebSocket) async {
+        do {
+            try req.auth.require(User.self)
+        } catch {
+            try? await ws.send(error.localizedDescription)
+            try? await ws.close()
+            return
+        }
+
+        drivers.append(ws)
+
+        try? await Order.query(on: req.db)
+            .filter(\.$state != .readyForDelivery)
             .with(\.$items) { $0.with(\.$item) }
             .all()
             .map { $0.getContent() }
