@@ -22,6 +22,8 @@ final class OnboardingPermissionViewController: UIViewController {
         return view
     }()
 
+    private lazy var mainButtonBottomConstraint = mainButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 100)
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,7 +49,7 @@ final class OnboardingPermissionViewController: UIViewController {
         NSLayoutConstraint.activate([
             mainButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .big),
             mainButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.big),
-            mainButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -.big),
+            mainButtonBottomConstraint,
             mainButton.heightAnchor.constraint(equalToConstant: .huge)
         ])
         mainButton.setTitle("Grant permission", for: .normal)
@@ -57,5 +59,22 @@ final class OnboardingPermissionViewController: UIViewController {
         mainButton.addAction(.init(handler: { _ in
             self.navigationController?.pushViewController(IdleViewController(), animated: true)
         }), for: .touchUpInside)
+    }
+}
+
+extension OnboardingPermissionViewController: CustomInTransitinable {
+
+    var transitionInDuration: TimeInterval {
+        0.5
+    }
+
+    func transitionIn(completion: (() -> Void)?) {
+        mainButtonBottomConstraint.constant = -.big
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            completion?()
+        }
     }
 }

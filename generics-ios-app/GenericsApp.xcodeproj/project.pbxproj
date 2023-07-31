@@ -36,6 +36,7 @@
 		014834A32A78243A0018C322 /* GenericsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; };
 		014834A42A78243A0018C322 /* GenericsUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		014834A92A7827900018C322 /* IdleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014834A82A7827900018C322 /* IdleViewController.swift */; };
+		014834AF2A7840840018C322 /* CustomInOutTransitinableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */; };
 		0148E8202A6D2A010011ACE4 /* CtaCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E81F2A6D2A010011ACE4 /* CtaCardView.swift */; };
 		0148E8222A6D2B160011ACE4 /* BigImageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E8212A6D2B160011ACE4 /* BigImageCardView.swift */; };
 		0148E8242A6D2D320011ACE4 /* CarouselCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E8232A6D2D320011ACE4 /* CarouselCardView.swift */; };
@@ -277,6 +278,7 @@
 		01389B922A43660D009DE998 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		014834A12A7823D90018C322 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		014834A82A7827900018C322 /* IdleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleViewController.swift; sourceTree = "<group>"; };
+		014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInOutTransitinableController.swift; sourceTree = "<group>"; };
 		0148E81F2A6D2A010011ACE4 /* CtaCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtaCardView.swift; sourceTree = "<group>"; };
 		0148E8212A6D2B160011ACE4 /* BigImageCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigImageCardView.swift; sourceTree = "<group>"; };
 		0148E8232A6D2D320011ACE4 /* CarouselCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCardView.swift; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 				010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */,
 				014834A82A7827900018C322 /* IdleViewController.swift */,
 				010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */,
+				014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */,
 				01C9DFC32A0AF16D001DC47D /* Assets.xcassets */,
 				01C9DFC52A0AF16D001DC47D /* LaunchScreen.storyboard */,
 				01C9DFC82A0AF16D001DC47D /* Info.plist */,
@@ -1271,6 +1274,7 @@
 				01C9DFBB2A0AF16B001DC47D /* AppDelegate.swift in Sources */,
 				014834A92A7827900018C322 /* IdleViewController.swift in Sources */,
 				010D5D8C2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift in Sources */,
+				014834AF2A7840840018C322 /* CustomInOutTransitinableController.swift in Sources */,
 				01C9DFBD2A0AF16B001DC47D /* SceneDelegate.swift in Sources */,
 				010D5D8A2A6DB09E00903CD3 /* MapNavigationViewController.swift in Sources */,
 			);
@@ -1705,8 +1709,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GenericsDriver/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -1733,8 +1736,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GenericsDriver/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
