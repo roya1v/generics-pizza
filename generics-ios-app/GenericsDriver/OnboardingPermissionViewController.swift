@@ -23,7 +23,7 @@ final class OnboardingPermissionViewController: UIViewController {
     }()
 
     private lazy var mainButtonBottomConstraint = mainButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 100)
-    private lazy var titleLabelTopConstraint = titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -100)
+    private lazy var titleLabelTopConstraint = titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -300)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,9 +71,26 @@ extension OnboardingPermissionViewController: CustomInTransitinable {
 
     func transitionIn(completion: (() -> Void)?) {
         mainButtonBottomConstraint.constant = -.big
-        titleLabelTopConstraint.constant = .big
+        titleLabelTopConstraint.constant = -.huge
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0) {
+        UIView.animate(withDuration: transitionInDuration, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            completion?()
+        }
+    }
+}
+
+extension OnboardingPermissionViewController: CustomOutTransitinable {
+    var transitionOutDuration: TimeInterval {
+        0.5
+    }
+
+    func transitionOut(completion: (() -> Void)?) {
+        mainButtonBottomConstraint.constant = 100
+        titleLabelTopConstraint.constant = -600
+
+        UIView.animate(withDuration: transitionOutDuration, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0) {
             self.view.layoutIfNeeded()
         } completion: { _ in
             completion?()

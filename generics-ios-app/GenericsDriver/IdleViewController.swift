@@ -36,7 +36,6 @@ final class IdleViewController: UIViewController {
         NSLayoutConstraint.activate([
             prettyAnimationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             prettyAnimationView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            prettyAnimationView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
             prettyAnimationView.heightAnchor.constraint(equalTo: prettyAnimationView.widthAnchor)
         ])
 
@@ -44,7 +43,7 @@ final class IdleViewController: UIViewController {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .big),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.big),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .big)
+            titleLabel.bottomAnchor.constraint(equalTo: prettyAnimationView.topAnchor, constant: -.big)
         ])
 
         titleLabel.text = "Waiting for orders"
@@ -62,5 +61,21 @@ final class IdleViewController: UIViewController {
 
     @objc func trigger() {
         self.navigationController?.pushViewController(MapNavigationViewController(), animated: true)
+    }
+}
+
+extension IdleViewController: CustomInTransitinable {
+    var transitionInDuration: TimeInterval {
+        0.5
+    }
+
+    func transitionIn(completion: (() -> Void)?) {
+        let newConstraint = prettyAnimationView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75)
+        newConstraint.isActive = true
+        UIView.animate(withDuration: transitionInDuration, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            completion?()
+        }
     }
 }
