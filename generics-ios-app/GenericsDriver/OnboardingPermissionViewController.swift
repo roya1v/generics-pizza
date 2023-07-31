@@ -23,6 +23,7 @@ final class OnboardingPermissionViewController: UIViewController {
     }()
 
     private lazy var mainButtonBottomConstraint = mainButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 100)
+    private lazy var titleLabelTopConstraint = titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -100)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,7 @@ final class OnboardingPermissionViewController: UIViewController {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .big),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.big),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .big)
+            titleLabelTopConstraint
         ])
 
         titleLabel.text = "To start accepting orders give the app access to your location"
@@ -70,6 +71,7 @@ extension OnboardingPermissionViewController: CustomInTransitinable {
 
     func transitionIn(completion: (() -> Void)?) {
         mainButtonBottomConstraint.constant = -.big
+        titleLabelTopConstraint.constant = .big
         
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0) {
             self.view.layoutIfNeeded()
