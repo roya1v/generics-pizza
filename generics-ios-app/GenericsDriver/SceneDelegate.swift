@@ -30,11 +30,11 @@ extension SceneDelegate: UINavigationControllerDelegate {
                               animationControllerFor operation: UINavigationController.Operation,
                               from fromVC: UIViewController,
                               to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard fromVC is CustomOutTransishable,
-              toVC is CustomInTransishable else {
+        guard fromVC is CustomOutTransitinable,
+              toVC is CustomInTransitinable else {
             return nil
         }
-        return CustomInOutTransishableController()
+        return CustomInOutTransitinableController()
     }
 }
 
