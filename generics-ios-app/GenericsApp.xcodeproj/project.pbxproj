@@ -10,6 +10,9 @@
 		010A85E82A11282100354E7D /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010A85E72A11282100354E7D /* AddressViewModel.swift */; };
 		010D5D8A2A6DB09E00903CD3 /* MapNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */; };
 		010D5D8C2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */; };
+		0124CAD32A784293002B9BC4 /* GenericsUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0124CAD42A7842C9002B9BC4 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
+		0124CAD62A78432A002B9BC4 /* WelcomeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0124CAD52A78432A002B9BC4 /* WelcomeLabelView.swift */; };
 		01389B3C2A4363F2009DE998 /* GenericsUI.docc in Sources */ = {isa = PBXBuildFile; fileRef = 01389B3B2A4363F2009DE998 /* GenericsUI.docc */; };
 		01389B422A4363F3009DE998 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
 		01389B492A4363F3009DE998 /* GenericsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B482A4363F3009DE998 /* GenericsUITests.swift */; };
@@ -34,9 +37,9 @@
 		01389B8A2A436530009DE998 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		014834A22A7823D90018C322 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014834A12A7823D90018C322 /* LoginViewController.swift */; };
 		014834A32A78243A0018C322 /* GenericsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; };
-		014834A42A78243A0018C322 /* GenericsUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		014834A92A7827900018C322 /* IdleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014834A82A7827900018C322 /* IdleViewController.swift */; };
 		014834AF2A7840840018C322 /* CustomInOutTransitinableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */; };
+		014834B02A7842630018C322 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0148E8202A6D2A010011ACE4 /* CtaCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E81F2A6D2A010011ACE4 /* CtaCardView.swift */; };
 		0148E8222A6D2B160011ACE4 /* BigImageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E8212A6D2B160011ACE4 /* BigImageCardView.swift */; };
 		0148E8242A6D2D320011ACE4 /* CarouselCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E8232A6D2D320011ACE4 /* CarouselCardView.swift */; };
@@ -248,7 +251,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				014834A42A78243A0018C322 /* GenericsUIKit.framework in Embed Frameworks */,
+				0124CAD32A784293002B9BC4 /* GenericsUIKit.framework in Embed Frameworks */,
+				014834B02A7842630018C322 /* GenericsUI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +263,7 @@
 		010A85E72A11282100354E7D /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
 		010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNavigationViewController.swift; sourceTree = "<group>"; };
 		010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPermissionViewController.swift; sourceTree = "<group>"; };
+		0124CAD52A78432A002B9BC4 /* WelcomeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeLabelView.swift; sourceTree = "<group>"; };
 		01389B382A4363F2009DE998 /* GenericsUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GenericsUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		01389B3A2A4363F2009DE998 /* GenericsUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenericsUI.h; sourceTree = "<group>"; };
 		01389B3B2A4363F2009DE998 /* GenericsUI.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = GenericsUI.docc; sourceTree = "<group>"; };
@@ -378,6 +383,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0124CAD42A7842C9002B9BC4 /* GenericsUI.framework in Frameworks */,
 				014834A32A78243A0018C322 /* GenericsUIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -515,6 +521,7 @@
 			children = (
 				01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */,
 				01C9DFBC2A0AF16B001DC47D /* SceneDelegate.swift */,
+				0124CAD52A78432A002B9BC4 /* WelcomeLabelView.swift */,
 				014834A12A7823D90018C322 /* LoginViewController.swift */,
 				010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */,
 				014834A82A7827900018C322 /* IdleViewController.swift */,
@@ -1270,6 +1277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0124CAD62A78432A002B9BC4 /* WelcomeLabelView.swift in Sources */,
 				014834A22A7823D90018C322 /* LoginViewController.swift in Sources */,
 				01C9DFBB2A0AF16B001DC47D /* AppDelegate.swift in Sources */,
 				014834A92A7827900018C322 /* IdleViewController.swift in Sources */,
@@ -1706,6 +1714,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GenericsDriver/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1733,6 +1742,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GenericsDriver/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

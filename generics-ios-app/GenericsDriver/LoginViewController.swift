@@ -10,6 +10,12 @@ import GenericsUI
 
 final class LoginViewController: UIViewController {
 
+    private var welcomeLabel: WelcomeLabelView = {
+        let view = WelcomeLabelView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
      private var emailTextField: UITextField = {
         let view = UITextField()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -35,10 +41,17 @@ final class LoginViewController: UIViewController {
     }
 
     private lazy var loginButtonBottomConstraint = loginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -.big)
-    private lazy var emailTextFieldTopConstraint = emailTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 120.0)
+    private lazy var welcomeLabelTopConstraint = welcomeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -.big)
 
     private func setupView() {
         view.backgroundColor = .systemBackground
+
+        view.addSubview(welcomeLabel)
+        NSLayoutConstraint.activate([
+            welcomeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .big),
+            welcomeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.big),
+            welcomeLabelTopConstraint
+        ])
 
         emailTextField.borderStyle = .roundedRect
         emailTextField.placeholder = "Email"
@@ -46,7 +59,7 @@ final class LoginViewController: UIViewController {
         NSLayoutConstraint.activate([
             emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .big),
             emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.big),
-            emailTextFieldTopConstraint
+            emailTextField.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: .big)
         ])
 
         passwordTextField.borderStyle = .roundedRect
@@ -81,7 +94,7 @@ extension LoginViewController: CustomOutTransitinable {
 
     func transitionOut(completion: (() -> Void)?) {
         loginButtonBottomConstraint.constant = 100
-        emailTextFieldTopConstraint.constant = -200
+        welcomeLabelTopConstraint.constant = -300
 
         UIView.animate(withDuration: transitionOutDuration, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0) {
             self.view.layoutIfNeeded()
