@@ -6,19 +6,20 @@
 //
 
 import UIKit
+import GenericsUIKit
 
-class OnboardingPermissionViewController: UIViewController {
+final class OnboardingPermissionViewController: UIViewController {
 
     private var titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
 
     private var mainButton: UIButton = {
-        let button = UIButton(configuration: .borderedProminent())
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+        let view = UIButton(configuration: .borderedProminent())
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
 
     override func viewDidLoad() {
@@ -32,9 +33,9 @@ class OnboardingPermissionViewController: UIViewController {
 
         view.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16.0),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16.0)
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .big),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.big),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: .big)
         ])
 
         titleLabel.text = "To start accepting orders give the app access to your location"
@@ -44,12 +45,17 @@ class OnboardingPermissionViewController: UIViewController {
 
         view.addSubview(mainButton)
         NSLayoutConstraint.activate([
-            mainButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
-            mainButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16.0),
-            mainButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32.0),
-            mainButton.heightAnchor.constraint(equalToConstant: 48.0)
+            mainButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: .big),
+            mainButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -.big),
+            mainButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -.big),
+            mainButton.heightAnchor.constraint(equalToConstant: .huge)
         ])
         mainButton.setTitle("Grant permission", for: .normal)
-    }
 
+        navigationController?.isNavigationBarHidden = true
+
+        mainButton.addAction(.init(handler: { _ in
+            self.navigationController?.pushViewController(IdleViewController(), animated: true)
+        }), for: .touchUpInside)
+    }
 }

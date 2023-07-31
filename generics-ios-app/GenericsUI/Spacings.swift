@@ -32,4 +32,9 @@ public extension CGFloat {
     static var big: CGFloat {
         16.0
     }
+
+    /// 48.0
+    static var huge: CGFloat {
+        48.0
+    }
 }
