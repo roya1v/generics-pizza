@@ -16,6 +16,12 @@ final class MapNavigationViewController: UIViewController {
         return view
     }()
 
+    private var sheetView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,6 +36,24 @@ final class MapNavigationViewController: UIViewController {
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mapView.topAnchor.constraint(equalTo: view.topAnchor),
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+
+        let navigateTo = NavigateView()
+        navigateTo.translatesAutoresizingMaskIntoConstraints = false
+        sheetView.addSubview(navigateTo)
+        NSLayoutConstraint.activate([
+            navigateTo.leadingAnchor.constraint(equalTo: sheetView.leadingAnchor),
+            navigateTo.trailingAnchor.constraint(equalTo: sheetView.trailingAnchor),
+            navigateTo.topAnchor.constraint(equalTo: sheetView.topAnchor),
+            navigateTo.bottomAnchor.constraint(equalTo: sheetView.safeAreaLayoutGuide.bottomAnchor),
+        ])
+        sheetView.backgroundColor = .systemBackground
+
+        view.addSubview(sheetView)
+        NSLayoutConstraint.activate([
+            view.leadingAnchor.constraint(equalTo: sheetView.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: sheetView.trailingAnchor),
+            view.bottomAnchor.constraint(equalTo: sheetView.bottomAnchor),
         ])
     }
 }

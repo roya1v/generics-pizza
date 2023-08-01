@@ -13,6 +13,7 @@
 		0124CAD32A784293002B9BC4 /* GenericsUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0124CAD42A7842C9002B9BC4 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
 		0124CAD62A78432A002B9BC4 /* WelcomeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0124CAD52A78432A002B9BC4 /* WelcomeLabelView.swift */; };
+		0124CAD82A785252002B9BC4 /* NavigateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0124CAD72A785252002B9BC4 /* NavigateView.swift */; };
 		01389B3C2A4363F2009DE998 /* GenericsUI.docc in Sources */ = {isa = PBXBuildFile; fileRef = 01389B3B2A4363F2009DE998 /* GenericsUI.docc */; };
 		01389B422A4363F3009DE998 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
 		01389B492A4363F3009DE998 /* GenericsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B482A4363F3009DE998 /* GenericsUITests.swift */; };
@@ -264,6 +265,7 @@
 		010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNavigationViewController.swift; sourceTree = "<group>"; };
 		010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPermissionViewController.swift; sourceTree = "<group>"; };
 		0124CAD52A78432A002B9BC4 /* WelcomeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeLabelView.swift; sourceTree = "<group>"; };
+		0124CAD72A785252002B9BC4 /* NavigateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateView.swift; sourceTree = "<group>"; };
 		01389B382A4363F2009DE998 /* GenericsUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GenericsUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		01389B3A2A4363F2009DE998 /* GenericsUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenericsUI.h; sourceTree = "<group>"; };
 		01389B3B2A4363F2009DE998 /* GenericsUI.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = GenericsUI.docc; sourceTree = "<group>"; };
@@ -526,6 +528,7 @@
 				010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */,
 				014834A82A7827900018C322 /* IdleViewController.swift */,
 				010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */,
+				0124CAD72A785252002B9BC4 /* NavigateView.swift */,
 				014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */,
 				01C9DFC32A0AF16D001DC47D /* Assets.xcassets */,
 				01C9DFC52A0AF16D001DC47D /* LaunchScreen.storyboard */,
@@ -1282,6 +1285,7 @@
 				01C9DFBB2A0AF16B001DC47D /* AppDelegate.swift in Sources */,
 				014834A92A7827900018C322 /* IdleViewController.swift in Sources */,
 				010D5D8C2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift in Sources */,
+				0124CAD82A785252002B9BC4 /* NavigateView.swift in Sources */,
 				014834AF2A7840840018C322 /* CustomInOutTransitinableController.swift in Sources */,
 				01C9DFBD2A0AF16B001DC47D /* SceneDelegate.swift in Sources */,
 				010D5D8A2A6DB09E00903CD3 /* MapNavigationViewController.swift in Sources */,
