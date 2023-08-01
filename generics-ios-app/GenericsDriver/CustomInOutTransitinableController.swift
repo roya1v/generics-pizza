@@ -34,7 +34,7 @@ final class CustomInOutTransitinableController: NSObject, UIViewControllerAnimat
             fatalError("'CustomInOutTransitinableController' should be only used with appropriate 'to' and 'from' VCs")
         }
         let containerView = transitionContext.containerView
-
+        containerView.addSubview(fromVC.view)
         fromVC.transitionOut {
             containerView.addSubview(toVC.view)
             containerView.layoutIfNeeded()

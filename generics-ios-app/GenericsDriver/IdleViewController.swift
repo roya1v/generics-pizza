@@ -79,3 +79,13 @@ extension IdleViewController: CustomInTransitinable {
         }
     }
 }
+
+extension IdleViewController: CustomOutTransitinable {
+    var transitionOutDuration: TimeInterval {
+        0.0
+    }
+
+    func transitionOut(completion: (() -> Void)?) {
+        completion?()
+    }
+}
