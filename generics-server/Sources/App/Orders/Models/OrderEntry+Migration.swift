@@ -1,5 +1,5 @@
 //
-//  Order+Migration.swift
+//  OrderEntry+Migration.swift
 //  
 //
 //  Created by Mike S. on 19/03/2023.
@@ -8,7 +8,7 @@
 import Fluent
 import Vapor
 
-extension Order {
+extension OrderEntry {
     struct Migration: AsyncMigration {
         var name: String { "CreateOrder" }
 

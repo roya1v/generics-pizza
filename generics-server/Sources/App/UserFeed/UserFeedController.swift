@@ -23,7 +23,7 @@ struct UserFeedController: RouteCollection {
 
     /// Update feed
     func update(req: Request) async throws -> HTTPStatus {
-        let user = try req.auth.require(User.self)
+        let user = try req.auth.require(UserEntry.self)
         let cards = try req.content.decode([FeedCardType].self)
 
         let transformedCards = cards.map { card in

@@ -9,7 +9,7 @@ import Fluent
 import Vapor
 import GenericsModels
 
-final class Order: Model, Content {
+final class OrderEntry: Model, Content {
     static var schema = "orders"
 
     @ID(key: .id)
@@ -22,7 +22,7 @@ final class Order: Model, Content {
     var state: OrderState
 
     @Children(for: \.$order)
-    var items: [OrderItem]
+    var items: [OrderItemEntry]
 
     init() { }
 
@@ -36,8 +36,8 @@ final class Order: Model, Content {
     }
 }
 
-extension Order: Hashable {
-    static func == (lhs: Order, rhs: Order) -> Bool {
+extension OrderEntry: Hashable {
+    static func == (lhs: OrderEntry, rhs: OrderEntry) -> Bool {
         return lhs.id == rhs.id
     }
 

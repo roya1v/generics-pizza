@@ -9,7 +9,7 @@ import Fluent
 import Vapor
 import GenericsModels
 
-final class OrderItem: Model, Content {
+final class OrderItemEntry: Model, Content {
     static var schema = "order_items"
 
     @ID(key: .id)
@@ -19,11 +19,11 @@ final class OrderItem: Model, Content {
     var item: MenuEntry
 
     @Parent(key: "order")
-    var order: Order
+    var order: OrderEntry
 
     init() { }
 
-    public init(id: UUID? = nil, item: MenuEntry, order: Order) {
+    public init(id: UUID? = nil, item: MenuEntry, order: OrderEntry) {
         self.id = id
         self.item = item
         self.order = order

@@ -1,5 +1,5 @@
 //
-//  UserToken.swift
+//  UserTokenEntry.swift
 //  
 //
 //  Created by Mike Shevelinsky on 13/02/2023.
@@ -8,7 +8,7 @@
 import Fluent
 import Vapor
 
-final class UserToken: Model, Content {
+final class UserTokenEntry: Model, Content {
     static let schema = "user_tokens"
 
     @ID(key: .id)
@@ -18,11 +18,11 @@ final class UserToken: Model, Content {
     var value: String
 
     @Parent(key: "user_id")
-    var user: User
+    var user: UserEntry
 
     init() { }
 
-    init(id: UUID? = nil, value: String, userID: User.IDValue) {
+    init(id: UUID? = nil, value: String, userID: UserEntry.IDValue) {
         self.id = id
         self.value = value
         self.$user.id = userID
@@ -31,9 +31,9 @@ final class UserToken: Model, Content {
 
 // MARK: - ModelTokenAuthenticatable
 
-extension UserToken: ModelTokenAuthenticatable {
-    static let valueKey = \UserToken.$value
-    static let userKey = \UserToken.$user
+extension UserTokenEntry: ModelTokenAuthenticatable {
+    static let valueKey = \UserTokenEntry.$value
+    static let userKey = \UserTokenEntry.$user
 
     var isValid: Bool {
         true

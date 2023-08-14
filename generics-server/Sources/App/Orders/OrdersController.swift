@@ -18,19 +18,19 @@ final class OrdersController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         let order = routes.grouped("order")
         order.post("check_price", use: checkPrice)
-        let authenticated = order.grouped(UserToken.authenticator())
+        let authenticated = order.grouped(UserTokenEntry.authenticator())
         authenticated.get("current", use: getCurrent)
         authenticated.get("history", use: getHistory)
         order.post(use: new)
 
         order.grouped("activity").grouped(":orderId").webSocket(onUpgrade: orderActivity)
-        order.grouped("activity").grouped(UserToken.authenticator()).webSocket(onUpgrade: restaurantActivity)
+        order.grouped("activity").grouped(UserTokenEntry.authenticator()).webSocket(onUpgrade: restaurantActivity)
     }
 
     /// Get currently unfinished orders
     func getCurrent(req: Request) async throws -> [OrderModel] {
-        try req.auth.require(User.self)
-        return try await Order.query(on: req.db)
+        try req.auth.require(UserEntry.self)
+        return try await OrderEntry.query(on: req.db)
             .filter(\.$state != .finished)
             .with(\.$items) { $0.with(\.$item) }
             .all()
@@ -39,8 +39,8 @@ final class OrdersController: RouteCollection {
 
     /// Get all finished orders
     func getHistory(req: Request) async throws -> [OrderModel] {
-        try req.auth.require(User.self)
-        return try await Order.query(on: req.db)
+        try req.auth.require(UserEntry.self)
+        return try await OrderEntry.query(on: req.db)
             .filter(\.$state == .finished)
             .with(\.$items) { $0.with(\.$item) }
             .all()
@@ -61,10 +61,10 @@ final class OrdersController: RouteCollection {
     func new(req: Request) async throws -> OrderModel {
         let orderModel = try req.content.decode(OrderModel.self)
 
-        let order = Order(state: .new)
+        let order = OrderEntry(state: .new)
         try await order.save(on: req.db)
 
-        let items = orderModel.items.map { OrderItem(item: $0.id!) }
+        let items = orderModel.items.map { OrderItemEntry(item: $0.id!) }
         try await order.$items.create(items, on: req.db)
 
         try await order.$items.load(on: req.db)
@@ -80,7 +80,7 @@ final class OrdersController: RouteCollection {
 
     /// Connect to order activity as a customer
     func orderActivity(req: Request, ws: WebSocket) async {
-        guard let order = try? await Order.find(req.parameters.get("orderId"), on: req.db) else {
+        guard let order = try? await OrderEntry.find(req.parameters.get("orderId"), on: req.db) else {
             try? await ws.close()
             return
         }
@@ -93,7 +93,7 @@ final class OrdersController: RouteCollection {
     /// Connect to order activity as a restaurant
     func restaurantActivity(req: Request, ws: WebSocket) async {
         do {
-            try req.auth.require(User.self)
+            try req.auth.require(UserEntry.self)
         } catch {
             try? await ws.send(error.localizedDescription)
             try? await ws.close()
@@ -102,7 +102,7 @@ final class OrdersController: RouteCollection {
 
         restaurants.append(ws)
 
-        try? await Order.query(on: req.db)
+        try? await OrderEntry.query(on: req.db)
             .filter(\.$state != .finished)
             .with(\.$items) { $0.with(\.$item) }
             .all()
@@ -117,7 +117,7 @@ final class OrdersController: RouteCollection {
             case .newOrder:
                 fatalError()
             case .update(let id, let state):
-                if let order = try? await Order.find(id, on: req.db) {
+                if let order = try? await OrderEntry.find(id, on: req.db) {
                     order.state = state
                     try? await order.save(on: req.db)
                     if let client = self.clients[id] {
@@ -136,7 +136,7 @@ final class OrdersController: RouteCollection {
     /// Connect to order activity as a driver
     func driverActivity(req: Request, ws: WebSocket) async {
         do {
-            try req.auth.require(User.self)
+            try req.auth.require(UserEntry.self)
         } catch {
             try? await ws.send(error.localizedDescription)
             try? await ws.close()
@@ -145,7 +145,7 @@ final class OrdersController: RouteCollection {
 
         drivers.append(ws)
 
-        try? await Order.query(on: req.db)
+        try? await OrderEntry.query(on: req.db)
             .filter(\.$state != .readyForDelivery)
             .with(\.$items) { $0.with(\.$item) }
             .all()
@@ -160,7 +160,7 @@ final class OrdersController: RouteCollection {
             case .newOrder:
                 fatalError()
             case .update(let id, let state):
-                if let order = try? await Order.find(id, on: req.db) {
+                if let order = try? await OrderEntry.find(id, on: req.db) {
                     order.state = state
                     try? await order.save(on: req.db)
                     if let client = self.clients[id] {

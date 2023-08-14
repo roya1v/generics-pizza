@@ -14,7 +14,7 @@ struct MenuController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         let menu = routes.grouped("menu")
         menu.get(use: index)
-        menu.grouped(UserToken.authenticator()).post(use: create)
+        menu.grouped(UserTokenEntry.authenticator()).post(use: create)
         menu.group(":itemID") { item in
             item.get(use: image)
         }
@@ -44,7 +44,7 @@ struct MenuController: RouteCollection {
 
     /// Create a menu item
     func create(req: Request) async throws -> MenuItem {
-        try req.auth.require(User.self)
+        try req.auth.require(UserEntry.self)
         let entry = try req.content.decode(MenuItem.self)
         try await entry.getModel().save(on: req.db)
         return entry

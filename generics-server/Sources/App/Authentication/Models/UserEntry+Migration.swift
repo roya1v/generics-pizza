@@ -1,5 +1,5 @@
 //
-//  User+Migration.swift
+//  UserEntry+Migration.swift
 //  
 //
 //  Created by Mike Shevelinsky on 13/02/2023.
@@ -8,7 +8,7 @@
 import Fluent
 import Vapor
 
-extension User {
+extension UserEntry {
     struct Migration: AsyncMigration {
         var name: String { "CreateUser" }
 

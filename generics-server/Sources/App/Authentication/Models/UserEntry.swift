@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  UserEntry.swift
 //  
 //
 //  Created by Mike Shevelinsky on 13/02/2023.
@@ -8,7 +8,7 @@
 import Fluent
 import Vapor
 
-final class User: Model, Content {
+final class UserEntry: Model, Content {
     static let schema = "users"
 
     @ID(key: .id)
@@ -35,7 +35,7 @@ final class User: Model, Content {
         self.access = access
     }
 
-    func generateToken() throws -> UserToken {
+    func generateToken() throws -> UserTokenEntry {
         try .init(
             value: [UInt8].random(count: 16).base64,
             userID: self.requireID()

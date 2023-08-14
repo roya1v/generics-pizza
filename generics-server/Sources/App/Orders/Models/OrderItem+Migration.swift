@@ -8,7 +8,7 @@
 import Fluent
 import Vapor
 
-extension OrderItem {
+extension OrderItemEntry {
     struct Migration: AsyncMigration {
         var name: String { "CreateOrderItem" }
 

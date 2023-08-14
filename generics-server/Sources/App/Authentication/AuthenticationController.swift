@@ -13,20 +13,20 @@ struct AuthenticationController: RouteCollection {
         let auth = routes.grouped("auth")
         auth.post("user", use: create)
 
-        auth.grouped(User.authenticator()).post("login", use: login)
+        auth.grouped(UserEntry.authenticator()).post("login", use: login)
 
-        let authenticated = auth.grouped(UserToken.authenticator())
+        let authenticated = auth.grouped(UserTokenEntry.authenticator())
         authenticated.get("user", use: me)
         authenticated.post("signout", use: signOut)
     }
 
     /// Create new user
-    func create(req: Request) async throws -> User {
-        let create = try req.content.decode(User.Create.self)
+    func create(req: Request) async throws -> UserEntry {
+        let create = try req.content.decode(UserEntry.Create.self)
         guard create.password == create.confirmPassword else {
             throw Abort(.badRequest, reason: "Passwords did not match")
         }
-        let user = try User(
+        let user = try UserEntry(
             email: create.email,
             passwordHash: Bcrypt.hash(create.password),
             access: .client
@@ -36,24 +36,24 @@ struct AuthenticationController: RouteCollection {
     }
 
     /// Login and get an auth token
-    func login(req: Request) async throws -> UserToken {
-        let user = try req.auth.require(User.self)
+    func login(req: Request) async throws -> UserTokenEntry {
+        let user = try req.auth.require(UserEntry.self)
         let token = try user.generateToken()
         try await token.save(on: req.db)
         return token
     }
 
     /// Check current user
-    func me(req: Request) async throws -> User {
-        try req.auth.require(User.self)
+    func me(req: Request) async throws -> UserEntry {
+        try req.auth.require(UserEntry.self)
     }
 
     /// Sign out deleting auth token
     func signOut(req: Request) async throws -> HTTPResponseStatus {
-        let user = try req.auth.require(User.self)
+        let user = try req.auth.require(UserEntry.self)
         if let id = user.id,
            let token = try await
-            UserToken.query(on: req.db)
+            UserTokenEntry.query(on: req.db)
                 .with(\.$user)
                 .filter(\.$user.$id == id)
                 .first() {

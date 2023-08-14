@@ -1,5 +1,5 @@
 //
-//  UserToken+Migration.swift
+//  UserTokenEntry+Migration.swift
 //  
 //
 //  Created by Mike Shevelinsky on 13/02/2023.
@@ -7,7 +7,7 @@
 
 import Fluent
 
-extension UserToken {
+extension UserTokenEntry {
     struct Migration: AsyncMigration {
         var name: String { "CreateUserToken" }
 
