@@ -7,9 +7,9 @@
 
 import UIKit
 
-class NavigateView: UIView {
+final class NavigateView: UIView {
 
-    private var actionButton: UIButton = {
+    var actionButton: UIButton = {
         let view = UIButton(configuration: .borderedProminent())
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

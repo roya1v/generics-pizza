@@ -59,6 +59,8 @@
 		01C9DFD22A0AF16D001DC47D /* GenericsDriverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFD12A0AF16D001DC47D /* GenericsDriverTests.swift */; };
 		01C9DFDC2A0AF16E001DC47D /* GenericsDriverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFDB2A0AF16E001DC47D /* GenericsDriverUITests.swift */; };
 		01C9DFDE2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFDD2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift */; };
+		01D537FA2A7AD093000CC221 /* OrderStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D537F92A7AD093000CC221 /* OrderStickerView.swift */; };
+		01D537FC2A7AD401000CC221 /* AcceptOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D537FB2A7AD401000CC221 /* AcceptOrderView.swift */; };
 		01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA4F2A09735800C622CC /* AddressViewController.swift */; };
 		01FFEA522A0974D900C622CC /* AddressSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */; };
 		EC14E819298B07C900A6540C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E818298B07C900A6540C /* HomeView.swift */; };
@@ -303,6 +305,8 @@
 		01C9DFD72A0AF16E001DC47D /* GenericsDriverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsDriverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C9DFDB2A0AF16E001DC47D /* GenericsDriverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsDriverUITests.swift; sourceTree = "<group>"; };
 		01C9DFDD2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsDriverUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		01D537F92A7AD093000CC221 /* OrderStickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStickerView.swift; sourceTree = "<group>"; };
+		01D537FB2A7AD401000CC221 /* AcceptOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptOrderView.swift; sourceTree = "<group>"; };
 		01FFEA4F2A09735800C622CC /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSwiftUIView.swift; sourceTree = "<group>"; };
 		EC14E818298B07C900A6540C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -529,6 +533,8 @@
 				014834A82A7827900018C322 /* IdleViewController.swift */,
 				010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */,
 				0124CAD72A785252002B9BC4 /* NavigateView.swift */,
+				01D537F92A7AD093000CC221 /* OrderStickerView.swift */,
+				01D537FB2A7AD401000CC221 /* AcceptOrderView.swift */,
 				014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */,
 				01C9DFC32A0AF16D001DC47D /* Assets.xcassets */,
 				01C9DFC52A0AF16D001DC47D /* LaunchScreen.storyboard */,
@@ -1282,9 +1288,11 @@
 			files = (
 				0124CAD62A78432A002B9BC4 /* WelcomeLabelView.swift in Sources */,
 				014834A22A7823D90018C322 /* LoginViewController.swift in Sources */,
+				01D537FC2A7AD401000CC221 /* AcceptOrderView.swift in Sources */,
 				01C9DFBB2A0AF16B001DC47D /* AppDelegate.swift in Sources */,
 				014834A92A7827900018C322 /* IdleViewController.swift in Sources */,
 				010D5D8C2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift in Sources */,
+				01D537FA2A7AD093000CC221 /* OrderStickerView.swift in Sources */,
 				0124CAD82A785252002B9BC4 /* NavigateView.swift in Sources */,
 				014834AF2A7840840018C322 /* CustomInOutTransitinableController.swift in Sources */,
 				01C9DFBD2A0AF16B001DC47D /* SceneDelegate.swift in Sources */,

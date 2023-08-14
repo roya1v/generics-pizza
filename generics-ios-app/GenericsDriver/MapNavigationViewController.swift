@@ -16,11 +16,41 @@ final class MapNavigationViewController: UIViewController {
         return view
     }()
 
+    // Temporary mock
+    private var qrView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .purple
+        return view
+    }()
+
     private var sheetView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+
+    // Almost ready views, might get moved
+
+    private var almostReadyLabel: UILabel = {
+        let view = UILabel()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    private var orderStickerView: OrderStickerView = {
+        let view = OrderStickerView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    private var backButton: UIButton = {
+        let view = UIButton(configuration: .plain())
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    // And everything else
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +58,12 @@ final class MapNavigationViewController: UIViewController {
         setupView()
     }
 
-    private lazy var sheetConstraint = view.bottomAnchor.constraint(equalTo: sheetView.topAnchor)
+    private lazy var sheetHiddenConstraint = view.bottomAnchor.constraint(equalTo: sheetView.topAnchor)
+    private lazy var sheetShownConstraint = view.bottomAnchor.constraint(equalTo: sheetView.bottomAnchor)
+    private lazy var sheetFullscreenConstraint = view.topAnchor.constraint(equalTo: sheetView.topAnchor)
     private lazy var mapConstraint = mapView.topAnchor.constraint(equalTo: view.bottomAnchor)
+    private lazy var qrShownConstraint = qrView.topAnchor.constraint(equalTo: view.topAnchor)
+    private lazy var qrHiddenConstraint = qrView.heightAnchor.constraint(equalToConstant: 0.0)
 
     private func setupView() {
         view.addSubview(mapView)
@@ -41,6 +75,41 @@ final class MapNavigationViewController: UIViewController {
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
+        setAcceptOrderView()
+        sheetView.backgroundColor = .systemBackground
+
+        view.addSubview(sheetView)
+        NSLayoutConstraint.activate([
+            view.leadingAnchor.constraint(equalTo: sheetView.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: sheetView.trailingAnchor),
+            sheetHiddenConstraint,
+        ])
+    }
+
+    private func showSheet(completion: (() -> Void)?) {
+        sheetHiddenConstraint.isActive = false
+        sheetFullscreenConstraint.isActive = false
+        sheetShownConstraint.isActive = true
+        UIView.animate(withDuration: transitionInDuration, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            completion?()
+        }
+    }
+
+    private func hideSheet(completion: (() -> Void)?) {
+        sheetShownConstraint.isActive = false
+        sheetFullscreenConstraint.isActive = false
+        sheetHiddenConstraint.isActive = true
+        UIView.animate(withDuration: transitionInDuration, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            completion?()
+        }
+    }
+
+    private func setNavigateToPickUpView() {
+        sheetView.subviews.forEach { $0.removeFromSuperview() }
         let navigateTo = NavigateView()
         navigateTo.translatesAutoresizingMaskIntoConstraints = false
         sheetView.addSubview(navigateTo)
@@ -50,14 +119,154 @@ final class MapNavigationViewController: UIViewController {
             navigateTo.topAnchor.constraint(equalTo: sheetView.topAnchor),
             navigateTo.bottomAnchor.constraint(equalTo: sheetView.safeAreaLayoutGuide.bottomAnchor),
         ])
-        sheetView.backgroundColor = .systemBackground
 
-        view.addSubview(sheetView)
+        navigateTo.actionButton.addAction(.init(handler: { _ in
+            self.hideSheet {
+                self.setAlmostReadyView()
+            }
+        }), for: .touchUpInside)
+    }
+
+    private func setAcceptOrderView() {
+        sheetView.subviews.forEach { $0.removeFromSuperview() }
+        let acceptOrder = AcceptOrderView()
+        acceptOrder.translatesAutoresizingMaskIntoConstraints = false
+        sheetView.addSubview(acceptOrder)
         NSLayoutConstraint.activate([
-            view.leadingAnchor.constraint(equalTo: sheetView.leadingAnchor),
-            view.trailingAnchor.constraint(equalTo: sheetView.trailingAnchor),
-            sheetConstraint,
+            acceptOrder.leadingAnchor.constraint(equalTo: sheetView.leadingAnchor),
+            acceptOrder.trailingAnchor.constraint(equalTo: sheetView.trailingAnchor),
+            acceptOrder.topAnchor.constraint(equalTo: sheetView.topAnchor),
+            acceptOrder.bottomAnchor.constraint(equalTo: sheetView.safeAreaLayoutGuide.bottomAnchor),
         ])
+
+        acceptOrder.actionButton.addAction(.init(handler: { _ in
+            self.hideSheet {
+                self.setNavigateToPickUpView()
+                self.view.layoutIfNeeded()
+                self.showSheet(completion: nil)
+            }
+        }), for: .touchUpInside)
+
+        acceptOrder.declineButton.addAction(.init(handler: { _ in
+            self.navigationController?.popViewController(animated: true)
+        }), for: .touchUpInside)
+    }
+
+    private func setAlmostReadyView() {
+        sheetView.subviews.forEach { $0.removeFromSuperview() }
+
+        orderStickerView.nameLabel.text = "Peperoni pizze"
+        orderStickerView.orderNumberLabel.text = "Order #1234567890"
+
+        sheetView.addSubview(orderStickerView)
+        sheetView.addSubview(almostReadyLabel)
+        sheetView.addSubview(backButton)
+
+        almostReadyLabel.text = "Almost ready! 5 mins left..."
+        backButton.setTitle("Back", for: .normal)
+
+        backButton.addAction(.init(handler: { _ in
+            self.hideSheet {
+                self.setNavigateToPickUpView()
+                self.view.layoutIfNeeded()
+                self.showSheet(completion: nil)
+            }
+        }), for: .touchUpInside)
+
+        NSLayoutConstraint.activate([
+            orderStickerView.centerXAnchor.constraint(equalTo: sheetView.centerXAnchor),
+            orderStickerView.centerYAnchor.constraint(equalTo: sheetView.centerYAnchor),
+            almostReadyLabel.centerXAnchor.constraint(equalTo: sheetView.centerXAnchor),
+            almostReadyLabel.bottomAnchor.constraint(equalTo: orderStickerView.topAnchor, constant: -.big),
+            orderStickerView.topAnchor.constraint(greaterThanOrEqualTo: sheetView.topAnchor),
+            orderStickerView.bottomAnchor.constraint(lessThanOrEqualTo: sheetView.safeAreaLayoutGuide.bottomAnchor),
+            backButton.centerXAnchor.constraint(equalTo: sheetView.centerXAnchor),
+            backButton.bottomAnchor.constraint(equalTo: sheetView.safeAreaLayoutGuide.bottomAnchor)
+        ])
+
+        view.layoutIfNeeded()
+        sheetHiddenConstraint.isActive = false
+        sheetShownConstraint.isActive = true
+        sheetFullscreenConstraint.isActive = true
+        UIView.animate(withDuration: transitionInDuration, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            //completion?()
+        }
+
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(trigger))
+        gestureRecognizer.addTarget(self, action: #selector(trigger))
+
+        orderStickerView.addGestureRecognizer(gestureRecognizer)
+    }
+
+    @objc func trigger() {
+        showQrView()
+    }
+
+    private func showQrView() {
+        view.insertSubview(qrView, aboveSubview: mapView)
+        NSLayoutConstraint.activate([
+            qrView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            qrView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            qrShownConstraint,
+            qrView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        self.view.layoutIfNeeded()
+        sheetHiddenConstraint.isActive = false
+        sheetFullscreenConstraint.isActive = false
+        sheetShownConstraint.isActive = true
+        UIView.animate(withDuration: transitionInDuration, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0) {
+            self.view.layoutIfNeeded()
+            self.backButton.layer.opacity = 0.0
+            self.almostReadyLabel.layer.opacity = 0.0
+        } completion: { _ in
+            self.backButton.removeFromSuperview()
+            self.almostReadyLabel.removeFromSuperview()
+        }
+
+
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(trigger))
+        gestureRecognizer.addTarget(self, action: #selector(trigger2))
+
+        qrView.addGestureRecognizer(gestureRecognizer)
+
+    }
+
+
+    @objc func trigger2() {
+        sheetShownConstraint.isActive = false
+        sheetFullscreenConstraint.isActive = false
+        sheetHiddenConstraint.isActive = true
+        qrShownConstraint.isActive = false
+        qrHiddenConstraint.isActive = true
+        UIView.animate(withDuration: transitionInDuration, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            self.setNavigateToDeliveryView()
+            self.qrView.removeFromSuperview()
+            self.view.layoutIfNeeded()
+            self.showSheet {
+
+            }
+        }
+    }
+
+    private func setNavigateToDeliveryView() {
+        sheetView.subviews.forEach { $0.removeFromSuperview() }
+        let navigateTo = NavigateView()
+        navigateTo.translatesAutoresizingMaskIntoConstraints = false
+        sheetView.addSubview(navigateTo)
+        NSLayoutConstraint.activate([
+            navigateTo.leadingAnchor.constraint(equalTo: sheetView.leadingAnchor),
+            navigateTo.trailingAnchor.constraint(equalTo: sheetView.trailingAnchor),
+            navigateTo.topAnchor.constraint(equalTo: sheetView.topAnchor),
+            navigateTo.bottomAnchor.constraint(equalTo: sheetView.safeAreaLayoutGuide.bottomAnchor),
+        ])
+
+        navigateTo.actionButton.addAction(.init(handler: { _ in
+            self.navigationController?.popViewController(animated: true)
+        }), for: .touchUpInside)
     }
 }
 
@@ -67,8 +276,8 @@ extension MapNavigationViewController: CustomInTransitinable {
     }
 
     func transitionIn(completion: (() -> Void)?) {
-        sheetConstraint.isActive = false
-        view.bottomAnchor.constraint(equalTo: sheetView.bottomAnchor).isActive = true
+        sheetHiddenConstraint.isActive = false
+        sheetShownConstraint.isActive = true
 
         mapConstraint.isActive = false
         mapView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -76,6 +285,18 @@ extension MapNavigationViewController: CustomInTransitinable {
         UIView.animate(withDuration: transitionInDuration, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0) {
             self.view.layoutIfNeeded()
         } completion: { _ in
+            completion?()
+        }
+    }
+}
+
+extension MapNavigationViewController: CustomOutTransitinable {
+    var transitionOutDuration: TimeInterval {
+        0.5
+    }
+
+    func transitionOut(completion: (() -> Void)?) {
+        hideSheet {
             completion?()
         }
     }
