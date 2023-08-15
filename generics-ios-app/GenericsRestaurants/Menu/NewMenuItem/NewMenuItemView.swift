@@ -26,7 +26,7 @@ struct NewMenuItemView: View {
                     TextField("Title", text: $title)
                     TextField("Description", text: $description)
                     TextField("Price", text: $price)
-                    if model.isLoading {
+                    if model.state == .loading {
                         ProgressView()
                     } else {
                         Button("Create") {
@@ -46,7 +46,6 @@ struct NewMenuItemView: View {
         VStack {
             Text("Error occirred!")
                 .font(.title)
-            Text(model.occurredError!.localizedDescription)
         }
     }
 }
