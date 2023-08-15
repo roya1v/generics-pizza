@@ -18,8 +18,8 @@ let package = Package(
         .package(url: "https://github.com/soto-project/soto.git", from: "6.0.0")
     ],
     targets: [
-        .target(
-            name: "App",
+        .executableTarget(
+            name: "Server",
             dependencies: [
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
@@ -37,9 +37,8 @@ let package = Package(
             name: "SharedModels",
             dependencies: []
         ),
-        .executableTarget(name: "Run", dependencies: [.target(name: "App")]),
         .testTarget(name: "AppTests", dependencies: [
-            .target(name: "App"),
+            //.target(name: "App"),
             .product(name: "XCTVapor", package: "vapor"),
         ])
     ]
