@@ -13,10 +13,11 @@ import GenericsUI
 @MainActor
 final class MenuViewModel: ObservableObject {
 
-    @Injected(Container.menuRepository) private var repository
-
-    @Published private(set) var items = [MenuItem]()
+    @Published private(set) var items: [MenuItem] = []
     @Published private(set) var state: ViewState = .ready
+
+    @Injected(Container.menuRepository)
+    private var repository
 
     func fetch() {
         if items.isEmpty {

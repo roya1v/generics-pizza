@@ -9,18 +9,23 @@ import Foundation
 import GenericsModels
 import Factory
 import AppKit
+import GenericsUI
 
 @MainActor
 final class NewMenuItemViewModel: ObservableObject {
 
-    @Injected(Container.menuRepository) private var menuRepository
-    @Injected(Container.authenticationRepository) private var authRepository
-
+    @Published private(set) var state: ViewState = .ready
     @Published var isLoading = false
     @Published var occurredError: Error?
 
+    @Injected(Container.menuRepository)
+    private var menuRepository
+
+    @Injected(Container.authenticationRepository)
+    private var authRepository
+
     func createMenuItem(title: String, description: String, price: String) {
-        isLoading = true
+        state = .loading
 
         menuRepository.authDelegate = authRepository
         let item = MenuItem(id: nil, title: title, description: description, price: 0)
@@ -29,11 +34,11 @@ final class NewMenuItemViewModel: ObservableObject {
                 try await menuRepository.create(item: item)
             } catch {
                 await MainActor.run {
-                    occurredError = error
+                    state = .error
                 }
             }
             await MainActor.run {
-                isLoading = false
+                state = .ready
                 // TODO: Find a better way
                 NSApplication.shared.keyWindow?.close()
             }

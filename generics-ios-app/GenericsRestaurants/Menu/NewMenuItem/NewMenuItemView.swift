@@ -16,9 +16,10 @@ struct NewMenuItemView: View {
     
     var body: some View {
         VStack {
-            if model.occurredError != nil {
+            switch model.state {
+            case .error:
                 errorView
-            } else {
+            default:
                 Text("New Item")
                     .font(.title)
                 Form {

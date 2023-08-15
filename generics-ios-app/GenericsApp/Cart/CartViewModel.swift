@@ -19,11 +19,13 @@ final class CartViewModel: ObservableObject {
         case error
     }
 
-    @Published private(set) var items = [MenuItem]()
-    @Published private(set) var subtotal = [SubtotalModel]()
+    @Published private(set) var items: [MenuItem] = []
+    @Published private(set) var subtotal: [SubtotalModel] = []
     @Published private(set) var state: State = .readyForOrder
 
-    @Injected(Container.orderRepository) private var repository
+    @Injected(Container.orderRepository)
+    private var repository
+
     private var cancellable = Set<AnyCancellable>()
 
     func fetch() {

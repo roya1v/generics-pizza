@@ -9,9 +9,9 @@ import SwiftUI
 
 struct LoginView: View {
 
+    @StateObject var model = LoginViewModel()
     @State var email = ""
     @State var password = ""
-    @ObservedObject var model = LoginViewModel()
 
     var body: some View {
         VStack {
@@ -20,7 +20,7 @@ struct LoginView: View {
                 .scaledToFit()
             TextField("Email", text: $email)
             SecureField("Password", text: $password)
-            if model.isLoading {
+            if model.state == .loading {
                 ProgressView()
             } else {
                 Button {

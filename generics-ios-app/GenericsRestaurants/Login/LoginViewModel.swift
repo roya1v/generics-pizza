@@ -7,20 +7,22 @@
 
 import Foundation
 import Factory
+import GenericsUI
 
 @MainActor
 final class LoginViewModel: ObservableObject {
 
-    @Injected(Container.authenticationRepository) private var repository
+    @Published private(set) var state: ViewState = .ready
 
-    @Published var isLoading = false
+    @Injected(Container.authenticationRepository)
+    private var repository
 
     func login(email: String, password: String) {
-        isLoading = true
+        state = .loading
         Task {
             try! await repository.login(email: email, password: password)
             await MainActor.run {
-                isLoading = false
+                state = .ready
             }
         }
     }
