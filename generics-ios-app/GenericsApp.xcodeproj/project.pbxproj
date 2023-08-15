@@ -27,6 +27,7 @@
 		0124CAD42A7842C9002B9BC4 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
 		0124CAD62A78432A002B9BC4 /* WelcomeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0124CAD52A78432A002B9BC4 /* WelcomeLabelView.swift */; };
 		0124CAD82A785252002B9BC4 /* NavigateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0124CAD72A785252002B9BC4 /* NavigateView.swift */; };
+		0136C2772A8BB83300407EAE /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */; };
 		01389B3C2A4363F2009DE998 /* GenericsUI.docc in Sources */ = {isa = PBXBuildFile; fileRef = 01389B3B2A4363F2009DE998 /* GenericsUI.docc */; };
 		01389B422A4363F3009DE998 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
 		01389B492A4363F3009DE998 /* GenericsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01389B482A4363F3009DE998 /* GenericsUITests.swift */; };
@@ -87,7 +88,6 @@
 		ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */; };
 		ECA5E7F129BFC6F300D9E85F /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7F029BFC6F300D9E85F /* MenuView.swift */; };
 		ECA5E7F329BFC71800D9E85F /* NowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7F229BFC71800D9E85F /* NowView.swift */; };
-		ECA5E7FA29BFCC3200D9E85F /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */; };
 		ECA5E7FC29C0F14900D9E85F /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
 		ECA5E7FE29C0FBE200D9E85F /* NewMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7FD29C0FBE200D9E85F /* NewMenuItemView.swift */; };
 		ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8A299C2D7700F28299 /* GenericsRestaurantsApp.swift */; };
@@ -100,7 +100,6 @@
 		ECA92FB4299D640500F28299 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FB3299D640500F28299 /* LoginView.swift */; };
 		ECA92FB7299D64E600F28299 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FB6299D64E600F28299 /* LoginViewModel.swift */; };
 		ECA92FBA299D652D00F28299 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = ECA92FB9299D652D00F28299 /* Factory */; };
-		ECA92FBC299D657000F28299 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */; };
 		ECCE5BB029D4B09D009AB280 /* NowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCE5BAF29D4B09D009AB280 /* NowViewModel.swift */; };
 		ECD079F129E45CCD00914593 /* Container+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD079F029E45CCD00914593 /* Container+Repositories.swift */; };
 		ECD079FD29E7511800914593 /* Container+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD079FC29E7511800914593 /* Container+Repositories.swift */; };
@@ -526,6 +525,7 @@
 		0122FD752A8BA65700D015C5 /* GenericsCore */ = {
 			isa = PBXGroup;
 			children = (
+				ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */,
 				0122FD9D2A8BA86E00D015C5 /* MenuRepository.swift */,
 				0122FD9E2A8BA86E00D015C5 /* OrderRepository.swift */,
 				0122FD9F2A8BA86E00D015C5 /* OrderRestaurantRepository.swift */,
@@ -759,7 +759,6 @@
 			children = (
 				ECA92FB3299D640500F28299 /* LoginView.swift */,
 				ECA92FB6299D64E600F28299 /* LoginViewModel.swift */,
-				ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1401,6 +1400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0122FDA22A8BA86E00D015C5 /* OrderRestaurantRepository.swift in Sources */,
+				0136C2772A8BB83300407EAE /* AuthenticationRepository.swift in Sources */,
 				0122FDA12A8BA86E00D015C5 /* OrderRepository.swift in Sources */,
 				0122FDA02A8BA86E00D015C5 /* MenuRepository.swift in Sources */,
 			);
@@ -1505,7 +1505,6 @@
 				ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */,
 				0148E8292A6D3C750011ACE4 /* BigImageCardView.swift in Sources */,
 				ECCE5BB029D4B09D009AB280 /* NowViewModel.swift in Sources */,
-				ECA92FBC299D657000F28299 /* AuthenticationRepository.swift in Sources */,
 				ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */,
 				ECA5E7F329BFC71800D9E85F /* NowView.swift in Sources */,
 			);
@@ -1541,7 +1540,6 @@
 				01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */,
 				EC14E81B298B086E00A6540C /* MenuView.swift in Sources */,
 				0148E8222A6D2B160011ACE4 /* BigImageCardView.swift in Sources */,
-				ECA5E7FA29BFCC3200D9E85F /* AuthenticationRepository.swift in Sources */,
 				ECD845AB298AE51D0036454C /* ContentView.swift in Sources */,
 				0148E8202A6D2A010011ACE4 /* CtaCardView.swift in Sources */,
 				010A85E82A11282100354E7D /* AddressViewModel.swift in Sources */,

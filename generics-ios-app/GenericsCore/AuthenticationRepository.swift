@@ -10,20 +10,20 @@ import Factory
 import Combine
 import SwiftlyHttp
 
-func buildAuthenticationRepository(url: String) -> AuthenticationRepository {
+public func buildAuthenticationRepository(url: String) -> AuthenticationRepository {
     AuthenticationRepositoryImpl(baseURL: url)
 }
 
-func mockAuthenticationRepository() -> AuthenticationRepository {
+public func mockAuthenticationRepository() -> AuthenticationRepository {
     AuthenticationRepositoryMck()
 }
 
-enum AuthenticationState {
+public enum AuthenticationState {
     case loggedIn
     case loggedOut
 }
 
-protocol AuthenticationRepository: AuthorizationDelegate {
+public protocol AuthenticationRepository: AuthorizationDelegate {
     var state: AnyPublisher<AuthenticationState, Never> { get }
     func login(email: String, password: String) async throws
     func reload()

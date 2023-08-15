@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import Factory
+import GenericsCore
 
 struct ContentView: View {
 
