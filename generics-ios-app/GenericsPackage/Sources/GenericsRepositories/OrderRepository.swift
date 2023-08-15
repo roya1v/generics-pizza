@@ -103,14 +103,26 @@ final class OrderRepositoryMck: OrderRepository {
         .init(id: .init(), title: "Super pepperoni", description: "Tomatoe souce, cheese and weird leaves", price: 100)
     ]
 
+    var addImplementation: ((MenuItem) -> Void)?
     func add(item: MenuItem) {
+        addImplementation?(item)
     }
 
+    var checkPriceImplementation: (() async throws -> [SubtotalModel])?
     func checkPrice() async throws -> [SubtotalModel] {
-        fatalError()
+        if let checkPriceImplementation {
+            return try await checkPriceImplementation()
+        } else {
+            fatalError()
+        }
     }
 
+    var placeOrderImplementation: (() async throws -> AnyPublisher<OrderMessage, Error>)?
     func placeOrder() async throws -> AnyPublisher<OrderMessage, Error> {
-        fatalError()
+        if let placeOrderImplementation {
+            return try await placeOrderImplementation()
+        } else {
+            fatalError()
+        }
     }
 }

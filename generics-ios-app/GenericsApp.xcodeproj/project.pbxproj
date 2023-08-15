@@ -10,6 +10,7 @@
 		010A85E82A11282100354E7D /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010A85E72A11282100354E7D /* AddressViewModel.swift */; };
 		010D5D8A2A6DB09E00903CD3 /* MapNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */; };
 		010D5D8C2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */; };
+		0122FD6E2A8B7A5400D015C5 /* CartViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122FD6D2A8B7A5400D015C5 /* CartViewModelTests.swift */; };
 		0124CAD32A784293002B9BC4 /* GenericsUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0124CAD42A7842C9002B9BC4 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
 		0124CAD62A78432A002B9BC4 /* WelcomeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0124CAD52A78432A002B9BC4 /* WelcomeLabelView.swift */; };
@@ -266,6 +267,7 @@
 		010A85E72A11282100354E7D /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
 		010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNavigationViewController.swift; sourceTree = "<group>"; };
 		010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPermissionViewController.swift; sourceTree = "<group>"; };
+		0122FD6D2A8B7A5400D015C5 /* CartViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModelTests.swift; sourceTree = "<group>"; };
 		0124CAD52A78432A002B9BC4 /* WelcomeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeLabelView.swift; sourceTree = "<group>"; };
 		0124CAD72A785252002B9BC4 /* NavigateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateView.swift; sourceTree = "<group>"; };
 		01389B382A4363F2009DE998 /* GenericsUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GenericsUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -761,6 +763,7 @@
 			isa = PBXGroup;
 			children = (
 				ECD845B9298AE51E0036454C /* GenericsAppTests.swift */,
+				0122FD6D2A8B7A5400D015C5 /* CartViewModelTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1388,6 +1391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0122FD6E2A8B7A5400D015C5 /* CartViewModelTests.swift in Sources */,
 				ECD845BA298AE51E0036454C /* GenericsAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
