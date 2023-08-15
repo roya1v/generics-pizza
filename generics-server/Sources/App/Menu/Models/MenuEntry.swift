@@ -7,7 +7,7 @@
 
 import Fluent
 import Vapor
-import GenericsModels
+import SharedModels
 
 final class MenuEntry: Model, Content {
     static var schema = "menu"

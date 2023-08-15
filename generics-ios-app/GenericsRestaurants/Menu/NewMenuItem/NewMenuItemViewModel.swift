@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import GenericsModels
+import SharedModels
 import Factory
 import AppKit
 import GenericsUI

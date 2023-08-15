@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Factory
-import GenericsRepositories
+import GenericsCore
 import GenericsUI
 
 struct CartView: View {

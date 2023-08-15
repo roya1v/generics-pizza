@@ -7,7 +7,7 @@
 
 import Fluent
 import Vapor
-import GenericsModels
+import SharedModels
 import PathKit
 
 struct MenuController: RouteCollection {

@@ -7,7 +7,7 @@
 
 import Foundation
 import Factory
-import GenericsModels
+import SharedModels
 import Combine
 
 final class NowViewModel: ObservableObject {

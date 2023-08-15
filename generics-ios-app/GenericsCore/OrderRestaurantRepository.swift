@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import GenericsModels
+import SharedModels
 import SwiftlyHttp
 
 public func buildOrderRestaurantRepository(url: String) -> OrderRestaurantRepository {

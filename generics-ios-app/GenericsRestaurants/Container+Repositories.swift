@@ -7,7 +7,7 @@
 
 import Foundation
 import Factory
-import GenericsRepositories
+import GenericsCore
 
 fileprivate let url = "http://localhost:8080"
 

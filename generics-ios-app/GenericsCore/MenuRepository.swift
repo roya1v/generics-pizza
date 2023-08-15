@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import GenericsModels
+import SharedModels
 import SwiftlyHttp
 
 public func buildMenuRepository(url: String) -> MenuRepository {
@@ -67,6 +67,6 @@ final class MenuRepositoryMck: MenuRepository {
         ]
     }
 
-    func create(item: GenericsModels.MenuItem) async throws {
+    func create(item: MenuItem) async throws {
     }
 }

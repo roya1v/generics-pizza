@@ -316,15 +316,6 @@
       }
     },
     {
-      "identity" : "swiftlyhttp",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/roya1v/SwiftlyHttp",
-      "state" : {
-        "branch" : "main",
-        "revision" : "4899dd4dbd6e528863c8fc169912d67ca9276c2d"
-      }
-    },
-    {
       "identity" : "swiftytexttable",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scottrhoyt/SwiftyTextTable.git",

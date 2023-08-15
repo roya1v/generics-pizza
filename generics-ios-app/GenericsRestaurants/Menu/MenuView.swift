@@ -7,8 +7,8 @@
 
 import SwiftUI
 import Factory
-import GenericsRepositories
-import GenericsModels
+import GenericsCore
+import SharedModels
 
 struct MenuView: View {
     @StateObject var model = MenuViewModel()

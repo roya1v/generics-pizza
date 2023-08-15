@@ -8,7 +8,7 @@
 import SwiftUI
 import Factory
 import GenericsUI
-import GenericsRepositories
+import GenericsCore
 
 struct MenuItemView: View {
     let name: String

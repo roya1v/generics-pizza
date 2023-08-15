@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import GenericsModels
+import SharedModels
 
 extension MenuItem {
     func formattedPrice() -> String {

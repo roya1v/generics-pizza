@@ -7,7 +7,7 @@
 
 import Fluent
 import Vapor
-import GenericsModels
+import SharedModels
 
 final class OrderItemEntry: Model, Content {
     static var schema = "order_items"

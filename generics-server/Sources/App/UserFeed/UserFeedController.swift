@@ -6,7 +6,7 @@
 //
 
 import Vapor
-import GenericsModels
+import SharedModels
 
 struct UserFeedController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {

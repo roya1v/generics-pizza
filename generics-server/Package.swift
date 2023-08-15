@@ -6,11 +6,13 @@ let package = Package(
     platforms: [
         .macOS(.v13)
     ],
+    products: [
+        .library(name: "SharedModels", targets: ["SharedModels"])
+    ],
     dependencies: [
         .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
         .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
-        .package(path: "../generics-ios-app/GenericsPackage"),
         .package(url: "https://github.com/kylef/PathKit", from: "1.0.1"),
         .package(url: "https://github.com/realm/SwiftLint", .upToNextMajor(from: "0.52.4")),
         .package(url: "https://github.com/soto-project/soto.git", from: "6.0.0")
@@ -22,17 +24,18 @@ let package = Package(
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
                 .product(name: "Vapor", package: "vapor"),
-                .product(name: "GenericsModels", package: "GenericsPackage"),
+                .target(name: "SharedModels"),
                 .product(name: "PathKit", package: "PathKit"),
                 .product(name: "SotoS3", package: "soto")
             ],
             swiftSettings: [
-                // Enable better optimizations when building in Release configuration. Despite the use of
-                // the `.unsafeFlags` construct required by SwiftPM, this flag is recommended for Release
-                // builds. See <https://github.com/swift-server/guides/blob/main/docs/building.md#building-for-production> for details.
                 .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release))
             ],
             plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
+        ),
+        .target(
+            name: "SharedModels",
+            dependencies: []
         ),
         .executableTarget(name: "Run", dependencies: [.target(name: "App")]),
         .testTarget(name: "AppTests", dependencies: [

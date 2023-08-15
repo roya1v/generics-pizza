@@ -7,8 +7,8 @@
 
 import SwiftUI
 import Factory
-import GenericsModels
-import GenericsRepositories
+import SharedModels
+import GenericsCore
 
 struct MenuView: View {
 

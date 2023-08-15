@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
-import GenericsModels
-import GenericsRepositories
+import GenericsCore
 import Factory
+import SharedModels
 
 struct NowView: View {
 
