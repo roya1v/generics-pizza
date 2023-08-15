@@ -12,7 +12,8 @@ let package = Package(
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
         .package(path: "../generics-ios-app/GenericsPackage"),
         .package(url: "https://github.com/kylef/PathKit", from: "1.0.1"),
-        .package(url: "https://github.com/realm/SwiftLint", .upToNextMajor(from: "0.52.4"))
+        .package(url: "https://github.com/realm/SwiftLint", .upToNextMajor(from: "0.52.4")),
+        .package(url: "https://github.com/soto-project/soto.git", from: "6.0.0")
     ],
     targets: [
         .target(
@@ -22,7 +23,8 @@ let package = Package(
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
                 .product(name: "Vapor", package: "vapor"),
                 .product(name: "GenericsModels", package: "GenericsPackage"),
-                .product(name: "PathKit", package: "PathKit")
+                .product(name: "PathKit", package: "PathKit"),
+                .product(name: "SotoS3", package: "soto")
             ],
             swiftSettings: [
                 // Enable better optimizations when building in Release configuration. Despite the use of
