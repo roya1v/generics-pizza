@@ -60,7 +60,7 @@ final class OrderRepositoryImpl: OrderRepository {
     func placeOrder() async throws -> AnyPublisher<OrderMessage, Error> {
         let order = try await makeOrderRequest()
 
-        socket = SwiftlyHttp(baseURL: "ws://localhost:8080")!
+        socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
             .add(path: "order")
             .add(path: "activity")
             .add(path: order.id!.uuidString)

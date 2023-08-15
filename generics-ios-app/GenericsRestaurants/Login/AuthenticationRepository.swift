@@ -83,7 +83,7 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
     }
 
     func getAuthorization() throws -> SwiftlyHttp.Authorization {
-        guard let token = UserDefaults.standard.string(forKey: "auth-token") else {
+        guard let token = UserDefaults.standard.string(forKey: "auth-token3") else {
             fatalError()
         }
 

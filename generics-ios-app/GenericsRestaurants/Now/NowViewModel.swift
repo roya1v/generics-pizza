@@ -31,8 +31,9 @@ final class NowViewModel: ObservableObject {
             do {
                 try await repository
                     .getFeed()
+                    .assertNoFailure()
                     .receive(on: DispatchQueue.main)
-                    .sink(receiveValue: { message in
+                    .sink { message in
                         self.state = .ready
                         switch message {
                         case .newOrder(let order):
@@ -47,7 +48,7 @@ final class NowViewModel: ObservableObject {
                         case .accepted:
                             print("wow")
                         }
-                    })
+                    }
                     .store(in: &cancellable)
             } catch {
                 state = .error

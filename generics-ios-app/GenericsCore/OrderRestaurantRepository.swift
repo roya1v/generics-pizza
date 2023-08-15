@@ -19,7 +19,7 @@ public func mockOrderRestaurantRepository() -> OrderRestaurantRepository {
 }
 
 public protocol OrderRestaurantRepository {
-    func getFeed() async throws -> AnyPublisher<OrderMessage, Never>
+    func getFeed() async throws -> AnyPublisher<OrderMessage, Error>
     func send(message: OrderMessage) async throws
     var authDelegate: AuthorizationDelegate? { get set}
 }
@@ -28,7 +28,7 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
 
     var authDelegate: AuthorizationDelegate?
 
-    private var socket: URLSessionWebSocketTask?
+    private var socket: SwiftlyWebSocketConnection?
     private let feed = PassthroughSubject<OrderMessage, Never>()
 
     private let baseURL: String
@@ -39,62 +39,48 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
 
     // MARK: - OrderRestaurantRepository
 
-    func getFeed() async throws -> AnyPublisher<OrderMessage, Never> {
+    func getFeed() async throws -> AnyPublisher<OrderMessage, Error> {
         let currentOrders = try await getCurrentOrders()
         currentOrders.forEach { order in
             feed.send(.newOrder(order: order))
         }
 
-        var req = URLRequest(url: URL(string: "ws://localhost:8080/order/activity/")!)
+        socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
+            .add(path: "order")
+            .add(path: "activity")
+            .authorizationDelegate(authDelegate!)
+            .websocket()
 
-        switch try authDelegate?.getAuthorization() {
-        case .bearer(let token):
-            req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        default:
-            fatalError()
-        }
-
-        socket = URLSession.shared.webSocketTask(with: req)
-
-        receive()
-        socket?.resume()
-        return feed.eraseToAnyPublisher()
+        return socket!
+            .messagePublisher
+            .compactMap({
+                if case let .string(message) = $0 {
+                    return message
+                } else {
+                    return nil
+                }
+            })
+            .tryMap(OrderMessage.decode)
+            .prepend(currentOrders.map { .newOrder(order: $0) })
+            .eraseToAnyPublisher()
     }
 
     func send(message: OrderMessage) async throws {
-        try await socket?.send(.string(message.encode() ?? ""))
-    }
-
-    private func receive() {
-        socket?.receive(completionHandler: { result in
-            print(result)
-            switch result {
-            case .success(let success2):
-                switch success2 {
-                case .string(let data):
-                    let message = try! OrderMessage.decode(from: data)
-                    self.feed.send(message)
-                default:
-                    return
-                }
-            case .failure(_):
-                return
-            }
-            self.receive()
-        })
+        try await socket?.send(message: .string(message.encode() ?? ""))
     }
 
     private func getCurrentOrders() async throws -> [OrderModel] {
-        let response = try await SwiftlyHttp(baseURL: baseURL)!
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+
+        return try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "order")
             .add(path: "current")
             .method(.get)
             .authorizationDelegate(authDelegate!)
+            .decode(to: [OrderModel].self)
+            .set(jsonDecoder: decoder)
             .perform()
-
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        return try decoder.decode([OrderModel].self, from: response.0)
     }
 }
 
@@ -102,8 +88,8 @@ final class OrderRestaurantRepositoryMck: OrderRestaurantRepository {
 
     var authDelegate: AuthorizationDelegate?
 
-    func getFeed() async throws -> AnyPublisher<OrderMessage, Never> {
-        return Just<OrderMessage>(.newOrder(order: .init(id: UUID(), createdAt: .now, items: [], state: .new))).eraseToAnyPublisher()
+    func getFeed() async throws -> AnyPublisher<OrderMessage, Error> {
+        return PassthroughSubject().eraseToAnyPublisher()
     }
 
     func send(message: OrderMessage) async throws {
