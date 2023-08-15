@@ -9,9 +9,11 @@ import Foundation
 import Factory
 import SharedModels
 import Combine
+import GenericsUI
 
 final class NowViewModel: ObservableObject {
 
+    @Published private(set) var state: ViewState = .ready
     @Published private(set) var orders: [OrderModel] = []
 
     @Injected(Container.orderRestaurantRepository)
@@ -23,34 +25,39 @@ final class NowViewModel: ObservableObject {
     private var cancellable = Set<AnyCancellable>()
 
     func fetch() {
+        state = .loading
         repository.authDelegate = authRepository
         Task {
-            try! await repository
-                .getFeed()
-                .receive(on: DispatchQueue.main)
-                .sink(receiveValue: { message in
-                    print(message)
-                    switch message {
-                    case .newOrder(let order):
-                        self.orders.insert(order, at: 0)
-                    case .update(let id, let state):
-                        let order = self.orders.first(where: { $0.id == id })
-                        self.orders.removeAll(where: { $0.id == id })
-                        if state != .finished {
-                            self.orders.append(.init(id: order?.id, createdAt: order?.createdAt, items: order?.items ?? [], state: state))
-                            self.orders.sort { $0.createdAt!.timeIntervalSince1970 > $1.createdAt!.timeIntervalSince1970 }
+            do {
+                try await repository
+                    .getFeed()
+                    .receive(on: DispatchQueue.main)
+                    .sink(receiveValue: { message in
+                        self.state = .ready
+                        switch message {
+                        case .newOrder(let order):
+                            self.orders.insert(order, at: 0)
+                        case .update(let id, let state):
+                            let order = self.orders.first(where: { $0.id == id })
+                            self.orders.removeAll(where: { $0.id == id })
+                            if state != .finished {
+                                self.orders.append(.init(id: order?.id, createdAt: order?.createdAt, items: order?.items ?? [], state: state))
+                                self.orders.sort { $0.createdAt!.timeIntervalSince1970 > $1.createdAt!.timeIntervalSince1970 }
+                            }
+                        case .accepted:
+                            print("wow")
                         }
-                    case .accepted:
-                        print("wow")
-                    }
-                })
-                .store(in: &cancellable)
+                    })
+                    .store(in: &cancellable)
+            } catch {
+                state = .error
+            }
         }
     }
 
     func update(_ order: OrderModel, to newState: OrderState) {
         Task {
-            try! await repository.send(message: .update(id: order.id!, state: newState))
+            try? await repository.send(message: .update(id: order.id!, state: newState))
         }
     }
 }

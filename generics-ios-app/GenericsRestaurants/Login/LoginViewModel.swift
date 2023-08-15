@@ -20,8 +20,12 @@ final class LoginViewModel: ObservableObject {
     func login(email: String, password: String) {
         state = .loading
         Task {
-            try! await repository.login(email: email, password: password)
-            await MainActor.run {
+            do {
+                try await repository.login(email: email, password: password)
+                await MainActor.run {
+                    state = .ready
+                }
+            } catch {
                 state = .ready
             }
         }
