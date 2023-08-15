@@ -12,10 +12,13 @@ import Combine
 
 final class NowViewModel: ObservableObject {
 
-    @Injected(Container.orderRestaurantRepository) var repository
-    @Injected(Container.authenticationRepository) private var authRepository
+    @Published private(set) var orders: [OrderModel] = []
 
-    @Published var orders = [OrderModel]()
+    @Injected(Container.orderRestaurantRepository)
+    private var repository
+
+    @Injected(Container.authenticationRepository)
+    private var authRepository
 
     private var cancellable = Set<AnyCancellable>()
 

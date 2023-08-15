@@ -12,7 +12,7 @@ import SharedModels
 
 struct NowView: View {
 
-    @ObservedObject var model = NowViewModel()
+    @StateObject var model = NowViewModel()
 
     var body: some View {
         List {

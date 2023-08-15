@@ -15,8 +15,6 @@ import GenericsUI
 final class NewMenuItemViewModel: ObservableObject {
 
     @Published private(set) var state: ViewState = .ready
-    @Published var isLoading = false
-    @Published var occurredError: Error?
 
     @Injected(Container.menuRepository)
     private var menuRepository
