@@ -37,6 +37,8 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
         self.baseURL = baseURL
     }
 
+    // MARK: - OrderRestaurantRepository
+
     func getFeed() async throws -> AnyPublisher<OrderMessage, Never> {
         let currentOrders = try await getCurrentOrders()
         currentOrders.forEach { order in

@@ -24,10 +24,7 @@ public protocol MenuRepository {
 }
 
 final class MenuRepositoryImp: MenuRepository {
-
     private let baseURL: String
-
-    public var authDelegate: AuthorizationDelegate?
 
     init(baseURL: String) {
         self.baseURL = baseURL
@@ -50,6 +47,8 @@ final class MenuRepositoryImp: MenuRepository {
             .decode(to: MenuItem.self)
             .perform()
     }
+
+    public var authDelegate: AuthorizationDelegate?
 
     private func getRequest() -> SwiftlyHttp {
         SwiftlyHttp(baseURL: baseURL)!

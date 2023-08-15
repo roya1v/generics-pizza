@@ -19,16 +19,13 @@ public func mockOrderRepository() -> OrderRepository {
 }
 
 public protocol OrderRepository {
+    var items: [MenuItem] { get }
     func add(item: MenuItem)
     func checkPrice() async throws -> [SubtotalModel]
     func placeOrder() async throws -> AnyPublisher<OrderMessage, Error>
-    var items: [MenuItem] { get }
 }
 
 final class OrderRepositoryImpl: OrderRepository {
-
-    var items = [MenuItem]()
-
     private var socket: SwiftlyWebSocketConnection?
     private let messages = PassthroughSubject<OrderMessage, Never>()
     private let baseURL: String
@@ -41,6 +38,8 @@ final class OrderRepositoryImpl: OrderRepository {
     }
 
     // MARK: - OrderRepository
+
+    var items = [MenuItem]()
 
     func add(item: MenuItem) {
         items.append(item)
@@ -97,6 +96,13 @@ final class OrderRepositoryImpl: OrderRepository {
 }
 
 final class OrderRepositoryMck: OrderRepository {
+
+    var items: [MenuItem] = [
+        .init(id: .init(), title: "Margarita simplita", description: "Tomatoe souce, cheese and weird leaves", price: 100),
+        .init(id: .init(), title: "Pepperoni Meroni", description: "Tomatoe souce, cheese and weird leaves", price: 100),
+        .init(id: .init(), title: "Super pepperoni", description: "Tomatoe souce, cheese and weird leaves", price: 100)
+    ]
+
     func add(item: MenuItem) {
     }
 
@@ -107,10 +113,4 @@ final class OrderRepositoryMck: OrderRepository {
     func placeOrder() async throws -> AnyPublisher<OrderMessage, Error> {
         fatalError()
     }
-
-    var items: [MenuItem] = [
-        .init(id: .init(), title: "Margarita simplita", description: "Tomatoe souce, cheese and weird leaves", price: 100),
-        .init(id: .init(), title: "Pepperoni Meroni", description: "Tomatoe souce, cheese and weird leaves", price: 100),
-        .init(id: .init(), title: "Super pepperoni", description: "Tomatoe souce, cheese and weird leaves", price: 100)
-    ]
 }
