@@ -10,7 +10,7 @@ import Vapor
 import GenericsModels
 import PathKit
 
-class MenuController: RouteCollection {
+struct MenuController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         let menu = routes.grouped("menu")
         menu.get(use: index)
@@ -45,6 +45,7 @@ class MenuController: RouteCollection {
         return resp
     }
 
+    /// Set image for menu item
     func setImage(req: Request) async throws -> HTTPResponseStatus {
         try req.auth.require(UserEntry.self)
         guard let menuItem = try await MenuEntry.find(req.parameters.get("itemID"), on: req.db),

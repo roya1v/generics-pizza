@@ -21,7 +21,9 @@ extension Application {
             return s3
         }
         set {
-            self.storage[S3Key.self] = newValue
+            self.storage.set(S3Key.self, to: newValue) {
+                try $0.client.syncShutdown()
+            }
         }
     }
 }
