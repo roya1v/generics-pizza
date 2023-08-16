@@ -74,6 +74,11 @@
 		01C9DFDE2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFDD2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift */; };
 		01D537FA2A7AD093000CC221 /* OrderStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D537F92A7AD093000CC221 /* OrderStickerView.swift */; };
 		01D537FC2A7AD401000CC221 /* AcceptOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D537FB2A7AD401000CC221 /* AcceptOrderView.swift */; };
+		01F889C42A8CD572001ACB69 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889C32A8CD572001ACB69 /* LoginViewModel.swift */; };
+		01F889C62A8CD593001ACB69 /* Container+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889C52A8CD593001ACB69 /* Container+Repositories.swift */; };
+		01F889C82A8CD5AE001ACB69 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 01F889C72A8CD5AE001ACB69 /* Factory */; };
+		01F889C92A8CD5B5001ACB69 /* GenericsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */; };
+		01F889CA2A8CD5B5001ACB69 /* GenericsCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA4F2A09735800C622CC /* AddressViewController.swift */; };
 		01FFEA522A0974D900C622CC /* AddressSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */; };
 		EC14E819298B07C900A6540C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E818298B07C900A6540C /* HomeView.swift */; };
@@ -218,6 +223,13 @@
 			remoteGlobalIDString = 01C9DFB72A0AF16B001DC47D;
 			remoteInfo = GenericsDriver;
 		};
+		01F889CB2A8CD5B5001ACB69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0122FD732A8BA65700D015C5;
+			remoteInfo = GenericsCore;
+		};
 		ECA92F99299C2D7900F28299 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
@@ -292,6 +304,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				0124CAD32A784293002B9BC4 /* GenericsUIKit.framework in Embed Frameworks */,
+				01F889CA2A8CD5B5001ACB69 /* GenericsCore.framework in Embed Frameworks */,
 				014834B02A7842630018C322 /* GenericsUI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -352,6 +365,8 @@
 		01C9DFDD2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsDriverUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		01D537F92A7AD093000CC221 /* OrderStickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStickerView.swift; sourceTree = "<group>"; };
 		01D537FB2A7AD401000CC221 /* AcceptOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptOrderView.swift; sourceTree = "<group>"; };
+		01F889C32A8CD572001ACB69 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		01F889C52A8CD593001ACB69 /* Container+Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Repositories.swift"; sourceTree = "<group>"; };
 		01FFEA4F2A09735800C622CC /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSwiftUIView.swift; sourceTree = "<group>"; };
 		EC14E818298B07C900A6540C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -450,8 +465,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01F889C82A8CD5AE001ACB69 /* Factory in Frameworks */,
 				0124CAD42A7842C9002B9BC4 /* GenericsUI.framework in Frameworks */,
 				014834A32A78243A0018C322 /* GenericsUIKit.framework in Frameworks */,
+				01F889C92A8CD5B5001ACB69 /* GenericsCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,8 +622,9 @@
 			children = (
 				01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */,
 				01C9DFBC2A0AF16B001DC47D /* SceneDelegate.swift */,
+				01F889C52A8CD593001ACB69 /* Container+Repositories.swift */,
+				01F889C22A8CD55C001ACB69 /* Login */,
 				0124CAD52A78432A002B9BC4 /* WelcomeLabelView.swift */,
-				014834A12A7823D90018C322 /* LoginViewController.swift */,
 				010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */,
 				014834A82A7827900018C322 /* IdleViewController.swift */,
 				010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */,
@@ -638,6 +656,15 @@
 				01C9DFDD2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift */,
 			);
 			path = UITests;
+			sourceTree = "<group>";
+		};
+		01F889C22A8CD55C001ACB69 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				014834A12A7823D90018C322 /* LoginViewController.swift */,
+				01F889C32A8CD572001ACB69 /* LoginViewModel.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		01FFEA4C2A096F7000C622CC /* Address */ = {
@@ -1015,8 +1042,12 @@
 			);
 			dependencies = (
 				014834A62A78243A0018C322 /* PBXTargetDependency */,
+				01F889CC2A8CD5B5001ACB69 /* PBXTargetDependency */,
 			);
 			name = GenericsDriver;
+			packageProductDependencies = (
+				01F889C72A8CD5AE001ACB69 /* Factory */,
+			);
 			productName = GenericsDriver;
 			productReference = 01C9DFB82A0AF16B001DC47D /* GenericsDriver.app */;
 			productType = "com.apple.product-type.application";
@@ -1457,6 +1488,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0124CAD62A78432A002B9BC4 /* WelcomeLabelView.swift in Sources */,
+				01F889C62A8CD593001ACB69 /* Container+Repositories.swift in Sources */,
 				014834A22A7823D90018C322 /* LoginViewController.swift in Sources */,
 				01D537FC2A7AD401000CC221 /* AcceptOrderView.swift in Sources */,
 				01C9DFBB2A0AF16B001DC47D /* AppDelegate.swift in Sources */,
@@ -1464,6 +1496,7 @@
 				010D5D8C2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift in Sources */,
 				01D537FA2A7AD093000CC221 /* OrderStickerView.swift in Sources */,
 				0124CAD82A785252002B9BC4 /* NavigateView.swift in Sources */,
+				01F889C42A8CD572001ACB69 /* LoginViewModel.swift in Sources */,
 				014834AF2A7840840018C322 /* CustomInOutTransitinableController.swift in Sources */,
 				01C9DFBD2A0AF16B001DC47D /* SceneDelegate.swift in Sources */,
 				010D5D8A2A6DB09E00903CD3 /* MapNavigationViewController.swift in Sources */,
@@ -1647,6 +1680,11 @@
 			isa = PBXTargetDependency;
 			target = 01C9DFB72A0AF16B001DC47D /* GenericsDriver */;
 			targetProxy = 01C9DFD82A0AF16E001DC47D /* PBXContainerItemProxy */;
+		};
+		01F889CC2A8CD5B5001ACB69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0122FD732A8BA65700D015C5 /* GenericsCore */;
+			targetProxy = 01F889CB2A8CD5B5001ACB69 /* PBXContainerItemProxy */;
 		};
 		ECA92F9A299C2D7900F28299 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2783,6 +2821,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */;
 			productName = SwiftlyHttp;
+		};
+		01F889C72A8CD5AE001ACB69 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
 		};
 		EC14E822298C515E00A6540C /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;

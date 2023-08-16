@@ -34,14 +34,16 @@ final class LoginViewController: UIViewController {
         return view
     }()
 
+    private lazy var loginButtonBottomConstraint = loginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -.big)
+    private lazy var welcomeLabelTopConstraint = welcomeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -.big)
+
+    private let model = LoginViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupView()
     }
-
-    private lazy var loginButtonBottomConstraint = loginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -.big)
-    private lazy var welcomeLabelTopConstraint = welcomeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -.big)
 
     private func setupView() {
         view.backgroundColor = .systemBackground
@@ -81,8 +83,12 @@ final class LoginViewController: UIViewController {
         ])
 
         // Temporary
+//        loginButton.addAction(.init(handler: { _ in
+//            self.navigationController?.pushViewController(OnboardingPermissionViewController(), animated: true)
+//        }), for: .touchUpInside)
+
         loginButton.addAction(.init(handler: { _ in
-            self.navigationController?.pushViewController(OnboardingPermissionViewController(), animated: true)
+            self.model.login(email: self.emailTextField.text!, password: self.passwordTextField.text!)
         }), for: .touchUpInside)
     }
 }
