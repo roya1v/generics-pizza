@@ -44,7 +44,7 @@ final class AcceptOrderView: UIView {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .big),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.big),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: .big),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: .big)
         ])
 
         actionButton.setTitle("Slide to accept", for: .normal)
@@ -52,7 +52,7 @@ final class AcceptOrderView: UIView {
         NSLayoutConstraint.activate([
             actionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .big),
             actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.big),
-            actionButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: .big),
+            actionButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: .big)
         ])
 
         declineButton.setTitle("Decline", for: .normal)

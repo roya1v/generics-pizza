@@ -20,7 +20,7 @@ final class MainRouter: NSObject {
 
     override init() {
         super.init()
-        
+
         navigationController.delegate = self
     }
 

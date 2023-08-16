@@ -52,7 +52,7 @@ final class NavigateView: UIView {
         NSLayoutConstraint.activate([
             actionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .big),
             actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.big),
-            actionButton.topAnchor.constraint(equalTo: topAnchor, constant: .big),
+            actionButton.topAnchor.constraint(equalTo: topAnchor, constant: .big)
         ])
 
         titleLabel.text = "Open navigation in:"
@@ -60,7 +60,7 @@ final class NavigateView: UIView {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .big),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.big),
-            titleLabel.topAnchor.constraint(equalTo: actionButton.bottomAnchor, constant: .big),
+            titleLabel.topAnchor.constraint(equalTo: actionButton.bottomAnchor, constant: .big)
         ])
 
         let stackView = UIStackView()
@@ -71,7 +71,7 @@ final class NavigateView: UIView {
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .big),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.big),
             stackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: .big),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.big),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.big)
         ])
 
         [appleMapsButton, googleMapsButton, wazeMapsButton].forEach { button in

@@ -58,7 +58,7 @@ final class WelcomeLabelView: UIView {
             dynamicLabel.leadingAnchor.constraint(equalTo: clippingView.leadingAnchor),
             dynamicLabel.trailingAnchor.constraint(equalTo: clippingView.trailingAnchor),
             dynamicLabel.topAnchor.constraint(equalTo: clippingView.topAnchor),
-            dynamicLabel.bottomAnchor.constraint(equalTo: clippingView.bottomAnchor),
+            dynamicLabel.bottomAnchor.constraint(equalTo: clippingView.bottomAnchor)
         ])
         clippingView.clipsToBounds = true
         stackView.addArrangedSubview(clippingView)
@@ -79,7 +79,7 @@ final class WelcomeLabelView: UIView {
     }
 
     func updateText() {
-        Timer.scheduledTimer(withTimeInterval: Double.random(in: 1...3), repeats: false) { timer in
+        Timer.scheduledTimer(withTimeInterval: Double.random(in: 1...3), repeats: false) { _ in
             let animation = CATransition()
             animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
             animation.type = CATransitionType.push

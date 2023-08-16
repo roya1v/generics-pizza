@@ -82,7 +82,7 @@ final class MapNavigationViewController: UIViewController {
         NSLayoutConstraint.activate([
             view.leadingAnchor.constraint(equalTo: sheetView.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: sheetView.trailingAnchor),
-            sheetHiddenConstraint,
+            sheetHiddenConstraint
         ])
     }
 
@@ -117,7 +117,7 @@ final class MapNavigationViewController: UIViewController {
             navigateTo.leadingAnchor.constraint(equalTo: sheetView.leadingAnchor),
             navigateTo.trailingAnchor.constraint(equalTo: sheetView.trailingAnchor),
             navigateTo.topAnchor.constraint(equalTo: sheetView.topAnchor),
-            navigateTo.bottomAnchor.constraint(equalTo: sheetView.safeAreaLayoutGuide.bottomAnchor),
+            navigateTo.bottomAnchor.constraint(equalTo: sheetView.safeAreaLayoutGuide.bottomAnchor)
         ])
 
         navigateTo.actionButton.addAction(.init(handler: { _ in
@@ -136,7 +136,7 @@ final class MapNavigationViewController: UIViewController {
             acceptOrder.leadingAnchor.constraint(equalTo: sheetView.leadingAnchor),
             acceptOrder.trailingAnchor.constraint(equalTo: sheetView.trailingAnchor),
             acceptOrder.topAnchor.constraint(equalTo: sheetView.topAnchor),
-            acceptOrder.bottomAnchor.constraint(equalTo: sheetView.safeAreaLayoutGuide.bottomAnchor),
+            acceptOrder.bottomAnchor.constraint(equalTo: sheetView.safeAreaLayoutGuide.bottomAnchor)
         ])
 
         acceptOrder.actionButton.addAction(.init(handler: { _ in
@@ -225,14 +225,12 @@ final class MapNavigationViewController: UIViewController {
             self.almostReadyLabel.removeFromSuperview()
         }
 
-
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(trigger))
         gestureRecognizer.addTarget(self, action: #selector(trigger2))
 
         qrView.addGestureRecognizer(gestureRecognizer)
 
     }
-
 
     @objc func trigger2() {
         sheetShownConstraint.isActive = false
@@ -261,7 +259,7 @@ final class MapNavigationViewController: UIViewController {
             navigateTo.leadingAnchor.constraint(equalTo: sheetView.leadingAnchor),
             navigateTo.trailingAnchor.constraint(equalTo: sheetView.trailingAnchor),
             navigateTo.topAnchor.constraint(equalTo: sheetView.topAnchor),
-            navigateTo.bottomAnchor.constraint(equalTo: sheetView.safeAreaLayoutGuide.bottomAnchor),
+            navigateTo.bottomAnchor.constraint(equalTo: sheetView.safeAreaLayoutGuide.bottomAnchor)
         ])
 
         navigateTo.actionButton.addAction(.init(handler: { _ in

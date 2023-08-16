@@ -30,7 +30,7 @@ final class OnboardingPermissionViewController: UIViewController {
 
         setupView()
     }
-    
+
     private func setupView() {
         view.backgroundColor = .systemBackground
 
@@ -72,7 +72,7 @@ extension OnboardingPermissionViewController: CustomInTransitinable {
     func transitionIn(completion: (() -> Void)?) {
         mainButtonBottomConstraint.constant = -.big
         titleLabelTopConstraint.constant = -.huge
-        
+
         UIView.animate(withDuration: transitionInDuration, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0) {
             self.view.layoutIfNeeded()
         } completion: { _ in

@@ -53,7 +53,6 @@ final class IdleViewController: UIViewController {
 
         navigationController?.isNavigationBarHidden = true
 
-
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(trigger))
         prettyAnimationView.addGestureRecognizer(gestureRecognizer)
         gestureRecognizer.addTarget(self, action: #selector(trigger))
