@@ -31,9 +31,9 @@ final class MainRouter: NSObject {
             .sink { state in
                 switch state {
                 case .loggedOut:
-                    self.navigationController.setViewControllers([LoginViewController()], animated: false)
+                    self.navigationController.setViewControllers([LoginViewController()], animated: true)
                 case .loggedIn:
-                    self.navigationController.setViewControllers([OnboardingPermissionViewController()], animated: false)
+                    self.navigationController.setViewControllers([OnboardingPermissionViewController()], animated: true)
                 }
             }
             .store(in: &cancellable)

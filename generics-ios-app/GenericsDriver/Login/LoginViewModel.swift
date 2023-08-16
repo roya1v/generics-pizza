@@ -26,7 +26,7 @@ final class LoginViewModel: ObservableObject {
                     state = .ready
                 }
             } catch {
-                state = .ready
+                state = .error
             }
         }
     }
