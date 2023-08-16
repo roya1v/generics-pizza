@@ -82,11 +82,6 @@ final class LoginViewController: UIViewController {
             loginButton.heightAnchor.constraint(equalToConstant: .huge)
         ])
 
-        // Temporary
-//        loginButton.addAction(.init(handler: { _ in
-//            self.navigationController?.pushViewController(OnboardingPermissionViewController(), animated: true)
-//        }), for: .touchUpInside)
-
         loginButton.addAction(.init(handler: { _ in
             self.model.login(email: self.emailTextField.text!, password: self.passwordTextField.text!)
         }), for: .touchUpInside)

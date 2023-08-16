@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import Factory
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+
+    @Injected(Container.mainRouter)
+    private var mainRouter
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -18,23 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
-        let navigationController = UINavigationController(rootViewController: LoginViewController())
-        navigationController.delegate = self
-        window?.rootViewController = navigationController
+        window?.rootViewController = mainRouter.start()
         window?.makeKeyAndVisible()
     }
 }
-
-extension SceneDelegate: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController,
-                              animationControllerFor operation: UINavigationController.Operation,
-                              from fromVC: UIViewController,
-                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard fromVC is CustomOutTransitinable,
-              toVC is CustomInTransitinable else {
-            return nil
-        }
-        return CustomInOutTransitinableController()
-    }
-}
-

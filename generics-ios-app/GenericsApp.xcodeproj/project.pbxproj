@@ -80,6 +80,7 @@
 		01F889C92A8CD5B5001ACB69 /* GenericsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */; };
 		01F889CA2A8CD5B5001ACB69 /* GenericsCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01F889CE2A8CDB58001ACB69 /* LocalSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889CD2A8CDB58001ACB69 /* LocalSettingsService.swift */; };
+		01F889D02A8CE059001ACB69 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889CF2A8CE059001ACB69 /* MainRouter.swift */; };
 		01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA4F2A09735800C622CC /* AddressViewController.swift */; };
 		01FFEA522A0974D900C622CC /* AddressSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */; };
 		EC14E819298B07C900A6540C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E818298B07C900A6540C /* HomeView.swift */; };
@@ -369,6 +370,7 @@
 		01F889C32A8CD572001ACB69 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		01F889C52A8CD593001ACB69 /* Container+Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Repositories.swift"; sourceTree = "<group>"; };
 		01F889CD2A8CDB58001ACB69 /* LocalSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSettingsService.swift; sourceTree = "<group>"; };
+		01F889CF2A8CE059001ACB69 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
 		01FFEA4F2A09735800C622CC /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSwiftUIView.swift; sourceTree = "<group>"; };
 		EC14E818298B07C900A6540C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 				01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */,
 				01C9DFBC2A0AF16B001DC47D /* SceneDelegate.swift */,
 				01F889C52A8CD593001ACB69 /* Container+Repositories.swift */,
+				01F889CF2A8CE059001ACB69 /* MainRouter.swift */,
 				01F889C22A8CD55C001ACB69 /* Login */,
 				0124CAD52A78432A002B9BC4 /* WelcomeLabelView.swift */,
 				010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */,
@@ -1492,6 +1495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0124CAD62A78432A002B9BC4 /* WelcomeLabelView.swift in Sources */,
+				01F889D02A8CE059001ACB69 /* MainRouter.swift in Sources */,
 				01F889C62A8CD593001ACB69 /* Container+Repositories.swift in Sources */,
 				014834A22A7823D90018C322 /* LoginViewController.swift in Sources */,
 				01D537FC2A7AD401000CC221 /* AcceptOrderView.swift in Sources */,
