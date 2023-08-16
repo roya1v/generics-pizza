@@ -39,6 +39,8 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
     private let baseURL: String
     private let stateSubject = PassthroughSubject<AuthenticationState, Never>()
 
+    private let settingsService = LocalSettingsServiceImpl()
+
     init(baseURL: String) {
         self.baseURL = baseURL
     }
@@ -58,13 +60,13 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
             .decode(to: LoginResponse.self)
             .perform()
 
-        UserDefaults.standard.set(response.value, forKey: "auth-token")
+        settingsService.setAuthToken(response.value)
 
         stateSubject.send(.loggedIn)
     }
 
     func reload() {
-        if let _ = UserDefaults.standard.string(forKey: "auth-token") {
+        if let _ = settingsService.getAuthToken() {
             stateSubject.send(.loggedIn)
         } else {
             stateSubject.send(.loggedOut)
@@ -78,12 +80,12 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
             .authorizationDelegate(self)
             .method(.post)
             .perform()
-        UserDefaults.standard.set(nil, forKey: "auth-token")
+        settingsService.resetAuthToken()
         stateSubject.send(.loggedOut)
     }
 
     func getAuthorization() throws -> SwiftlyHttp.Authorization {
-        guard let token = UserDefaults.standard.string(forKey: "auth-token3") else {
+        guard let token = settingsService.getAuthToken() else {
             fatalError()
         }
 

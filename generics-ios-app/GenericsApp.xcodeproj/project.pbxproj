@@ -79,6 +79,7 @@
 		01F889C82A8CD5AE001ACB69 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 01F889C72A8CD5AE001ACB69 /* Factory */; };
 		01F889C92A8CD5B5001ACB69 /* GenericsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */; };
 		01F889CA2A8CD5B5001ACB69 /* GenericsCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01F889CE2A8CDB58001ACB69 /* LocalSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889CD2A8CDB58001ACB69 /* LocalSettingsService.swift */; };
 		01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA4F2A09735800C622CC /* AddressViewController.swift */; };
 		01FFEA522A0974D900C622CC /* AddressSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */; };
 		EC14E819298B07C900A6540C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E818298B07C900A6540C /* HomeView.swift */; };
@@ -367,6 +368,7 @@
 		01D537FB2A7AD401000CC221 /* AcceptOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptOrderView.swift; sourceTree = "<group>"; };
 		01F889C32A8CD572001ACB69 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		01F889C52A8CD593001ACB69 /* Container+Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Repositories.swift"; sourceTree = "<group>"; };
+		01F889CD2A8CDB58001ACB69 /* LocalSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSettingsService.swift; sourceTree = "<group>"; };
 		01FFEA4F2A09735800C622CC /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSwiftUIView.swift; sourceTree = "<group>"; };
 		EC14E818298B07C900A6540C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 		0122FD752A8BA65700D015C5 /* GenericsCore */ = {
 			isa = PBXGroup;
 			children = (
+				01F889CD2A8CDB58001ACB69 /* LocalSettingsService.swift */,
 				ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */,
 				0122FD9D2A8BA86E00D015C5 /* MenuRepository.swift */,
 				0122FD9E2A8BA86E00D015C5 /* OrderRepository.swift */,
@@ -1432,6 +1435,7 @@
 			files = (
 				0122FDA22A8BA86E00D015C5 /* OrderRestaurantRepository.swift in Sources */,
 				0136C2772A8BB83300407EAE /* AuthenticationRepository.swift in Sources */,
+				01F889CE2A8CDB58001ACB69 /* LocalSettingsService.swift in Sources */,
 				0122FDA12A8BA86E00D015C5 /* OrderRepository.swift in Sources */,
 				0122FDA02A8BA86E00D015C5 /* MenuRepository.swift in Sources */,
 			);
