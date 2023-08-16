@@ -7,6 +7,7 @@
 
 import UIKit
 import GenericsUIKit
+import Combine
 
 final class OnboardingPermissionViewController: UIViewController {
 
@@ -24,6 +25,9 @@ final class OnboardingPermissionViewController: UIViewController {
 
     private lazy var mainButtonBottomConstraint = mainButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 100)
     private lazy var titleLabelTopConstraint = titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -300)
+
+    private let model = OnboardingPermissionViewModel()
+    private var cancellable = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,8 +62,18 @@ final class OnboardingPermissionViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
 
         mainButton.addAction(.init(handler: { _ in
-            self.navigationController?.pushViewController(IdleViewController(), animated: true)
+            self.model.mainButtonPressed()
         }), for: .touchUpInside)
+
+        model.$mainButtonState.sink { state in
+            switch state {
+            case .grantPermission:
+                self.mainButton.setTitle("Grant permission", for: .normal)
+            case .openSettings:
+                self.mainButton.setTitle("Open settings", for: .normal)
+            }
+        }
+        .store(in: &cancellable)
     }
 }
 

@@ -14,4 +14,5 @@ fileprivate let url = "http://localhost:8080"
 extension Container {
     static let authenticationRepository = Factory(scope: .singleton) { buildAuthenticationRepository(url: url) }
     static let mainRouter = Factory(scope: .singleton) { MainRouter() }
+    static let locationRepository = Factory(scope: .singleton) { LocationRepository() }
 }

@@ -82,6 +82,10 @@
 		01F889CE2A8CDB58001ACB69 /* LocalSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889CD2A8CDB58001ACB69 /* LocalSettingsService.swift */; };
 		01F889D02A8CE059001ACB69 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889CF2A8CE059001ACB69 /* MainRouter.swift */; };
 		01F889D22A8CE3E6001ACB69 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889D12A8CE3E6001ACB69 /* TextField.swift */; };
+		01F889D82A8CF068001ACB69 /* OnboardingPermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889D72A8CF068001ACB69 /* OnboardingPermissionViewModel.swift */; };
+		01F889DA2A8CF892001ACB69 /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889D92A8CF892001ACB69 /* LocationRepository.swift */; };
+		01F889DC2A8D06C4001ACB69 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01F889DB2A8D06C4001ACB69 /* Settings.bundle */; };
+		01F889DE2A8D0A73001ACB69 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889DD2A8D0A72001ACB69 /* SplashViewController.swift */; };
 		01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA4F2A09735800C622CC /* AddressViewController.swift */; };
 		01FFEA522A0974D900C622CC /* AddressSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */; };
 		EC14E819298B07C900A6540C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E818298B07C900A6540C /* HomeView.swift */; };
@@ -373,6 +377,10 @@
 		01F889CD2A8CDB58001ACB69 /* LocalSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSettingsService.swift; sourceTree = "<group>"; };
 		01F889CF2A8CE059001ACB69 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
 		01F889D12A8CE3E6001ACB69 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		01F889D72A8CF068001ACB69 /* OnboardingPermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPermissionViewModel.swift; sourceTree = "<group>"; };
+		01F889D92A8CF892001ACB69 /* LocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRepository.swift; sourceTree = "<group>"; };
+		01F889DB2A8D06C4001ACB69 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		01F889DD2A8D0A72001ACB69 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		01FFEA4F2A09735800C622CC /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSwiftUIView.swift; sourceTree = "<group>"; };
 		EC14E818298B07C900A6540C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -632,20 +640,22 @@
 				01C9DFBC2A0AF16B001DC47D /* SceneDelegate.swift */,
 				01F889C52A8CD593001ACB69 /* Container+Repositories.swift */,
 				01F889CF2A8CE059001ACB69 /* MainRouter.swift */,
+				01F889DD2A8D0A72001ACB69 /* SplashViewController.swift */,
 				01F889C22A8CD55C001ACB69 /* Login */,
-				0124CAD52A78432A002B9BC4 /* WelcomeLabelView.swift */,
-				010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */,
+				01F889D62A8CF03A001ACB69 /* Onboarding */,
 				014834A82A7827900018C322 /* IdleViewController.swift */,
 				010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */,
 				0124CAD72A785252002B9BC4 /* NavigateView.swift */,
 				01D537F92A7AD093000CC221 /* OrderStickerView.swift */,
 				01D537FB2A7AD401000CC221 /* AcceptOrderView.swift */,
 				014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */,
+				01F889D92A8CF892001ACB69 /* LocationRepository.swift */,
 				01C9DFC32A0AF16D001DC47D /* Assets.xcassets */,
 				01C9DFC52A0AF16D001DC47D /* LaunchScreen.storyboard */,
 				01C9DFC82A0AF16D001DC47D /* Info.plist */,
 				01C9DFD02A0AF16D001DC47D /* Tests */,
 				01C9DFDA2A0AF16E001DC47D /* UITests */,
+				01F889DB2A8D06C4001ACB69 /* Settings.bundle */,
 			);
 			path = GenericsDriver;
 			sourceTree = "<group>";
@@ -670,10 +680,20 @@
 		01F889C22A8CD55C001ACB69 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				0124CAD52A78432A002B9BC4 /* WelcomeLabelView.swift */,
 				014834A12A7823D90018C322 /* LoginViewController.swift */,
 				01F889C32A8CD572001ACB69 /* LoginViewModel.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		01F889D62A8CF03A001ACB69 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */,
+				01F889D72A8CF068001ACB69 /* OnboardingPermissionViewModel.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		01FFEA4C2A096F7000C622CC /* Address */ = {
@@ -1370,6 +1390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C9DFC72A0AF16D001DC47D /* LaunchScreen.storyboard in Resources */,
+				01F889DC2A8D06C4001ACB69 /* Settings.bundle in Resources */,
 				01C9DFC42A0AF16D001DC47D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1501,7 +1522,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0124CAD62A78432A002B9BC4 /* WelcomeLabelView.swift in Sources */,
+				01F889D82A8CF068001ACB69 /* OnboardingPermissionViewModel.swift in Sources */,
 				01F889D02A8CE059001ACB69 /* MainRouter.swift in Sources */,
+				01F889DE2A8D0A73001ACB69 /* SplashViewController.swift in Sources */,
 				01F889C62A8CD593001ACB69 /* Container+Repositories.swift in Sources */,
 				014834A22A7823D90018C322 /* LoginViewController.swift in Sources */,
 				01D537FC2A7AD401000CC221 /* AcceptOrderView.swift in Sources */,
@@ -1511,6 +1534,7 @@
 				01D537FA2A7AD093000CC221 /* OrderStickerView.swift in Sources */,
 				0124CAD82A785252002B9BC4 /* NavigateView.swift in Sources */,
 				01F889C42A8CD572001ACB69 /* LoginViewModel.swift in Sources */,
+				01F889DA2A8CF892001ACB69 /* LocationRepository.swift in Sources */,
 				014834AF2A7840840018C322 /* CustomInOutTransitinableController.swift in Sources */,
 				01C9DFBD2A0AF16B001DC47D /* SceneDelegate.swift in Sources */,
 				010D5D8A2A6DB09E00903CD3 /* MapNavigationViewController.swift in Sources */,
@@ -2101,6 +2125,8 @@
 				DEVELOPMENT_TEAM = 4S3J7NRC9R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GenericsDriver/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location to provide you with orders";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -2129,6 +2155,8 @@
 				DEVELOPMENT_TEAM = 4S3J7NRC9R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GenericsDriver/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location to provide you with orders";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

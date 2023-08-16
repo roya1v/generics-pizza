@@ -8,13 +8,24 @@
 import UIKit
 import Factory
 import Combine
+import CoreLocation
 
 final class MainRouter: NSObject {
+
+    enum AppState {
+        case login
+        case onboarding
+        case idle
+        case etc
+    }
 
     private let navigationController = UINavigationController()
 
     @Injected(Container.authenticationRepository)
     var authRepository
+
+    @Injected(Container.locationRepository)
+    var locationRepository
 
     private var cancellable = Set<AnyCancellable>()
 
@@ -25,21 +36,49 @@ final class MainRouter: NSObject {
     }
 
     func start() -> UIViewController {
+        setViewController(SplashViewController())
+        return navigationController
+    }
+
+    func showApp() {
         authRepository
             .state
             .receive(on: DispatchQueue.main)
             .sink { state in
                 switch state {
                 case .loggedOut:
-                    self.navigationController.setViewControllers([LoginViewController()], animated: true)
+                    self.setViewController(LoginViewController())
                 case .loggedIn:
-                    self.navigationController.setViewControllers([OnboardingPermissionViewController()], animated: true)
+                    self.setLoggedInFlow()
                 }
             }
             .store(in: &cancellable)
-        authRepository.reload()
 
-        return navigationController
+        locationRepository
+            .state
+            .sink { state in
+                switch state {
+                case .ready:
+                    self.setViewController(IdleViewController())
+                default:
+                    self.setViewController(OnboardingPermissionViewController())
+                }
+            }
+            .store(in: &cancellable)
+
+        authRepository.reload()
+    }
+
+    private func setLoggedInFlow() {
+        if locationRepository.currentState == .ready {
+            setViewController(IdleViewController())
+        } else {
+            setViewController(OnboardingPermissionViewController())
+        }
+    }
+
+    private func setViewController( _ vc: UIViewController) {
+        navigationController.setViewControllers([vc], animated: true)
     }
 }
 
