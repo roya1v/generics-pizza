@@ -17,9 +17,6 @@ final class LoginViewModel: ObservableObject {
     @Injected(Container.authenticationRepository)
     private var repository
 
-    @Injected(Container.mainRouter)
-    private var router
-
     func login(email: String, password: String) {
         state = .loading
         Task {

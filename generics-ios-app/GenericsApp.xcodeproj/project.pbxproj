@@ -81,6 +81,7 @@
 		01F889CA2A8CD5B5001ACB69 /* GenericsCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01F889CE2A8CDB58001ACB69 /* LocalSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889CD2A8CDB58001ACB69 /* LocalSettingsService.swift */; };
 		01F889D02A8CE059001ACB69 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889CF2A8CE059001ACB69 /* MainRouter.swift */; };
+		01F889D22A8CE3E6001ACB69 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889D12A8CE3E6001ACB69 /* TextField.swift */; };
 		01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA4F2A09735800C622CC /* AddressViewController.swift */; };
 		01FFEA522A0974D900C622CC /* AddressSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */; };
 		EC14E819298B07C900A6540C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E818298B07C900A6540C /* HomeView.swift */; };
@@ -371,6 +372,7 @@
 		01F889C52A8CD593001ACB69 /* Container+Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Container+Repositories.swift"; sourceTree = "<group>"; };
 		01F889CD2A8CDB58001ACB69 /* LocalSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSettingsService.swift; sourceTree = "<group>"; };
 		01F889CF2A8CE059001ACB69 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
+		01F889D12A8CE3E6001ACB69 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		01FFEA4F2A09735800C622CC /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSwiftUIView.swift; sourceTree = "<group>"; };
 		EC14E818298B07C900A6540C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 			isa = PBXGroup;
 			children = (
 				01389B822A436444009DE998 /* RouteStepView.swift */,
+				01F889D12A8CE3E6001ACB69 /* TextField.swift */,
 				01389B672A43643C009DE998 /* GenericsUIKit.h */,
 				01389B682A43643C009DE998 /* GenericsUIKit.docc */,
 			);
@@ -1047,6 +1050,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				01F889D52A8CE4C6001ACB69 /* PBXTargetDependency */,
 				014834A62A78243A0018C322 /* PBXTargetDependency */,
 				01F889CC2A8CD5B5001ACB69 /* PBXTargetDependency */,
 			);
@@ -1293,6 +1297,7 @@
 			packageReferences = (
 				EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */,
 				018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */,
+				01F889D32A8CE4C0001ACB69 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 			);
 			productRefGroup = ECD845A6298AE51D0036454C /* Products */;
 			projectDirPath = "";
@@ -1477,6 +1482,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01F889D22A8CE3E6001ACB69 /* TextField.swift in Sources */,
 				01389B832A436444009DE998 /* RouteStepView.swift in Sources */,
 				01389B692A43643C009DE998 /* GenericsUIKit.docc in Sources */,
 			);
@@ -1693,6 +1699,10 @@
 			isa = PBXTargetDependency;
 			target = 0122FD732A8BA65700D015C5 /* GenericsCore */;
 			targetProxy = 01F889CB2A8CD5B5001ACB69 /* PBXContainerItemProxy */;
+		};
+		01F889D52A8CE4C6001ACB69 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 01F889D42A8CE4C6001ACB69 /* SwiftLintPlugin */;
 		};
 		ECA92F9A299C2D7900F28299 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2805,6 +2815,14 @@
 				kind = branch;
 			};
 		};
+		01F889D32A8CE4C0001ACB69 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.52.4;
+			};
+		};
 		EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Factory";
@@ -2834,6 +2852,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
+		};
+		01F889D42A8CE4C6001ACB69 /* SwiftLintPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01F889D32A8CE4C0001ACB69 /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintPlugin";
 		};
 		EC14E822298C515E00A6540C /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;

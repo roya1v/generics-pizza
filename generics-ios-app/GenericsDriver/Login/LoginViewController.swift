@@ -7,6 +7,7 @@
 
 import UIKit
 import GenericsUI
+import GenericsUIKit
 
 final class LoginViewController: UIViewController {
 
@@ -16,14 +17,14 @@ final class LoginViewController: UIViewController {
         return view
     }()
 
-     private var emailTextField: UITextField = {
-        let view = UITextField()
+     private var emailTextField: TextField = {
+        let view = TextField()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    private var passwordTextField: UITextField = {
-        let view = UITextField()
+    private var passwordTextField: TextField = {
+        let view = TextField()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -55,7 +56,6 @@ final class LoginViewController: UIViewController {
             welcomeLabelTopConstraint
         ])
 
-        emailTextField.borderStyle = .roundedRect
         emailTextField.placeholder = "Email"
         view.addSubview(emailTextField)
         NSLayoutConstraint.activate([
@@ -64,7 +64,6 @@ final class LoginViewController: UIViewController {
             emailTextField.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: .big)
         ])
 
-        passwordTextField.borderStyle = .roundedRect
         passwordTextField.placeholder = "Password"
         view.addSubview(passwordTextField)
         NSLayoutConstraint.activate([
