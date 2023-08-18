@@ -86,6 +86,7 @@
 		01F889DA2A8CF892001ACB69 /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889D92A8CF892001ACB69 /* LocationRepository.swift */; };
 		01F889DC2A8D06C4001ACB69 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01F889DB2A8D06C4001ACB69 /* Settings.bundle */; };
 		01F889DE2A8D0A73001ACB69 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889DD2A8D0A72001ACB69 /* SplashViewController.swift */; };
+		01F889E02A8D1EE6001ACB69 /* DriverRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889DF2A8D1EE6001ACB69 /* DriverRepository.swift */; };
 		01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA4F2A09735800C622CC /* AddressViewController.swift */; };
 		01FFEA522A0974D900C622CC /* AddressSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */; };
 		EC14E819298B07C900A6540C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E818298B07C900A6540C /* HomeView.swift */; };
@@ -381,6 +382,7 @@
 		01F889D92A8CF892001ACB69 /* LocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRepository.swift; sourceTree = "<group>"; };
 		01F889DB2A8D06C4001ACB69 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		01F889DD2A8D0A72001ACB69 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		01F889DF2A8D1EE6001ACB69 /* DriverRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverRepository.swift; sourceTree = "<group>"; };
 		01FFEA4F2A09735800C622CC /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSwiftUIView.swift; sourceTree = "<group>"; };
 		EC14E818298B07C900A6540C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -650,6 +652,7 @@
 				01D537FB2A7AD401000CC221 /* AcceptOrderView.swift */,
 				014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */,
 				01F889D92A8CF892001ACB69 /* LocationRepository.swift */,
+				01F889DF2A8D1EE6001ACB69 /* DriverRepository.swift */,
 				01C9DFC32A0AF16D001DC47D /* Assets.xcassets */,
 				01C9DFC52A0AF16D001DC47D /* LaunchScreen.storyboard */,
 				01C9DFC82A0AF16D001DC47D /* Info.plist */,
@@ -1534,6 +1537,7 @@
 				01D537FA2A7AD093000CC221 /* OrderStickerView.swift in Sources */,
 				0124CAD82A785252002B9BC4 /* NavigateView.swift in Sources */,
 				01F889C42A8CD572001ACB69 /* LoginViewModel.swift in Sources */,
+				01F889E02A8D1EE6001ACB69 /* DriverRepository.swift in Sources */,
 				01F889DA2A8CF892001ACB69 /* LocationRepository.swift in Sources */,
 				014834AF2A7840840018C322 /* CustomInOutTransitinableController.swift in Sources */,
 				01C9DFBD2A0AF16B001DC47D /* SceneDelegate.swift in Sources */,

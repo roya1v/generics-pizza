@@ -7,6 +7,7 @@
 
 import UIKit
 import GenericsUIKit
+import Factory
 
 final class IdleViewController: UIViewController {
 
@@ -56,6 +57,8 @@ final class IdleViewController: UIViewController {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(trigger))
         prettyAnimationView.addGestureRecognizer(gestureRecognizer)
         gestureRecognizer.addTarget(self, action: #selector(trigger))
+
+        Container.locationRepository().startStuff()
     }
 
     @objc func trigger() {
