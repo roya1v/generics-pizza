@@ -10,6 +10,7 @@
 		010A85E82A11282100354E7D /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010A85E72A11282100354E7D /* AddressViewModel.swift */; };
 		010D5D8A2A6DB09E00903CD3 /* MapNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */; };
 		010D5D8C2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */; };
+		01118A682A9FDC010067926A /* ButtonConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01118A672A9FDC010067926A /* ButtonConfigurations.swift */; };
 		0122FD6E2A8B7A5400D015C5 /* CartViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122FD6D2A8B7A5400D015C5 /* CartViewModelTests.swift */; };
 		0122FD7C2A8BA65700D015C5 /* GenericsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */; };
 		0122FD832A8BA65700D015C5 /* GenericsCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122FD822A8BA65700D015C5 /* GenericsCoreTests.swift */; };
@@ -327,6 +328,7 @@
 		010A85E72A11282100354E7D /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
 		010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNavigationViewController.swift; sourceTree = "<group>"; };
 		010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPermissionViewController.swift; sourceTree = "<group>"; };
+		01118A672A9FDC010067926A /* ButtonConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConfigurations.swift; sourceTree = "<group>"; };
 		0122FD6D2A8B7A5400D015C5 /* CartViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModelTests.swift; sourceTree = "<group>"; };
 		0122FD742A8BA65700D015C5 /* GenericsCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GenericsCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0122FD762A8BA65700D015C5 /* GenericsCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenericsCore.h; sourceTree = "<group>"; };
@@ -611,6 +613,7 @@
 				01F889D12A8CE3E6001ACB69 /* TextField.swift */,
 				01389B672A43643C009DE998 /* GenericsUIKit.h */,
 				01389B682A43643C009DE998 /* GenericsUIKit.docc */,
+				01118A672A9FDC010067926A /* ButtonConfigurations.swift */,
 			);
 			path = GenericsUIKit;
 			sourceTree = "<group>";
@@ -1519,6 +1522,7 @@
 			files = (
 				01F889D22A8CE3E6001ACB69 /* TextField.swift in Sources */,
 				01389B832A436444009DE998 /* RouteStepView.swift in Sources */,
+				01118A682A9FDC010067926A /* ButtonConfigurations.swift in Sources */,
 				01389B692A43643C009DE998 /* GenericsUIKit.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GenericsUIKit
 
 final class AcceptOrderView: UIView {
 
@@ -22,7 +23,7 @@ final class AcceptOrderView: UIView {
     }()
 
     var declineButton: UIButton = {
-        let view = UIButton(configuration: .borderedTinted())
+        let view = UIButton(configuration: .secondary())
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
