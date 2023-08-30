@@ -28,7 +28,16 @@ final class OnboardingPermissionViewModel: ObservableObject {
             mainButtonState = .openSettings
         }
 
-        repository.state.map { if $0 == .needLocationWhenInUse { return MainButtonState.grantPermission} else { return MainButtonState.openSettings}}.assign(to: &$mainButtonState)
+        repository
+            .state
+            .map {
+                if $0 == .needLocationWhenInUse {
+                    return .grantPermission
+                } else {
+                    return .openSettings
+                }
+            }
+            .assign(to: &$mainButtonState)
     }
 
     func mainButtonPressed() {
