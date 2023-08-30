@@ -66,6 +66,7 @@
 		018A6AA22A1212770015D716 /* SwiftlyHttp in Frameworks */ = {isa = PBXBuildFile; productRef = 018A6AA12A1212770015D716 /* SwiftlyHttp */; };
 		01BEAEC52A9E7FE000106F48 /* dotmatrix.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 01BEAEC42A9E7FE000106F48 /* dotmatrix.TTF */; };
 		01BEAEC72A9E836F00106F48 /* FontFix.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01BEAEC62A9E836F00106F48 /* FontFix.storyboard */; };
+		01BEAEC92A9E86AB00106F48 /* SliderToActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BEAEC82A9E86AB00106F48 /* SliderToActionView.swift */; };
 		01C9DFB32A0AE0E2001DC47D /* AddressSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFB22A0AE0E2001DC47D /* AddressSheetView.swift */; };
 		01C9DFBB2A0AF16B001DC47D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */; };
 		01C9DFBD2A0AF16B001DC47D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFBC2A0AF16B001DC47D /* SceneDelegate.swift */; };
@@ -363,6 +364,7 @@
 		016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuItem+formattedPrice.swift"; sourceTree = "<group>"; };
 		01BEAEC42A9E7FE000106F48 /* dotmatrix.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = dotmatrix.TTF; sourceTree = "<group>"; };
 		01BEAEC62A9E836F00106F48 /* FontFix.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FontFix.storyboard; sourceTree = "<group>"; };
+		01BEAEC82A9E86AB00106F48 /* SliderToActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderToActionView.swift; sourceTree = "<group>"; };
 		01C9DFB22A0AE0E2001DC47D /* AddressSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSheetView.swift; sourceTree = "<group>"; };
 		01C9DFB82A0AF16B001DC47D /* GenericsDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -657,6 +659,7 @@
 				014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */,
 				01F889D92A8CF892001ACB69 /* LocationRepository.swift */,
 				01F889DF2A8D1EE6001ACB69 /* DriverRepository.swift */,
+				01BEAEC82A9E86AB00106F48 /* SliderToActionView.swift */,
 				01BEAEC42A9E7FE000106F48 /* dotmatrix.TTF */,
 				01C9DFC32A0AF16D001DC47D /* Assets.xcassets */,
 				01C9DFC52A0AF16D001DC47D /* LaunchScreen.storyboard */,
@@ -1544,6 +1547,7 @@
 				010D5D8C2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift in Sources */,
 				01D537FA2A7AD093000CC221 /* OrderStickerView.swift in Sources */,
 				0124CAD82A785252002B9BC4 /* NavigateView.swift in Sources */,
+				01BEAEC92A9E86AB00106F48 /* SliderToActionView.swift in Sources */,
 				01F889C42A8CD572001ACB69 /* LoginViewModel.swift in Sources */,
 				01F889E02A8D1EE6001ACB69 /* DriverRepository.swift in Sources */,
 				01F889DA2A8CF892001ACB69 /* LocationRepository.swift in Sources */,

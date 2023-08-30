@@ -15,15 +15,14 @@ final class AcceptOrderView: UIView {
         return view
     }()
 
-    //TODO: Replace with slide-to-action
-    var actionButton: UIButton = {
-        let view = UIButton(configuration: .borderedProminent())
+    var actionSlider: SliderToActionView = {
+        let view = SliderToActionView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     var declineButton: UIButton = {
-        let view = UIButton(configuration: .borderedProminent())
+        let view = UIButton(configuration: .borderedTinted())
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -47,12 +46,12 @@ final class AcceptOrderView: UIView {
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: .big)
         ])
 
-        actionButton.setTitle("Slide to accept", for: .normal)
-        addSubview(actionButton)
+        actionSlider.title = "Slide to accept"
+        addSubview(actionSlider)
         NSLayoutConstraint.activate([
-            actionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .big),
-            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.big),
-            actionButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: .big)
+            actionSlider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .big),
+            actionSlider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.big),
+            actionSlider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: .big)
         ])
 
         declineButton.setTitle("Decline", for: .normal)
@@ -60,7 +59,7 @@ final class AcceptOrderView: UIView {
         NSLayoutConstraint.activate([
             declineButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .big),
             declineButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.big),
-            declineButton.topAnchor.constraint(equalTo: actionButton.bottomAnchor, constant: .big),
+            declineButton.topAnchor.constraint(equalTo: actionSlider.bottomAnchor, constant: .big),
             declineButton.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
 

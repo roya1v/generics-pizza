@@ -139,13 +139,13 @@ final class MapNavigationViewController: UIViewController {
             acceptOrder.bottomAnchor.constraint(equalTo: sheetView.safeAreaLayoutGuide.bottomAnchor)
         ])
 
-        acceptOrder.actionButton.addAction(.init(handler: { _ in
+        acceptOrder.actionSlider.onAction = {
             self.hideSheet {
                 self.setNavigateToPickUpView()
                 self.view.layoutIfNeeded()
                 self.showSheet(completion: nil)
             }
-        }), for: .touchUpInside)
+        }
 
         acceptOrder.declineButton.addAction(.init(handler: { _ in
             self.navigationController?.popViewController(animated: true)
