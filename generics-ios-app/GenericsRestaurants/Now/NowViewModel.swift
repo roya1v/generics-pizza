@@ -38,15 +38,6 @@ final class NowViewModel: ObservableObject {
                         switch message {
                         case .newOrder(let order):
                             self.orders.insert(order, at: 0)
-                        case .update(let id, let state):
-                            let order = self.orders.first(where: { $0.id == id })
-                            self.orders.removeAll(where: { $0.id == id })
-                            if state != .finished {
-                                self.orders.append(.init(id: order?.id, createdAt: order?.createdAt, items: order?.items ?? [], state: state))
-                                self.orders.sort { $0.createdAt!.timeIntervalSince1970 > $1.createdAt!.timeIntervalSince1970 }
-                            }
-                        case .accepted:
-                            print("wow")
                         }
                     }
                     .store(in: &cancellable)
@@ -58,7 +49,13 @@ final class NowViewModel: ObservableObject {
 
     func update(_ order: OrderModel, to newState: OrderState) {
         Task {
-            try? await repository.send(message: .update(id: order.id!, state: newState))
+            try? await repository.send(message: .update(orderId: order.id!, state: newState))
+            let order = self.orders.first(where: { $0.id == order.id })
+            self.orders.removeAll(where: { $0.id == order?.id})
+            if newState != .finished {
+                self.orders.append(.init(id: order?.id, createdAt: order?.createdAt, items: order?.items ?? [], state: newState))
+                self.orders.sort { $0.createdAt!.timeIntervalSince1970 > $1.createdAt!.timeIntervalSince1970 }
+            }
         }
     }
 }

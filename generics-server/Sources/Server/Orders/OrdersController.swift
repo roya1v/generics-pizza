@@ -9,10 +9,13 @@ import Fluent
 import Vapor
 import SharedModels
 
+typealias CustomerMessenger = Messenger<CustomerFromServerMessage, CustomerFromServerMessage>
+typealias RestaurantMessenger = Messenger<RestaurantToServerMessage, RestaurantFromServerMessage>
+
 final class OrdersController: RouteCollection {
 
-    private var clients = [UUID: WebSocket]()
-    private var restaurants = [WebSocket]()
+    private var clients = [UUID: CustomerMessenger]()
+    private var restaurant: RestaurantMessenger?
     private var drivers = [WebSocket]()
 
     func boot(routes: RoutesBuilder) throws {
@@ -25,6 +28,7 @@ final class OrdersController: RouteCollection {
 
         order.grouped("activity").grouped(":orderId").webSocket(onUpgrade: orderActivity)
         order.grouped("activity").grouped(UserTokenEntry.authenticator()).webSocket(onUpgrade: restaurantActivity)
+        order.grouped("activity").grouped("driver").webSocket(onUpgrade: driverActivity)
     }
 
     /// Get currently unfinished orders
@@ -71,9 +75,7 @@ final class OrdersController: RouteCollection {
         for item in order.items {
             try await item.$item.load(on: req.db)
         }
-        for admin in restaurants {
-            try? await admin.send(OrderMessage.newOrder(order: order.getContent()).encode() ?? "")
-        }
+        try? await restaurant?.send(message: .newOrder(order.getContent()))
 
         return order.getContent()
     }
@@ -84,7 +86,7 @@ final class OrdersController: RouteCollection {
             try? await ws.close()
             return
         }
-        clients[order.id!] = ws
+        clients[order.id!] = .init(ws: ws, eventLoop: req.eventLoop)
         ws.onClose.whenComplete { [weak self] _ in
             self?.clients.removeValue(forKey: order.id!)
         }
@@ -100,7 +102,7 @@ final class OrdersController: RouteCollection {
             return
         }
 
-        restaurants.append(ws)
+        restaurant = .init(ws: ws, eventLoop: req.eventLoop)
 
         try? await OrderEntry.query(on: req.db)
             .filter(\.$state != .finished)
@@ -108,27 +110,21 @@ final class OrdersController: RouteCollection {
             .all()
             .map { $0.getContent() }
             .forEach({ order in
-                ws.send(OrderMessage.newOrder(order: order).encode() ?? "")
+                try? restaurant!.send(message: .newOrder(order))
             })
 
-        ws.onText { ws, text in
-            let message = try? OrderMessage.decode(from: text)
-            switch message {
-            case .newOrder:
-                fatalError()
-            case .update(let id, let state):
-                if let order = try? await OrderEntry.find(id, on: req.db) {
-                    order.state = state
-                    try? await order.save(on: req.db)
-                    if let client = self.clients[id] {
-                        try? await client.send(text)
+        restaurant!.onMessage { message in
+            Task {
+                switch message {
+                case .update(let id, let state):
+                    if let order = try? await OrderEntry.find(id, on: req.db) {
+                        order.state = state
+                        try? await order.save(on: req.db)
+                        if let client = self.clients[id] {
+                            try? await client.send(message: .newState(state))
+                        }
                     }
-                    try? await ws.send(text)
                 }
-            case .accepted:
-                fatalError()
-            case .none:
-                fatalError()
             }
         }
     }
@@ -145,34 +141,8 @@ final class OrdersController: RouteCollection {
 
         drivers.append(ws)
 
-        try? await OrderEntry.query(on: req.db)
-            .filter(\.$state != .readyForDelivery)
-            .with(\.$items) { $0.with(\.$item) }
-            .all()
-            .map { $0.getContent() }
-            .forEach({ order in
-                ws.send(OrderMessage.newOrder(order: order).encode() ?? "")
-            })
-
         ws.onText { ws, text in
-            let message = try? OrderMessage.decode(from: text)
-            switch message {
-            case .newOrder:
-                fatalError()
-            case .update(let id, let state):
-                if let order = try? await OrderEntry.find(id, on: req.db) {
-                    order.state = state
-                    try? await order.save(on: req.db)
-                    if let client = self.clients[id] {
-                        try? await client.send(text)
-                    }
-                    try? await ws.send(text)
-                }
-            case .accepted:
-                fatalError()
-            case .none:
-                fatalError()
-            }
+
         }
     }
 }

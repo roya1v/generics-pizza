@@ -19,8 +19,8 @@ public func mockOrderRestaurantRepository() -> OrderRestaurantRepository {
 }
 
 public protocol OrderRestaurantRepository {
-    func getFeed() async throws -> AnyPublisher<OrderMessage, Error>
-    func send(message: OrderMessage) async throws
+    func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error>
+    func send(message: RestaurantToServerMessage) async throws
     var authDelegate: AuthorizationDelegate? { get set}
 }
 
@@ -39,7 +39,7 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
 
     // MARK: - OrderRestaurantRepository
 
-    func getFeed() async throws -> AnyPublisher<OrderMessage, Error> {
+    func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error> {
         let currentOrders = try await getCurrentOrders()
         currentOrders.forEach { order in
             feed.send(.newOrder(order: order))
@@ -55,18 +55,20 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
             .messagePublisher
             .compactMap({
                 if case let .string(message) = $0 {
-                    return message
+                    return message.data(using: .utf8)
                 } else {
                     return nil
                 }
             })
-            .tryMap(OrderMessage.decode)
-            .prepend(currentOrders.map { .newOrder(order: $0) })
+            .decode(type: RestaurantFromServerMessage.self, decoder: JSONDecoder())
+            .prepend(currentOrders.map { .newOrder($0) })
             .eraseToAnyPublisher()
     }
 
-    func send(message: OrderMessage) async throws {
-        try await socket?.send(message: .string(message.encode() ?? ""))
+    func send(message: RestaurantToServerMessage) async throws {
+        let data = try JSONEncoder().encode(message)
+        let text = String(data: data, encoding: .utf8)
+        try await socket?.send(message: .string(text ?? ""))
     }
 
     private func getCurrentOrders() async throws -> [OrderModel] {
@@ -88,10 +90,10 @@ final class OrderRestaurantRepositoryMck: OrderRestaurantRepository {
 
     var authDelegate: AuthorizationDelegate?
 
-    func getFeed() async throws -> AnyPublisher<OrderMessage, Error> {
+    func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error> {
         return PassthroughSubject().eraseToAnyPublisher()
     }
 
-    func send(message: OrderMessage) async throws {
+    func send(message: RestaurantToServerMessage) async throws {
     }
 }

@@ -48,10 +48,10 @@ final class CartViewModel: ObservableObject {
                     .receive(on: DispatchQueue.main)
                     .sink { [weak self] message in
                         switch message {
-                        case .update(_, let newState):
-                            self?.state = .inOrderState(state: newState)
-                        default:
-                            fatalError("Not implemented")
+                        case let .newState(state):
+                            self?.state = .inOrderState(state: state)
+                        case .accepted:
+                            fatalError()
                         }
                     }
                     .store(in: &cancellable)

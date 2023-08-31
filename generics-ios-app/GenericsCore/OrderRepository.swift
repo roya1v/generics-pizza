@@ -22,7 +22,7 @@ public protocol OrderRepository {
     var items: [MenuItem] { get }
     func add(item: MenuItem)
     func checkPrice() async throws -> [SubtotalModel]
-    func placeOrder() async throws -> AnyPublisher<OrderMessage, Error>
+    func placeOrder() async throws -> AnyPublisher<CustomerFromServerMessage, Error>
 }
 
 final class OrderRepositoryImpl: OrderRepository {
@@ -57,7 +57,7 @@ final class OrderRepositoryImpl: OrderRepository {
             .perform()
     }
 
-    func placeOrder() async throws -> AnyPublisher<OrderMessage, Error> {
+    func placeOrder() async throws -> AnyPublisher<CustomerFromServerMessage, Error> {
         let order = try await makeOrderRequest()
 
         socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
@@ -70,12 +70,12 @@ final class OrderRepositoryImpl: OrderRepository {
             .messagePublisher
             .compactMap({
                 if case let .string(message) = $0 {
-                    return message
+                    return message.data(using: .utf8)
                 } else {
                     return nil
                 }
             })
-            .tryMap(OrderMessage.decode)
+            .decode(type: CustomerFromServerMessage.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
 
@@ -117,8 +117,8 @@ final class OrderRepositoryMck: OrderRepository {
         }
     }
 
-    var placeOrderImplementation: (() async throws -> AnyPublisher<OrderMessage, Error>)?
-    func placeOrder() async throws -> AnyPublisher<OrderMessage, Error> {
+    var placeOrderImplementation: (() async throws -> AnyPublisher<CustomerFromServerMessage, Error>)?
+    func placeOrder() async throws -> AnyPublisher<CustomerFromServerMessage, Error> {
         if let placeOrderImplementation {
             return try await placeOrderImplementation()
         } else {
