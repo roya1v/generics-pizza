@@ -27,7 +27,6 @@ public protocol OrderRepository {
 
 final class OrderRepositoryImpl: OrderRepository {
     private var socket: SwiftlyWebSocketConnection?
-    private let messages = PassthroughSubject<OrderMessage, Never>()
     private let baseURL: String
 
     init(baseURL: String) {

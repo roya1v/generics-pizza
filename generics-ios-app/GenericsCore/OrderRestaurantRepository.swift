@@ -29,7 +29,6 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
     var authDelegate: AuthorizationDelegate?
 
     private var socket: SwiftlyWebSocketConnection?
-    private let feed = PassthroughSubject<OrderMessage, Never>()
 
     private let baseURL: String
 
@@ -41,9 +40,6 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
 
     func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error> {
         let currentOrders = try await getCurrentOrders()
-        currentOrders.forEach { order in
-            feed.send(.newOrder(order: order))
-        }
 
         socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
             .add(path: "order")
