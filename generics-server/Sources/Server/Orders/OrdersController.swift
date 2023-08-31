@@ -11,12 +11,13 @@ import SharedModels
 
 typealias CustomerMessenger = Messenger<CustomerFromServerMessage, CustomerFromServerMessage>
 typealias RestaurantMessenger = Messenger<RestaurantToServerMessage, RestaurantFromServerMessage>
+typealias DriverMessenger = Messenger<DriverToServerMessage, DriverFromServerMessage>
 
 final class OrdersController: RouteCollection {
 
     private var clients = [UUID: CustomerMessenger]()
     private var restaurant: RestaurantMessenger?
-    private var drivers = [WebSocket]()
+    private var drivers = [DriverMessenger]()
 
     func boot(routes: RoutesBuilder) throws {
         let order = routes.grouped("order")
@@ -76,6 +77,7 @@ final class OrdersController: RouteCollection {
             try await item.$item.load(on: req.db)
         }
         try? await restaurant?.send(message: .newOrder(order.getContent()))
+        req.logger.debug("New incomming order: \(order.getContent())")
 
         return order.getContent()
     }
@@ -123,6 +125,13 @@ final class OrdersController: RouteCollection {
                         if let client = self.clients[id] {
                             try? await client.send(message: .newState(state))
                         }
+
+                        // TODO: Change the moment for driver search. Change the way the driver is selected.
+                        if state == .readyForDelivery,
+                           let driver = self.drivers.first {
+                            try? await driver.send(message: .offerOrder)
+                            req.logger.debug("Order ready for pick-up!")
+                        }
                     }
                 }
             }
@@ -139,10 +148,17 @@ final class OrdersController: RouteCollection {
             return
         }
 
-        drivers.append(ws)
+        let messenger = DriverMessenger(ws: ws, eventLoop: req.eventLoop)
+        drivers.append(messenger)
+        req.logger.debug("New driver joined!")
 
-        ws.onText { ws, text in
-
+        messenger.onMessage { message in
+            switch message {
+            case .locationUpdated(lon: let lon, lat: let lat):
+                break
+            case .acceptOrder:
+                break
+            }
         }
     }
 }

@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum DriverToServerMessage: Codable {
+public enum DriverToServerMessage: Codable {
     case locationUpdated(lon: Double, lat: Double)
     case acceptOrder
 }
 
-enum DriverFromServerMessage: Codable {
+public enum DriverFromServerMessage: Codable {
     case offerOrder
 }
