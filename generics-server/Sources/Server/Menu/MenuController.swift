@@ -26,7 +26,7 @@ struct MenuController: RouteCollection {
         try await MenuEntry
             .query(on: req.db)
             .all()
-            .map { $0.toSharedModel() }
+            .toSharedModels()
     }
 
     /// Get image for a menu item

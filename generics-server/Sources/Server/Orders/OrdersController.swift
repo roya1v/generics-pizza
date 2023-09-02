@@ -40,7 +40,7 @@ final class OrdersController: RouteCollection {
             .filter(\.$state != .finished)
             .with(\.$items) { $0.with(\.$item) }
             .all()
-            .map { $0.toSharedModel() }
+            .toSharedModels()
     }
 
     /// Get all finished orders
@@ -50,7 +50,7 @@ final class OrdersController: RouteCollection {
             .filter(\.$state == .finished)
             .with(\.$items) { $0.with(\.$item) }
             .all()
-            .map { $0.toSharedModel() }
+            .toSharedModels()
     }
 
     /// Check price for order
@@ -118,7 +118,7 @@ final class OrdersController: RouteCollection {
             .filter(\.$state != .finished)
             .with(\.$items) { $0.with(\.$item) }
             .all()
-            .map { $0.toSharedModel() }
+            .toSharedModels()
             .forEach({ order in
                 try? restaurant!.send(message: .newOrder(order))
             })
