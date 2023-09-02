@@ -72,6 +72,9 @@ final class OrdersController: RouteCollection {
 
     /// Make a new order
     func new(req: Request) async throws -> OrderModel {
+        guard let restaurant else {
+            throw Abort(.notAcceptable, reason: "Restaurant is offline.")
+        }
         let orderModel = try req.content.decode(OrderModel.self)
 
         let order = OrderEntry(state: .new)
@@ -84,7 +87,7 @@ final class OrdersController: RouteCollection {
         for item in order.items {
             try await item.$item.load(on: req.db)
         }
-        try? await restaurant?.send(message: .newOrder(order.toSharedModel()))
+        try await restaurant.send(message: .newOrder(order.toSharedModel()))
         req.logger.debug("New incomming order: \(order.toSharedModel())")
 
         return order.toSharedModel()
