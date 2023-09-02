@@ -9,7 +9,7 @@ import Fluent
 import Vapor
 import SharedModels
 
-final class OrderItemEntry: Model, Content {
+final class OrderItemEntry: Model {
     static var schema = "order_items"
 
     @ID(key: .id)
