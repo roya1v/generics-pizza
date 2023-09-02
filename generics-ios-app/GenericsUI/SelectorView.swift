@@ -29,6 +29,7 @@ public struct SelectorView: View {
                 Image(systemName: icon)
                     .foregroundColor(Color.gray)
                 Text(text)
+                    .lineLimit(1)
             }
         }
     }

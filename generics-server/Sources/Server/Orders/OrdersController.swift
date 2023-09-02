@@ -22,6 +22,7 @@ final class OrdersController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         let order = routes.grouped("order")
         order.post("check_price", use: checkPrice)
+        order.post("check_location", use: checkRestaurantLocation)
         let authenticated = order.grouped(UserTokenEntry.authenticator())
         authenticated.get("current", use: getCurrent)
         authenticated.get("history", use: getHistory)
@@ -60,6 +61,13 @@ final class OrdersController: RouteCollection {
             .init(name: "Delivery", value: 1299),
             .init(name: "Total", value: sum + 1299, isSecondary: false)
         ]
+    }
+
+    /// Check which restaurant serves which location
+    func checkRestaurantLocation(req: Request) async throws -> AddressModel {
+        // Hardcoded single restaurant for now
+        return .init(coordinate: .init(latitude: 52.23052266504451, longitude: 21.006914615520103),
+                     details: "Śródmieście Północne, Warszawa")
     }
 
     /// Make a new order
@@ -157,6 +165,8 @@ final class OrdersController: RouteCollection {
             case .locationUpdated(lon: let lon, lat: let lat):
                 break
             case .acceptOrder:
+                break
+            case .declineOrder:
                 break
             }
         }

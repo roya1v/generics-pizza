@@ -12,6 +12,8 @@
 		010D5D8C2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */; };
 		01118A682A9FDC010067926A /* ButtonConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01118A672A9FDC010067926A /* ButtonConfigurations.swift */; };
 		01118A6A2A9FE0AA0067926A /* ExternalMapOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01118A692A9FE0AA0067926A /* ExternalMapOpener.swift */; };
+		011D49FA2AA324F500611D8D /* GeocodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011D49F92AA324F500611D8D /* GeocodingService.swift */; };
+		011D49FC2AA3442C00611D8D /* MapPointModel+CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011D49FB2AA3442C00611D8D /* MapPointModel+CLLocationCoordinate2D.swift */; };
 		0122FD6E2A8B7A5400D015C5 /* CartViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122FD6D2A8B7A5400D015C5 /* CartViewModelTests.swift */; };
 		0122FD7C2A8BA65700D015C5 /* GenericsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */; };
 		0122FD832A8BA65700D015C5 /* GenericsCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122FD822A8BA65700D015C5 /* GenericsCoreTests.swift */; };
@@ -331,6 +333,8 @@
 		010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPermissionViewController.swift; sourceTree = "<group>"; };
 		01118A672A9FDC010067926A /* ButtonConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConfigurations.swift; sourceTree = "<group>"; };
 		01118A692A9FE0AA0067926A /* ExternalMapOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalMapOpener.swift; sourceTree = "<group>"; };
+		011D49F92AA324F500611D8D /* GeocodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingService.swift; sourceTree = "<group>"; };
+		011D49FB2AA3442C00611D8D /* MapPointModel+CLLocationCoordinate2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapPointModel+CLLocationCoordinate2D.swift"; sourceTree = "<group>"; };
 		0122FD6D2A8B7A5400D015C5 /* CartViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModelTests.swift; sourceTree = "<group>"; };
 		0122FD742A8BA65700D015C5 /* GenericsCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GenericsCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0122FD762A8BA65700D015C5 /* GenericsCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenericsCore.h; sourceTree = "<group>"; };
@@ -890,6 +894,7 @@
 				ECD845A8298AE51D0036454C /* GenericsAppApp.swift */,
 				ECD845AA298AE51D0036454C /* ContentView.swift */,
 				ECD079F029E45CCD00914593 /* Container+Repositories.swift */,
+				011D49F92AA324F500611D8D /* GeocodingService.swift */,
 				EC14E81D298B0C1100A6540C /* Home */,
 				EC14E81E298B0C1C00A6540C /* Menu */,
 				EC688C2129CA38C100450D2E /* Cart */,
@@ -899,6 +904,7 @@
 				ECD845B8298AE51E0036454C /* Tests */,
 				ECD845C2298AE51E0036454C /* UITests */,
 				016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */,
+				011D49FB2AA3442C00611D8D /* MapPointModel+CLLocationCoordinate2D.swift */,
 			);
 			path = GenericsApp;
 			sourceTree = "<group>";
@@ -1629,8 +1635,10 @@
 				016934142A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift in Sources */,
 				EC688C2929CA462E00450D2E /* CartViewModel.swift in Sources */,
 				ECD079F129E45CCD00914593 /* Container+Repositories.swift in Sources */,
+				011D49FC2AA3442C00611D8D /* MapPointModel+CLLocationCoordinate2D.swift in Sources */,
 				EC688C2329CA38D900450D2E /* CartView.swift in Sources */,
 				01FFEA522A0974D900C622CC /* AddressSwiftUIView.swift in Sources */,
+				011D49FA2AA324F500611D8D /* GeocodingService.swift in Sources */,
 				0148E8242A6D2D320011ACE4 /* CarouselCardView.swift in Sources */,
 				01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */,
 				EC14E81B298B086E00A6540C /* MenuView.swift in Sources */,

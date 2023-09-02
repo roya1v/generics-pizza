@@ -19,7 +19,7 @@ final class AddressSheetView: UIView {
     }()
 
     private let submitButton: UIButton = {
-        let view = UIButton(frame: .zero)
+        let view = UIButton(configuration: .primary())
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -48,8 +48,8 @@ final class AddressSheetView: UIView {
         return view
     }()
 
-    var addressTextChanged = PassthroughSubject<String?, Never>()
-    var addressTextSubmited = PassthroughSubject<String?, Never>()
+    let addressTextChanged = PassthroughSubject<String?, Never>()
+    let addressTextSubmited = PassthroughSubject<String?, Never>()
 
     var addressTextFieldValue: String? {
         get {
@@ -60,12 +60,20 @@ final class AddressSheetView: UIView {
         }
     }
 
+    var isSubmitEnabled: Bool {
+        get {
+            submitButton.isEnabled
+        }
+        set {
+            submitButton.isEnabled = newValue
+        }
+    }
+
     var startAddress: String? {
         didSet {
-            if let finishAddress {
-                routeStartStep.subtitleText = finishAddress
+            if let startAddress {
+                routeStartStep.subtitleText = startAddress
                 showSteps()
-
             } else {
                 routeStartStep.isHidden = true
             }
@@ -83,6 +91,8 @@ final class AddressSheetView: UIView {
         }
     }
 
+    var onSubmit: (() -> Void)?
+
     init() {
         super.init(frame: .zero)
 
@@ -99,21 +109,22 @@ final class AddressSheetView: UIView {
 
         addSubview(titleView)
         NSLayoutConstraint.activate([
-            titleView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
-            titleView.topAnchor.constraint(equalTo: topAnchor, constant: 16.0),
-            titleView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16.0)
+            titleView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .big),
+            titleView.topAnchor.constraint(equalTo: topAnchor, constant: .big),
+            titleView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: .big)
         ])
         titleView.text = "Delivery address"
         titleView.font = .preferredFont(forTextStyle: .title1)
 
         addSubview(addressTextField)
         NSLayoutConstraint.activate([
-            addressTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
-            addressTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
-            addressTextField.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 16.0),
-            addressTextField.bottomAnchor.constraint(lessThanOrEqualTo: keyboardLayoutGuide.topAnchor, constant: -16.0)
+            addressTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .big),
+            addressTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.big),
+            addressTextField.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: .big),
+            addressTextField.bottomAnchor.constraint(lessThanOrEqualTo: keyboardLayoutGuide.topAnchor, constant: -.big)
         ])
         addressTextField.borderStyle = .roundedRect
+        addressTextField.placeholder = "Details"
         addressTextField.addAction(.init(handler: { action in
             self.addressTextChanged.send(self.addressTextField.text)
         }), for: .editingChanged)
@@ -124,25 +135,23 @@ final class AddressSheetView: UIView {
 
         addSubview(submitButton)
         NSLayoutConstraint.activate([
-            submitButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
-            submitButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
-            submitButton.heightAnchor.constraint(equalToConstant: 64.0),
-            submitButton.topAnchor.constraint(greaterThanOrEqualTo: addressTextField.bottomAnchor, constant: 16.0)
+            submitButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .big),
+            submitButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.big),
+            submitButton.topAnchor.constraint(greaterThanOrEqualTo: addressTextField.bottomAnchor, constant: .big)
         ])
-        submitButton.setTitleColor(.white, for: .normal)
         submitButton.setTitle("Submit", for: .normal)
-        submitButton.backgroundColor = .black
-        submitButton.layer.cornerRadius = 32.0
-        submitButton.isEnabled = false
+        submitButton.addAction(.init(handler: { _ in
+            self.onSubmit?()
+        }), for: .touchUpInside)
 
         addSubview(captionLabel)
         NSLayoutConstraint.activate([
             captionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32.0),
             captionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32.0),
-            captionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-            captionLabel.topAnchor.constraint(equalTo: submitButton.bottomAnchor, constant: 8.0),
+            captionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -.big),
+            captionLabel.topAnchor.constraint(equalTo: submitButton.bottomAnchor, constant: .normal),
         ])
-        captionLabel.text = "Your driver will receive both the pin location and address"
+        captionLabel.text = "Your driver will receive both the pin location and details"
         captionLabel.font = .preferredFont(forTextStyle: .caption1)
         captionLabel.textAlignment = .center
         captionLabel.numberOfLines = 0
@@ -151,21 +160,20 @@ final class AddressSheetView: UIView {
     func showSteps() {
         addSubview(routeStartStep)
         NSLayoutConstraint.activate([
-            routeStartStep.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
-            routeStartStep.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
-            routeStartStep.topAnchor.constraint(equalTo: addressTextField.bottomAnchor, constant: 16.0)
+            routeStartStep.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .big),
+            routeStartStep.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.big),
+            routeStartStep.topAnchor.constraint(equalTo: addressTextField.bottomAnchor, constant: .big)
         ])
         routeStartStep.titleText = "Restaurant"
-        routeStartStep.subtitleText = " "
         routeStartStep.image = UIImage(named: "destination_icon")
         routeStartStep.isHidden = false
 
         addSubview(routeFinishStep)
         NSLayoutConstraint.activate([
-            routeFinishStep.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
-            routeFinishStep.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
-            routeFinishStep.topAnchor.constraint(equalTo: routeStartStep.bottomAnchor, constant: 16.0),
-            routeFinishStep.bottomAnchor.constraint(equalTo: submitButton.topAnchor, constant: -16.0)
+            routeFinishStep.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .big),
+            routeFinishStep.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -.big),
+            routeFinishStep.topAnchor.constraint(equalTo: routeStartStep.bottomAnchor, constant: .big),
+            routeFinishStep.bottomAnchor.constraint(equalTo: submitButton.topAnchor, constant: -.big)
         ])
         routeFinishStep.titleText = "You"
         routeFinishStep.image = UIImage(named: "location_icon")

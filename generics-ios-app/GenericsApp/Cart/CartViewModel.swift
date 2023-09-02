@@ -9,22 +9,29 @@ import Foundation
 import SharedModels
 import Factory
 import Combine
+import GenericsCore
+import CoreLocation
 
 final class CartViewModel: ObservableObject {
 
-    enum State {
+    enum State: Equatable {
         case readyForOrder
         case loading
         case inOrderState(state: OrderState)
+        case needAddress
         case error
     }
 
     @Published private(set) var items: [MenuItem] = []
+    @Published private(set) var address: String?
     @Published private(set) var subtotal: [SubtotalModel] = []
     @Published private(set) var state: State = .readyForOrder
 
     @Injected(Container.orderRepository)
     private var repository
+
+    @Injected(Container.geocodingService)
+    private var geocodingService
 
     private var cancellable = Set<AnyCancellable>()
 
@@ -35,6 +42,20 @@ final class CartViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.subtotal = total
                 }
+            }
+        }
+    }
+
+    func checkAddress() {
+        if state == .needAddress && repository.address != nil {
+            state = .readyForOrder
+        }
+
+        if let address = repository.address {
+            self.address = ""
+            Task {
+                let addressString = (try? await geocodingService.getAddress(for: address.coordinate.clLocationCoordinate2d)) ?? ""
+                self.address = addressString  + address.details
             }
         }
     }
@@ -56,6 +77,13 @@ final class CartViewModel: ObservableObject {
                     }
                     .store(in: &cancellable)
             } catch {
+                if let error = error as? OrderError {
+                    switch error {
+                    case .noAddress:
+                        self.state = .needAddress
+                    }
+                    return
+                }
                 state = .error
             }
         }

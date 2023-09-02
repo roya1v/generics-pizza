@@ -18,10 +18,16 @@ public func mockOrderRepository() -> OrderRepository {
     OrderRepositoryMck()
 }
 
+public enum OrderError: Error {
+    case noAddress
+}
+
 public protocol OrderRepository {
     var items: [MenuItem] { get }
+    var address: AddressModel? { get set }
     func add(item: MenuItem)
     func checkPrice() async throws -> [SubtotalModel]
+    func checkRestaurantLocation(for location: MapPointModel) async throws -> AddressModel
     func placeOrder() async throws -> AnyPublisher<CustomerFromServerMessage, Error>
 }
 
@@ -38,7 +44,9 @@ final class OrderRepositoryImpl: OrderRepository {
 
     // MARK: - OrderRepository
 
-    var items = [MenuItem]()
+    private(set) var items = [MenuItem]()
+
+    var address: AddressModel?
 
     func add(item: MenuItem) {
         items.append(item)
@@ -50,13 +58,16 @@ final class OrderRepositoryImpl: OrderRepository {
     func checkPrice() async throws -> [SubtotalModel] {
         try await getRequest()
             .add(path: "check_price")
-            .method(.post)
             .body(OrderModel(createdAt: nil, items: items))
             .decode(to: [SubtotalModel].self)
             .perform()
     }
 
     func placeOrder() async throws -> AnyPublisher<CustomerFromServerMessage, Error> {
+        guard address != nil else {
+            throw OrderError.noAddress
+        }
+
         let order = try await makeOrderRequest()
 
         socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
@@ -78,6 +89,14 @@ final class OrderRepositoryImpl: OrderRepository {
             .eraseToAnyPublisher()
     }
 
+    func checkRestaurantLocation(for location: MapPointModel) async throws -> AddressModel {
+        try await getRequest()
+            .add(path: "check_location")
+            .body(location)
+            .decode(to: AddressModel.self)
+            .perform()
+    }
+
     private func makeOrderRequest() async throws -> OrderModel {
         let response = try await getRequest()
             .method(.post)
@@ -91,10 +110,13 @@ final class OrderRepositoryImpl: OrderRepository {
     private func getRequest() -> SwiftlyHttp {
         SwiftlyHttp(baseURL: baseURL)!
             .add(path: "order")
+            .method(.post)
     }
 }
 
 final class OrderRepositoryMck: OrderRepository {
+
+    var address: AddressModel?
 
     var items: [MenuItem] = [
         .init(id: .init(), title: "Margarita simplita", description: "Tomatoe souce, cheese and weird leaves", price: 100),
@@ -123,5 +145,9 @@ final class OrderRepositoryMck: OrderRepository {
         } else {
             fatalError()
         }
+    }
+
+    func checkRestaurantLocation(for location: SharedModels.MapPointModel) async throws -> AddressModel {
+        fatalError()
     }
 }

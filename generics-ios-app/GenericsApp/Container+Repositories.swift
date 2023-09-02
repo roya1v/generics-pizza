@@ -15,4 +15,5 @@ extension Container {
     static let orderRepository = Factory(scope: .singleton) { buildOrderRepository(url: url) }
     static let menuRepository = Factory { buildMenuRepository(url: url) }
     static let authenticationRepository = Factory(scope: .singleton) { buildAuthenticationRepository(url: url) }
+    static let geocodingService = Factory { buildGeocodingService() }
 }

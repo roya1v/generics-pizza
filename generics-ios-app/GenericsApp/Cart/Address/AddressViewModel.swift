@@ -7,23 +7,36 @@
 
 import Foundation
 import CoreLocation
-import Contacts
 import MapKit
+import Factory
+import SharedModels
 
 final class AddressViewModel {
 
-    @Published var finishAddress: String?
-    @Published var mapRegion: MKCoordinateRegion?
+    @Published private(set) var finishAddress: String?
+    @Published private(set) var restaurantAddress: String?
+    @Published private(set) var mapRegion: MKCoordinateRegion?
+    @Published private(set) var restaurantCoordinate: CLLocationCoordinate2D?
+    @Published private(set) var isSubmitEnabled = false
 
-    private let geocoder = CLGeocoder()
+    private var orderCoordinate: CLLocationCoordinate2D?
+    private var orderDetails = ""
+
     private let popMe: (() -> Void)?
+
+    @Injected(Container.orderRepository)
+    var orderRepository
+
+    @Injected(Container.geocodingService)
+    var geocodingService
 
     init(popMe: (() -> Void)?) {
         self.popMe = popMe
     }
 
     func submitTapped() {
-
+        orderRepository.address = .init(coordinate: orderCoordinate!.mapPointModel, details: orderDetails)
+        popMe?()
     }
 
     func closeTapped() {
@@ -31,28 +44,33 @@ final class AddressViewModel {
     }
 
     func mapMoved(to coordinates: CLLocationCoordinate2D) {
-        geocoder.reverseGeocodeLocation(CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)) { places, error in
-            let place = places!.first!
-            let formatter = CNPostalAddressFormatter()
-            let addressString = formatter.string(from: place.postalAddress!)
-            self.finishAddress = addressString
-            //self.addressSheetView.finishAddress = addressString
-            //self.addressSheetView.addressTextFieldValue = addressString
+        Task {
+            self.finishAddress = try? await geocodingService.getAddress(for: coordinates)
+            if let restaurantLocation = try? await orderRepository.checkRestaurantLocation(for: coordinates.mapPointModel) {
+                restaurantCoordinate = restaurantLocation.coordinate.clLocationCoordinate2d
+                restaurantAddress = restaurantLocation.details
+
+                orderCoordinate = coordinates
+                isSubmitEnabled = true
+            }
         }
     }
 
     func addressFieldChanged(to value: String?) {
-        self.geocoder.geocodeAddressString(value ?? "") {
-                (placemarks, error) in
-                guard error == nil else {
-                    print("Geocoding error: \(error!)")
-                    return
+        orderDetails = value ?? ""
+        Task {
+            if let address = value,
+               let coordinate = try? await geocodingService.getCoordinate(for: address) {
+                if let orderCoordinate {
+                    let orderLocation = CLLocation(latitude: orderCoordinate.latitude, longitude: orderCoordinate.longitude)
+                    let detailLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                    if orderLocation.distance(from: detailLocation) > 300 {
+                        mapRegion = .init(center: coordinate, latitudinalMeters: 500.0, longitudinalMeters: 500.0)
+                    }
+                } else {
+                    mapRegion = .init(center: coordinate, latitudinalMeters: 500.0, longitudinalMeters: 500.0)
                 }
-            let place = placemarks!.first!
-            self.mapRegion = .init(center: place.location!.coordinate, latitudinalMeters: 500.0, longitudinalMeters: 500.0)
-            let formatter = CNPostalAddressFormatter()
-            let addressString = formatter.string(from: place.postalAddress!)
-            self.finishAddress = addressString
             }
+        }
     }
 }

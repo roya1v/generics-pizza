@@ -54,26 +54,7 @@ struct CartView: View {
 
                         }
                     }
-                    Section {
-                        NavigationLink {
-                            AddressSwiftUIView(dumbFix: $dumbFix)
-                                .ignoresSafeArea()
-                                .toolbar(.hidden, for: .navigationBar)
-                                .toolbar(dumbFix ? .hidden : .automatic,
-                                         for: .tabBar)
-                        } label: {
-                            SelectorView(caption: "Your delivery address",
-                                         icon: "location",
-                                         text: "Select your address")
-                        }
-                        NavigationLink {
-                            Text("Payment view")
-                        } label: {
-                            SelectorView(caption: "Payment method",
-                                         icon: "creditcard",
-                                         text: "Cash")
-                        }
-                    }
+                    detailsSection
                     Section {
                         VStack {
                             ForEach(model.subtotal, id: \.name) { part in
@@ -99,7 +80,7 @@ struct CartView: View {
                     }
                     Section {
                         switch model.state {
-                        case .readyForOrder:
+                        case .readyForOrder, .needAddress:
                             orderButton
                         case .loading:
                             ProgressView()
@@ -111,11 +92,56 @@ struct CartView: View {
                     }
                 }
                 .navigationTitle("My cart")
+                .onAppear {
+                    model.checkAddress()
+                }
             }
         }
         .onAppear {
             model.fetch()
         }
+    }
+
+    @ViewBuilder
+    var detailsSection: some View {
+        Section {
+            if model.state == .needAddress {
+                NavigationLink {
+                    AddressSwiftUIView(dumbFix: $dumbFix)
+                        .ignoresSafeArea()
+                        .toolbar(.hidden, for: .navigationBar)
+                        .toolbar(dumbFix ? .hidden : .automatic,
+                                 for: .tabBar)
+                } label: {
+                    SelectorView(caption: "Your delivery address",
+                                 icon: "location",
+                                 text: "Select your address")
+                }
+                .listRowBackground(Color.red.opacity(0.25))
+            } else {
+                NavigationLink {
+                    AddressSwiftUIView(dumbFix: $dumbFix)
+                        .ignoresSafeArea()
+                        .toolbar(.hidden, for: .navigationBar)
+                        .toolbar(dumbFix ? .hidden : .automatic,
+                                 for: .tabBar)
+                } label: {
+                    SelectorView(caption: "Your delivery address",
+                                 icon: "location",
+                                 text: model.address ?? "Select your address")
+                }
+            }
+
+            NavigationLink {
+                Text("Payment view")
+            } label: {
+                SelectorView(caption: "Payment method",
+                             icon: "creditcard",
+                             text: "Cash")
+            }
+        }
+        .disabled(!(model.state == .readyForOrder
+                    || model.state == .needAddress))
     }
 
     @ViewBuilder

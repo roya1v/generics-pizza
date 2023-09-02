@@ -47,11 +47,22 @@ final class AddressViewController: UIViewController {
     private let model: AddressViewModel
     private var cancellable = Set<AnyCancellable>()
 
-    private var constraint: NSLayoutConstraint! = nil
+    private lazy var constraint = addressSheetView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+
+    private var restaurantAnnotation: MKAnnotation? {
+        willSet {
+            if let newValue {
+                mapView.addAnnotation(newValue)
+            } else if let restaurantAnnotation {
+                mapView.removeAnnotation(restaurantAnnotation)
+            }
+        }
+    }
 
     init(model: AddressViewModel) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
+        setupBinding()
     }
 
     required init?(coder: NSCoder) {
@@ -94,10 +105,9 @@ final class AddressViewController: UIViewController {
         view.addSubview(addressSheetView)
         NSLayoutConstraint.activate([
             addressSheetView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            addressSheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            addressSheetView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            constraint
         ])
-        constraint = addressSheetView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        constraint.isActive = true
 
         view.addSubview(closeButtonView)
         NSLayoutConstraint.activate([
@@ -109,6 +119,12 @@ final class AddressViewController: UIViewController {
             self.model.closeTapped()
         }), for: .touchUpInside)
 
+        addressSheetView.onSubmit = {
+            self.model.submitTapped()
+        }
+    }
+
+    private func setupBinding() {
         addressSheetView.addressTextChanged.debounce(for: .seconds(2), scheduler: DispatchQueue.main).sink { value in
             self.model.addressFieldChanged(to: value)
         }.store(in: &cancellable)
@@ -126,6 +142,28 @@ final class AddressViewController: UIViewController {
                 self.mapView.setRegion(region, animated: true)
             }
         }.store(in: &cancellable)
+
+        model.$restaurantCoordinate.receive(on: DispatchQueue.main).sink { location in
+            if let location {
+                let annotation = MKPointAnnotation()
+                annotation.title = "Restaurant"
+                annotation.coordinate = location
+                self.restaurantAnnotation = annotation
+            } else {
+                self.restaurantAnnotation = nil
+            }
+        }
+        .store(in: &cancellable)
+
+        model.$restaurantAddress.receive(on: DispatchQueue.main).sink { address in
+            self.addressSheetView.startAddress = address
+        }
+        .store(in: &cancellable)
+
+        model.$isSubmitEnabled.receive(on: DispatchQueue.main).sink { isEnabled in
+            self.addressSheetView.isSubmitEnabled = isEnabled
+        }
+        .store(in: &cancellable)
     }
 }
 
