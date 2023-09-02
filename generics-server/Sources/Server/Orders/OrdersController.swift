@@ -54,7 +54,7 @@ final class OrdersController: RouteCollection {
     }
 
     /// Check price for order
-    func checkPrice(req: Request) async throws -> [Subtotal] {
+    func checkPrice(req: Request) async throws -> [SubtotalModel] {
         let sum = try req.content.decode(OrderModel.self).items.reduce(0, {$0 + $1.price})
         return [
             .init(name: "Subtotal", value: sum),
