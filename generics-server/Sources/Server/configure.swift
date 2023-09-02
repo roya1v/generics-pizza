@@ -15,8 +15,10 @@ public func configure(_ app: Application) throws {
         ), as: .psql)
 
     let awsClient = AWSClient(
-        credentialProvider: .static(accessKeyId: Environment.get("AWS_ACCESS_KEY_ID") ?? "vapor_access_key_id",
-                                    secretAccessKey: Environment.get("AWS_SECRET_ACCESS_KEY") ?? "vapor_secret_access_key"),
+        credentialProvider: .static(
+            accessKeyId: Environment.get("AWS_ACCESS_KEY_ID") ?? "vapor_access_key_id",
+            secretAccessKey: Environment.get("AWS_SECRET_ACCESS_KEY") ?? "vapor_secret_access_key"
+        ),
         httpClientProvider: .shared(app.http.client.shared))
 
      app.s3 = S3(client: awsClient, endpoint: Environment.get("AWS_S3_ENDPOINT") ?? "http://localhost:9001")

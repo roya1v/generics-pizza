@@ -40,7 +40,7 @@ final class OrdersController: RouteCollection {
             .filter(\.$state != .finished)
             .with(\.$items) { $0.with(\.$item) }
             .all()
-            .map { $0.getContent() }
+            .map { $0.toSharedModel() }
     }
 
     /// Get all finished orders
@@ -50,7 +50,7 @@ final class OrdersController: RouteCollection {
             .filter(\.$state == .finished)
             .with(\.$items) { $0.with(\.$item) }
             .all()
-            .map { $0.getContent() }
+            .map { $0.toSharedModel() }
     }
 
     /// Check price for order
@@ -84,10 +84,10 @@ final class OrdersController: RouteCollection {
         for item in order.items {
             try await item.$item.load(on: req.db)
         }
-        try? await restaurant?.send(message: .newOrder(order.getContent()))
-        req.logger.debug("New incomming order: \(order.getContent())")
+        try? await restaurant?.send(message: .newOrder(order.toSharedModel()))
+        req.logger.debug("New incomming order: \(order.toSharedModel())")
 
-        return order.getContent()
+        return order.toSharedModel()
     }
 
     /// Connect to order activity as a customer
@@ -118,7 +118,7 @@ final class OrdersController: RouteCollection {
             .filter(\.$state != .finished)
             .with(\.$items) { $0.with(\.$item) }
             .all()
-            .map { $0.getContent() }
+            .map { $0.toSharedModel() }
             .forEach({ order in
                 try? restaurant!.send(message: .newOrder(order))
             })

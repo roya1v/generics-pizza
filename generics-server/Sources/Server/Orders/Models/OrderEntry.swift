@@ -30,10 +30,6 @@ final class OrderEntry: Model, Content {
         self.id = id
         self.state = state
     }
-
-    func getContent() -> OrderModel {
-        .init(id: id, createdAt: createdAt, items: items.map { $0.item.getContent() }, state: state)
-    }
 }
 
 extension OrderEntry: Hashable {
@@ -46,6 +42,8 @@ extension OrderEntry: Hashable {
     }
 }
 
-extension OrderModel: Content {
-
+extension OrderEntry: SharedModelRepresentable {
+    func toSharedModel() -> OrderModel {
+        .init(id: id, createdAt: createdAt, items: items.map { $0.item.toSharedModel() }, state: state)
+    }
 }

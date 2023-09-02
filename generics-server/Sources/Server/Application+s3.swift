@@ -8,6 +8,7 @@
 import Vapor
 import SotoS3
 
+// swiftlint:disable nesting
 extension Application {
     struct S3Key: StorageKey {
         typealias Value = S3
@@ -33,3 +34,4 @@ public extension Request {
         return application.s3
     }
 }
+// swiftlint:enable nesting

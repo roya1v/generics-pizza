@@ -9,7 +9,7 @@ import Fluent
 import Vapor
 import SharedModels
 
-final class MenuEntry: Model, Content {
+final class MenuEntry: Model {
     static var schema = "menu"
 
     @ID(key: .id)
@@ -40,14 +40,10 @@ final class MenuEntry: Model, Content {
         self.price = price
         self.imageUrl = imageUrl
     }
-
-    func getContent() -> MenuItem {
-        .init(id: id, title: title, description: description, price: price)
-    }
 }
 
-extension MenuItem: Content {
-    func getModel() -> MenuEntry {
-        .init(id: id, title: title, description: description, price: price, imageUrl: nil)
+extension MenuEntry: SharedModelRepresentable {
+    func toSharedModel() -> MenuItem {
+        .init(id: id, title: title, description: description, price: price)
     }
 }

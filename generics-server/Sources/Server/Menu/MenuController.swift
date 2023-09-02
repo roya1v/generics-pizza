@@ -26,7 +26,7 @@ struct MenuController: RouteCollection {
         try await MenuEntry
             .query(on: req.db)
             .all()
-            .map { $0.getContent() }
+            .map { $0.toSharedModel() }
     }
 
     /// Get image for a menu item
@@ -65,7 +65,7 @@ struct MenuController: RouteCollection {
     func create(req: Request) async throws -> MenuItem {
         try req.auth.require(UserEntry.self)
         let entry = try req.content.decode(MenuItem.self)
-        try await entry.getModel().save(on: req.db)
+        try await entry.toEntry().save(on: req.db)
         return entry
     }
 }
