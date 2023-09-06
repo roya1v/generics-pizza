@@ -53,7 +53,7 @@ final class NowViewModel: ObservableObject {
             let order = self.orders.first(where: { $0.id == order.id })
             self.orders.removeAll(where: { $0.id == order?.id})
             if newState != .finished {
-                self.orders.append(.init(id: order?.id, createdAt: order?.createdAt, items: order?.items ?? [], state: newState))
+                self.orders.append(.init(id: order?.id, createdAt: order?.createdAt, items: order?.items ?? [], address: order!.address, state: newState))
                 self.orders.sort { $0.createdAt!.timeIntervalSince1970 > $1.createdAt!.timeIntervalSince1970 }
             }
         }

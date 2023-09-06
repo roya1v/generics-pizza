@@ -39,6 +39,7 @@ final class OrdersController: RouteCollection {
         return try await OrderEntry.query(on: req.db)
             .filter(\.$state != .finished)
             .with(\.$items) { $0.with(\.$item) }
+            .with(\.$address)
             .all()
             .toSharedModels()
     }
@@ -49,6 +50,7 @@ final class OrdersController: RouteCollection {
         return try await OrderEntry.query(on: req.db)
             .filter(\.$state == .finished)
             .with(\.$items) { $0.with(\.$item) }
+            .with(\.$address)
             .all()
             .toSharedModels()
     }
@@ -77,7 +79,10 @@ final class OrdersController: RouteCollection {
         }
         let orderModel = try req.content.decode(OrderModel.self)
 
-        let order = OrderEntry(state: .new)
+        let address = orderModel.address.toEntry()
+        try await address.save(on: req.db)
+
+        let order = OrderEntry(state: .new, addressId: address.id!)
         try await order.save(on: req.db)
 
         let items = orderModel.items.map { OrderItemEntry(item: $0.id!) }
@@ -87,6 +92,11 @@ final class OrdersController: RouteCollection {
         for item in order.items {
             try await item.$item.load(on: req.db)
         }
+
+        //let address = orderModel.address.toEntry()
+
+        try await order.$address.load(on: req.db)
+
         try await restaurant.send(message: .newOrder(order.toSharedModel()))
         req.logger.debug("New incomming order: \(order.toSharedModel())")
 
@@ -120,6 +130,7 @@ final class OrdersController: RouteCollection {
         try? await OrderEntry.query(on: req.db)
             .filter(\.$state != .finished)
             .with(\.$items) { $0.with(\.$item) }
+            .with(\.$address)
             .all()
             .toSharedModels()
             .forEach({ order in

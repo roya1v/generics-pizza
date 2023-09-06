@@ -27,6 +27,9 @@ final class MainRouter: NSObject {
     @Injected(Container.locationRepository)
     var locationRepository
 
+    @Injected(Container.driverRepository)
+    var driverRepository
+
     private var cancellable = Set<AnyCancellable>()
 
     override init() {
@@ -60,6 +63,7 @@ final class MainRouter: NSObject {
                 switch state {
                 case .ready:
                     self.setViewController(IdleViewController())
+                    self.setupWork()
                 default:
                     self.setViewController(OnboardingPermissionViewController())
                 }
@@ -69,9 +73,28 @@ final class MainRouter: NSObject {
         authRepository.reload()
     }
 
+    private func setupWork() {
+        Task {
+            try? await self.driverRepository
+                .getFeed()
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: {_ in }, receiveValue: {message in
+                    switch message {
+                    case .offerOrder:
+                        Task {
+                            await self.navigationController.pushViewController(MapNavigationViewController(), animated: true)
+                        }
+
+                    }
+                })
+                .store(in: &self.cancellable)
+        }
+    }
+
     private func setLoggedInFlow() {
         if locationRepository.currentState == .ready {
             setViewController(IdleViewController())
+            setupWork()
         } else {
             setViewController(OnboardingPermissionViewController())
         }

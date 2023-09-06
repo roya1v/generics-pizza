@@ -15,6 +15,9 @@ extension AddressEntry {
         func prepare(on database: Database) async throws {
             try await database.schema(AddressEntry.schema)
                 .id()
+                .field("details", .string)
+                .field("latitude", .double, .required)
+                .field("longitude", .double, .required)
                 .create()
         }
 

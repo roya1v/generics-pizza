@@ -23,3 +23,9 @@ extension MenuItem: EntryRepresentable {
         .init(id: id, title: title, description: description, price: price, imageUrl: nil)
     }
 }
+
+extension AddressModel: EntryRepresentable {
+    func toEntry() -> AddressEntry {
+        .init(details: details, latitude: coordinate.latitude, longitude: coordinate.longitude)
+    }
+}

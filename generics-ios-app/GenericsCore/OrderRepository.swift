@@ -56,9 +56,12 @@ final class OrderRepositoryImpl: OrderRepository {
     }
 
     func checkPrice() async throws -> [SubtotalModel] {
-        try await getRequest()
+        guard let address else {
+            throw OrderError.noAddress
+        }
+        return try await getRequest()
             .add(path: "check_price")
-            .body(OrderModel(createdAt: nil, items: items))
+            .body(OrderModel(createdAt: nil, items: items, address: address))
             .decode(to: [SubtotalModel].self)
             .perform()
     }
@@ -99,8 +102,7 @@ final class OrderRepositoryImpl: OrderRepository {
 
     private func makeOrderRequest() async throws -> OrderModel {
         let response = try await getRequest()
-            .method(.post)
-            .body(OrderModel(createdAt: nil, items: items))
+            .body(OrderModel(createdAt: nil, items: items, address: address!))
             .perform()
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601

@@ -14,12 +14,15 @@ final class DriverRepository {
 
     private var socket: SwiftlyWebSocketConnection?
 
-    func getFeed() async throws -> AnyPublisher<DriverMessage, Error> {
-        socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
-            .add(path: "order")
-            .add(path: "activity")
-            //.authorizationDelegate(authDelegate!)
-            .websocket()
+    func getFeed() async throws -> AnyPublisher<DriverFromServerMessage, Error> {
+        if socket == nil {
+            socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
+                .add(path: "order")
+                .add(path: "activity")
+                .add(path: "driver")
+                //.authorizationDelegate(authDelegate!)
+                .websocket()
+        }
 
         return socket!
             .messagePublisher
@@ -30,11 +33,11 @@ final class DriverRepository {
                     return nil
                 }
             })
-            .decode(type: DriverMessage.self, decoder: JSONDecoder())
+            .decode(type: DriverFromServerMessage.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
 
-    func send(_ message: DriverMessage) async throws {
+    func send(_ message: DriverToServerMessage) async throws {
         let data = try JSONEncoder().encode(message)
         let string = String(data: data, encoding: .utf8)!
         try await socket?.send(message: .string(string))

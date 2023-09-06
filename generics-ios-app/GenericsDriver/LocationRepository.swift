@@ -80,11 +80,5 @@ extension LocationRepository: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.first!
-        let message = DriverMessage.locationUpdated(lon: location.coordinate.longitude, lat: location.coordinate.latitude)
-
-        let data = try? JSONEncoder().encode(message)
-
-        let string = String(data: data!, encoding: .utf8)!
-        print(string)
     }
 }

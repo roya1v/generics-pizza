@@ -24,11 +24,15 @@ final class OrderEntry: Model {
     @Children(for: \.$order)
     var items: [OrderItemEntry]
 
+    @Parent(key: "address_id")
+    var address: AddressEntry
+
     init() { }
 
-    public init(id: UUID? = nil, state: OrderState) {
+    public init(id: UUID? = nil, state: OrderState, addressId: AddressEntry.IDValue) {
         self.id = id
         self.state = state
+        self.$address.id = addressId
     }
 }
 
@@ -44,6 +48,10 @@ extension OrderEntry: Hashable {
 
 extension OrderEntry: SharedModelRepresentable {
     func toSharedModel() -> OrderModel {
-        .init(id: id, createdAt: createdAt, items: items.map { $0.item.toSharedModel() }, state: state)
+        .init(id: id,
+              createdAt: createdAt,
+              items: items.map { $0.item.toSharedModel() },
+              address: address.toSharedModel(),
+              state: state)
     }
 }
