@@ -74,7 +74,7 @@ struct MenuView: View {
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        Container.menuRepository.register { mockMenuRepository() }
+        Container.shared.menuRepository.register { mockMenuRepository() }
         return MenuView()
     }
 }

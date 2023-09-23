@@ -9,10 +9,16 @@ import Foundation
 import SwiftlyHttp
 import Combine
 import SharedModels
+import GenericsCore
 
 final class DriverRepository {
 
+    private let authenticationRepository: AuthenticationRepository
     private var socket: SwiftlyWebSocketConnection?
+
+    init(authenticationRepository: AuthenticationRepository) {
+        self.authenticationRepository = authenticationRepository
+    }
 
     func getFeed() async throws -> AnyPublisher<DriverFromServerMessage, Error> {
         if socket == nil {
@@ -20,7 +26,9 @@ final class DriverRepository {
                 .add(path: "order")
                 .add(path: "activity")
                 .add(path: "driver")
-                //.authorizationDelegate(authDelegate!)
+                .authorization({
+                    return try? self.authenticationRepository.getAuthorization()
+                })
                 .websocket()
         }
 

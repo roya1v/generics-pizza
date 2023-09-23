@@ -13,7 +13,7 @@ struct MenuItemDetailView: View {
 
     let item: MenuItem
     @Environment(\.presentationMode) var presentationMode
-    @Injected(Container.orderRepository) var repository
+    @Injected(\.orderRepository) var repository
 
     var imageURL: URL {
         URL(string: "http://localhost:8080/menu/\(item.id!)")!

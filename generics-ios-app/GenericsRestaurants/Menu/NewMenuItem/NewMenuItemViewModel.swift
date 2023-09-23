@@ -16,10 +16,10 @@ final class NewMenuItemViewModel: ObservableObject {
 
     @Published private(set) var state: ViewState = .ready
 
-    @Injected(Container.menuRepository)
+    @Injected(\.menuRepository)
     private var menuRepository
 
-    @Injected(Container.authenticationRepository)
+    @Injected(\.authenticationRepository)
     private var authRepository
 
     func createMenuItem(title: String, description: String, price: String) {

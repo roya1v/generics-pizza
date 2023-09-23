@@ -14,7 +14,7 @@ final class LoginViewModel: ObservableObject {
 
     @Published private(set) var state: ViewState = .ready
 
-    @Injected(Container.authenticationRepository)
+    @Injected(\.authenticationRepository)
     private var repository
 
     func login(email: String, password: String) {

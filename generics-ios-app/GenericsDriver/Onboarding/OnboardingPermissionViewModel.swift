@@ -18,11 +18,11 @@ final class OnboardingPermissionViewModel: ObservableObject {
 
     @Published var mainButtonState: MainButtonState
 
-    @Injected(Container.locationRepository)
+    @Injected(\.locationRepository)
     private var repository
 
     init() {
-        if Container.locationRepository.callAsFunction().currentState == .needLocationWhenInUse {
+        if Container.shared.locationRepository.callAsFunction().currentState == .needLocationWhenInUse {
             mainButtonState = .grantPermission
         } else {
             mainButtonState = .openSettings

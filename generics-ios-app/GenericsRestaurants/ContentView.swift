@@ -13,7 +13,7 @@ import GenericsCore
 struct ContentView: View {
 
     @State var state: AuthenticationState = .loggedOut
-    @Injected(Container.authenticationRepository) private var repository
+    @Injected(\.authenticationRepository) private var repository
 
     var body: some View {
         Group {

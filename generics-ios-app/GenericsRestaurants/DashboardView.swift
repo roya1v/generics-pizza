@@ -28,7 +28,7 @@ enum Items: String {
 struct DashboardView: View {
 
     @State private var selected: Items = .now
-    @Injected(Container.authenticationRepository) private var repository
+    @Injected(\.authenticationRepository) private var repository
 
     var body: some View {
         NavigationSplitView {

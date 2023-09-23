@@ -49,7 +49,7 @@ struct NowView: View {
 
 struct NowView_Previews: PreviewProvider {
     static var previews: some View {
-        Container.orderRestaurantRepository.register { mockOrderRestaurantRepository() }
+        Container.shared.orderRestaurantRepository.register { mockOrderRestaurantRepository() }
         return NowView()
     }
 }

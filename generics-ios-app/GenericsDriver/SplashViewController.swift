@@ -19,7 +19,7 @@ final class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        Container.mainRouter().showApp()
+        Container.shared.mainRouter().showApp()
     }
 }
 

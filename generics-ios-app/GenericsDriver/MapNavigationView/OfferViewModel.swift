@@ -15,13 +15,13 @@ final class OfferViewModel: ObservableObject {
     @Published private(set) var routeToRestaurant: MKPolyline?
     @Published private(set) var routeToClient: MKPolyline?
 
-    @Injected(Container.routingService)
+    @Injected(\.routingService)
     private var routingService
 
-    @Injected(Container.driverRepository)
+    @Injected(\.driverRepository)
     private var driverRepository
 
-    @Injected(Container.locationRepository)
+    @Injected(\.locationRepository)
     private var locationRepository
 
     init(restaurantAddress: AddressModel,

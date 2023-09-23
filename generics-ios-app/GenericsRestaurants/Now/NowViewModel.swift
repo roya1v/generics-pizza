@@ -16,10 +16,10 @@ final class NowViewModel: ObservableObject {
     @Published private(set) var state: ViewState = .ready
     @Published private(set) var orders: [OrderModel] = []
 
-    @Injected(Container.orderRestaurantRepository)
+    @Injected(\.orderRestaurantRepository)
     private var repository
 
-    @Injected(Container.authenticationRepository)
+    @Injected(\.authenticationRepository)
     private var authRepository
 
     private var cancellable = Set<AnyCancellable>()

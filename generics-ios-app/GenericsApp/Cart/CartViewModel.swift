@@ -27,10 +27,10 @@ final class CartViewModel: ObservableObject {
     @Published private(set) var subtotal: [SubtotalModel] = []
     @Published private(set) var state: State = .readyForOrder
 
-    @Injected(Container.orderRepository)
+    @Injected(\.orderRepository)
     private var repository
 
-    @Injected(Container.geocodingService)
+    @Injected(\.geocodingService)
     private var geocodingService
 
     private var cancellable = Set<AnyCancellable>()

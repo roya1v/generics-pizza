@@ -58,7 +58,7 @@ final class IdleViewController: UIViewController {
         prettyAnimationView.addGestureRecognizer(gestureRecognizer)
         gestureRecognizer.addTarget(self, action: #selector(trigger))
 
-        Container.locationRepository().startStuff()
+        Container.shared.locationRepository().startStuff()
     }
 
     @objc func trigger() {

@@ -21,13 +21,13 @@ final class MainRouter: NSObject {
 
     private let navigationController = UINavigationController()
 
-    @Injected(Container.authenticationRepository)
+    @Injected(\.authenticationRepository)
     var authRepository
 
-    @Injected(Container.locationRepository)
+    @Injected(\.locationRepository)
     var locationRepository
 
-    @Injected(Container.driverRepository)
+    @Injected(\.driverRepository)
     var driverRepository
 
     private var cancellable = Set<AnyCancellable>()

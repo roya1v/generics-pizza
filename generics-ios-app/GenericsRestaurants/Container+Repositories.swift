@@ -12,8 +12,22 @@ import GenericsCore
 fileprivate let url = "http://localhost:8080"
 
 extension Container {
-    static let orderRepository = Factory(scope: .singleton) { buildOrderRepository(url: url) }
-    static let menuRepository = Factory { buildMenuRepository(url: url) }
-    static let orderRestaurantRepository = Factory(scope: .singleton) { buildOrderRestaurantRepository(url: url) }
-    static let authenticationRepository = Factory(scope: .singleton) { buildAuthenticationRepository(url: url) }
+    var authenticationRepository: Factory<AuthenticationRepository> {
+        self { buildAuthenticationRepository(url: url) }
+            .singleton
+    }
+
+    var orderRestaurantRepository: Factory<OrderRestaurantRepository> {
+        self { buildOrderRestaurantRepository(url: url) }
+            .singleton
+    }
+
+    var menuRepository: Factory<MenuRepository> {
+        self { buildMenuRepository(url: url) }
+    }
+
+    var orderRepository: Factory<OrderRepository> {
+        self { buildOrderRepository(url: url) }
+            .singleton
+    }
 }

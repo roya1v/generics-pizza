@@ -24,10 +24,10 @@ final class AddressViewModel {
 
     private let popMe: (() -> Void)?
 
-    @Injected(Container.orderRepository)
+    @Injected(\.orderRepository)
     var orderRepository
 
-    @Injected(Container.geocodingService)
+    @Injected(\.geocodingService)
     var geocodingService
 
     init(popMe: (() -> Void)?) {

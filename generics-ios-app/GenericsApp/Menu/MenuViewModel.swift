@@ -16,7 +16,7 @@ final class MenuViewModel: ObservableObject {
     @Published private(set) var items: [MenuItem] = []
     @Published private(set) var state: ViewState = .ready
 
-    @Injected(Container.menuRepository)
+    @Injected(\.menuRepository)
     private var repository
 
     func fetch() {
