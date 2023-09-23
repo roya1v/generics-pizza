@@ -9,6 +9,10 @@ import Fluent
 import Vapor
 import SharedModels
 
+// Hardcoded single restaurant for now
+fileprivate let restaurantLocation = AddressModel(coordinate: .init(latitude: 52.23052266504451, longitude: 21.006914615520103),
+                                                  details: "Śródmieście Północne, Warszawa")
+
 typealias CustomerMessenger = Messenger<CustomerFromServerMessage, CustomerFromServerMessage>
 typealias RestaurantMessenger = Messenger<RestaurantToServerMessage, RestaurantFromServerMessage>
 typealias DriverMessenger = Messenger<DriverToServerMessage, DriverFromServerMessage>
@@ -68,8 +72,7 @@ final class OrdersController: RouteCollection {
     /// Check which restaurant serves which location
     func checkRestaurantLocation(req: Request) async throws -> AddressModel {
         // Hardcoded single restaurant for now
-        return .init(coordinate: .init(latitude: 52.23052266504451, longitude: 21.006914615520103),
-                     details: "Śródmieście Północne, Warszawa")
+        return restaurantLocation
     }
 
     /// Make a new order
@@ -151,7 +154,10 @@ final class OrdersController: RouteCollection {
                         // TODO: Change the moment for driver search. Change the way the driver is selected.
                         if state == .readyForDelivery,
                            let driver = self.drivers.first {
-                            try? await driver.send(message: .offerOrder)
+                            try await order.$address.load(on: req.db)
+                            try? await driver.send(message: .offerOrder(fromAddress: restaurantLocation,
+                                                                        toAddress: order.address.toSharedModel(),
+                                                                        reward: 9999))
                             req.logger.debug("Order ready for pick-up!")
                         }
                     }
@@ -176,7 +182,7 @@ final class OrdersController: RouteCollection {
 
         messenger.onMessage { message in
             switch message {
-            case .locationUpdated(lon: let lon, lat: let lat):
+            case .locationUpdated(_, _):
                 break
             case .acceptOrder:
                 break

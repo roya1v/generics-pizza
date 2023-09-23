@@ -14,6 +14,5 @@ public enum DriverToServerMessage: Codable {
 }
 
 public enum DriverFromServerMessage: Codable {
-    //TODO: Add pickup and destination
-    case offerOrder
+    case offerOrder(fromAddress: AddressModel, toAddress: AddressModel, reward: Int)
 }

@@ -80,9 +80,13 @@ final class MainRouter: NSObject {
                 .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: {_ in }, receiveValue: {message in
                     switch message {
-                    case .offerOrder:
+                    case let .offerOrder(fromAddress, toAddress, reward):
                         Task {
-                            await self.navigationController.pushViewController(MapNavigationViewController(), animated: true)
+                            let vc = await MapNavigationViewController()
+                            await self.navigationController.pushViewController(vc, animated: true)
+                            await vc.set(state: .offer(.init(restaurantAddress: fromAddress,
+                                                       customerAddress: toAddress,
+                                                       reward: reward)))
                         }
 
                     }

@@ -16,4 +16,5 @@ extension Container {
     static let mainRouter = Factory(scope: .singleton) { MainRouter() }
     static let locationRepository = Factory(scope: .singleton) { LocationRepository() }
     static let driverRepository = Factory(scope: .singleton) { DriverRepository() }
+    static let routingService = Factory { buildRoutingService() }
 }

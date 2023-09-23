@@ -7,8 +7,13 @@
 
 import UIKit
 import MapKit
+import Combine
 
 final class MapNavigationViewController: UIViewController {
+
+    enum ViewState {
+        case offer(OfferViewModel)
+    }
 
     private var mapView: MKMapView = {
         let view = MKMapView()
@@ -52,10 +57,65 @@ final class MapNavigationViewController: UIViewController {
 
     // And everything else
 
+    private var state: ViewState?
+
+    func set(state: ViewState) {
+        switch state {
+        case .offer(let offerViewModel):
+            setupBindning(to: offerViewModel)
+        }
+    }
+
+    private var cancellable = Set<AnyCancellable>()
+
+    func setupBindning(to viewModel: OfferViewModel) {
+        viewModel.$routeToClient.sink { route in
+            if let route {
+                let padding: CGFloat = 8
+                self.mapView.addOverlay(route)
+                self.mapView.setVisibleMapRect(
+                    self.mapView.visibleMapRect.union(
+                        route.boundingMapRect
+                    ),
+                    edgePadding: UIEdgeInsets(
+                        top: 0,
+                        left: padding,
+                        bottom: padding,
+                        right: padding
+                    ),
+                    animated: true
+                )
+            }
+        }
+        .store(in: &cancellable)
+        
+        viewModel.$routeToRestaurant.sink { route in
+            if let route {
+                let padding: CGFloat = 8
+                self.mapView.addOverlay(route)
+                self.mapView.setVisibleMapRect(
+                    self.mapView.visibleMapRect.union(
+                        route.boundingMapRect
+                    ),
+                    edgePadding: UIEdgeInsets(
+                        top: 0,
+                        left: padding,
+                        bottom: padding,
+                        right: padding
+                    ),
+                    animated: true
+                )
+            }
+        }
+        .store(in: &cancellable)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupView()
+
+        mapView.delegate = self
     }
 
     private lazy var sheetHiddenConstraint = view.bottomAnchor.constraint(equalTo: sheetView.topAnchor)
@@ -141,14 +201,24 @@ final class MapNavigationViewController: UIViewController {
 
         acceptOrder.actionSlider.onAction = {
             self.hideSheet {
-                self.setNavigateToPickUpView()
-                self.view.layoutIfNeeded()
-                self.showSheet(completion: nil)
+//                self.setNavigateToPickUpView()
+//                self.view.layoutIfNeeded()
+//                self.showSheet(completion: nil)
+
+                guard case let .offer(viewModel) = self.state else {
+                    fatalError("Weird state: accepting offer when not in offer state")
+                }
+                viewModel.acceptOffer()
             }
         }
 
         acceptOrder.declineButton.addAction(.init(handler: { _ in
-            self.navigationController?.popViewController(animated: true)
+            // self.navigationController?.popViewController(animated: true)
+
+            guard case let .offer(viewModel) = self.state else {
+                fatalError("Weird state: declining offer when not in offer state")
+            }
+            viewModel.acceptOffer()
         }), for: .touchUpInside)
     }
 
@@ -298,4 +368,18 @@ extension MapNavigationViewController: CustomOutTransitinable {
             completion?()
         }
     }
+}
+
+extension MapNavigationViewController: MKMapViewDelegate {
+    func mapView(
+        _ mapView: MKMapView,
+        rendererFor overlay: MKOverlay
+      ) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+
+        renderer.strokeColor = .systemBlue
+        renderer.lineWidth = 3
+
+        return renderer
+      }
 }

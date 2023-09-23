@@ -8,7 +8,6 @@
 import UIKit
 import CoreLocation
 
-
 enum MapsApp {
     case googleMaps // https://developers.google.com/maps/documentation/urls/ios-urlscheme
     case appleMaps // https://developer.apple.com/library/archive/featuredarticles/iPhoneURLScheme_Reference/MapLinks/MapLinks.html#//apple_ref/doc/uid/TP40007899-CH5-SW1
