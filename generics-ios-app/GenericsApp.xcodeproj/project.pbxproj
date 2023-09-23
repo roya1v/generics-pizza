@@ -62,18 +62,11 @@
 		014834A92A7827900018C322 /* IdleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014834A82A7827900018C322 /* IdleViewController.swift */; };
 		014834AF2A7840840018C322 /* CustomInOutTransitinableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */; };
 		014834B02A7842630018C322 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0148E8202A6D2A010011ACE4 /* CtaCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E81F2A6D2A010011ACE4 /* CtaCardView.swift */; };
-		0148E8222A6D2B160011ACE4 /* BigImageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E8212A6D2B160011ACE4 /* BigImageCardView.swift */; };
-		0148E8242A6D2D320011ACE4 /* CarouselCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E8232A6D2D320011ACE4 /* CarouselCardView.swift */; };
 		0148E8272A6D37200011ACE4 /* UserFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E8262A6D37200011ACE4 /* UserFeedView.swift */; };
-		0148E8282A6D3C730011ACE4 /* CtaCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E81F2A6D2A010011ACE4 /* CtaCardView.swift */; };
-		0148E8292A6D3C750011ACE4 /* BigImageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E8212A6D2B160011ACE4 /* BigImageCardView.swift */; };
-		0148E82A2A6D3C780011ACE4 /* CarouselCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148E8232A6D2D320011ACE4 /* CarouselCardView.swift */; };
 		016934142A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */; };
 		018A6AA22A1212770015D716 /* SwiftlyHttp in Frameworks */ = {isa = PBXBuildFile; productRef = 018A6AA12A1212770015D716 /* SwiftlyHttp */; };
 		01BEAEC52A9E7FE000106F48 /* dotmatrix.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 01BEAEC42A9E7FE000106F48 /* dotmatrix.TTF */; };
 		01BEAEC72A9E836F00106F48 /* FontFix.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01BEAEC62A9E836F00106F48 /* FontFix.storyboard */; };
-		01BEAEC92A9E86AB00106F48 /* SliderToActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BEAEC82A9E86AB00106F48 /* SliderToActionView.swift */; };
 		01C9DFB32A0AE0E2001DC47D /* AddressSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFB22A0AE0E2001DC47D /* AddressSheetView.swift */; };
 		01C9DFBB2A0AF16B001DC47D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */; };
 		01C9DFBD2A0AF16B001DC47D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFBC2A0AF16B001DC47D /* SceneDelegate.swift */; };
@@ -84,6 +77,8 @@
 		01C9DFDE2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFDD2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift */; };
 		01D537FA2A7AD093000CC221 /* OrderStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D537F92A7AD093000CC221 /* OrderStickerView.swift */; };
 		01D537FC2A7AD401000CC221 /* AcceptOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D537FB2A7AD401000CC221 /* AcceptOrderView.swift */; };
+		01E7FEFB2ABF0A1A00B8EACD /* DriverRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889DF2A8D1EE6001ACB69 /* DriverRepository.swift */; };
+		01E7FEFC2ABF0B1B00B8EACD /* SliderToActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BEAEC82A9E86AB00106F48 /* SliderToActionView.swift */; };
 		01F889C42A8CD572001ACB69 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889C32A8CD572001ACB69 /* LoginViewModel.swift */; };
 		01F889C62A8CD593001ACB69 /* Container+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889C52A8CD593001ACB69 /* Container+Repositories.swift */; };
 		01F889C82A8CD5AE001ACB69 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 01F889C72A8CD5AE001ACB69 /* Factory */; };
@@ -96,10 +91,8 @@
 		01F889DA2A8CF892001ACB69 /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889D92A8CF892001ACB69 /* LocationRepository.swift */; };
 		01F889DC2A8D06C4001ACB69 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01F889DB2A8D06C4001ACB69 /* Settings.bundle */; };
 		01F889DE2A8D0A73001ACB69 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889DD2A8D0A72001ACB69 /* SplashViewController.swift */; };
-		01F889E02A8D1EE6001ACB69 /* DriverRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889DF2A8D1EE6001ACB69 /* DriverRepository.swift */; };
 		01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA4F2A09735800C622CC /* AddressViewController.swift */; };
 		01FFEA522A0974D900C622CC /* AddressSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */; };
-		EC14E819298B07C900A6540C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E818298B07C900A6540C /* HomeView.swift */; };
 		EC14E81B298B086E00A6540C /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E81A298B086E00A6540C /* MenuView.swift */; };
 		EC14E820298B0C3E00A6540C /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E81F298B0C3E00A6540C /* MenuItemView.swift */; };
 		EC14E823298C515E00A6540C /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = EC14E822298C515E00A6540C /* Factory */; };
@@ -370,9 +363,6 @@
 		014834A12A7823D90018C322 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		014834A82A7827900018C322 /* IdleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleViewController.swift; sourceTree = "<group>"; };
 		014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInOutTransitinableController.swift; sourceTree = "<group>"; };
-		0148E81F2A6D2A010011ACE4 /* CtaCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtaCardView.swift; sourceTree = "<group>"; };
-		0148E8212A6D2B160011ACE4 /* BigImageCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigImageCardView.swift; sourceTree = "<group>"; };
-		0148E8232A6D2D320011ACE4 /* CarouselCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCardView.swift; sourceTree = "<group>"; };
 		0148E8262A6D37200011ACE4 /* UserFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFeedView.swift; sourceTree = "<group>"; };
 		016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuItem+formattedPrice.swift"; sourceTree = "<group>"; };
 		01BEAEC42A9E7FE000106F48 /* dotmatrix.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = dotmatrix.TTF; sourceTree = "<group>"; };
@@ -404,7 +394,6 @@
 		01F889DF2A8D1EE6001ACB69 /* DriverRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverRepository.swift; sourceTree = "<group>"; };
 		01FFEA4F2A09735800C622CC /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
 		01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSwiftUIView.swift; sourceTree = "<group>"; };
-		EC14E818298B07C900A6540C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EC14E81A298B086E00A6540C /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		EC14E81F298B0C3E00A6540C /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
 		EC14E826298C527900A6540C /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
@@ -579,6 +568,9 @@
 			children = (
 				010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */,
 				010EB8422ABB98F600D28E70 /* OfferViewModel.swift */,
+				0124CAD72A785252002B9BC4 /* NavigateView.swift */,
+				01D537F92A7AD093000CC221 /* OrderStickerView.swift */,
+				01D537FB2A7AD401000CC221 /* AcceptOrderView.swift */,
 			);
 			path = MapNavigationView;
 			sourceTree = "<group>";
@@ -587,6 +579,7 @@
 			isa = PBXGroup;
 			children = (
 				01F889CD2A8CDB58001ACB69 /* LocalSettingsService.swift */,
+				01F889DF2A8D1EE6001ACB69 /* DriverRepository.swift */,
 				ECA92FBB299D657000F28299 /* AuthenticationRepository.swift */,
 				0122FD9D2A8BA86E00D015C5 /* MenuRepository.swift */,
 				0122FD9E2A8BA86E00D015C5 /* OrderRepository.swift */,
@@ -631,6 +624,7 @@
 			children = (
 				01389B822A436444009DE998 /* RouteStepView.swift */,
 				01F889D12A8CE3E6001ACB69 /* TextField.swift */,
+				01BEAEC82A9E86AB00106F48 /* SliderToActionView.swift */,
 				01389B672A43643C009DE998 /* GenericsUIKit.h */,
 				01389B682A43643C009DE998 /* GenericsUIKit.docc */,
 				01118A672A9FDC010067926A /* ButtonConfigurations.swift */,
@@ -644,16 +638,6 @@
 				01389B752A43643C009DE998 /* GenericsUIKitTests.swift */,
 			);
 			path = GenericsUIKitTests;
-			sourceTree = "<group>";
-		};
-		0148E81E2A6D29EE0011ACE4 /* FeedCards */ = {
-			isa = PBXGroup;
-			children = (
-				0148E81F2A6D2A010011ACE4 /* CtaCardView.swift */,
-				0148E8212A6D2B160011ACE4 /* BigImageCardView.swift */,
-				0148E8232A6D2D320011ACE4 /* CarouselCardView.swift */,
-			);
-			path = FeedCards;
 			sourceTree = "<group>";
 		};
 		0148E8252A6D37090011ACE4 /* User feed */ = {
@@ -676,14 +660,10 @@
 				01F889D62A8CF03A001ACB69 /* Onboarding */,
 				010EB8412ABB98DE00D28E70 /* MapNavigationView */,
 				014834A82A7827900018C322 /* IdleViewController.swift */,
-				0124CAD72A785252002B9BC4 /* NavigateView.swift */,
-				01D537F92A7AD093000CC221 /* OrderStickerView.swift */,
-				01D537FB2A7AD401000CC221 /* AcceptOrderView.swift */,
 				014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */,
 				01F889D92A8CF892001ACB69 /* LocationRepository.swift */,
-				01F889DF2A8D1EE6001ACB69 /* DriverRepository.swift */,
-				01BEAEC82A9E86AB00106F48 /* SliderToActionView.swift */,
 				01118A692A9FE0AA0067926A /* ExternalMapOpener.swift */,
+				010EB83F2ABB974D00D28E70 /* RoutingService.swift */,
 				01BEAEC42A9E7FE000106F48 /* dotmatrix.TTF */,
 				01C9DFC32A0AF16D001DC47D /* Assets.xcassets */,
 				01C9DFC52A0AF16D001DC47D /* LaunchScreen.storyboard */,
@@ -692,7 +672,6 @@
 				01C9DFD02A0AF16D001DC47D /* Tests */,
 				01C9DFDA2A0AF16E001DC47D /* UITests */,
 				01F889DB2A8D06C4001ACB69 /* Settings.bundle */,
-				010EB83F2ABB974D00D28E70 /* RoutingService.swift */,
 			);
 			path = GenericsDriver;
 			sourceTree = "<group>";
@@ -742,15 +721,6 @@
 				01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */,
 			);
 			path = Address;
-			sourceTree = "<group>";
-		};
-		EC14E81D298B0C1100A6540C /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				0148E81E2A6D29EE0011ACE4 /* FeedCards */,
-				EC14E818298B07C900A6540C /* HomeView.swift */,
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 		EC14E81E298B0C1C00A6540C /* Menu */ = {
@@ -910,7 +880,6 @@
 				ECD845AA298AE51D0036454C /* ContentView.swift */,
 				ECD079F029E45CCD00914593 /* Container+Repositories.swift */,
 				011D49F92AA324F500611D8D /* GeocodingService.swift */,
-				EC14E81D298B0C1100A6540C /* Home */,
 				EC14E81E298B0C1C00A6540C /* Menu */,
 				EC688C2129CA38C100450D2E /* Cart */,
 				ECD845AC298AE51E0036454C /* Assets.xcassets */,
@@ -1504,6 +1473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0122FDA22A8BA86E00D015C5 /* OrderRestaurantRepository.swift in Sources */,
+				01E7FEFB2ABF0A1A00B8EACD /* DriverRepository.swift in Sources */,
 				0136C2772A8BB83300407EAE /* AuthenticationRepository.swift in Sources */,
 				01F889CE2A8CDB58001ACB69 /* LocalSettingsService.swift in Sources */,
 				0122FDA12A8BA86E00D015C5 /* OrderRepository.swift in Sources */,
@@ -1546,6 +1516,7 @@
 			files = (
 				01F889D22A8CE3E6001ACB69 /* TextField.swift in Sources */,
 				01389B832A436444009DE998 /* RouteStepView.swift in Sources */,
+				01E7FEFC2ABF0B1B00B8EACD /* SliderToActionView.swift in Sources */,
 				01118A682A9FDC010067926A /* ButtonConfigurations.swift in Sources */,
 				01389B692A43643C009DE998 /* GenericsUIKit.docc in Sources */,
 			);
@@ -1579,9 +1550,7 @@
 				01D537FA2A7AD093000CC221 /* OrderStickerView.swift in Sources */,
 				0124CAD82A785252002B9BC4 /* NavigateView.swift in Sources */,
 				010EB8442ABB9E6200D28E70 /* MapPointModel+CLLocationCoordinate2D.swift in Sources */,
-				01BEAEC92A9E86AB00106F48 /* SliderToActionView.swift in Sources */,
 				01F889C42A8CD572001ACB69 /* LoginViewModel.swift in Sources */,
-				01F889E02A8D1EE6001ACB69 /* DriverRepository.swift in Sources */,
 				01F889DA2A8CF892001ACB69 /* LocationRepository.swift in Sources */,
 				014834AF2A7840840018C322 /* CustomInOutTransitinableController.swift in Sources */,
 				01C9DFBD2A0AF16B001DC47D /* SceneDelegate.swift in Sources */,
@@ -1610,7 +1579,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0148E8282A6D3C730011ACE4 /* CtaCardView.swift in Sources */,
 				ECA5E7F129BFC6F300D9E85F /* MenuView.swift in Sources */,
 				0148E8272A6D37200011ACE4 /* UserFeedView.swift in Sources */,
 				ECA92FB7299D64E600F28299 /* LoginViewModel.swift in Sources */,
@@ -1620,9 +1588,7 @@
 				ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */,
 				ECD079FD29E7511800914593 /* Container+Repositories.swift in Sources */,
 				ECA92FB4299D640500F28299 /* LoginView.swift in Sources */,
-				0148E82A2A6D3C780011ACE4 /* CarouselCardView.swift in Sources */,
 				ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */,
-				0148E8292A6D3C750011ACE4 /* BigImageCardView.swift in Sources */,
 				ECCE5BB029D4B09D009AB280 /* NowViewModel.swift in Sources */,
 				ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */,
 				ECA5E7F329BFC71800D9E85F /* NowView.swift in Sources */,
@@ -1657,14 +1623,10 @@
 				EC688C2329CA38D900450D2E /* CartView.swift in Sources */,
 				01FFEA522A0974D900C622CC /* AddressSwiftUIView.swift in Sources */,
 				011D49FA2AA324F500611D8D /* GeocodingService.swift in Sources */,
-				0148E8242A6D2D320011ACE4 /* CarouselCardView.swift in Sources */,
 				01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */,
 				EC14E81B298B086E00A6540C /* MenuView.swift in Sources */,
-				0148E8222A6D2B160011ACE4 /* BigImageCardView.swift in Sources */,
 				ECD845AB298AE51D0036454C /* ContentView.swift in Sources */,
-				0148E8202A6D2A010011ACE4 /* CtaCardView.swift in Sources */,
 				010A85E82A11282100354E7D /* AddressViewModel.swift in Sources */,
-				EC14E819298B07C900A6540C /* HomeView.swift in Sources */,
 				EC688C2729CA3C0100450D2E /* MenuItemDetailView.swift in Sources */,
 				EC14E820298B0C3E00A6540C /* MenuItemView.swift in Sources */,
 				ECD845A9298AE51D0036454C /* GenericsAppApp.swift in Sources */,

@@ -28,7 +28,7 @@ extension Container {
     }
 
     var driverRepository: Factory<DriverRepository> {
-        self { DriverRepository(authenticationRepository: self.authenticationRepository()) }
+        self { buildDriverRepository(url: url, authenticationRepository: self.authenticationRepository()) }
         .singleton
     }
 

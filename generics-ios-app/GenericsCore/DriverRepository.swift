@@ -9,20 +9,36 @@ import Foundation
 import SwiftlyHttp
 import Combine
 import SharedModels
-import GenericsCore
 
-final class DriverRepository {
+public func buildDriverRepository(url: String,
+                                  authenticationRepository: AuthenticationRepository) -> DriverRepository {
+    DriverRepositoryImpl(baseURL: url, authenticationRepository: authenticationRepository)
+}
 
+public func mockDriverRepository() -> DriverRepository {
+    fatalError("Not yet implemented")
+}
+
+public protocol DriverRepository {
+    func getFeed() async throws -> AnyPublisher<DriverFromServerMessage, Error>
+    func send(_ message: DriverToServerMessage) async throws
+}
+
+final class DriverRepositoryImpl: DriverRepository {
+    private let baseURL: String
     private let authenticationRepository: AuthenticationRepository
+
     private var socket: SwiftlyWebSocketConnection?
 
-    init(authenticationRepository: AuthenticationRepository) {
+    init(baseURL: String,
+         authenticationRepository: AuthenticationRepository) {
+        self.baseURL = baseURL
         self.authenticationRepository = authenticationRepository
     }
 
     func getFeed() async throws -> AnyPublisher<DriverFromServerMessage, Error> {
         if socket == nil {
-            socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
+            socket = try await SwiftlyHttp(baseURL: baseURL)!
                 .add(path: "order")
                 .add(path: "activity")
                 .add(path: "driver")

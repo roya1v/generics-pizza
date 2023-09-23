@@ -8,7 +8,7 @@
 import UIKit
 
 //TODO: Make dismiss interactable
-final class SliderToActionView: UIView {
+public final class SliderToActionView: UIView {
 
     private var sliderView: UIView = {
         let view = UIView()
@@ -35,15 +35,15 @@ final class SliderToActionView: UIView {
 
     private lazy var sliderConstraint = sliderView.leadingAnchor.constraint(equalTo: leadingAnchor)
 
-    var title: String? {
+    public var title: String? {
         didSet {
             titleLabel.text = title
         }
     }
 
-    var onAction: (() -> Void)?
+    public var onAction: (() -> Void)?
 
-    init() {
+    public init() {
         super.init(frame: .zero)
 
         setupView()
@@ -86,7 +86,7 @@ final class SliderToActionView: UIView {
         arrowView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
     }
 
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
 
         gradient.frame = bounds
