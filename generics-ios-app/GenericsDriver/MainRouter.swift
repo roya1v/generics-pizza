@@ -9,6 +9,7 @@ import UIKit
 import Factory
 import Combine
 import CoreLocation
+import SharedModels
 
 final class MainRouter: Router {
 
@@ -36,26 +37,30 @@ final class MainRouter: Router {
                 try await self.driverRepository
                     .getFeed()
                     .receive(on: DispatchQueue.main)
-                    .print()
-                    .sink(receiveCompletion: { _ in }, receiveValue: {message in
-                        switch message {
-                        case let .offerOrder(fromAddress, toAddress, reward):
-                            Task {
-                                let vc = await MapNavigationViewController()
-                                await self.navigationController.pushViewController(vc, animated: true)
-                                await vc.set(state: .offer(.init(restaurantAddress: fromAddress,
-                                                           customerAddress: toAddress,
-                                                           reward: reward)))
+                    .sink { completion in
+                        fatalError("Didn't expect a completion: \(completion)")
+                    } receiveValue: { message in
+                        Task {
+                            switch message {
+                            case let .offerOrder(fromAddress, toAddress, reward):
+                                await self.showNewOffer(fromAddress:fromAddress, toAddress: toAddress, reward: reward)
                             }
-
                         }
-                    })
-                    .store(in: &self.cancellable)
+                    }
+                    .store(in: &cancellable)
             } catch {
-                print(error)
+                fatalError("Should add error handling here. Error: \(error)")
             }
-
         }
+    }
+
+    @MainActor
+    private func showNewOffer(fromAddress: AddressModel, toAddress: AddressModel, reward: Int) {
+        let vc = MapNavigationViewController()
+        navigationController.pushViewController(vc, animated: true)
+        vc.set(state: .offer(.init(restaurantAddress: fromAddress,
+                                   customerAddress: toAddress,
+                                   reward: reward)))
     }
 
     private func setLoggedInFlow() {
