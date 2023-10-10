@@ -129,6 +129,7 @@ final class OrdersController: RouteCollection {
         }
 
         restaurant = .init(ws: ws, eventLoop: req.eventLoop)
+        req.logger.debug("New restaurant joined.")
 
         try? await OrderEntry.query(on: req.db)
             .filter(\.$state != .finished)
@@ -168,13 +169,13 @@ final class OrdersController: RouteCollection {
 
     /// Connect to order activity as a driver
     func driverActivity(req: Request, ws: WebSocket) async {
-//        do {
-//            try req.auth.require(UserEntry.self)
-//        } catch {
-//            try? await ws.send(error.localizedDescription)
-//            try? await ws.close()
-//            return
-//        }
+        do {
+            try req.auth.require(UserEntry.self)
+        } catch {
+            try? await ws.send(error.localizedDescription)
+            try? await ws.close()
+            return
+        }
 
         let messenger = DriverMessenger(ws: ws, eventLoop: req.eventLoop)
         drivers.append(messenger)
@@ -185,9 +186,9 @@ final class OrdersController: RouteCollection {
             case .locationUpdated(_, _):
                 break
             case .acceptOrder:
-                break
+                req.logger.debug("Driver accepted order.")
             case .declineOrder:
-                break
+                req.logger.debug("Driver declined order.")
             }
         }
     }
