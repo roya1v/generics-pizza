@@ -23,7 +23,7 @@ struct ContentView: View {
                 DashboardView()
             }
         }
-        .onReceive(repository.state) { state in
+        .onReceive(repository.statePublisher) { state in
             self.state = state
         }
         .onAppear {

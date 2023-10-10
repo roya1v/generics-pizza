@@ -28,9 +28,7 @@ final class OfferViewModel: ObservableObject {
          customerAddress: AddressModel,
          reward: Int) {
         Task {
-            let manager = CLLocationManager()
-            manager.requestLocation()
-            let myLocation = manager.location!.coordinate
+            let myLocation = CLLocationCoordinate2D(latitude: 0, longitude: 0)
             routeToRestaurant = try? await routingService.getRoute(from: myLocation,
                                                                    to: restaurantAddress.coordinate.clLocationCoordinate2d)
 

@@ -168,17 +168,17 @@ final class OrdersController: RouteCollection {
 
     /// Connect to order activity as a driver
     func driverActivity(req: Request, ws: WebSocket) async {
-        do {
-            try req.auth.require(UserEntry.self)
-        } catch {
-            try? await ws.send(error.localizedDescription)
-            try? await ws.close()
-            return
-        }
+//        do {
+//            try req.auth.require(UserEntry.self)
+//        } catch {
+//            try? await ws.send(error.localizedDescription)
+//            try? await ws.close()
+//            return
+//        }
 
         let messenger = DriverMessenger(ws: ws, eventLoop: req.eventLoop)
         drivers.append(messenger)
-        req.logger.debug("New driver joined!")
+        req.logger.debug("New driver joined.")
 
         messenger.onMessage { message in
             switch message {

@@ -5,6 +5,7 @@
 //  Created by Mike S. on 30/08/2023.
 //
 
+#if os(iOS)
 import UIKit
 import CoreLocation
 
@@ -55,3 +56,4 @@ enum MapsApp {
 }
 
 extension MapsApp: CaseIterable { }
+#endif

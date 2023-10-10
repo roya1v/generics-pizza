@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import Combine
+import GenericsUIKit
 
 final class MapNavigationViewController: UIViewController {
 
@@ -69,7 +70,10 @@ final class MapNavigationViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()
 
     func setupBindning(to viewModel: OfferViewModel) {
-        viewModel.$routeToClient.sink { route in
+        viewModel
+            .$routeToClient
+            .receive(on: DispatchQueue.main)
+            .sink { route in
             if let route {
                 let padding: CGFloat = 8
                 self.mapView.addOverlay(route)
@@ -89,7 +93,10 @@ final class MapNavigationViewController: UIViewController {
         }
         .store(in: &cancellable)
         
-        viewModel.$routeToRestaurant.sink { route in
+        viewModel
+            .$routeToRestaurant
+            .receive(on: DispatchQueue.main)
+            .sink { route in
             if let route {
                 let padding: CGFloat = 8
                 self.mapView.addOverlay(route)

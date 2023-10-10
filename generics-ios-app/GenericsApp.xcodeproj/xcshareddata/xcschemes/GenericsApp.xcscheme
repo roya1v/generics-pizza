@@ -84,6 +84,17 @@
                ReferencedContainer = "container:GenericsApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "01E7FF082ABF125500B8EACD"
+               BuildableName = "GenericsHelpersTests.xctest"
+               BlueprintName = "GenericsHelpersTests"
+               ReferencedContainer = "container:GenericsApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

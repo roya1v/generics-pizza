@@ -9,8 +9,8 @@ import Foundation
 import Factory
 import SharedModels
 import GenericsUI
+import GenericsHelpers
 
-@MainActor
 final class MenuViewModel: ObservableObject {
 
     @Published private(set) var items: [MenuItem] = []
@@ -23,16 +23,13 @@ final class MenuViewModel: ObservableObject {
         if items.isEmpty {
             state = .loading
         }
-        Task {
-            do {
-                let newItems = try await repository.fetchMenu()
-                await MainActor.run {
-                    state = .ready
-                    items = newItems
-                }
-            } catch {
-                state = .error
-            }
+        ThrowingAsyncTask {
+            return try await self.repository.fetchMenu()
+        } onResult: { newItems in
+            self.items = newItems
+            self.state = .ready
+        } onError: { error in
+            self.state = .error
         }
     }
 }

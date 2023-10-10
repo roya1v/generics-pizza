@@ -8,7 +8,7 @@
 import XCTest
 import Factory
 @testable import GenericsApp
-@testable import GenericsRepositories
+@testable import GenericsCore
 
 final class CartViewModelTests: XCTestCase {
 
@@ -17,7 +17,7 @@ final class CartViewModelTests: XCTestCase {
 
     override func setUp() {
         mockOrderRepository = OrderRepositoryMck()
-        Container.orderRepository.register { self.mockOrderRepository }
+        Container.shared.orderRepository.register { self.mockOrderRepository }
 
         sut = CartViewModel()
     }

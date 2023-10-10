@@ -11,6 +11,7 @@ import Factory
 import Combine
 import GenericsCore
 import CoreLocation
+import GenericsHelpers
 
 final class CartViewModel: ObservableObject {
 
@@ -37,12 +38,12 @@ final class CartViewModel: ObservableObject {
 
     func fetch() {
         items = repository.items
-        Task {
-            if let total = try? await repository.checkPrice() {
-                DispatchQueue.main.async {
-                    self.subtotal = total
-                }
-            }
+        ThrowingAsyncTask {
+            return try await self.repository.checkPrice()
+        } onResult: { subtotal in
+            self.subtotal = subtotal
+        } onError: { error in
+            fatalError(error.localizedDescription)
         }
     }
 
@@ -53,9 +54,13 @@ final class CartViewModel: ObservableObject {
 
         if let address = repository.address {
             self.address = ""
-            Task {
-                let addressString = (try? await geocodingService.getAddress(for: address.coordinate.clLocationCoordinate2d)) ?? ""
-                self.address = addressString  + address.details
+            ThrowingAsyncTask {
+                return try await self.geocodingService
+                    .getAddress(for: address.coordinate.clLocationCoordinate2d)
+            } onResult: { addressString in
+                self.address = (addressString ?? "")  + address.details
+            } onError: { error in
+                fatalError(error.localizedDescription)
             }
         }
     }

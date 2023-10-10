@@ -24,6 +24,10 @@ public protocol DriverRepository {
     func send(_ message: DriverToServerMessage) async throws
 }
 
+public enum DriverFeedError: Error {
+    case unknownMessage(URLSessionWebSocketTask.Message)
+}
+
 final class DriverRepositoryImpl: DriverRepository {
     private let baseURL: String
     private let authenticationRepository: AuthenticationRepository
@@ -50,11 +54,12 @@ final class DriverRepositoryImpl: DriverRepository {
 
         return socket!
             .messagePublisher
-            .compactMap({
-                if case let .string(message) = $0 {
-                    return message.data(using: .utf8)
+            .tryMap({
+                if case let .string(message) = $0,
+                   let data = message.data(using: .utf8) {
+                    return data
                 } else {
-                    return nil
+                    throw DriverFeedError.unknownMessage($0)
                 }
             })
             .decode(type: DriverFromServerMessage.self, decoder: JSONDecoder())

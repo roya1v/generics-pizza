@@ -19,12 +19,14 @@ public func mockAuthenticationRepository() -> AuthenticationRepository {
 }
 
 public enum AuthenticationState {
+    case unknown
     case loggedIn
     case loggedOut
 }
 
 public protocol AuthenticationRepository: AuthorizationDelegate {
-    var state: AnyPublisher<AuthenticationState, Never> { get }
+    var statePublisher: AnyPublisher<AuthenticationState, Never> { get }
+    var state: AuthenticationState { get }
     func login(email: String, password: String) async throws
     func reload()
     func signOut() async throws
@@ -32,56 +34,55 @@ public protocol AuthenticationRepository: AuthorizationDelegate {
 
 final class AuthenticationRepositoryImpl: AuthenticationRepository {
 
-    private struct LoginResponse: Decodable {
-        let value: String
-    }
-
-    private let baseURL: String
     private let stateSubject = PassthroughSubject<AuthenticationState, Never>()
 
     private let settingsService = LocalSettingsServiceImpl()
+    private let authenticationService: AuthenticationService
 
     init(baseURL: String) {
-        self.baseURL = baseURL
+        self.authenticationService = AuthenticationService(baseURL: baseURL)
     }
 
     // MARK: - AuthenticationRepository
 
-    var state: AnyPublisher<AuthenticationState, Never> {
-        stateSubject.eraseToAnyPublisher()
+    var statePublisher: AnyPublisher<AuthenticationState, Never> {
+        if state == .unknown {
+            Task {
+                reload()
+            }
+        }
+        return stateSubject.eraseToAnyPublisher()
+    }
+
+    private(set) var state = AuthenticationState.unknown {
+        didSet {
+            stateSubject.send(state)
+        }
     }
 
     func login(email: String, password: String) async throws {
-        let response = try await SwiftlyHttp(baseURL: "http://localhost:8080")!
-            .add(path: "auth")
-            .add(path: "login")
-            .authorization(.basic(login: email, password: password))
-            .method(.post)
-            .decode(to: LoginResponse.self)
-            .perform()
+        let token = try await authenticationService.login(email: email, password: password)
 
-        settingsService.setAuthToken(response.value)
+        settingsService.setAuthToken(token)
 
-        stateSubject.send(.loggedIn)
+        state = .loggedIn
     }
 
     func reload() {
         if let _ = settingsService.getAuthToken() {
-            stateSubject.send(.loggedIn)
+            state = .loggedIn
         } else {
-            stateSubject.send(.loggedOut)
+            state = .loggedOut
         }
     }
 
     func signOut() async throws {
-        try await SwiftlyHttp(baseURL: "http://localhost:8080")!
-            .add(path: "auth")
-            .add(path: "signout")
-            .authorizationDelegate(self)
-            .method(.post)
-            .perform()
+        guard let token = settingsService.getAuthToken() else {
+            fatalError()
+        }
+        try await authenticationService.signOut(token)
         settingsService.resetAuthToken()
-        stateSubject.send(.loggedOut)
+        state = .loggedOut
     }
 
     func getAuthorization() throws -> SwiftlyHttp.Authorization {
@@ -94,7 +95,10 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
 }
 
 final class AuthenticationRepositoryMck: AuthenticationRepository {
-    var state: AnyPublisher<AuthenticationState, Never> = PassthroughSubject().eraseToAnyPublisher()
+    var state = AuthenticationState.unknown
+
+    var statePublisher: AnyPublisher<AuthenticationState, Never> = PassthroughSubject().eraseToAnyPublisher()
+
 
     func login(email: String, password: String) async throws {
     }

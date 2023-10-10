@@ -56,12 +56,10 @@ final class OrderRepositoryImpl: OrderRepository {
     }
 
     func checkPrice() async throws -> [SubtotalModel] {
-        guard let address else {
-            throw OrderError.noAddress
-        }
+        //TODO: Make address optional
         return try await getRequest()
             .add(path: "check_price")
-            .body(OrderModel(createdAt: nil, items: items, address: address))
+            .body(OrderModel(createdAt: nil, items: items, address: .init(coordinate: .init(latitude: 0, longitude: 0), details: "")))
             .decode(to: [SubtotalModel].self)
             .perform()
     }

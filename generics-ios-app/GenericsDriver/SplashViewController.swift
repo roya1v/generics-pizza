@@ -7,6 +7,7 @@
 
 import UIKit
 import Factory
+import GenericsUIKit
 
 final class SplashViewController: UIViewController {
 
@@ -18,8 +19,6 @@ final class SplashViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        Container.shared.mainRouter().showApp()
     }
 }
 

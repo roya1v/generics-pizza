@@ -17,8 +17,8 @@ extension Container {
         .singleton
     }
 
-    var mainRouter: Factory<MainRouter> {
-        self { MainRouter() }
+    var mainRouter: Factory<AppRouter> {
+        self { AppRouter() }
         .singleton
     }
 

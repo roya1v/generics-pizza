@@ -22,14 +22,14 @@ final class OnboardingPermissionViewModel: ObservableObject {
     private var repository
 
     init() {
-        if Container.shared.locationRepository.callAsFunction().currentState == .needLocationWhenInUse {
+        if Container.shared.locationRepository.callAsFunction().state == .needLocationWhenInUse {
             mainButtonState = .grantPermission
         } else {
             mainButtonState = .openSettings
         }
 
         repository
-            .state
+            .statePublisher
             .map {
                 if $0 == .needLocationWhenInUse {
                     return .grantPermission
@@ -41,7 +41,7 @@ final class OnboardingPermissionViewModel: ObservableObject {
     }
 
     func mainButtonPressed() {
-        if repository.currentState == .needLocationWhenInUse {
+        if repository.state == .needLocationWhenInUse {
             repository.requestPermission()
         } else {
             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)

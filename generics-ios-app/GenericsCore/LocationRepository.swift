@@ -10,23 +10,27 @@ import CoreLocation
 import Combine
 import SharedModels
 
-final class LocationRepository: NSObject {
+public protocol LocationService {
+    
+}
 
-    enum LocationState {
-        case loading
+public final class LocationRepository: NSObject {
+
+    public enum LocationState {
+        case unknown
         case needLocationWhenInUse
         case needLocationAlways
         case needPrecision
         case ready
     }
 
-    var state: AnyPublisher<LocationState, Never> {
+    public var statePublisher: AnyPublisher<LocationState, Never> {
         stateSubject.eraseToAnyPublisher()
     }
 
-    var currentState: LocationState = .loading {
+    public var state: LocationState = .unknown {
         didSet {
-            stateSubject.send(currentState)
+            stateSubject.send(state)
         }
     }
 
@@ -34,7 +38,7 @@ final class LocationRepository: NSObject {
 
     private let locationManager = CLLocationManager()
 
-    override init() {
+    override public init() {
         super.init()
         checkState()
         locationManager.delegate = self
@@ -43,42 +47,42 @@ final class LocationRepository: NSObject {
     private func checkState() {
         switch locationManager.authorizationStatus {
         case .restricted:
-            currentState = .loading
+            state = .unknown
         case .notDetermined:
-            currentState = .needLocationWhenInUse
+            state = .needLocationWhenInUse
         case .denied:
-            currentState = .needLocationAlways
+            state = .needLocationAlways
         case .authorizedAlways:
             switch locationManager.accuracyAuthorization {
             case .fullAccuracy:
-                currentState = .ready
+                state = .ready
             case .reducedAccuracy:
-                currentState = .needLocationAlways
+                state = .needLocationAlways
             @unknown default:
                 fatalError()
             }
         case .authorizedWhenInUse:
-            currentState = .needLocationAlways
+            state = .needLocationAlways
         @unknown default:
             fatalError()
         }
     }
 
-    func requestPermission() {
+    public func requestPermission() {
         locationManager.requestAlwaysAuthorization()
     }
 
-    func startStuff() {
+    public func startStuff() {
         locationManager.startUpdatingLocation()
     }
 }
 
 extension LocationRepository: CLLocationManagerDelegate {
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+    public func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkState()
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.first!
     }
 }

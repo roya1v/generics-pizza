@@ -33,6 +33,9 @@ final class OnboardingPermissionViewController: UIViewController {
         super.viewDidLoad()
 
         setupView()
+        transitionIn {
+            
+        }
     }
 
     private func setupView() {

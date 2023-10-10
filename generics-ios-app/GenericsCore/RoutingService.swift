@@ -18,10 +18,8 @@ public protocol RoutingService {
 }
 
 final class RoutingServiceImpl: RoutingService {
-
-
     func getRoute(from start: CLLocationCoordinate2D,
-                  to destination: CLLocationCoordinate2D) async throws -> MKPolyline  {
+                  to destination: CLLocationCoordinate2D) async throws -> MKPolyline {
         let request = MKDirections.Request()
         request.source = .init(placemark: .init(coordinate: start))
         request.destination = .init(placemark: .init(coordinate: destination))
