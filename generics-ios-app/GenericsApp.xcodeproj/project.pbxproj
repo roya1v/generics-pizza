@@ -55,6 +55,8 @@
 		013B956D2AD86F9000BA4154 /* main2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B956C2AD86F9000BA4154 /* main2.swift */; };
 		013B95712AD8713300BA4154 /* GenericsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */; };
 		013B95722AD8713300BA4154 /* GenericsCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		013B957A2AD8755900BA4154 /* MakeOrderShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B95792AD8755900BA4154 /* MakeOrderShortcut.swift */; };
+		013B957C2AD8758300BA4154 /* MakeDriverOfferShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B957B2AD8758300BA4154 /* MakeDriverOfferShortcut.swift */; };
 		014834A22A7823D90018C322 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014834A12A7823D90018C322 /* LoginViewController.swift */; };
 		014834A32A78243A0018C322 /* GenericsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; };
 		014834A92A7827900018C322 /* IdleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014834A82A7827900018C322 /* IdleViewController.swift */; };
@@ -425,6 +427,8 @@
 		01389B822A436444009DE998 /* RouteStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStepView.swift; sourceTree = "<group>"; };
 		013B956A2AD86F9000BA4154 /* GenericsTester */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GenericsTester; sourceTree = BUILT_PRODUCTS_DIR; };
 		013B956C2AD86F9000BA4154 /* main2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main2.swift; sourceTree = "<group>"; };
+		013B95792AD8755900BA4154 /* MakeOrderShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeOrderShortcut.swift; sourceTree = "<group>"; };
+		013B957B2AD8758300BA4154 /* MakeDriverOfferShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeDriverOfferShortcut.swift; sourceTree = "<group>"; };
 		014834A12A7823D90018C322 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		014834A82A7827900018C322 /* IdleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleViewController.swift; sourceTree = "<group>"; };
 		014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInOutTransitinableController.swift; sourceTree = "<group>"; };
@@ -719,9 +723,19 @@
 		013B956B2AD86F9000BA4154 /* GenericsTester */ = {
 			isa = PBXGroup;
 			children = (
+				013B95782AD8754600BA4154 /* Shortcuts */,
 				013B956C2AD86F9000BA4154 /* main2.swift */,
 			);
 			path = GenericsTester;
+			sourceTree = "<group>";
+		};
+		013B95782AD8754600BA4154 /* Shortcuts */ = {
+			isa = PBXGroup;
+			children = (
+				013B95792AD8755900BA4154 /* MakeOrderShortcut.swift */,
+				013B957B2AD8758300BA4154 /* MakeDriverOfferShortcut.swift */,
+			);
+			path = Shortcuts;
 			sourceTree = "<group>";
 		};
 		01C9DFB92A0AF16B001DC47D /* GenericsDriver */ = {
@@ -1772,7 +1786,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				013B957A2AD8755900BA4154 /* MakeOrderShortcut.swift in Sources */,
 				013B956D2AD86F9000BA4154 /* main2.swift in Sources */,
+				013B957C2AD8758300BA4154 /* MakeDriverOfferShortcut.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

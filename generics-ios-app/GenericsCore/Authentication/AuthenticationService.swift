@@ -8,7 +8,7 @@
 import Foundation
 import SwiftlyHttp
 
-final class AuthenticationService {
+public final class AuthenticationService {
 
     private struct LoginResponse: Decodable {
         let value: String
@@ -16,11 +16,11 @@ final class AuthenticationService {
 
     private let baseURL: String
 
-    init(baseURL: String) {
+    public init(baseURL: String) {
         self.baseURL = baseURL
     }
 
-    func login(email: String, password: String) async throws -> String {
+    public func login(email: String, password: String) async throws -> String {
         let response = try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "auth")
             .add(path: "login")
@@ -32,7 +32,7 @@ final class AuthenticationService {
         return response.value
     }
 
-    func signOut(_ token: String) async throws {
+    public func signOut(_ token: String) async throws {
         try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "auth")
             .add(path: "signout")

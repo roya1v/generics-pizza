@@ -6,25 +6,32 @@
 //
 
 import Foundation
-import GenericsCore
-import SharedModels
+
+let url = "http://localhost:8080"
+
+protocol TestShortcut {
+    var name: String { get }
+    func perform() async throws
+}
 
 @main
 struct GenericsTester {
+
+    static let macros: [TestShortcut] = [
+        MakeOrderShortcut(),
+        MakeDriverOfferShortcut()
+    ]
+
     static func main() async throws {
-         let url = "http://localhost:8080"
-
-        let menuRepository = buildMenuRepository(url: url)
-
-        var orderRepository = buildOrderRepository(url: url)
-
-        let items = try await menuRepository.fetchMenu()
-        print("Found menu items: \(items)")
-
-        orderRepository.add(item: items.first!)
-        orderRepository.address = .init(coordinate: .init(latitude: 0, longitude: 0), details: "")
-        print("Making order")
-        let test = try await orderRepository.placeOrder()
-        print("Order made: \(test)")
+        print("Welcome to Generics Tester!")
+        print("Please choose a test shortcut:")
+        for (index, macro) in macros.enumerated() {
+            print("\(index) - \(macro.name)")
+        }
+        print("\nEnter number and press return:")
+        guard let input = readLine(), let index = Int(input) else {
+            return
+        }
+        try await macros[index].perform()
     }
 }
