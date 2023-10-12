@@ -35,4 +35,8 @@ extension Container {
     var routingService: Factory<RoutingService> {
         self { buildRoutingService() }
     }
+
+    var mainStateHolder: Factory<MainStateHolder> {
+        self { MainStateHolder() }
+    }
 }

@@ -52,6 +52,9 @@
 		01389B852A436478009DE998 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01389B892A436530009DE998 /* GenericsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; };
 		01389B8A2A436530009DE998 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		013B956D2AD86F9000BA4154 /* main2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B956C2AD86F9000BA4154 /* main2.swift */; };
+		013B95712AD8713300BA4154 /* GenericsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */; };
+		013B95722AD8713300BA4154 /* GenericsCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		014834A22A7823D90018C322 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014834A12A7823D90018C322 /* LoginViewController.swift */; };
 		014834A32A78243A0018C322 /* GenericsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; };
 		014834A92A7827900018C322 /* IdleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014834A82A7827900018C322 /* IdleViewController.swift */; };
@@ -220,6 +223,13 @@
 			remoteGlobalIDString = 01389B372A4363F2009DE998;
 			remoteInfo = GenericsUI;
 		};
+		013B95732AD8713300BA4154 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0122FD732A8BA65700D015C5;
+			remoteInfo = GenericsCore;
+		};
 		014834A52A78243A0018C322 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ECD8459D298AE51D0036454C /* Project object */;
@@ -345,6 +355,26 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		013B95682AD86F9000BA4154 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		013B95752AD8713300BA4154 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				013B95722AD8713300BA4154 /* GenericsCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		014834A72A78243A0018C322 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -393,6 +423,8 @@
 		01389B6E2A43643C009DE998 /* GenericsUIKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsUIKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01389B752A43643C009DE998 /* GenericsUIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsUIKitTests.swift; sourceTree = "<group>"; };
 		01389B822A436444009DE998 /* RouteStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStepView.swift; sourceTree = "<group>"; };
+		013B956A2AD86F9000BA4154 /* GenericsTester */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GenericsTester; sourceTree = BUILT_PRODUCTS_DIR; };
+		013B956C2AD86F9000BA4154 /* main2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main2.swift; sourceTree = "<group>"; };
 		014834A12A7823D90018C322 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		014834A82A7827900018C322 /* IdleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleViewController.swift; sourceTree = "<group>"; };
 		014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInOutTransitinableController.swift; sourceTree = "<group>"; };
@@ -522,6 +554,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				01389B6F2A43643C009DE998 /* GenericsUIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		013B95672AD86F9000BA4154 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				013B95712AD8713300BA4154 /* GenericsCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,6 +714,14 @@
 				01E7FF232ABF13C800B8EACD /* Tests */,
 			);
 			path = GenericsUIKit;
+			sourceTree = "<group>";
+		};
+		013B956B2AD86F9000BA4154 /* GenericsTester */ = {
+			isa = PBXGroup;
+			children = (
+				013B956C2AD86F9000BA4154 /* main2.swift */,
+			);
+			path = GenericsTester;
 			sourceTree = "<group>";
 		};
 		01C9DFB92A0AF16B001DC47D /* GenericsDriver */ = {
@@ -935,6 +983,7 @@
 			children = (
 				01E7FF1F2ABF133100B8EACD /* Apps */,
 				01E7FF202ABF135900B8EACD /* Common */,
+				013B956B2AD86F9000BA4154 /* GenericsTester */,
 				ECD845A6298AE51D0036454C /* Products */,
 				ECA92FB8299D652D00F28299 /* Frameworks */,
 			);
@@ -960,6 +1009,7 @@
 				0122FD7B2A8BA65700D015C5 /* GenericsCoreTests.xctest */,
 				01E7FF022ABF125500B8EACD /* GenericsHelpers.framework */,
 				01E7FF092ABF125500B8EACD /* GenericsHelpersTests.xctest */,
+				013B956A2AD86F9000BA4154 /* GenericsTester */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1161,6 +1211,27 @@
 			productName = GenericsUIKitTests;
 			productReference = 01389B6E2A43643C009DE998 /* GenericsUIKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		013B95692AD86F9000BA4154 /* GenericsTester */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 013B956E2AD86F9000BA4154 /* Build configuration list for PBXNativeTarget "GenericsTester" */;
+			buildPhases = (
+				013B95662AD86F9000BA4154 /* Sources */,
+				013B95672AD86F9000BA4154 /* Frameworks */,
+				013B95682AD86F9000BA4154 /* CopyFiles */,
+				013B95752AD8713300BA4154 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				013B95742AD8713300BA4154 /* PBXTargetDependency */,
+			);
+			name = GenericsTester;
+			packageProductDependencies = (
+			);
+			productName = GenericsTester;
+			productReference = 013B956A2AD86F9000BA4154 /* GenericsTester */;
+			productType = "com.apple.product-type.tool";
 		};
 		01C9DFB72A0AF16B001DC47D /* GenericsDriver */ = {
 			isa = PBXNativeTarget;
@@ -1413,6 +1484,9 @@
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = ECD845A4298AE51D0036454C;
 					};
+					013B95692AD86F9000BA4154 = {
+						CreatedOnToolsVersion = 15.0;
+					};
 					01C9DFB72A0AF16B001DC47D = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -1483,6 +1557,7 @@
 				01C9DFB72A0AF16B001DC47D /* GenericsDriver */,
 				01C9DFCC2A0AF16D001DC47D /* GenericsDriverTests */,
 				01C9DFD62A0AF16D001DC47D /* GenericsDriverUITests */,
+				013B95692AD86F9000BA4154 /* GenericsTester */,
 				01389B372A4363F2009DE998 /* GenericsUI */,
 				01389B402A4363F3009DE998 /* GenericsUITests */,
 				01389B642A43643C009DE998 /* GenericsUIKit */,
@@ -1693,6 +1768,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		013B95662AD86F9000BA4154 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				013B956D2AD86F9000BA4154 /* main2.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		01C9DFB42A0AF16B001DC47D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1893,6 +1976,11 @@
 			isa = PBXTargetDependency;
 			target = 01389B372A4363F2009DE998 /* GenericsUI */;
 			targetProxy = 01389B8B2A436530009DE998 /* PBXContainerItemProxy */;
+		};
+		013B95742AD8713300BA4154 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0122FD732A8BA65700D015C5 /* GenericsCore */;
+			targetProxy = 013B95732AD8713300BA4154 /* PBXContainerItemProxy */;
 		};
 		014834A62A78243A0018C322 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2322,6 +2410,41 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericsApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GenericsApp";
+			};
+			name = Release;
+		};
+		013B956F2AD86F9000BA4154 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		013B95702AD86F9000BA4154 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -3081,6 +3204,15 @@
 			buildConfigurations = (
 				01389B802A43643C009DE998 /* Debug */,
 				01389B812A43643C009DE998 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		013B956E2AD86F9000BA4154 /* Build configuration list for PBXNativeTarget "GenericsTester" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				013B956F2AD86F9000BA4154 /* Debug */,
+				013B95702AD86F9000BA4154 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

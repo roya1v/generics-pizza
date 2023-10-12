@@ -18,8 +18,8 @@ final class OfferViewModel: ObservableObject {
     @Injected(\.routingService)
     private var routingService
 
-    @Injected(\.driverRepository)
-    private var driverRepository
+    @Injected(\.mainStateHolder)
+    private var mainStateHolder
 
     @Injected(\.locationRepository)
     private var locationRepository
@@ -42,13 +42,13 @@ final class OfferViewModel: ObservableObject {
 
     func acceptOffer() {
         Task {
-            try? await driverRepository.send(.acceptOrder)
+            try? await mainStateHolder.acceptOffer()
         }
     }
 
     func declineOffer() {
         Task {
-            try? await driverRepository.send(.declineOrder)
+            try? await mainStateHolder.acceptOffer()
         }
     }
 }

@@ -13,11 +13,11 @@ import SharedModels
 
 final class MainRouter: Router {
 
-    @Injected(\.driverRepository)
-    var driverRepository
-
     @Injected(\.locationRepository)
     var locationRepository
+
+    @Injected(\.mainStateHolder)
+    var mainStateHolder
 
     private var cancellable = Set<AnyCancellable>()
 
@@ -32,22 +32,23 @@ final class MainRouter: Router {
     }
 
     private func setupWork() {
+        mainStateHolder.appStatePublisher
+            .sink { newState in
+                Task {
+                    switch newState {
+                    case .idle:
+                        await self.setViewController(IdleViewController())
+                    case .offer(let fromAddress, let toAddress, let reward):
+                        await self.showNewOffer(fromAddress:fromAddress, toAddress: toAddress, reward: reward)
+                    case .accepted:
+                        break
+                    }
+                }
+            }
+            .store(in: &cancellable)
         Task {
             do {
-                try await self.driverRepository
-                    .getFeed()
-                    .receive(on: DispatchQueue.main)
-                    .sink { completion in
-                        fatalError("Didn't expect a completion: \(completion)")
-                    } receiveValue: { message in
-                        Task {
-                            switch message {
-                            case let .offerOrder(fromAddress, toAddress, reward):
-                                await self.showNewOffer(fromAddress:fromAddress, toAddress: toAddress, reward: reward)
-                            }
-                        }
-                    }
-                    .store(in: &cancellable)
+                try await self.mainStateHolder.start()
             } catch {
                 fatalError("Should add error handling here. Error: \(error)")
             }
@@ -74,5 +75,57 @@ final class MainRouter: Router {
 
     private func setViewController( _ vc: UIViewController) {
         navigationController.setViewControllers([vc], animated: true)
+    }
+}
+
+final class MainStateHolder {
+    enum AppState {
+        case idle
+        case offer(fromAddress: AddressModel, toAddress: AddressModel, reward: Int)
+        case accepted
+    }
+
+    @Injected(\.driverRepository)
+    var driverRepository
+
+    var appState = AppState.idle {
+        didSet {
+            stateSubject.send(appState)
+        }
+    }
+
+    var appStatePublisher: AnyPublisher<AppState, Never> {
+        stateSubject.eraseToAnyPublisher()
+    }
+
+    private let stateSubject = PassthroughSubject<AppState, Never>()
+
+    private var cancellable = Set<AnyCancellable>()
+
+    func start() async throws {
+        try await driverRepository
+            .getFeed()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                fatalError("Didn't expect a completion: \(completion)")
+            } receiveValue: { message in
+                Task {
+                    switch message {
+                    case let .offerOrder(fromAddress, toAddress, reward):
+                        self.appState = .offer(fromAddress: fromAddress, toAddress: toAddress, reward: reward)
+                    }
+                }
+            }
+            .store(in: &cancellable)
+    }
+
+    func acceptOffer() async throws {
+        try await driverRepository.send(.acceptOrder)
+        appState = .accepted
+    }
+
+    func declineOffer() async throws {
+        try await driverRepository.send(.declineOrder)
+        appState = .idle
     }
 }

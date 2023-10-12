@@ -61,6 +61,7 @@ final class MapNavigationViewController: UIViewController {
     private var state: ViewState?
 
     func set(state: ViewState) {
+        self.state = state
         switch state {
         case .offer(let offerViewModel):
             setupBindning(to: offerViewModel)
@@ -70,51 +71,51 @@ final class MapNavigationViewController: UIViewController {
     private var cancellable = Set<AnyCancellable>()
 
     func setupBindning(to viewModel: OfferViewModel) {
-        viewModel
-            .$routeToClient
-            .receive(on: DispatchQueue.main)
-            .sink { route in
-            if let route {
-                let padding: CGFloat = 8
-                self.mapView.addOverlay(route)
-                self.mapView.setVisibleMapRect(
-                    self.mapView.visibleMapRect.union(
-                        route.boundingMapRect
-                    ),
-                    edgePadding: UIEdgeInsets(
-                        top: 0,
-                        left: padding,
-                        bottom: padding,
-                        right: padding
-                    ),
-                    animated: true
-                )
-            }
-        }
-        .store(in: &cancellable)
+//        viewModel
+//            .$routeToClient
+//            .receive(on: DispatchQueue.main)
+//            .sink { route in
+//            if let route {
+//                let padding: CGFloat = 8
+//                self.mapView.addOverlay(route)
+//                self.mapView.setVisibleMapRect(
+//                    self.mapView.visibleMapRect.union(
+//                        route.boundingMapRect
+//                    ),
+//                    edgePadding: UIEdgeInsets(
+//                        top: 0,
+//                        left: padding,
+//                        bottom: padding,
+//                        right: padding
+//                    ),
+//                    animated: true
+//                )
+//            }
+//        }
+//        .store(in: &cancellable)
         
-        viewModel
-            .$routeToRestaurant
-            .receive(on: DispatchQueue.main)
-            .sink { route in
-            if let route {
-                let padding: CGFloat = 8
-                self.mapView.addOverlay(route)
-                self.mapView.setVisibleMapRect(
-                    self.mapView.visibleMapRect.union(
-                        route.boundingMapRect
-                    ),
-                    edgePadding: UIEdgeInsets(
-                        top: 0,
-                        left: padding,
-                        bottom: padding,
-                        right: padding
-                    ),
-                    animated: true
-                )
-            }
-        }
-        .store(in: &cancellable)
+//        viewModel
+//            .$routeToRestaurant
+//            .receive(on: DispatchQueue.main)
+//            .sink { route in
+//            if let route {
+//                let padding: CGFloat = 8
+//                self.mapView.addOverlay(route)
+//                self.mapView.setVisibleMapRect(
+//                    self.mapView.visibleMapRect.union(
+//                        route.boundingMapRect
+//                    ),
+//                    edgePadding: UIEdgeInsets(
+//                        top: 0,
+//                        left: padding,
+//                        bottom: padding,
+//                        right: padding
+//                    ),
+//                    animated: true
+//                )
+//            }
+//        }
+//        .store(in: &cancellable)
     }
 
     override func viewDidLoad() {
@@ -207,25 +208,17 @@ final class MapNavigationViewController: UIViewController {
         ])
 
         acceptOrder.actionSlider.onAction = {
-            self.hideSheet {
-//                self.setNavigateToPickUpView()
-//                self.view.layoutIfNeeded()
-//                self.showSheet(completion: nil)
-
-                guard case let .offer(viewModel) = self.state else {
-                    fatalError("Weird state: accepting offer when not in offer state")
-                }
-                viewModel.acceptOffer()
+            guard case let .offer(viewModel) = self.state else {
+                fatalError("Weird state: accepting offer when not in offer state")
             }
+            viewModel.acceptOffer()
         }
 
         acceptOrder.declineButton.addAction(.init(handler: { _ in
-            // self.navigationController?.popViewController(animated: true)
-
             guard case let .offer(viewModel) = self.state else {
                 fatalError("Weird state: declining offer when not in offer state")
             }
-            viewModel.acceptOffer()
+            viewModel.declineOffer()
         }), for: .touchUpInside)
     }
 
