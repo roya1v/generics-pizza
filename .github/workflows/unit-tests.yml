@@ -1,7 +1,7 @@
 name: Unit tests
 
 on: 
-  workflow_dispatch
+  - cron: '0 16 * * 5'
 
 jobs:
   run_tests:
@@ -11,3 +11,10 @@ jobs:
     - name: Run tests
       run: |
         xcodebuild test -workspace shared-workspace.xcworkspace -scheme GenericsApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.0.1' -testPlan NoServerTests | xcpretty && exit ${PIPESTATUS[0]}
+    - name: Send message to me
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_CHAT_ID }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: |
+          Hello world! Unit tests are done.
