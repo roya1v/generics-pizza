@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -61,6 +61,7 @@
 		014834A32A78243A0018C322 /* GenericsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; };
 		014834A92A7827900018C322 /* IdleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014834A82A7827900018C322 /* IdleViewController.swift */; };
 		014834B02A7842630018C322 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0164CF0F2B040078000E1433 /* SharedModels in Frameworks */ = {isa = PBXBuildFile; productRef = 0164CF0E2B040078000E1433 /* SharedModels */; };
 		016934142A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */; };
 		018A6AA22A1212770015D716 /* SwiftlyHttp in Frameworks */ = {isa = PBXBuildFile; productRef = 018A6AA12A1212770015D716 /* SwiftlyHttp */; };
 		01B5081D2AC4AB7900CFCA32 /* MenuViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5081C2AC4AB7900CFCA32 /* MenuViewModelTests.swift */; };
@@ -393,6 +394,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0108FDF82B0401ED00EEE405 /* NoServerTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = NoServerTests.xctestplan; sourceTree = "<group>"; };
 		010A85E72A11282100354E7D /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
 		010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNavigationViewController.swift; sourceTree = "<group>"; };
 		010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPermissionViewController.swift; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0122FD962A8BA6E300D015C5 /* SwiftlyHttp in Frameworks */,
+				0164CF0F2B040078000E1433 /* SharedModels in Frameworks */,
 				0122FDA42A8BA95A00D015C5 /* SharedModels in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -995,6 +998,7 @@
 		ECD8459C298AE51D0036454C = {
 			isa = PBXGroup;
 			children = (
+				0108FDF82B0401ED00EEE405 /* NoServerTests.xctestplan */,
 				01E7FF1F2ABF133100B8EACD /* Apps */,
 				01E7FF202ABF135900B8EACD /* Common */,
 				013B956B2AD86F9000BA4154 /* GenericsTester */,
@@ -1126,6 +1130,7 @@
 			packageProductDependencies = (
 				0122FD952A8BA6E300D015C5 /* SwiftlyHttp */,
 				0122FDA32A8BA95A00D015C5 /* SharedModels */,
+				0164CF0E2B040078000E1433 /* SharedModels */,
 			);
 			productName = GenericsCore;
 			productReference = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */;
@@ -1557,6 +1562,7 @@
 				EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */,
 				018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */,
 				01F889D32A8CE4C0001ACB69 /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				0164CF0D2B040078000E1433 /* XCLocalSwiftPackageReference "../generics-server" */,
 			);
 			productRefGroup = ECD845A6298AE51D0036454C /* Products */;
 			projectDirPath = "";
@@ -3343,6 +3349,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		0164CF0D2B040078000E1433 /* XCLocalSwiftPackageReference "../generics-server" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../generics-server";
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -3377,6 +3390,10 @@
 			productName = SwiftlyHttp;
 		};
 		0122FDA32A8BA95A00D015C5 /* SharedModels */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SharedModels;
+		};
+		0164CF0E2B040078000E1433 /* SharedModels */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SharedModels;
 		};
