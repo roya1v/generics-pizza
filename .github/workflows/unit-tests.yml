@@ -11,9 +11,4 @@ jobs:
     - name: Run tests
       run: |
         cd generics-ios-app
-        xcodebuild test \ 
-          -project GenericsApp.xcodeproj \
-          -scheme GenericsApp \
-          -sdk iphonesimulator \
-          -destination 'platform=iOS Simulator,name=iPhone 12 mini,OS=17.0.1' \
-          -testPlan NoServerTests | xcpretty && exit ${PIPESTATUS[0]}
+        xcodebuild test -project GenericsApp.xcodeproj -scheme GenericsApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12 mini,OS=17.0.1' -testPlan NoServerTests | xcpretty && exit ${PIPESTATUS[0]}
