@@ -12,52 +12,64 @@ import GenericsCore
 
 struct MenuView: View {
 
-    let columns = [GridItem(.flexible()), GridItem(.flexible())]
-
     @StateObject var model = MenuViewModel()
-    @State var shownItem: MenuItem?
 
     var body: some View {
         NavigationView {
-            ZStack {
-                Color(.systemGray6)
-                    .ignoresSafeArea()
-                ScrollView {
-                    switch model.state {
-                    case .loading:
-                        ProgressView()
-                    case .ready:
-                        menu
-                    case .error:
-                        Text("Something didn't work out :(")
-                    }
+            Group {
+                switch model.state {
+                case .loading:
+                    ProgressView()
+                case .ready:
+                    menu
+                case .error:
+                    Text("Something didn't work out :(")
                 }
-                .navigationTitle("Menu")
-                .navigationBarTitleDisplayMode(.large)
-                .onAppear {
-                    model.fetch()
-                }
-                .sheet(item: $shownItem) { test in
-                        MenuItemDetailView(item: test)
-                }
+            }
+            .navigationTitle("Menu")
+            .navigationBarTitleDisplayMode(.large)
+            .onAppear {
+                model.fetch()
             }
         }
     }
 
     var menu: some View {
-        LazyVGrid(columns: columns) {
-            ForEach(model.items) { item in
-                MenuItemView(name: item.title,
-                             description: item.description,
-                             price: item.formattedPrice(),
-                             imageURL: URL(string: "http://localhost:8080/menu/\(item.id!.uuidString)")!)
-                .padding(.all, 4.0)
-                .onTapGesture {
-                    shownItem = item
+        List(model.items) { item in
+            getMenuItem(for: item)
+        }
+    }
+
+    func getMenuItem(for item: MenuItem) -> some View {
+        HStack {
+            AsyncImage(url: URL(string: "http://localhost:8080/menu/\(item.id!.uuidString)")!) { phase in
+                switch phase {
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFit()
+                case .failure(_), .empty:
+                    Image("pizzza_placeholder")
+                        .resizable()
+                        .scaledToFit()
+                @unknown default:
+                    fatalError()
                 }
             }
+            .frame(width: 75.0)
+            VStack(alignment: .leading) {
+                Text(item.title)
+                Text(item.description)
+                    .font(.genericsCaption)
+            }
+            Text(item.formattedPrice())
+            Spacer()
+            Button {
+                model.add(item: item)
+            } label: {
+                Image(systemName: "plus")
+            }
         }
-        .padding()
     }
 }
 
