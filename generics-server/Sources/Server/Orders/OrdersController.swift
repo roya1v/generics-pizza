@@ -43,7 +43,6 @@ final class OrdersController: RouteCollection {
         return try await OrderEntry.query(on: req.db)
             .filter(\.$state != .finished)
             .with(\.$items) { $0.with(\.$item) }
-            .with(\.$address)
             .all()
             .toSharedModels()
     }
@@ -54,7 +53,6 @@ final class OrdersController: RouteCollection {
         return try await OrderEntry.query(on: req.db)
             .filter(\.$state == .finished)
             .with(\.$items) { $0.with(\.$item) }
-            .with(\.$address)
             .all()
             .toSharedModels()
     }
@@ -82,10 +80,7 @@ final class OrdersController: RouteCollection {
         }
         let orderModel = try req.content.decode(OrderModel.self)
 
-        let address = orderModel.address.toEntry()
-        try await address.save(on: req.db)
-
-        let order = OrderEntry(state: .new, addressId: address.id!)
+        let order = OrderEntry(state: .new)
         try await order.save(on: req.db)
 
         let items = orderModel.items.map { OrderItemEntry(item: $0.id!) }
@@ -95,10 +90,6 @@ final class OrdersController: RouteCollection {
         for item in order.items {
             try await item.$item.load(on: req.db)
         }
-
-        //let address = orderModel.address.toEntry()
-
-        try await order.$address.load(on: req.db)
 
         try await restaurant.send(message: .newOrder(order.toSharedModel()))
         req.logger.debug("New incomming order: \(order.toSharedModel())")
@@ -134,7 +125,6 @@ final class OrdersController: RouteCollection {
         try? await OrderEntry.query(on: req.db)
             .filter(\.$state != .finished)
             .with(\.$items) { $0.with(\.$item) }
-            .with(\.$address)
             .all()
             .toSharedModels()
             .forEach({ order in
@@ -150,16 +140,6 @@ final class OrdersController: RouteCollection {
                         try? await order.save(on: req.db)
                         if let client = self.clients[id] {
                             try? await client.send(message: .newState(state))
-                        }
-
-                        // TODO: Change the moment for driver search. Change the way the driver is selected.
-                        if state == .readyForDelivery,
-                           let driver = self.drivers.first {
-                            try await order.$address.load(on: req.db)
-                            try? await driver.send(message: .offerOrder(fromAddress: restaurantLocation,
-                                                                        toAddress: order.address.toSharedModel(),
-                                                                        reward: 9999))
-                            req.logger.debug("Order ready for pick-up!")
                         }
                     }
                 }

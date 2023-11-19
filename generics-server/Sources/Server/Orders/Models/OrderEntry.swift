@@ -24,15 +24,11 @@ final class OrderEntry: Model {
     @Children(for: \.$order)
     var items: [OrderItemEntry]
 
-    @Parent(key: "address_id")
-    var address: AddressEntry
-
     init() { }
 
-    public init(id: UUID? = nil, state: OrderState, addressId: AddressEntry.IDValue) {
+    public init(id: UUID? = nil, state: OrderState) {
         self.id = id
         self.state = state
-        self.$address.id = addressId
     }
 }
 
@@ -51,7 +47,6 @@ extension OrderEntry: SharedModelRepresentable {
         .init(id: id,
               createdAt: createdAt,
               items: items.map { $0.item.toSharedModel() },
-              address: address.toSharedModel(),
               state: state)
     }
 }

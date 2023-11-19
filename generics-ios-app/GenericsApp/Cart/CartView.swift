@@ -63,7 +63,6 @@ struct CartView: View {
                                         Text(part.name)
                                         Spacer()
                                         Text(part.formattedPrice())
-
                                     }
                                     .foregroundColor(Color.gray)
                                     .font(.genericsCaption)
@@ -80,7 +79,7 @@ struct CartView: View {
                     }
                     Section {
                         switch model.state {
-                        case .readyForOrder, .needAddress:
+                        case .readyForOrder:
                             orderButton
                         case .loading:
                             ProgressView()
@@ -92,9 +91,6 @@ struct CartView: View {
                     }
                 }
                 .navigationTitle("My cart")
-                .onAppear {
-                    model.checkAddress()
-                }
             }
         }
         .onAppear {
@@ -105,33 +101,14 @@ struct CartView: View {
     @ViewBuilder
     var detailsSection: some View {
         Section {
-            if model.state == .needAddress {
-                NavigationLink {
-                    AddressSwiftUIView(dumbFix: $dumbFix)
-                        .ignoresSafeArea()
-                        .toolbar(.hidden, for: .navigationBar)
-                        .toolbar(dumbFix ? .hidden : .automatic,
-                                 for: .tabBar)
-                } label: {
-                    SelectorView(caption: "Your delivery address",
-                                 icon: "location",
-                                 text: "Select your address")
-                }
-                .listRowBackground(Color.red.opacity(0.25))
-            } else {
-                NavigationLink {
-                    AddressSwiftUIView(dumbFix: $dumbFix)
-                        .ignoresSafeArea()
-                        .toolbar(.hidden, for: .navigationBar)
-                        .toolbar(dumbFix ? .hidden : .automatic,
-                                 for: .tabBar)
-                } label: {
-                    SelectorView(caption: "Your delivery address",
-                                 icon: "location",
-                                 text: model.address ?? "Select your address")
-                }
+            NavigationLink {
+                Text("Address view")
+            } label: {
+                SelectorView(caption: "Your delivery address",
+                             icon: "location",
+                             text: "Select your address")
             }
-
+            .disabled(true)
             NavigationLink {
                 Text("Payment view")
             } label: {
@@ -139,9 +116,8 @@ struct CartView: View {
                              icon: "creditcard",
                              text: "Cash")
             }
+            .disabled(true)
         }
-        .disabled(!(model.state == .readyForOrder
-                    || model.state == .needAddress))
     }
 
     @ViewBuilder

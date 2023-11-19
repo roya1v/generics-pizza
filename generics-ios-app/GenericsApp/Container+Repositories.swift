@@ -9,7 +9,7 @@ import Foundation
 import Factory
 import GenericsCore
 
-fileprivate let url = "http://localhost:8080"
+fileprivate let url = "http://192.168.64.4:8080"
 
 extension Container {
     var orderRepository: Factory<OrderRepository> {

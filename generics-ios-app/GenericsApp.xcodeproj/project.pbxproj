@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		010A85E82A11282100354E7D /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010A85E72A11282100354E7D /* AddressViewModel.swift */; };
 		010D5D8A2A6DB09E00903CD3 /* MapNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */; };
 		010D5D8C2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */; };
 		010EB8432ABB98F600D28E70 /* OfferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EB8422ABB98F600D28E70 /* OfferViewModel.swift */; };
@@ -70,7 +69,6 @@
 		01B7C4772AD4346F00736CB0 /* GenericsHelpers.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01E7FF022ABF125500B8EACD /* GenericsHelpers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		01BEAEC52A9E7FE000106F48 /* dotmatrix.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 01BEAEC42A9E7FE000106F48 /* dotmatrix.TTF */; };
 		01BEAEC72A9E836F00106F48 /* FontFix.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01BEAEC62A9E836F00106F48 /* FontFix.storyboard */; };
-		01C9DFB32A0AE0E2001DC47D /* AddressSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFB22A0AE0E2001DC47D /* AddressSheetView.swift */; };
 		01C9DFBB2A0AF16B001DC47D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */; };
 		01C9DFBD2A0AF16B001DC47D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C9DFBC2A0AF16B001DC47D /* SceneDelegate.swift */; };
 		01C9DFC42A0AF16D001DC47D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C9DFC32A0AF16D001DC47D /* Assets.xcassets */; };
@@ -104,8 +102,6 @@
 		01F889D82A8CF068001ACB69 /* OnboardingPermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889D72A8CF068001ACB69 /* OnboardingPermissionViewModel.swift */; };
 		01F889DC2A8D06C4001ACB69 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01F889DB2A8D06C4001ACB69 /* Settings.bundle */; };
 		01F889DE2A8D0A73001ACB69 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889DD2A8D0A72001ACB69 /* SplashViewController.swift */; };
-		01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA4F2A09735800C622CC /* AddressViewController.swift */; };
-		01FFEA522A0974D900C622CC /* AddressSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */; };
 		EC14E81B298B086E00A6540C /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E81A298B086E00A6540C /* MenuView.swift */; };
 		EC14E823298C515E00A6540C /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = EC14E822298C515E00A6540C /* Factory */; };
 		EC14E827298C527900A6540C /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
@@ -393,7 +389,6 @@
 
 /* Begin PBXFileReference section */
 		0108FDF82B0401ED00EEE405 /* NoServerTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = NoServerTests.xctestplan; sourceTree = "<group>"; };
-		010A85E72A11282100354E7D /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
 		010D5D892A6DB09E00903CD3 /* MapNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNavigationViewController.swift; sourceTree = "<group>"; };
 		010D5D8B2A6DB55F00903CD3 /* OnboardingPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPermissionViewController.swift; sourceTree = "<group>"; };
 		010EB83F2ABB974D00D28E70 /* RoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingService.swift; sourceTree = "<group>"; };
@@ -437,7 +432,6 @@
 		01BEAEC42A9E7FE000106F48 /* dotmatrix.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = dotmatrix.TTF; sourceTree = "<group>"; };
 		01BEAEC62A9E836F00106F48 /* FontFix.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FontFix.storyboard; sourceTree = "<group>"; };
 		01BEAEC82A9E86AB00106F48 /* SliderToActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderToActionView.swift; sourceTree = "<group>"; };
-		01C9DFB22A0AE0E2001DC47D /* AddressSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSheetView.swift; sourceTree = "<group>"; };
 		01C9DFB82A0AF16B001DC47D /* GenericsDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01C9DFBC2A0AF16B001DC47D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -468,8 +462,6 @@
 		01F889DB2A8D06C4001ACB69 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		01F889DD2A8D0A72001ACB69 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		01F889DF2A8D1EE6001ACB69 /* DriverRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverRepository.swift; sourceTree = "<group>"; };
-		01FFEA4F2A09735800C622CC /* AddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewController.swift; sourceTree = "<group>"; };
-		01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSwiftUIView.swift; sourceTree = "<group>"; };
 		EC14E81A298B086E00A6540C /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		EC14E826298C527900A6540C /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		EC611F33299432A30000427A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -871,17 +863,6 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		01FFEA4C2A096F7000C622CC /* Address */ = {
-			isa = PBXGroup;
-			children = (
-				01C9DFB22A0AE0E2001DC47D /* AddressSheetView.swift */,
-				01FFEA4F2A09735800C622CC /* AddressViewController.swift */,
-				010A85E72A11282100354E7D /* AddressViewModel.swift */,
-				01FFEA512A0974D900C622CC /* AddressSwiftUIView.swift */,
-			);
-			path = Address;
-			sourceTree = "<group>";
-		};
 		EC14E81E298B0C1C00A6540C /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -903,7 +884,6 @@
 		EC688C2129CA38C100450D2E /* Cart */ = {
 			isa = PBXGroup;
 			children = (
-				01FFEA4C2A096F7000C622CC /* Address */,
 				EC688C2229CA38D900450D2E /* CartView.swift */,
 				EC688C2829CA462E00450D2E /* CartViewModel.swift */,
 			);
@@ -1897,15 +1877,11 @@
 				ECD079F129E45CCD00914593 /* Container+Repositories.swift in Sources */,
 				011D49FC2AA3442C00611D8D /* MapPointModel+CLLocationCoordinate2D.swift in Sources */,
 				EC688C2329CA38D900450D2E /* CartView.swift in Sources */,
-				01FFEA522A0974D900C622CC /* AddressSwiftUIView.swift in Sources */,
 				011D49FA2AA324F500611D8D /* GeocodingService.swift in Sources */,
-				01FFEA502A09735800C622CC /* AddressViewController.swift in Sources */,
 				EC14E81B298B086E00A6540C /* MenuView.swift in Sources */,
 				ECD845AB298AE51D0036454C /* ContentView.swift in Sources */,
-				010A85E82A11282100354E7D /* AddressViewModel.swift in Sources */,
 				ECD845A9298AE51D0036454C /* GenericsAppApp.swift in Sources */,
 				EC14E827298C527900A6540C /* MenuViewModel.swift in Sources */,
-				01C9DFB32A0AE0E2001DC47D /* AddressSheetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

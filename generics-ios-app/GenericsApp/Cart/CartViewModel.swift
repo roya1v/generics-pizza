@@ -19,20 +19,15 @@ final class CartViewModel: ObservableObject {
         case readyForOrder
         case loading
         case inOrderState(state: OrderState)
-        case needAddress
         case error
     }
 
     @Published private(set) var items: [MenuItem] = []
-    @Published private(set) var address: String?
     @Published private(set) var subtotal: [SubtotalModel] = []
     @Published private(set) var state: State = .readyForOrder
 
     @Injected(\.orderRepository)
     private var repository
-
-    @Injected(\.geocodingService)
-    private var geocodingService
 
     private var cancellable = Set<AnyCancellable>()
 
@@ -44,24 +39,6 @@ final class CartViewModel: ObservableObject {
             self.subtotal = subtotal
         } onError: { error in
             fatalError(error.localizedDescription)
-        }
-    }
-
-    func checkAddress() {
-        if state == .needAddress && repository.address != nil {
-            state = .readyForOrder
-        }
-
-        if let address = repository.address {
-            self.address = ""
-            ThrowingAsyncTask {
-                return try await self.geocodingService
-                    .getAddress(for: address.coordinate.clLocationCoordinate2d)
-            } onResult: { addressString in
-                self.address = (addressString ?? "")  + address.details
-            } onError: { error in
-                fatalError(error.localizedDescription)
-            }
         }
     }
 
@@ -82,13 +59,6 @@ final class CartViewModel: ObservableObject {
                     }
                     .store(in: &cancellable)
             } catch {
-                if let error = error as? OrderError {
-                    switch error {
-                    case .noAddress:
-                        self.state = .needAddress
-                    }
-                    return
-                }
                 state = .error
             }
         }

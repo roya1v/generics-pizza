@@ -59,7 +59,7 @@ final class OrderRepositoryImpl: OrderRepository {
         //TODO: Make address optional
         return try await getRequest()
             .add(path: "check_price")
-            .body(OrderModel(createdAt: nil, items: items, address: .init(coordinate: .init(latitude: 0, longitude: 0), details: "")))
+            .body(OrderModel(createdAt: nil, items: items))
             .decode(to: [SubtotalModel].self)
             .perform()
     }
@@ -100,7 +100,7 @@ final class OrderRepositoryImpl: OrderRepository {
 
     private func makeOrderRequest() async throws -> OrderModel {
         let response = try await getRequest()
-            .body(OrderModel(createdAt: nil, items: items, address: address!))
+            .body(OrderModel(createdAt: nil, items: items))
             .perform()
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
