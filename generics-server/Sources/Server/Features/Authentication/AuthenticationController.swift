@@ -37,7 +37,7 @@ struct AuthenticationController: RouteCollection {
 
     /// Login and get an auth token
     func login(req: Request) async throws -> UserTokenEntry {
-        let user = try req.auth.require(UserEntry.self)
+        let user = try req.requireAnyUser()
         let token = try user.generateToken()
         try await token.save(on: req.db)
         return token
@@ -45,12 +45,12 @@ struct AuthenticationController: RouteCollection {
 
     /// Check current user
     func me(req: Request) async throws -> UserEntry {
-        try req.auth.require(UserEntry.self)
+        try req.requireAnyUser()
     }
 
     /// Sign out deleting auth token
     func signOut(req: Request) async throws -> HTTPResponseStatus {
-        let user = try req.auth.require(UserEntry.self)
+        let user = try req.requireAnyUser()
         if let id = user.id,
            let token = try await
             UserTokenEntry.query(on: req.db)

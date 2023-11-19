@@ -13,6 +13,7 @@ import PathKit
 struct MenuController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         let menu = routes.grouped("menu")
+
         menu.get(use: index)
         menu.grouped(UserTokenEntry.authenticator()).post(use: create)
         menu.group(":itemID") { item in
@@ -47,7 +48,7 @@ struct MenuController: RouteCollection {
 
     /// Set image for menu item
     func setImage(req: Request) async throws -> HTTPResponseStatus {
-        try req.auth.require(UserEntry.self)
+        try req.requireEmployeeOrAdminUser()
         guard let menuItem = try await MenuEntry.find(req.parameters.get("itemID"), on: req.db),
               let id = menuItem.id else {
             throw Abort(.notFound)
@@ -57,13 +58,15 @@ struct MenuController: RouteCollection {
             throw Abort(.badRequest, reason: "Content must be jpeg")
         }
 
-        _ = try await req.s3.putObject(.init(body: .byteBuffer(req.body.data!), bucket: "menu-images", key: "\(id).jpeg"))
-        return .notImplemented
+        _ = try await req.s3.putObject(.init(body: .byteBuffer(req.body.data!),
+                                             bucket: "menu-images",
+                                             key: "\(id).jpeg"))
+        return .ok
     }
 
     /// Create a menu item
     func create(req: Request) async throws -> MenuItem {
-        try req.auth.require(UserEntry.self)
+        try req.requireEmployeeOrAdminUser()
         let entry = try req.content.decode(MenuItem.self)
         try await entry.toEntry().save(on: req.db)
         return entry
