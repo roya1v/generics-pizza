@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import SwiftlyHttp
+import SharedModels
 
 public func buildAuthenticationRepository(url: String) -> AuthenticationRepository {
     AuthenticationRepositoryImpl(baseURL: url)
@@ -23,15 +24,18 @@ public enum AuthenticationState {
     case loggedOut
 }
 
-public protocol AuthenticationRepository: AuthorizationDelegate {
+public protocol AuthenticationRepository {
     var statePublisher: AnyPublisher<AuthenticationState, Never> { get }
     var state: AuthenticationState { get }
     func login(email: String, password: String) async throws
     func reload()
     func signOut() async throws
+    func getMe() async throws -> UserModel
+    func getAuthentication() throws -> SwiftlyHttp.Authentication
 }
 
 final class AuthenticationRepositoryImpl: AuthenticationRepository {
+
 
     private let stateSubject = PassthroughSubject<AuthenticationState, Never>()
 
@@ -69,7 +73,15 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
 
     func reload() {
         if let _ = settingsService.getAuthToken() {
-            state = .loggedIn
+            Task {
+                if (try? await getMe()) != nil {
+                    state = .loggedIn
+                } else {
+                    settingsService.resetAuthToken()
+                    state = .loggedOut
+                }
+            }
+
         } else {
             state = .loggedOut
         }
@@ -84,7 +96,14 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
         state = .loggedOut
     }
 
-    func getAuthorization() throws -> SwiftlyHttp.Authorization {
+    func getMe() async throws -> UserModel {
+        guard let token = settingsService.getAuthToken() else {
+            fatalError()
+        }
+        return try await authenticationService.getMe(token)
+    }
+
+    func getAuthentication() throws -> SwiftlyHttp.Authentication {
         guard let token = settingsService.getAuthToken() else {
             fatalError()
         }
@@ -105,7 +124,11 @@ final class AuthenticationRepositoryMck: AuthenticationRepository {
     func reload() {
     }
 
-    func getAuthorization() throws -> SwiftlyHttp.Authorization {
+    func getAuthentication() throws -> SwiftlyHttp.Authentication {
+        fatalError()
+    }
+    
+    func getMe() async throws -> UserModel {
         fatalError()
     }
 

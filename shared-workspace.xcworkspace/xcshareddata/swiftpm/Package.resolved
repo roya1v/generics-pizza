@@ -329,8 +329,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/roya1v/SwiftlyHttp",
       "state" : {
-        "branch" : "main",
-        "revision" : "26b3d4731403fcb66485caea2d9a4be732d465fd"
+        "revision" : "e43a53dd1bdcd91ec4f1fb7e4fc31f4b7224e7a7",
+        "version" : "0.0.1"
       }
     },
     {

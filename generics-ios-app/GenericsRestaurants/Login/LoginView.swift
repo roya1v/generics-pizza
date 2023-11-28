@@ -20,6 +20,9 @@ struct LoginView: View {
                 .scaledToFit()
             TextField("Email", text: $email)
             SecureField("Password", text: $password)
+            if model.state == .error {
+                Text("Something went wrong!")
+            }
             if model.state == .loading {
                 ProgressView()
             } else {

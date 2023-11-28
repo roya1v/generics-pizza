@@ -25,8 +25,8 @@ final class NewMenuItemViewModel: ObservableObject {
     func createMenuItem(title: String, description: String, price: String) {
         state = .loading
 
-        menuRepository.authDelegate = authRepository
-        let item = MenuItem(id: nil, title: title, description: description, price: 0)
+        menuRepository.authFactory = { try? self.authRepository.getAuthentication() }
+        let item = MenuItem(id: nil, title: title, description: description, price: Int(price)!)
         Task {
             do {
                 try await menuRepository.create(item: item)

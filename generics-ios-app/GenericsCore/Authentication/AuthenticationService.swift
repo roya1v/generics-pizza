@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftlyHttp
+import SharedModels
 
 public final class AuthenticationService {
 
@@ -24,7 +25,7 @@ public final class AuthenticationService {
         let response = try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "auth")
             .add(path: "login")
-            .authorization(.basic(login: email, password: password))
+            .authentication(.basic(login: email, password: password))
             .method(.post)
             .decode(to: LoginResponse.self)
             .perform()
@@ -36,10 +37,18 @@ public final class AuthenticationService {
         try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "auth")
             .add(path: "signout")
-            .authorization({
-                .bearer(token: token)
-            })
+            .authentication(.bearer(token: token))
             .method(.post)
+            .perform()
+    }
+
+    public func getMe(_ token: String) async throws -> UserModel {
+        try await SwiftlyHttp(baseURL: baseURL)!
+            .add(path: "auth")
+            .add(path: "user")
+            .authentication(.bearer(token: token))
+            .method(.get)
+            .decode(to: UserModel.self)
             .perform()
     }
 }

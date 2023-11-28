@@ -20,7 +20,7 @@ public func mockMenuRepository() -> MenuRepository {
 public protocol MenuRepository {
     func fetchMenu() async throws -> [MenuItem]
     func create(item: MenuItem) async throws
-    var authDelegate: AuthorizationDelegate? { get set}
+    var authFactory: (() -> SwiftlyHttp.Authentication?)? { get set }
 }
 
 final class MenuRepositoryImp: MenuRepository {
@@ -31,6 +31,8 @@ final class MenuRepositoryImp: MenuRepository {
     }
 
     // MARK: - MenuRepository
+    
+    var authFactory: (() -> SwiftlyHttp.Authentication?)?
 
     public func fetchMenu() async throws -> [MenuItem] {
          return try await getRequest()
@@ -42,13 +44,13 @@ final class MenuRepositoryImp: MenuRepository {
     public func create(item: MenuItem) async throws {
         try await getRequest()
             .method(.post)
-            .authorizationDelegate(authDelegate!)
+            .authentication({
+                self.authFactory?()
+            })
             .body(item)
             .decode(to: MenuItem.self)
             .perform()
     }
-
-    public var authDelegate: AuthorizationDelegate?
 
     private func getRequest() -> SwiftlyHttp {
         SwiftlyHttp(baseURL: baseURL)!
@@ -58,8 +60,7 @@ final class MenuRepositoryImp: MenuRepository {
 
 final class MenuRepositoryMck: MenuRepository {
 
-    var authDelegate: AuthorizationDelegate?
-
+    var authFactory: (() -> SwiftlyHttp.Authentication?)?
     var fetchMenuImplementation: (() async throws -> [MenuItem]) = {
         [.init(id: .init(), title: "Margarita simplita", description: "Tomatoe souce, cheese and weird leaves", price: 100),
          .init(id: .init(), title: "Pepperoni Meroni", description: "Tomatoe souce, cheese and weird leaves", price: 100),

@@ -12,18 +12,25 @@ import GenericsCore
 
 struct ContentView: View {
 
-    @State var state: AuthenticationState = .loggedOut
+    @State var state: AuthenticationState = .unknown
     @Injected(\.authenticationRepository) private var repository
 
     var body: some View {
         Group {
-            if state == .loggedOut {
-                LoginView()
-            } else {
+            switch state {
+            case .unknown:
+                Text("")
+            case .loggedIn:
                 DashboardView()
+            case .loggedOut:
+                LoginView()
             }
         }
-        .onReceive(repository.statePublisher) { state in
+        .onReceive(
+            repository
+            .statePublisher
+            .receive(on: DispatchQueue.main)
+        ) { state in
             self.state = state
         }
         .onAppear {

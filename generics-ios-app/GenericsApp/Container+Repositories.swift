@@ -25,8 +25,4 @@ extension Container {
         self { buildAuthenticationRepository(url: url) }
             .singleton
     }
-    var geocodingService: Factory<GeocodingService> {
-        self { buildGeocodingService() }
-            .singleton
-    }
 }

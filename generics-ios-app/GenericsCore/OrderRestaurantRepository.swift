@@ -19,17 +19,14 @@ public func mockOrderRestaurantRepository() -> OrderRestaurantRepository {
 }
 
 public protocol OrderRestaurantRepository {
+    var authFactory: (() -> SwiftlyHttp.Authentication?)? { get set }
     func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error>
     func send(message: RestaurantToServerMessage) async throws
-    var authDelegate: AuthorizationDelegate? { get set}
 }
 
 final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
 
-    var authDelegate: AuthorizationDelegate?
-
     private var socket: SwiftlyWebSocketConnection?
-
     private let baseURL: String
 
     init(baseURL: String) {
@@ -38,13 +35,17 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
 
     // MARK: - OrderRestaurantRepository
 
+    var authFactory: (() -> SwiftlyHttp.Authentication?)?
+
     func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error> {
         let currentOrders = try await getCurrentOrders()
 
         socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
             .add(path: "order")
             .add(path: "activity")
-            .authorizationDelegate(authDelegate!)
+            .authentication({
+                self.authFactory?()
+            })
             .websocket()
 
         return socket!
@@ -75,7 +76,9 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
             .add(path: "order")
             .add(path: "current")
             .method(.get)
-            .authorizationDelegate(authDelegate!)
+            .authentication({
+                self.authFactory?()
+            })
             .decode(to: [OrderModel].self)
             .set(jsonDecoder: decoder)
             .perform()
@@ -84,7 +87,7 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
 
 final class OrderRestaurantRepositoryMck: OrderRestaurantRepository {
 
-    var authDelegate: AuthorizationDelegate?
+    var authFactory: (() -> SwiftlyHttp.Authentication?)?
 
     func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error> {
         return PassthroughSubject().eraseToAnyPublisher()

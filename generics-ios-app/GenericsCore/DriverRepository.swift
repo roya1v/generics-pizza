@@ -46,8 +46,8 @@ final class DriverRepositoryImpl: DriverRepository {
                 .add(path: "order")
                 .add(path: "activity")
                 .add(path: "driver")
-                .authorization({
-                    return try? self.authenticationRepository.getAuthorization()
+                .authentication({
+                    return try? self.authenticationRepository.getAuthentication()
                 })
                 .websocket()
         }

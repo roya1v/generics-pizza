@@ -57,7 +57,7 @@ struct MenuView: View {
                     .font(.caption)
             }
             Spacer()
-            Text("\(item.price)")
+            Text(item.formattedPrice())
                 .bold()
                 .padding()
             Button {
