@@ -1,6 +1,21 @@
 // swift-tools-version:5.7
 import PackageDescription
 
+let baseDependencies: [Package.Dependency] = [
+    .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
+    .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
+    .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
+    .package(url: "https://github.com/kylef/PathKit", from: "1.0.1"),
+    .package(url: "https://github.com/soto-project/soto.git", from: "6.0.0"),
+
+]
+
+#if !RELESE
+let dependencies = baseDependencies + [.package(url: "https://github.com/realm/SwiftLint", .upToNextMajor(from: "0.52.4"))]
+#else
+let dependencies = baseDependencies
+#endif
+
 let package = Package(
     name: "generics-server",
     platforms: [
@@ -9,14 +24,7 @@ let package = Package(
     products: [
         .library(name: "SharedModels", targets: ["SharedModels"])
     ],
-    dependencies: [
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
-        .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
-        .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
-        .package(url: "https://github.com/kylef/PathKit", from: "1.0.1"),
-        .package(url: "https://github.com/realm/SwiftLint", .upToNextMajor(from: "0.52.4")),
-        .package(url: "https://github.com/soto-project/soto.git", from: "6.0.0")
-    ],
+    dependencies: dependencies,
     targets: [
         .executableTarget(
             name: "Server",
@@ -31,7 +39,7 @@ let package = Package(
             swiftSettings: [
                 .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release))
             ],
-            plugins: [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
+            plugins: []
         ),
         .target(
             name: "SharedModels",
