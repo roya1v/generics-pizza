@@ -43,10 +43,11 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
         socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
             .add(path: "order")
             .add(path: "activity")
-            .authentication({
-                self.authFactory?()
-            })
             .websocket()
+
+        if case let .bearer(token) = authFactory?() {
+            try await socket?.send(message: .string(token))
+        }
 
         return socket!
             .messagePublisher
