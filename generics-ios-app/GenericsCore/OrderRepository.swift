@@ -119,9 +119,9 @@ final class OrderRepositoryMck: OrderRepository {
     var address: AddressModel?
 
     var items: [MenuItem] = [
-        .init(id: .init(), title: "Margarita simplita", description: "Tomatoe souce, cheese and weird leaves", price: 100),
-        .init(id: .init(), title: "Pepperoni Meroni", description: "Tomatoe souce, cheese and weird leaves", price: 100),
-        .init(id: .init(), title: "Super pepperoni", description: "Tomatoe souce, cheese and weird leaves", price: 100)
+        .init(id: .init(), title: "Margarita simplita", description: "Tomatoe souce, cheese and weird leaves", price: 1299),
+        .init(id: .init(), title: "Pepperoni Meroni", description: "Tomatoe souce, cheese and weird leaves", price: 1299),
+        .init(id: .init(), title: "Super pepperoni", description: "Tomatoe souce, cheese and weird leaves", price: 1299)
     ]
 
     var addImplementation: ((MenuItem) -> Void)?
@@ -134,7 +134,12 @@ final class OrderRepositoryMck: OrderRepository {
         if let checkPriceImplementation {
             return try await checkPriceImplementation()
         } else {
-            fatalError()
+            return [
+                .init(name: "Margarita simplita", value: 1299),
+                .init(name: "Pepperoni Meroni", value: 1299),
+                .init(name: "Super pepperoni", value: 1299),
+                .init(name: "Total", value: 3897, isSecondary: false)
+            ]
         }
     }
 

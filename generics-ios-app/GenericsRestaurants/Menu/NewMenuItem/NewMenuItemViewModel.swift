@@ -15,6 +15,10 @@ import GenericsUI
 final class NewMenuItemViewModel: ObservableObject {
 
     @Published private(set) var state: ViewState = .ready
+    @Published var title = ""
+    @Published var description = ""
+    @Published var price = 0.0
+    @Published var imageUrl: URL? = nil
 
     @Injected(\.menuRepository)
     private var menuRepository
@@ -22,14 +26,22 @@ final class NewMenuItemViewModel: ObservableObject {
     @Injected(\.authenticationRepository)
     private var authRepository
 
-    func createMenuItem(title: String, description: String, price: String) {
+    func createMenuItem() {
         state = .loading
 
+        guard !title.isEmpty,
+              !description.isEmpty,
+              price != 0.0 else {
+            state = .error
+            return
+        }
+
         menuRepository.authFactory = { try? self.authRepository.getAuthentication() }
-        let item = MenuItem(id: nil, title: title, description: description, price: Int(price)!)
+        let item = MenuItem(id: nil, title: title, description: description, price: Int(price * 100))
         Task {
             do {
-                try await menuRepository.create(item: item)
+                let menuItem = try await menuRepository.create(item: item)
+                try await menuRepository.setImage(from: imageUrl!, for: menuItem)
             } catch {
                 await MainActor.run {
                     state = .error

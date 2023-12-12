@@ -10,13 +10,14 @@ import SharedModels
 import Factory
 import Combine
 import GenericsCore
-import CoreLocation
 import GenericsHelpers
 
 final class CartViewModel: ObservableObject {
 
     enum State: Equatable {
+        case needItems
         case readyForOrder
+        case loadingOrderDetails
         case loading
         case inOrderState(state: OrderState)
         case error
@@ -24,7 +25,7 @@ final class CartViewModel: ObservableObject {
 
     @Published private(set) var items: [MenuItem] = []
     @Published private(set) var subtotal: [SubtotalModel] = []
-    @Published private(set) var state: State = .readyForOrder
+    @Published private(set) var state: State = .needItems
 
     @Injected(\.orderRepository)
     private var repository
@@ -33,12 +34,13 @@ final class CartViewModel: ObservableObject {
 
     func fetch() {
         items = repository.items
+        state = .loadingOrderDetails
         ThrowingAsyncTask {
-            return try await self.repository.checkPrice()
+            try await self.repository.checkPrice()
         } onResult: { subtotal in
             self.subtotal = subtotal
         } onError: { error in
-            fatalError(error.localizedDescription)
+            self.state = .error
         }
     }
 
@@ -68,11 +70,5 @@ final class CartViewModel: ObservableObject {
         if let index = items.firstIndex(of: item) {
             items.remove(at: index)
         }
-    }
-}
-
-extension MenuItem: Equatable {
-    public static func == (lhs: MenuItem, rhs: MenuItem) -> Bool {
-        lhs.id == rhs.id
     }
 }

@@ -67,8 +67,8 @@ struct MenuController: RouteCollection {
     /// Create a menu item
     func create(req: Request) async throws -> MenuItem {
         try req.requireEmployeeOrAdminUser()
-        let entry = try req.content.decode(MenuItem.self)
-        try await entry.toEntry().save(on: req.db)
-        return entry
+        let entry = try req.content.decode(MenuItem.self).toEntry()
+        try await entry.create(on: req.db)
+        return entry.toSharedModel()
     }
 }

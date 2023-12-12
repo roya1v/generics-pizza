@@ -31,15 +31,17 @@ final class NowViewModel: ObservableObject {
             do {
                 try await repository
                     .getFeed()
-                    .assertNoFailure()
+
                     .receive(on: DispatchQueue.main)
-                    .sink { message in
+                    .sink(receiveCompletion: { completion in
+                        print(completion)
+                    }, receiveValue: { message in
                         self.state = .ready
                         switch message {
                         case .newOrder(let order):
                             self.orders.insert(order, at: 0)
                         }
-                    }
+                    })
                     .store(in: &cancellable)
             } catch {
                 state = .error

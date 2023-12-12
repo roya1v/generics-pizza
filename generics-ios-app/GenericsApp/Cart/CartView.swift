@@ -9,94 +9,78 @@ import SwiftUI
 import Factory
 import GenericsCore
 import GenericsUI
+import SharedModels
 
 struct CartView: View {
 
     @StateObject var model = CartViewModel()
-    // Fix for tab bar not reappering
-    @State var dumbFix = false
 
     var body: some View {
         NavigationView {
-            if model.items.isEmpty {
+            switch model.state {
+            case .needItems:
                 Text("You have to first add items to your cart!")
                     .font(.largeTitle)
                     .multilineTextAlignment(.center)
-            } else {
-                List {
-                    Section {
-                        ForEach(model.items) { item in
-                            HStack {
-                                Image("pizzza_placeholder")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 80.0, height: 80.0)
-                                VStack(alignment: .leading) {
-                                    Text(item.title)
-                                    Text(item.description)
-                                        .font(.genericsCaption)
-                                        .foregroundColor(.gray)
-                                        .lineLimit(1)
-                                    HStack {
-                                        Text("\(item.formattedPrice())")
-                                        Spacer()
-                                    }
-                                    .padding(2.0)
-                                }
-                                Button {
-                                    model.remove(item)
-                                } label: {
-                                    Image(systemName: "minus.circle.fill")
-                                        .foregroundColor(Color.red)
-                                }
-
-                            }
-
-                        }
-                    }
-                    detailsSection
-                    Section {
-                        VStack {
-                            ForEach(model.subtotal, id: \.name) { part in
-                                if part.isSecondary {
-                                    HStack {
-                                        Text(part.name)
-                                        Spacer()
-                                        Text(part.formattedPrice())
-                                    }
-                                    .foregroundColor(Color.gray)
-                                    .font(.genericsCaption)
-                                } else {
-                                    Divider()
-                                    HStack {
-                                        Text(part.name)
-                                        Spacer()
-                                        Text(part.formattedPrice())
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    Section {
-                        switch model.state {
-                        case .readyForOrder:
-                            orderButton
-                        case .loading:
-                            ProgressView()
-                        case .inOrderState(_):
-                            liveOrder
-                        case .error:
-                            Text("Something didn't work out :(")
-                        }
-                    }
-                }
-                .navigationTitle("My cart")
+            case .readyForOrder, .loadingOrderDetails, .loading, .inOrderState(_), .error:
+                mainBody
+                    .navigationTitle("My cart")
             }
         }
         .onAppear {
             model.fetch()
         }
     }
+
+    @ViewBuilder
+    var mainBody: some View {
+        List {
+            cartSection
+            detailsSection
+            totalSection
+            ctaSection
+        }
+    }
+
+    // MARK: Cart section
+
+    @ViewBuilder
+    var cartSection: some View {
+        Section {
+            ForEach(model.items) { item in
+                getCartItem(for: item)
+            }
+        }
+    }
+
+    private func getCartItem(for item: MenuItem) -> some View {
+        HStack {
+            Image("pizzza_placeholder")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 80.0, height: 80.0)
+            VStack(alignment: .leading) {
+                Text(item.title)
+                Text(item.description)
+                    .font(.genericsCaption)
+                    .foregroundColor(.gray)
+                    .lineLimit(1)
+                HStack {
+                    Text(item.formattedPrice())
+                    Spacer()
+                }
+                .padding(2.0)
+            }
+            Button {
+                model.remove(item)
+            } label: {
+                Image(systemName: "minus.circle.fill")
+                    .foregroundColor(Color.red)
+            }
+        }
+    }
+
+    // MARK: Details section
 
     @ViewBuilder
     var detailsSection: some View {
@@ -117,6 +101,56 @@ struct CartView: View {
                              text: "Cash")
             }
             .disabled(true)
+        }
+    }
+
+    // MARK: Total section
+
+    @ViewBuilder
+    var totalSection: some View {
+        Section {
+            VStack {
+                ForEach(model.subtotal, id: \.name) { part in
+                    if part.isSecondary {
+                        HStack {
+                            Text(part.name)
+                            Spacer()
+                            Text(part.formattedPrice())
+                        }
+                        .foregroundColor(Color.gray)
+                        .font(.genericsCaption)
+                    } else {
+                        Divider()
+                        HStack {
+                            Text(part.name)
+                            Spacer()
+                            Text(part.formattedPrice())
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: CTA section
+
+    @ViewBuilder
+    var ctaSection: some View {
+        Section {
+            switch model.state {
+            case .readyForOrder:
+                orderButton
+            case .loading:
+                ProgressView()
+            case .inOrderState(_):
+                liveOrder
+            case .error:
+                Text("Something didn't work out :(")
+            case .needItems:
+                Text("Hello")
+            case .loadingOrderDetails:
+                Text("This shouldn't be here")
+            }
         }
     }
 

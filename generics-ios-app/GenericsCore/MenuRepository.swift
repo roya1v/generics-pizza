@@ -19,11 +19,19 @@ public func mockMenuRepository() -> MenuRepository {
 
 public protocol MenuRepository {
     func fetchMenu() async throws -> [MenuItem]
-    func create(item: MenuItem) async throws
+    func create(item: MenuItem) async throws -> MenuItem
     var authFactory: (() -> SwiftlyHttp.Authentication?)? { get set }
+    func imageUrl(for item: MenuItem) -> URL?
+    func setImage(from localUrl: URL, for item: MenuItem) async throws
+}
+
+enum MenuRepositoryError: Error {
+    case invalidFile
 }
 
 final class MenuRepositoryImp: MenuRepository {
+
+
     private let baseURL: String
 
     init(baseURL: String) {
@@ -41,7 +49,7 @@ final class MenuRepositoryImp: MenuRepository {
             .perform()
     }
 
-    public func create(item: MenuItem) async throws {
+    public func create(item: MenuItem) async throws -> MenuItem {
         try await getRequest()
             .method(.post)
             .authentication({
@@ -52,9 +60,32 @@ final class MenuRepositoryImp: MenuRepository {
             .perform()
     }
 
+    func imageUrl(for item: SharedModels.MenuItem) -> URL? {
+        guard let idString = item.id?.uuidString else {
+            return nil
+        }
+        return URL(string: "\(baseURL)/menu/\(idString)")
+    }
+
     private func getRequest() -> SwiftlyHttp {
         SwiftlyHttp(baseURL: baseURL)!
             .add(path: "menu")
+    }
+    
+    func setImage(from localUrl: URL, for item: MenuItem) async throws {
+        guard localUrl.isFileURL else {
+            throw MenuRepositoryError.invalidFile
+        }
+        let imageData = try Data(contentsOf: localUrl)
+        try await getRequest()
+            .method(.post)
+            .add(path: item.id!.uuidString)
+            .authentication({
+                self.authFactory?()
+            })
+            .setHeader("Content-Type", to: "image/jpeg")
+            .body(imageData)
+            .perform()
     }
 }
 
@@ -71,6 +102,14 @@ final class MenuRepositoryMck: MenuRepository {
         try await fetchMenuImplementation()
     }
 
-    func create(item: MenuItem) async throws {
+    func create(item: MenuItem) async throws -> MenuItem {
+         .init(id: .init(), title: "Pepperoni Meroni", description: "Tomatoe souce, cheese and weird leaves", price: 100)
+    }
+
+    func imageUrl(for item: MenuItem) -> URL? {
+        return nil
+    }
+    
+    func setImage(from localUrl: URL, for item: MenuItem) async throws {
     }
 }

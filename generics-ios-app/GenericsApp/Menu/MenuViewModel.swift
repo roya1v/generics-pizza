@@ -27,7 +27,7 @@ final class MenuViewModel: ObservableObject {
             state = .loading
         }
         ThrowingAsyncTask {
-            return try await self.menuRepository.fetchMenu()
+            try await self.menuRepository.fetchMenu()
         } onResult: { newItems in
             self.items = newItems
             self.state = .ready
@@ -38,5 +38,9 @@ final class MenuViewModel: ObservableObject {
 
     func add(item: MenuItem) {
         orderRepository.add(item: item)
+    }
+
+    func imageUrl(for item: MenuItem) -> URL? {
+        menuRepository.imageUrl(for: item)
     }
 }

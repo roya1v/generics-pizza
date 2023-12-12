@@ -50,6 +50,23 @@ struct MenuView: View {
 
     func listRow(for item: MenuItem) -> some View {
         HStack {
+            if let url = model.imageUrl(for: item) {
+                AsyncImage(url: url) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    case .failure(_), .empty:
+                        Image("pizzza_placeholder")
+                            .resizable()
+                            .scaledToFit()
+                    @unknown default:
+                        fatalError()
+                    }
+                }
+                .frame(width: 75.0)
+            }
             VStack(alignment: .leading) {
                 Text(item.title)
                     .font(.title2)
