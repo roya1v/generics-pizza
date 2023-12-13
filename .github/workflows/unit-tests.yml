@@ -13,12 +13,13 @@ jobs:
     - name: Run tests
       run: |
         xcodebuild test -workspace shared-workspace.xcworkspace -scheme GenericsApp -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=17.0.1' -testPlan NoServerTests | xcpretty && exit ${PIPESTATUS[0]}
-    - name: Send message to me
-      if: always()
-      uses: appleboy/telegram-action@master
-      with:
-        to: ${{ secrets.TELEGRAM_CHAT_ID }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: |
-          Unit tests in ${{ github.repository }} are done!
-          The action result is ${{ job.status }}.
+    # TODO: Fix
+    # - name: Send message to me
+    #   if: always()
+    #   uses: appleboy/telegram-action@master
+    #   with:
+    #     to: ${{ secrets.TELEGRAM_CHAT_ID }}
+    #     token: ${{ secrets.TELEGRAM_TOKEN }}
+    #     message: |
+    #       Unit tests in ${{ github.repository }} are done!
+    #       The action result is ${{ job.status }}.
