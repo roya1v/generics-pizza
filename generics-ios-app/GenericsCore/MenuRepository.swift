@@ -20,6 +20,7 @@ public func mockMenuRepository() -> MenuRepository {
 public protocol MenuRepository {
     func fetchMenu() async throws -> [MenuItem]
     func create(item: MenuItem) async throws -> MenuItem
+    func delete(item: MenuItem) async throws
     var authFactory: (() -> SwiftlyHttp.Authentication?)? { get set }
     func imageUrl(for item: MenuItem) -> URL?
     func setImage(from localUrl: URL, for item: MenuItem) async throws
@@ -64,7 +65,7 @@ final class MenuRepositoryImp: MenuRepository {
         guard let idString = item.id?.uuidString else {
             return nil
         }
-        return URL(string: "\(baseURL)/menu/\(idString)")
+        return URL(string: "\(baseURL)/menu/\(idString)/image")
     }
 
     private func getRequest() -> SwiftlyHttp {
@@ -85,6 +86,16 @@ final class MenuRepositoryImp: MenuRepository {
             })
             .setHeader("Content-Type", to: "image/jpeg")
             .body(imageData)
+            .perform()
+    }
+
+    func delete(item: MenuItem) async throws {
+        try await getRequest()
+            .method(.delete)
+            .add(path: item.id!.uuidString)
+            .authentication({
+                self.authFactory?()
+            })
             .perform()
     }
 }
@@ -111,5 +122,9 @@ final class MenuRepositoryMck: MenuRepository {
     }
     
     func setImage(from localUrl: URL, for item: MenuItem) async throws {
+    }
+    
+    func delete(item: MenuItem) async throws {
+
     }
 }

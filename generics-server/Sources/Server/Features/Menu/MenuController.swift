@@ -17,8 +17,12 @@ struct MenuController: RouteCollection {
         menu.get(use: index)
         menu.grouped(UserTokenEntry.authenticator()).post(use: create)
         menu.group(":itemID") { item in
-            item.get(use: getImage)
-            item.grouped(UserTokenEntry.authenticator()).post(use: setImage)
+            item.group("image") { image in
+                image.get(use: getImage)
+                image.grouped(UserTokenEntry.authenticator()).post(use: setImage)
+                image.grouped(UserTokenEntry.authenticator()).delete(use: deleteImage)
+            }
+            item.grouped(UserTokenEntry.authenticator()).delete(use: delete)
         }
     }
 
@@ -70,5 +74,36 @@ struct MenuController: RouteCollection {
         let entry = try req.content.decode(MenuItem.self).toEntry()
         try await entry.create(on: req.db)
         return entry.toSharedModel()
+    }
+
+    /// Delete a menu item
+    func delete(req: Request) async throws -> HTTPStatus {
+        guard let menuItem = try await MenuEntry.find(req.parameters.get("itemID"), on: req.db) else {
+            throw Abort(.notFound)
+        }
+        
+        let id = menuItem.id!
+
+        if let imageData = try? await req.s3.getObject(.init(bucket: "menu-images", key: "\(id).jpeg")) {
+            _ = try await req.s3.deleteObject(.init(bucket: "menu-images", key: "\(id).jpeg"))
+        }
+
+        try await menuItem.delete(on: req.db)
+        return .ok
+    }
+
+    /// Update a menu item
+    func update(req: Request) async throws -> MenuItem {
+        throw Abort(.notImplemented)
+    }
+
+    /// Update image for menu item
+    func updateImage(req: Request) async throws -> MenuItem {
+        throw Abort(.notImplemented)
+    }
+
+    /// Delete image for menu item
+    func deleteImage(req: Request) async throws -> MenuItem {
+        throw Abort(.notImplemented)
     }
 }

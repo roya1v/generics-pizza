@@ -46,10 +46,10 @@ struct UserController: RouteCollection {
 
     /// Update a user's access
     func updateUserAccess(req: Request) async throws -> UserEntry {
-        fatalError()
-
         guard let user = try await UserEntry.find(req.parameters.get("userID"), on: req.db) else {
             throw Abort(.notFound)
         }
+
+        throw Abort(.notImplemented)
     }
 }

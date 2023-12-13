@@ -15,6 +15,9 @@ struct MenuView: View {
 
     @Environment(\.openWindow) var openWindow
 
+    @State var itemToDelete: MenuItem?
+    @State var isDeleting = false
+
     var body: some View {
         VStack {
             switch model.state {
@@ -37,6 +40,15 @@ struct MenuView: View {
             }
         }
         .navigationTitle("Menu")
+        .alert("Are you sure you want to delete \(itemToDelete?.title ?? "this item")?",
+               isPresented: $isDeleting,
+               presenting: itemToDelete) { item in
+            Button(role: .destructive) {
+                model.delete(item: itemToDelete!)
+            } label: {
+                Text("Delete")
+            }
+        }
     }
 
     var table: some View {
@@ -86,6 +98,14 @@ struct MenuView: View {
             .buttonStyle(.link)
             .padding()
         }
+        .contextMenu(menuItems: {
+            Button {
+                isDeleting = true
+                itemToDelete = item
+            } label: {
+                Text("Delete item")
+            }
+        })
     }
 }
 
