@@ -13,12 +13,12 @@ Stuff that I'm using here in no particular order:
 - Github Actions
 
 # Customer app
-![App demo gif](assets/restaurant-app.gif)
 - [x] Menu
 - [x] Making orders and tracking their state
 - [ ] Choosing devilery address
 
 # Restaurant app
+![App demo gif](assets/restaurant-app.gif)
 - [x] Updating orders
 - [x] Updating menu
 - [ ] Creation and managment of accounts
