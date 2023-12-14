@@ -22,11 +22,6 @@ extension Container {
         .singleton
     }
 
-    var locationRepository: Factory<LocationRepository> {
-        self { LocationRepository() }
-        .singleton
-    }
-
     var driverRepository: Factory<DriverRepository> {
         self { buildDriverRepository(url: url, authenticationRepository: self.authenticationRepository()) }
         .singleton

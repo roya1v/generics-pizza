@@ -87,7 +87,6 @@
 		01E7FF252ABF167C00B8EACD /* ExternalMapOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01118A692A9FE0AA0067926A /* ExternalMapOpener.swift */; };
 		01E7FF262ABF169500B8EACD /* CustomInOutTransitinableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */; };
 		01E7FF272ABF172900B8EACD /* RoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EB83F2ABB974D00D28E70 /* RoutingService.swift */; };
-		01E7FF282ABF173D00B8EACD /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889D92A8CF892001ACB69 /* LocationRepository.swift */; };
 		01E7FF2C2ABF18FA00B8EACD /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7FF2A2ABF182600B8EACD /* AuthenticationService.swift */; };
 		01E7FF312ABF242400B8EACD /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E7FF2D2ABF201800B8EACD /* AppRouter.swift */; };
 		01F889C42A8CD572001ACB69 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F889C32A8CD572001ACB69 /* LoginViewModel.swift */; };
@@ -456,7 +455,6 @@
 		01F889CF2A8CE059001ACB69 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
 		01F889D12A8CE3E6001ACB69 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		01F889D72A8CF068001ACB69 /* OnboardingPermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPermissionViewModel.swift; sourceTree = "<group>"; };
-		01F889D92A8CF892001ACB69 /* LocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRepository.swift; sourceTree = "<group>"; };
 		01F889DB2A8D06C4001ACB69 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		01F889DD2A8D0A72001ACB69 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		01F889DF2A8D1EE6001ACB69 /* DriverRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverRepository.swift; sourceTree = "<group>"; };
@@ -670,7 +668,6 @@
 			children = (
 				01E7FF292ABF181300B8EACD /* Authentication */,
 				01F889CD2A8CDB58001ACB69 /* LocalSettingsService.swift */,
-				01F889D92A8CF892001ACB69 /* LocationRepository.swift */,
 				010EB83F2ABB974D00D28E70 /* RoutingService.swift */,
 				01F889DF2A8D1EE6001ACB69 /* DriverRepository.swift */,
 				0122FD9D2A8BA86E00D015C5 /* MenuRepository.swift */,
@@ -1702,7 +1699,6 @@
 				0136C2772A8BB83300407EAE /* AuthenticationRepository.swift in Sources */,
 				01E7FF2C2ABF18FA00B8EACD /* AuthenticationService.swift in Sources */,
 				01E7FF272ABF172900B8EACD /* RoutingService.swift in Sources */,
-				01E7FF282ABF173D00B8EACD /* LocationRepository.swift in Sources */,
 				01F889CE2A8CDB58001ACB69 /* LocalSettingsService.swift in Sources */,
 				0122FDA12A8BA86E00D015C5 /* OrderRepository.swift in Sources */,
 				0122FDA02A8BA86E00D015C5 /* MenuRepository.swift in Sources */,
