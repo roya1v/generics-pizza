@@ -19,9 +19,3 @@ extension SubtotalModel {
         String(format: "%.2f$", Double(value) / 100)
     }
 }
-
-extension MenuItem: Equatable {
-    public static func == (lhs: MenuItem, rhs: MenuItem) -> Bool {
-        lhs.id == rhs.id
-    }
-}

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct MenuItem: Codable, Identifiable {
+public struct MenuItem: Codable, Identifiable, Equatable {
 
     public init(id: UUID?, title: String, description: String, price: Int) {
         self.id = id

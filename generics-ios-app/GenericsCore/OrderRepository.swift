@@ -26,12 +26,14 @@ public protocol OrderRepository {
     var items: [MenuItem] { get }
     var address: AddressModel? { get set }
     func add(item: MenuItem)
+    func remove(item: MenuItem)
     func checkPrice() async throws -> [SubtotalModel]
     func checkRestaurantLocation(for location: MapPointModel) async throws -> AddressModel
     func placeOrder() async throws -> AnyPublisher<CustomerFromServerMessage, Error>
 }
 
 final class OrderRepositoryImpl: OrderRepository {
+
     private var socket: SwiftlyWebSocketConnection?
     private let baseURL: String
 
@@ -54,6 +56,16 @@ final class OrderRepositoryImpl: OrderRepository {
             UserDefaults.standard.setValue(data, forKey: "order-items")
         }
     }
+    
+    func remove(item: SharedModels.MenuItem) {
+        if let index = items.firstIndex(of: item) {
+            items.remove(at: index)
+        }
+
+        if let data = try? PropertyListEncoder().encode(items) {
+            UserDefaults.standard.setValue(data, forKey: "order-items")
+        }
+    }
 
     func checkPrice() async throws -> [SubtotalModel] {
         //TODO: Make address optional
@@ -65,10 +77,6 @@ final class OrderRepositoryImpl: OrderRepository {
     }
 
     func placeOrder() async throws -> AnyPublisher<CustomerFromServerMessage, Error> {
-        guard address != nil else {
-            throw OrderError.noAddress
-        }
-
         let order = try await makeOrderRequest()
 
         socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
@@ -99,12 +107,13 @@ final class OrderRepositoryImpl: OrderRepository {
     }
 
     private func makeOrderRequest() async throws -> OrderModel {
-        let response = try await getRequest()
-            .body(OrderModel(createdAt: nil, items: items))
-            .perform()
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        return try decoder.decode(OrderModel.self, from: response.0)
+        return try await getRequest()
+            .body(OrderModel(createdAt: nil, items: items))
+            .decode(to: OrderModel.self)
+            .set(jsonDecoder: decoder)
+            .perform()
     }
 
     private func getRequest() -> SwiftlyHttp {
@@ -127,6 +136,10 @@ final class OrderRepositoryMck: OrderRepository {
     var addImplementation: ((MenuItem) -> Void)?
     func add(item: MenuItem) {
         addImplementation?(item)
+    }
+
+    func remove(item: SharedModels.MenuItem) {
+
     }
 
     var checkPriceImplementation: (() async throws -> [SubtotalModel])?

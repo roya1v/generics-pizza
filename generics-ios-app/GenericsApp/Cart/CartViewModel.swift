@@ -12,6 +12,7 @@ import Combine
 import GenericsCore
 import GenericsHelpers
 
+@MainActor
 final class CartViewModel: ObservableObject {
 
     enum State: Equatable {
@@ -39,6 +40,7 @@ final class CartViewModel: ObservableObject {
             try await self.repository.checkPrice()
         } onResult: { subtotal in
             self.subtotal = subtotal
+            self.state = .readyForOrder
         } onError: { error in
             self.state = .error
         }
@@ -67,8 +69,7 @@ final class CartViewModel: ObservableObject {
     }
 
     func remove(_ item: MenuItem) {
-        if let index = items.firstIndex(of: item) {
-            items.remove(at: index)
-        }
+        repository.remove(item: item)
+        items = repository.items
     }
 }

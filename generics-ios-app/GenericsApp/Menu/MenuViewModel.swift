@@ -11,6 +11,7 @@ import SharedModels
 import GenericsUI
 import GenericsHelpers
 
+@MainActor
 final class MenuViewModel: ObservableObject {
 
     @Published private(set) var items: [MenuItem] = []
