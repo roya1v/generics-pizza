@@ -11,6 +11,7 @@ import SharedModels
 import Combine
 import GenericsUI
 
+@MainActor
 final class NowViewModel: ObservableObject {
 
     @Published private(set) var state: ViewState = .ready
@@ -31,7 +32,6 @@ final class NowViewModel: ObservableObject {
             do {
                 try await repository
                     .getFeed()
-
                     .receive(on: DispatchQueue.main)
                     .sink(receiveCompletion: { completion in
                         print(completion)
@@ -52,11 +52,17 @@ final class NowViewModel: ObservableObject {
     func update(_ order: OrderModel, to newState: OrderState) {
         Task {
             try? await repository.send(message: .update(orderId: order.id!, state: newState))
-            let order = self.orders.first(where: { $0.id == order.id })
-            self.orders.removeAll(where: { $0.id == order?.id})
-            if newState != .finished {
-                self.orders.append(.init(id: order?.id, createdAt: order?.createdAt, items: order?.items ?? [], state: newState))
-                self.orders.sort { $0.createdAt!.timeIntervalSince1970 > $1.createdAt!.timeIntervalSince1970 }
+            if let index = orders.firstIndex(where: {$0.id == order.id}) {
+                let newState = order.state?.next()
+                guard newState != .finished else {
+                    orders.remove(at: index)
+                    return
+                }
+                orders[index] = OrderModel(id: order.id,
+                                           createdAt: order.createdAt,
+                                           items: order.items,
+                                           state: newState)
+
             }
         }
     }

@@ -15,6 +15,7 @@ import GenericsUI
 final class NewMenuItemViewModel: ObservableObject {
 
     @Published private(set) var state: ViewState = .ready
+    @Published private(set) var shouldDismiss = false
     @Published var title = ""
     @Published var description = ""
     @Published var price = 0.0
@@ -43,15 +44,10 @@ final class NewMenuItemViewModel: ObservableObject {
                 let menuItem = try await menuRepository.create(item: item)
                 try await menuRepository.setImage(from: imageUrl!, for: menuItem)
             } catch {
-                await MainActor.run {
-                    state = .error
-                }
+                state = .error
             }
-            await MainActor.run {
-                state = .ready
-                // TODO: Find a better way
-                NSApplication.shared.keyWindow?.close()
-            }
+            state = .ready
+            shouldDismiss = true
         }
     }
 }

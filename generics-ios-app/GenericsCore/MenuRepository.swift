@@ -81,6 +81,7 @@ final class MenuRepositoryImp: MenuRepository {
         try await getRequest()
             .method(.post)
             .add(path: item.id!.uuidString)
+            .add(path: "image")
             .authentication({
                 self.authFactory?()
             })

@@ -13,18 +13,22 @@ import GenericsUI
 final class LoginViewModel: ObservableObject {
 
     @Published private(set) var state: ViewState = .ready
+    @Published var email: String = ""
+    @Published var password: String = ""
 
     @Injected(\.authenticationRepository)
     private var repository
 
-    func login(email: String, password: String) {
+    func login() {
         state = .loading
+        guard !email.isEmpty, !password.isEmpty else {
+            state = .error
+            return
+        }
         Task {
             do {
                 try await repository.login(email: email, password: password)
-                await MainActor.run {
-                    state = .ready
-                }
+                state = .ready
             } catch {
                 state = .error
             }

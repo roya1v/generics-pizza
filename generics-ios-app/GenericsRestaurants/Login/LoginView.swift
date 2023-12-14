@@ -18,8 +18,8 @@ struct LoginView: View {
             Image("generics-header")
                 .resizable()
                 .scaledToFit()
-            TextField("Email", text: $email)
-            SecureField("Password", text: $password)
+            TextField("Email", text: $model.email)
+            SecureField("Password", text: $model.password)
             if model.state == .error {
                 Text("Something went wrong!")
             }
@@ -27,7 +27,7 @@ struct LoginView: View {
                 ProgressView()
             } else {
                 Button {
-                    model.login(email: email, password: password)
+                    model.login()
                 } label: {
                     Text("Login")
                 }

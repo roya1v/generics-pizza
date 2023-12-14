@@ -17,6 +17,7 @@ struct MenuView: View {
 
     @State var itemToDelete: MenuItem?
     @State var isDeleting = false
+    @State var isCreating = false
 
     var body: some View {
         VStack {
@@ -35,11 +36,19 @@ struct MenuView: View {
         .toolbar {
             ToolbarItem(placement: .automatic) {
                 Button("New") {
-                    openWindow(id: "new-pizza")
+                    isCreating = true
                 }
             }
         }
         .navigationTitle("Menu")
+        .sheet(isPresented: $isCreating,
+               onDismiss: {
+            isCreating = false
+            model.fetch()
+        },
+               content: {
+            NewMenuItemView()
+        })
         .alert("Are you sure you want to delete \(itemToDelete?.title ?? "this item")?",
                isPresented: $isDeleting,
                presenting: itemToDelete) { item in
