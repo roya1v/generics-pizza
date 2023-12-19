@@ -13,6 +13,7 @@ import SharedModels
 import Combine
 import GenericsUI
 
+@MainActor
 final class MenuViewModelTests: XCTestCase {
 
     var sut: MenuViewModel!
