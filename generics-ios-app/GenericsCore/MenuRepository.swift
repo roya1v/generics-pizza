@@ -8,6 +8,7 @@
 import Foundation
 import SharedModels
 import SwiftlyHttp
+import Spyable
 
 public func buildMenuRepository(url: String) -> MenuRepository {
     MenuRepositoryImp(baseURL: url)
@@ -17,6 +18,7 @@ public func mockMenuRepository() -> MenuRepository {
     MenuRepositoryMck()
 }
 
+@Spyable
 public protocol MenuRepository {
     func fetchMenu() async throws -> [MenuItem]
     func create(item: MenuItem) async throws -> MenuItem

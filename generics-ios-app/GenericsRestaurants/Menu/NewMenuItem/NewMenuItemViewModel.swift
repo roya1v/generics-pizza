@@ -8,7 +8,6 @@
 import Foundation
 import SharedModels
 import Factory
-import AppKit
 import GenericsUI
 
 @MainActor
@@ -38,11 +37,16 @@ final class NewMenuItemViewModel: ObservableObject {
         }
 
         menuRepository.authFactory = { try? self.authRepository.getAuthentication() }
-        let item = MenuItem(id: nil, title: title, description: description, price: Int(price * 100))
+        let item = MenuItem(id: nil,
+                            title: title,
+                            description: description,
+                            price: Int(price * 100))
         Task {
             do {
                 let menuItem = try await menuRepository.create(item: item)
-                try await menuRepository.setImage(from: imageUrl!, for: menuItem)
+                if let imageUrl {
+                    try await menuRepository.setImage(from: imageUrl, for: menuItem)
+                }
             } catch {
                 state = .error
             }
