@@ -57,6 +57,10 @@
 		014834A32A78243A0018C322 /* GenericsUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B652A43643C009DE998 /* GenericsUIKit.framework */; };
 		014834A92A7827900018C322 /* IdleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014834A82A7827900018C322 /* IdleViewController.swift */; };
 		014834B02A7842630018C322 /* GenericsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01389B382A4363F2009DE998 /* GenericsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		014869202B31C60000BC3350 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148691D2B31C5B200BC3350 /* LoginViewModelTests.swift */; };
+		014869232B31C96000BC3350 /* Spyable in Frameworks */ = {isa = PBXBuildFile; productRef = 014869222B31C96000BC3350 /* Spyable */; };
+		014869252B31CF4A00BC3350 /* NewMenuItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014869242B31CF4A00BC3350 /* NewMenuItemViewModelTests.swift */; };
+		014869272B31CF5F00BC3350 /* NowViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014869262B31CF5F00BC3350 /* NowViewModelTests.swift */; };
 		0164CF0F2B040078000E1433 /* SharedModels in Frameworks */ = {isa = PBXBuildFile; productRef = 0164CF0E2B040078000E1433 /* SharedModels */; };
 		016934142A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */; };
 		018A6AA22A1212770015D716 /* SwiftlyHttp in Frameworks */ = {isa = PBXBuildFile; productRef = 018A6AA12A1212770015D716 /* SwiftlyHttp */; };
@@ -115,7 +119,6 @@
 		ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F8C299C2D7700F28299 /* ContentView.swift */; };
 		ECA92F8F299C2D7800F28299 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA92F8E299C2D7800F28299 /* Assets.xcassets */; };
 		ECA92F93299C2D7900F28299 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA92F92299C2D7900F28299 /* Preview Assets.xcassets */; };
-		ECA92F9D299C2D7900F28299 /* GenericsRestaurantsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92F9C299C2D7900F28299 /* GenericsRestaurantsTests.swift */; };
 		ECA92FA7299C2D7900F28299 /* GenericsRestaurantsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FA6299C2D7900F28299 /* GenericsRestaurantsUITests.swift */; };
 		ECA92FA9299C2D7900F28299 /* GenericsRestaurantsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FA8299C2D7900F28299 /* GenericsRestaurantsUITestsLaunchTests.swift */; };
 		ECA92FB4299D640500F28299 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA92FB3299D640500F28299 /* LoginView.swift */; };
@@ -423,6 +426,9 @@
 		014834A12A7823D90018C322 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		014834A82A7827900018C322 /* IdleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleViewController.swift; sourceTree = "<group>"; };
 		014834AE2A7840840018C322 /* CustomInOutTransitinableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInOutTransitinableController.swift; sourceTree = "<group>"; };
+		0148691D2B31C5B200BC3350 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
+		014869242B31CF4A00BC3350 /* NewMenuItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuItemViewModelTests.swift; sourceTree = "<group>"; };
+		014869262B31CF5F00BC3350 /* NowViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowViewModelTests.swift; sourceTree = "<group>"; };
 		016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuItem+formattedPrice.swift"; sourceTree = "<group>"; };
 		0199A5BD2B0C040300813533 /* AuthenticationRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepositoryTests.swift; sourceTree = "<group>"; };
 		01B5081C2AC4AB7900CFCA32 /* MenuViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModelTests.swift; sourceTree = "<group>"; };
@@ -475,7 +481,6 @@
 		ECA92F90299C2D7900F28299 /* GenericsRestaurants.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GenericsRestaurants.entitlements; sourceTree = "<group>"; };
 		ECA92F92299C2D7900F28299 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		ECA92F98299C2D7900F28299 /* GenericsRestaurantsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsRestaurantsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ECA92F9C299C2D7900F28299 /* GenericsRestaurantsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsRestaurantsTests.swift; sourceTree = "<group>"; };
 		ECA92FA2299C2D7900F28299 /* GenericsRestaurantsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsRestaurantsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECA92FA6299C2D7900F28299 /* GenericsRestaurantsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsRestaurantsUITests.swift; sourceTree = "<group>"; };
 		ECA92FA8299C2D7900F28299 /* GenericsRestaurantsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsRestaurantsUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -506,6 +511,7 @@
 				0122FD962A8BA6E300D015C5 /* SwiftlyHttp in Frameworks */,
 				0164CF0F2B040078000E1433 /* SharedModels in Frameworks */,
 				0122FDA42A8BA95A00D015C5 /* SharedModels in Frameworks */,
+				014869232B31C96000BC3350 /* Spyable in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -935,7 +941,9 @@
 		ECA92F9B299C2D7900F28299 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				ECA92F9C299C2D7900F28299 /* GenericsRestaurantsTests.swift */,
+				0148691D2B31C5B200BC3350 /* LoginViewModelTests.swift */,
+				014869262B31CF5F00BC3350 /* NowViewModelTests.swift */,
+				014869242B31CF4A00BC3350 /* NewMenuItemViewModelTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1099,6 +1107,7 @@
 				0122FD952A8BA6E300D015C5 /* SwiftlyHttp */,
 				0122FDA32A8BA95A00D015C5 /* SharedModels */,
 				0164CF0E2B040078000E1433 /* SharedModels */,
+				014869222B31C96000BC3350 /* Spyable */,
 			);
 			productName = GenericsCore;
 			productReference = 0122FD742A8BA65700D015C5 /* GenericsCore.framework */;
@@ -1531,6 +1540,7 @@
 				018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */,
 				01F889D32A8CE4C0001ACB69 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 				0164CF0D2B040078000E1433 /* XCLocalSwiftPackageReference "../generics-server" */,
+				014869212B31C96000BC3350 /* XCRemoteSwiftPackageReference "swift-spyable" */,
 			);
 			productRefGroup = ECD845A6298AE51D0036454C /* Products */;
 			projectDirPath = "";
@@ -1849,7 +1859,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECA92F9D299C2D7900F28299 /* GenericsRestaurantsTests.swift in Sources */,
+				014869272B31CF5F00BC3350 /* NowViewModelTests.swift in Sources */,
+				014869202B31C60000BC3350 /* LoginViewModelTests.swift in Sources */,
+				014869252B31CF4A00BC3350 /* NewMenuItemViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3317,6 +3329,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		014869212B31C96000BC3350 /* XCRemoteSwiftPackageReference "swift-spyable" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Matejkob/swift-spyable.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 		018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/roya1v/SwiftlyHttp";
@@ -3352,6 +3372,11 @@
 		0122FDA32A8BA95A00D015C5 /* SharedModels */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SharedModels;
+		};
+		014869222B31C96000BC3350 /* Spyable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 014869212B31C96000BC3350 /* XCRemoteSwiftPackageReference "swift-spyable" */;
+			productName = Spyable;
 		};
 		0164CF0E2B040078000E1433 /* SharedModels */ = {
 			isa = XCSwiftPackageProductDependency;

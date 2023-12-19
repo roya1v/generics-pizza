@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import SwiftlyHttp
 import SharedModels
+import Spyable
 
 public func buildAuthenticationRepository(url: String) -> AuthenticationRepository {
     AuthenticationRepositoryImpl(baseURL: url)
@@ -24,6 +25,7 @@ public enum AuthenticationState {
     case loggedOut
 }
 
+@Spyable
 public protocol AuthenticationRepository {
     var statePublisher: AnyPublisher<AuthenticationState, Never> { get }
     var state: AuthenticationState { get }

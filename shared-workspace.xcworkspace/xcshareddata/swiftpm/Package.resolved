@@ -307,6 +307,15 @@
       }
     },
     {
+      "identity" : "swift-spyable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Matejkob/swift-spyable.git",
+      "state" : {
+        "revision" : "6e05626600604e0fa1459a772b578ca5b0759d80",
+        "version" : "0.2.0"
+      }
+    },
+    {
       "identity" : "swift-syntax",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-syntax.git",
