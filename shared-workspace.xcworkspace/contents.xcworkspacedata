@@ -8,6 +8,15 @@
       location = "group:generics-server">
    </FileRef>
    <FileRef
-      location = "group:generics-ios-app/GenericsApp.xcodeproj">
+      location = "group:generics-shared">
+   </FileRef>
+   <FileRef
+      location = "group:generics-apps/GenericsApp/GenericsApp.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:generics-apps/GenericsRestaurants/GenericsRestaurants.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:generics-apps/Unfinished/Unfinished.xcodeproj">
    </FileRef>
 </Workspace>
