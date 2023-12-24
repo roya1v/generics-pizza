@@ -42,6 +42,27 @@ struct MenuView: View {
 
     func getMenuItem(for item: MenuItem) -> some View {
         HStack {
+            getImage(for: item)
+            VStack(alignment: .leading) {
+                Text(item.title)
+                    .font(.headline)
+                Text(item.description)
+                    .font(.genericsCaption)
+                    .foregroundStyle(.secondary)
+
+            }
+            Spacer()
+            Button {
+                model.add(item: item)
+            } label: {
+                Text(item.formattedPrice())
+            }
+            .buttonStyle(.borderedProminent)
+        }
+    }
+
+    func getImage(for item: MenuItem) -> some View {
+        Group {
             if let url = model.imageUrl(for: item) {
                 AsyncImage(url: url) { phase in
                     switch phase {
@@ -64,25 +85,11 @@ struct MenuView: View {
                     .scaledToFit()
                     .frame(width: 75.0)
             }
-            VStack(alignment: .leading) {
-                Text(item.title)
-                Text(item.description)
-                    .font(.genericsCaption)
-            }
-            Text(item.formattedPrice())
-            Spacer()
-            Button {
-                model.add(item: item)
-            } label: {
-                Image(systemName: "plus")
-            }
         }
     }
 }
 
-struct MenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        Container.shared.menuRepository.register { mockMenuRepository() }
-        return MenuView()
-    }
+#Preview {
+    let _ = Container.shared.menuRepository.register { mockMenuRepository() }
+    return MenuView()
 }

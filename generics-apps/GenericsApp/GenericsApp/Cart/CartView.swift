@@ -74,9 +74,11 @@ struct CartView: View {
             Button {
                 model.remove(item)
             } label: {
-                Image(systemName: "minus.circle.fill")
-                    .foregroundColor(Color.red)
+                Image(systemName: "minus")
             }
+            .buttonStyle(.borderedProminent)
+            .tint(.red)
+
         }
     }
 
@@ -192,9 +194,7 @@ struct CartView: View {
     }
 }
 
-struct CartView_Previews: PreviewProvider {
-    static var previews: some View {
-        Container.shared.orderRepository.register { mockOrderRepository() }
-        return CartView()
-    }
+#Preview {
+    let _ = Container.shared.orderRepository.register { mockOrderRepository() }
+    return CartView()
 }
