@@ -44,14 +44,4 @@ final class MenuViewModel: ObservableObject {
     func imageUrl(for item: MenuItem) -> URL? {
         menuRepository.imageUrl(for: item)
     }
-
-    func delete(item: MenuItem) {
-        ThrowingAsyncTask {
-            try await self.menuRepository.delete(item: item)
-        } onResult: {
-            self.fetch()
-        } onError: { error in
-            self.state = .error
-        }
-    }
 }
