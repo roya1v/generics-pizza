@@ -1,12 +1,6 @@
 {
   "images" : [
     {
-      "filename" : "g_negative.png",
-      "idiom" : "universal",
-      "platform" : "ios",
-      "size" : "1024x1024"
-    },
-    {
       "filename" : "16.png",
       "idiom" : "mac",
       "scale" : "1x",
