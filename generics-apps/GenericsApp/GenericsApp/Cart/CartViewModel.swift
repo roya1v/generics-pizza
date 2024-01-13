@@ -31,6 +31,9 @@ final class CartViewModel: ObservableObject {
     @Injected(\.orderRepository)
     private var repository
 
+    @Injected(\.menuRepository)
+    private var menuRepository
+
     private var cancellable = Set<AnyCancellable>()
 
     func fetch() {
@@ -71,5 +74,9 @@ final class CartViewModel: ObservableObject {
     func remove(_ item: MenuItem) {
         repository.remove(item: item)
         items = repository.items
+    }
+
+    func imageUrl(for item: MenuItem) -> URL? {
+        menuRepository.imageUrl(for: item)
     }
 }
