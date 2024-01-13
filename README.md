@@ -18,7 +18,7 @@ Stuff that I'm using here in no particular order:
 - [ ] Choosing devilery address
 
 # Restaurant app
-![App demo gif](assets/restaurant-app.gif)
+![App demo gif](assets/readme//restaurant-app.gif)
 - [x] Updating orders
 - [x] Updating menu
 - [ ] Creation and managment of accounts
