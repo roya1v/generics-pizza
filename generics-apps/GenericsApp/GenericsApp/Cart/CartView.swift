@@ -55,10 +55,7 @@ struct CartView: View {
 
     private func getCartItem(for item: MenuItem) -> some View {
         HStack {
-            Image("pizzza_placeholder")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 80.0, height: 80.0)
+            getImage(for: item)
             VStack(alignment: .leading) {
                 Text(item.title)
                 Text(item.description)
@@ -79,6 +76,33 @@ struct CartView: View {
             .buttonStyle(.borderedProminent)
             .tint(.red)
 
+        }
+    }
+
+    func getImage(for item: MenuItem) -> some View {
+        Group {
+            if let url = model.imageUrl(for: item) {
+                AsyncImage(url: url) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    case .failure(_), .empty:
+                        Image("pizzza_placeholder")
+                            .resizable()
+                            .scaledToFit()
+                    @unknown default:
+                        fatalError()
+                    }
+                }
+                .frame(width: 75.0)
+            } else {
+                Image("pizzza_placeholder")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 75.0)
+            }
         }
     }
 
