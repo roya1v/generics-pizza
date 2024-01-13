@@ -13,12 +13,18 @@ Stuff that I'm using here in no particular order:
 - Github Actions
 
 # Customer app
+
+<img src="assets/readme/customer-app-icon.png" height="100" width="100" />
+<img src="assets/readme/customer-app.gif" height="400" width="660" />
+
 - [x] Menu
 - [x] Making orders and tracking their state
 - [ ] Choosing devilery address
 
 # Restaurant app
-![App demo gif](assets/readme//restaurant-app.gif)
+<img src="assets/readme/restaurant-app-icon.png" height="100" width="100" />
+
+![App demo gif](assets/readme/restaurant-app.gif)
 - [x] Updating orders
 - [x] Updating menu
 - [ ] Creation and managment of accounts
