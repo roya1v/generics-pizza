@@ -10,6 +10,7 @@ import Factory
 @testable import GenericsApp
 @testable import GenericsCore
 
+@MainActor
 final class CartViewModelTests: XCTestCase {
 
     var sut: CartViewModel!

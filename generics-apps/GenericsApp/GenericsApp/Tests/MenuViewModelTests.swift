@@ -17,11 +17,11 @@ import GenericsUI
 final class MenuViewModelTests: XCTestCase {
 
     var sut: MenuViewModel!
-    var mockMenuRepository: MenuRepositoryMck!
+    var mockMenuRepository: MenuRepositorySpy!
     var cancellable = Set<AnyCancellable>()
 
     override func setUp() {
-        mockMenuRepository = MenuRepositoryMck()
+        mockMenuRepository = MenuRepositorySpy()
         Container.shared.menuRepository.register {
             self.mockMenuRepository
         }
@@ -32,7 +32,7 @@ final class MenuViewModelTests: XCTestCase {
     func testFetch() {
         let expectation = XCTestExpectation(description: "All correct states occured")
         let mockItems = [MenuItem(id: nil, title: "mock", description: "mock", price: 0)]
-        mockMenuRepository.fetchMenuImplementation = {
+        mockMenuRepository.fetchMenuClosure = {
             return mockItems
         }
         var oldState: ViewState?
@@ -59,7 +59,7 @@ final class MenuViewModelTests: XCTestCase {
 
     func testFetchWithError() {
         let expectation = XCTestExpectation(description: "All correct states occured")
-        mockMenuRepository.fetchMenuImplementation = {
+        mockMenuRepository.fetchMenuClosure = {
             throw NSError(domain: "", code: 1)
         }
         var oldState: ViewState?

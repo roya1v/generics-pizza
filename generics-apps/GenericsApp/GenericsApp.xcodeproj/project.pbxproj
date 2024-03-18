@@ -16,6 +16,7 @@
 		01E6663A2B379E58008CC055 /* GenericsHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 01E666392B379E58008CC055 /* GenericsHelpers */; };
 		01E6663C2B379E58008CC055 /* GenericsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 01E6663B2B379E58008CC055 /* GenericsUI */; };
 		01E6663E2B379E58008CC055 /* GenericsUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 01E6663D2B379E58008CC055 /* GenericsUIKit */; };
+		01FED1C52BA8D54C00B21D25 /* GenericsAppTests.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 01FED1C42BA8D54C00B21D25 /* GenericsAppTests.xctestplan */; };
 		EC14E81B298B086E00A6540C /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E81A298B086E00A6540C /* MenuView.swift */; };
 		EC14E827298C527900A6540C /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC14E826298C527900A6540C /* MenuViewModel.swift */; };
 		EC688C2329CA38D900450D2E /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC688C2229CA38D900450D2E /* CartView.swift */; };
@@ -64,6 +65,7 @@
 		0122FD6D2A8B7A5400D015C5 /* CartViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModelTests.swift; sourceTree = "<group>"; };
 		016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuItem+formattedPrice.swift"; sourceTree = "<group>"; };
 		01B5081C2AC4AB7900CFCA32 /* MenuViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModelTests.swift; sourceTree = "<group>"; };
+		01FED1C42BA8D54C00B21D25 /* GenericsAppTests.xctestplan */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GenericsAppTests.xctestplan; sourceTree = "<group>"; };
 		EC14E81A298B086E00A6540C /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		EC14E826298C527900A6540C /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		EC611F33299432A30000427A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 		ECD8459C298AE51D0036454C = {
 			isa = PBXGroup;
 			children = (
+				01FED1C42BA8D54C00B21D25 /* GenericsAppTests.xctestplan */,
 				ECD845A7298AE51D0036454C /* GenericsApp */,
 				ECD845A6298AE51D0036454C /* Products */,
 				01610B692B379DD5000E641D /* Frameworks */,
@@ -325,6 +328,7 @@
 			files = (
 				ECD845B0298AE51E0036454C /* Preview Assets.xcassets in Resources */,
 				ECD845AD298AE51E0036454C /* Assets.xcassets in Resources */,
+				01FED1C52BA8D54C00B21D25 /* GenericsAppTests.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,9 +594,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericsApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GenericsApp";
 			};
 			name = Debug;
@@ -610,9 +618,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericsApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GenericsApp";
 			};
 			name = Release;
