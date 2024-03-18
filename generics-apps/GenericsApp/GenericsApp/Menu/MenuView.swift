@@ -90,6 +90,5 @@ struct MenuView: View {
 }
 
 #Preview {
-    let _ = Container.shared.menuRepository.register { mockMenuRepository() }
-    return MenuView()
+    MenuView()
 }

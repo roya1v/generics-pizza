@@ -14,10 +14,6 @@ public func buildMenuRepository(url: String) -> MenuRepository {
     MenuRepositoryImp(baseURL: url)
 }
 
-public func mockMenuRepository() -> MenuRepository {
-    MenuRepositoryMck()
-}
-
 @Spyable
 public protocol MenuRepository {
     func fetchMenu() async throws -> [MenuItem]
@@ -100,34 +96,5 @@ final class MenuRepositoryImp: MenuRepository {
                 self.authFactory?()
             })
             .perform()
-    }
-}
-
-final class MenuRepositoryMck: MenuRepository {
-
-    var authFactory: (() -> SwiftlyHttp.Authentication?)?
-    var fetchMenuImplementation: (() async throws -> [MenuItem]) = {
-        [.init(id: .init(), title: "Margarita simplita", description: "Tomatoe souce, cheese and weird leaves", price: 100),
-         .init(id: .init(), title: "Pepperoni Meroni", description: "Tomatoe souce, cheese and weird leaves", price: 100),
-         .init(id: .init(), title: "Super pepperoni", description: "Tomatoe souce, cheese and weird leaves", price: 100)
-        ]
-    }
-    func fetchMenu() async throws -> [MenuItem] {
-        try await fetchMenuImplementation()
-    }
-
-    func create(item: MenuItem) async throws -> MenuItem {
-         .init(id: .init(), title: "Pepperoni Meroni", description: "Tomatoe souce, cheese and weird leaves", price: 100)
-    }
-
-    func imageUrl(for item: MenuItem) -> URL? {
-        return nil
-    }
-    
-    func setImage(from localUrl: URL, for item: MenuItem) async throws {
-    }
-    
-    func delete(item: MenuItem) async throws {
-
     }
 }
