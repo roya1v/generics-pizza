@@ -9,9 +9,11 @@ import SwiftUI
 import Factory
 import GenericsCore
 import SharedModels
+import ComposableArchitecture
 
 struct MenuView: View {
-    @StateObject var model = MenuViewModel()
+
+    let store: StoreOf<MenuFeature>
 
     @Environment(\.openWindow) var openWindow
 
@@ -20,49 +22,48 @@ struct MenuView: View {
     @State var isCreating = false
 
     var body: some View {
-        VStack {
-            switch model.state {
-            case .loading:
-                ProgressView()
-            case .ready:
-                table
-            case .error:
-                Text("Error occured")
-            }
-        }
-        .onAppear {
-            model.fetch()
-        }
-        .toolbar {
-            ToolbarItem(placement: .automatic) {
-                Button("New") {
-                    isCreating = true
+        WithPerceptionTracking {
+            VStack {
+                if store.isLoading {
+                    ProgressView()
+                } else {
+                    table
                 }
             }
-        }
-        .navigationTitle("Menu")
-        .sheet(isPresented: $isCreating,
-               onDismiss: {
-            isCreating = false
-            model.fetch()
-        },
-               content: {
-            NewMenuItemView()
-        })
-        .alert("Are you sure you want to delete \(itemToDelete?.title ?? "this item")?",
-               isPresented: $isDeleting,
-               presenting: itemToDelete) { item in
-            Button(role: .destructive) {
-                model.delete(item: itemToDelete!)
-            } label: {
-                Text("Delete")
+            .onAppear {
+                store.send(.shown)
+            }
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Button("New") {
+                        isCreating = true
+                    }
+                }
+            }
+            .navigationTitle("Menu")
+            .sheet(isPresented: $isCreating,
+                   onDismiss: {
+                isCreating = false
+                store.send(.shown)
+            },
+                   content: {
+                NewMenuItemView()
+            })
+            .alert("Are you sure you want to delete \(itemToDelete?.title ?? "this item")?",
+                   isPresented: $isDeleting,
+                   presenting: itemToDelete) { item in
+                Button(role: .destructive) {
+                    store.send(.delete(item.id!))
+                } label: {
+                    Text("Delete")
+                }
             }
         }
     }
 
     var table: some View {
         List {
-            ForEach(model.items) { item in
+            ForEach(store.items) { item in
                 listRow(for: item)
             }
         }
@@ -71,7 +72,7 @@ struct MenuView: View {
 
     func listRow(for item: MenuItem) -> some View {
         HStack {
-            if let url = model.imageUrl(for: item) {
+            if let url = store.imageUrls[item.id] {
                 AsyncImage(url: url) { phase in
                     switch phase {
                     case .success(let image):
@@ -121,6 +122,8 @@ struct MenuView: View {
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
         Container.shared.menuRepository.register { mockMenuRepository() }
-        return MenuView()
+        return MenuView(store: Store(initialState: MenuFeature.State(items: [], isLoading: false, imageUrls: [:])){
+            MenuFeature()
+        })
     }
 }

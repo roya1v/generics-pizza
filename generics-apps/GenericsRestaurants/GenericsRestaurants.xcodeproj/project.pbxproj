@@ -10,13 +10,13 @@
 		010110032B37927C0001B900 /* GenericsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 010110022B37927C0001B900 /* GenericsCore */; };
 		010110052B37927C0001B900 /* GenericsHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 010110042B37927C0001B900 /* GenericsHelpers */; };
 		010110072B37927C0001B900 /* GenericsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 010110062B37927C0001B900 /* GenericsUI */; };
-		01144D062B4AF9E300656DD0 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01144D052B4AF9E300656DD0 /* MenuViewModel.swift */; };
 		014869202B31C60000BC3350 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148691D2B31C5B200BC3350 /* LoginViewModelTests.swift */; };
 		014869252B31CF4A00BC3350 /* NewMenuItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014869242B31CF4A00BC3350 /* NewMenuItemViewModelTests.swift */; };
 		014869272B31CF5F00BC3350 /* NowViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014869262B31CF5F00BC3350 /* NowViewModelTests.swift */; };
 		015024E12BA882A200E6C130 /* OrderHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015024E02BA882A200E6C130 /* OrderHistoryView.swift */; };
 		015024E42BA8833D00E6C130 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 015024E32BA8833D00E6C130 /* ComposableArchitecture */; };
 		015024E62BA8834900E6C130 /* OrderHistoryFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015024E52BA8834900E6C130 /* OrderHistoryFeature.swift */; };
+		015024E82BA8C6BE00E6C130 /* MenuFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015024E72BA8C6BE00E6C130 /* MenuFeature.swift */; };
 		01A67E4D2B37A0AE00E52CDF /* MenuItem+formattedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A67E4C2B37A0AE00E52CDF /* MenuItem+formattedPrice.swift */; };
 		EC63164E29C259FF00BF52E0 /* NewMenuItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC63164D29C259FF00BF52E0 /* NewMenuItemViewModel.swift */; };
 		ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */; };
@@ -67,12 +67,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		01144D052B4AF9E300656DD0 /* MenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		0148691D2B31C5B200BC3350 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		014869242B31CF4A00BC3350 /* NewMenuItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuItemViewModelTests.swift; sourceTree = "<group>"; };
 		014869262B31CF5F00BC3350 /* NowViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowViewModelTests.swift; sourceTree = "<group>"; };
 		015024E02BA882A200E6C130 /* OrderHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryView.swift; sourceTree = "<group>"; };
 		015024E52BA8834900E6C130 /* OrderHistoryFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryFeature.swift; sourceTree = "<group>"; };
+		015024E72BA8C6BE00E6C130 /* MenuFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuFeature.swift; sourceTree = "<group>"; };
 		017956632B37A151006DBB37 /* GenericsRestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsRestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		017956642B37A151006DBB37 /* GenericsRestaurantsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsRestaurantsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		017956652B37A151006DBB37 /* GenericsRestaurantsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsRestaurantsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,7 +166,7 @@
 			children = (
 				EC63164C29C259E900BF52E0 /* NewMenuItem */,
 				ECA5E7F029BFC6F300D9E85F /* MenuView.swift */,
-				01144D052B4AF9E300656DD0 /* MenuViewModel.swift */,
+				015024E72BA8C6BE00E6C130 /* MenuFeature.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -406,7 +406,7 @@
 				015024E12BA882A200E6C130 /* OrderHistoryView.swift in Sources */,
 				ECCE5BB029D4B09D009AB280 /* NowViewModel.swift in Sources */,
 				ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */,
-				01144D062B4AF9E300656DD0 /* MenuViewModel.swift in Sources */,
+				015024E82BA8C6BE00E6C130 /* MenuFeature.swift in Sources */,
 				01A67E4D2B37A0AE00E52CDF /* MenuItem+formattedPrice.swift in Sources */,
 				ECA5E7F329BFC71800D9E85F /* NowView.swift in Sources */,
 			);
