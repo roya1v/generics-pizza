@@ -48,7 +48,9 @@ struct DashboardView: View {
                     OrderHistoryFeature()
                 })
             case .menu:
-                MenuView()
+                MenuView(store: Store(initialState: MenuFeature.State(items: [], isLoading: false, imageUrls: [:])){
+                    MenuFeature()
+                })
             }
         }
     }
