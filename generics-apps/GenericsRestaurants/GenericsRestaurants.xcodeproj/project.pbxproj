@@ -14,6 +14,9 @@
 		014869202B31C60000BC3350 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0148691D2B31C5B200BC3350 /* LoginViewModelTests.swift */; };
 		014869252B31CF4A00BC3350 /* NewMenuItemViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014869242B31CF4A00BC3350 /* NewMenuItemViewModelTests.swift */; };
 		014869272B31CF5F00BC3350 /* NowViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014869262B31CF5F00BC3350 /* NowViewModelTests.swift */; };
+		015024E12BA882A200E6C130 /* OrderHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015024E02BA882A200E6C130 /* OrderHistoryView.swift */; };
+		015024E42BA8833D00E6C130 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 015024E32BA8833D00E6C130 /* ComposableArchitecture */; };
+		015024E62BA8834900E6C130 /* OrderHistoryFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015024E52BA8834900E6C130 /* OrderHistoryFeature.swift */; };
 		01A67E4D2B37A0AE00E52CDF /* MenuItem+formattedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A67E4C2B37A0AE00E52CDF /* MenuItem+formattedPrice.swift */; };
 		EC63164E29C259FF00BF52E0 /* NewMenuItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC63164D29C259FF00BF52E0 /* NewMenuItemViewModel.swift */; };
 		ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */; };
@@ -68,6 +71,8 @@
 		0148691D2B31C5B200BC3350 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		014869242B31CF4A00BC3350 /* NewMenuItemViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuItemViewModelTests.swift; sourceTree = "<group>"; };
 		014869262B31CF5F00BC3350 /* NowViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowViewModelTests.swift; sourceTree = "<group>"; };
+		015024E02BA882A200E6C130 /* OrderHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryView.swift; sourceTree = "<group>"; };
+		015024E52BA8834900E6C130 /* OrderHistoryFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryFeature.swift; sourceTree = "<group>"; };
 		017956632B37A151006DBB37 /* GenericsRestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsRestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		017956642B37A151006DBB37 /* GenericsRestaurantsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsRestaurantsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		017956652B37A151006DBB37 /* GenericsRestaurantsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsRestaurantsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				015024E42BA8833D00E6C130 /* ComposableArchitecture in Frameworks */,
 				010110072B37927C0001B900 /* GenericsUI in Frameworks */,
 				ECA92FBA299D652D00F28299 /* Factory in Frameworks */,
 				010110032B37927C0001B900 /* GenericsCore in Frameworks */,
@@ -120,6 +126,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		015024DF2BA8828C00E6C130 /* OrderHistory */ = {
+			isa = PBXGroup;
+			children = (
+				015024E02BA882A200E6C130 /* OrderHistoryView.swift */,
+				015024E52BA8834900E6C130 /* OrderHistoryFeature.swift */,
+			);
+			path = OrderHistory;
+			sourceTree = "<group>";
+		};
 		017956662B37A163006DBB37 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +189,7 @@
 				ECD079FC29E7511800914593 /* Container+Repositories.swift */,
 				01A67E4C2B37A0AE00E52CDF /* MenuItem+formattedPrice.swift */,
 				ECA5E7F529BFC88300D9E85F /* Now */,
+				015024DF2BA8828C00E6C130 /* OrderHistory */,
 				ECA5E7F429BFC87400D9E85F /* Menu */,
 				ECA92FB5299D646000F28299 /* Login */,
 				ECA92F8E299C2D7800F28299 /* Assets.xcassets */,
@@ -253,6 +269,7 @@
 				010110022B37927C0001B900 /* GenericsCore */,
 				010110042B37927C0001B900 /* GenericsHelpers */,
 				010110062B37927C0001B900 /* GenericsUI */,
+				015024E32BA8833D00E6C130 /* ComposableArchitecture */,
 			);
 			productName = GenericsRestaurants;
 			productReference = 017956632B37A151006DBB37 /* GenericsRestaurants.app */;
@@ -333,6 +350,7 @@
 				0164CF0D2B040078000E1433 /* XCLocalSwiftPackageReference "../../generics-server" */,
 				014869212B31C96000BC3350 /* XCRemoteSwiftPackageReference "swift-spyable" */,
 				014F2F3F2B378E7B006907D6 /* XCLocalSwiftPackageReference "../../generics-shared" */,
+				015024E22BA8833D00E6C130 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = 01868E8B2B37A0F0009D1EE9 /* Products */;
 			projectDirPath = "";
@@ -384,6 +402,8 @@
 				ECD079FD29E7511800914593 /* Container+Repositories.swift in Sources */,
 				ECA92FB4299D640500F28299 /* LoginView.swift in Sources */,
 				ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */,
+				015024E62BA8834900E6C130 /* OrderHistoryFeature.swift in Sources */,
+				015024E12BA882A200E6C130 /* OrderHistoryView.swift in Sources */,
 				ECCE5BB029D4B09D009AB280 /* NowViewModel.swift in Sources */,
 				ECA92F8B299C2D7700F28299 /* GenericsRestaurantsApp.swift in Sources */,
 				01144D062B4AF9E300656DD0 /* MenuViewModel.swift in Sources */,
@@ -782,6 +802,14 @@
 				minimumVersion = 0.2.0;
 			};
 		};
+		015024E22BA8833D00E6C130 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.2;
+			};
+		};
 		018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/roya1v/SwiftlyHttp";
@@ -820,6 +848,11 @@
 		010110062B37927C0001B900 /* GenericsUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GenericsUI;
+		};
+		015024E32BA8833D00E6C130 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 015024E22BA8833D00E6C130 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 		ECA92FB9299D652D00F28299 /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;

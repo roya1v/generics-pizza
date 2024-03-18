@@ -22,6 +22,7 @@ public protocol OrderRestaurantRepository {
     var authFactory: (() -> SwiftlyHttp.Authentication?)? { get set }
     func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error>
     func send(message: RestaurantToServerMessage) async throws
+    func getHistory() async throws -> [OrderModel]
 }
 
 final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
@@ -69,6 +70,22 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
         try await socket?.send(message: .string(text ?? ""))
     }
 
+    func getHistory() async throws -> [SharedModels.OrderModel] {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+
+        return try await SwiftlyHttp(baseURL: baseURL)!
+            .add(path: "order")
+            .add(path: "history")
+            .method(.get)
+            .authentication({
+                self.authFactory?()
+            })
+            .decode(to: [OrderModel].self)
+            .set(jsonDecoder: decoder)
+            .perform()
+    }
+
     private func getCurrentOrders() async throws -> [OrderModel] {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
@@ -95,5 +112,9 @@ final class OrderRestaurantRepositoryMck: OrderRestaurantRepository {
     }
 
     func send(message: RestaurantToServerMessage) async throws {
+    }
+
+    func getHistory() async throws -> [SharedModels.OrderModel] {
+        fatalError()
     }
 }

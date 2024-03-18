@@ -7,19 +7,12 @@
 
 import SwiftUI
 import Factory
+import ComposableArchitecture
 
 enum Items: String {
     case now
+    case orderHistory
     case menu
-
-    var label: String {
-        switch self {
-        case .now:
-            return "Now"
-        case .menu:
-            return "Menu"
-        }
-    }
 }
 
 struct DashboardView: View {
@@ -29,9 +22,14 @@ struct DashboardView: View {
 
     var body: some View {
         NavigationSplitView {
-            List([Items.now, .menu], id: \.rawValue,
-                 selection: $selected) { item in
-                NavigationLink(item.label, value: item)
+            List(selection: $selected) {
+                Section("Orders") {
+                    NavigationLink("Current", value: Items.now)
+                    NavigationLink("History", value: Items.orderHistory)
+                }
+                Section("Other") {
+                    NavigationLink("Menu", value: Items.menu)
+                }
             }
             Button {
                 Task {
@@ -41,11 +39,14 @@ struct DashboardView: View {
                 Text("Sign out")
             }
             .padding()
-
         } detail: {
             switch selected {
             case .now:
                 NowView()
+            case .orderHistory:
+                OrderHistoryView(store: Store(initialState: OrderHistoryFeature.State(items: [])) {
+                    OrderHistoryFeature()
+                })
             case .menu:
                 MenuView()
             }
@@ -53,8 +54,6 @@ struct DashboardView: View {
     }
 }
 
-struct DashboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        DashboardView()
-    }
+#Preview {
+    DashboardView()
 }

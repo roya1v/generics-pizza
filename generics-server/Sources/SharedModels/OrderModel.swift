@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct OrderModel: Codable, Identifiable {
+public struct OrderModel: Codable, Identifiable, Equatable {
     public init(id: UUID? = nil,
                 createdAt: Date?,
                 items: [MenuItem],
