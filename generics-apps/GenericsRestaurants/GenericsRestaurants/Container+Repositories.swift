@@ -30,4 +30,9 @@ extension Container {
         self { buildOrderRepository(url: url) }
             .singleton
     }
+
+    var usersRepository: Factory<UsersRepository> {
+        self { buildUsersRepository(url: url) }
+            .singleton
+    }
 }

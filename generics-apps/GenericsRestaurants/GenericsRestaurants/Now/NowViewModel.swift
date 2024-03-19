@@ -23,11 +23,15 @@ final class NowViewModel: ObservableObject {
     @Injected(\.authenticationRepository)
     private var authRepository
 
+    @Injected(\.usersRepository)
+    private var tempRepository
+
     private var cancellable = Set<AnyCancellable>()
 
     func fetch() {
         state = .loading
         repository.authFactory = { try? self.authRepository.getAuthentication() }
+        tempRepository.authFactory = { try? self.authRepository.getAuthentication() } // FIX THIS
         Task {
             do {
                 try await repository

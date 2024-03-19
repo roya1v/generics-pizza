@@ -8,13 +8,16 @@
 import Fluent
 import Vapor
 
+import SharedModels
+
 struct UserController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
-        let user = routes.grouped("user").grouped(UserEntry.authenticator())
+        let user = routes.grouped("user").grouped(UserTokenEntry.authenticator())
 
         user.get(use: index)
         user.group(":userID") { user in
             user.delete(use: deleteUser)
+            user.put(use: updateUserAccess)
         }
     }
 
@@ -46,10 +49,24 @@ struct UserController: RouteCollection {
 
     /// Update a user's access
     func updateUserAccess(req: Request) async throws -> UserEntry {
+        try req.requireAdminUser()
         guard let user = try await UserEntry.find(req.parameters.get("userID"), on: req.db) else {
             throw Abort(.notFound)
         }
+        let newAccess = try req.content.decode(UserAccess.self)
 
-        throw Abort(.notImplemented)
+        let newAccessEntry: AccessLevel = switch(newAccess) {
+        case .client:
+                .client
+        case .employee:
+                .employee
+        case .admin:
+                .admin
+        }
+
+        user.access = newAccessEntry
+
+        try await user.update(on: req.db)
+        return user
     }
 }

@@ -13,6 +13,7 @@ enum Items: String {
     case now
     case orderHistory
     case menu
+    case users
 }
 
 struct DashboardView: View {
@@ -29,6 +30,7 @@ struct DashboardView: View {
                 }
                 Section("Other") {
                     NavigationLink("Menu", value: Items.menu)
+                    NavigationLink("Users", value: Items.users)
                 }
             }
             Button {
@@ -50,6 +52,10 @@ struct DashboardView: View {
             case .menu:
                 MenuView(store: Store(initialState: MenuFeature.State(items: [], isLoading: false, imageUrls: [:])){
                     MenuFeature()
+                })
+            case .users:
+                UsersView(store: Store(initialState: UsersFeature.State(isLoading: false, users: [])) {
+                    UsersFeature()
                 })
             }
         }

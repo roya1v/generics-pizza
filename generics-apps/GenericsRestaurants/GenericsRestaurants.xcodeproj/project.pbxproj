@@ -18,6 +18,8 @@
 		015024E62BA8834900E6C130 /* OrderHistoryFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015024E52BA8834900E6C130 /* OrderHistoryFeature.swift */; };
 		015024E82BA8C6BE00E6C130 /* MenuFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015024E72BA8C6BE00E6C130 /* MenuFeature.swift */; };
 		01A67E4D2B37A0AE00E52CDF /* MenuItem+formattedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A67E4C2B37A0AE00E52CDF /* MenuItem+formattedPrice.swift */; };
+		01B5E27F2BA9DA9B00C5E80C /* UsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5E27E2BA9DA9B00C5E80C /* UsersView.swift */; };
+		01B5E2812BA9DAB200C5E80C /* UsersFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5E2802BA9DAB200C5E80C /* UsersFeature.swift */; };
 		EC63164E29C259FF00BF52E0 /* NewMenuItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC63164D29C259FF00BF52E0 /* NewMenuItemViewModel.swift */; };
 		ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */; };
 		ECA5E7F129BFC6F300D9E85F /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA5E7F029BFC6F300D9E85F /* MenuView.swift */; };
@@ -77,6 +79,8 @@
 		017956642B37A151006DBB37 /* GenericsRestaurantsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsRestaurantsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		017956652B37A151006DBB37 /* GenericsRestaurantsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsRestaurantsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01A67E4C2B37A0AE00E52CDF /* MenuItem+formattedPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MenuItem+formattedPrice.swift"; path = "../../GenericsApp/GenericsApp/MenuItem+formattedPrice.swift"; sourceTree = "<group>"; };
+		01B5E27E2BA9DA9B00C5E80C /* UsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersView.swift; sourceTree = "<group>"; };
+		01B5E2802BA9DAB200C5E80C /* UsersFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersFeature.swift; sourceTree = "<group>"; };
 		EC63164D29C259FF00BF52E0 /* NewMenuItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMenuItemViewModel.swift; sourceTree = "<group>"; };
 		ECA5E7EE29BFC6A800D9E85F /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		ECA5E7F029BFC6F300D9E85F /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
@@ -152,6 +156,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		01B5E27D2BA9DA8300C5E80C /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				01B5E27E2BA9DA9B00C5E80C /* UsersView.swift */,
+				01B5E2802BA9DAB200C5E80C /* UsersFeature.swift */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
 		EC63164C29C259E900BF52E0 /* NewMenuItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +204,7 @@
 				ECA5E7F529BFC88300D9E85F /* Now */,
 				015024DF2BA8828C00E6C130 /* OrderHistory */,
 				ECA5E7F429BFC87400D9E85F /* Menu */,
+				01B5E27D2BA9DA8300C5E80C /* Users */,
 				ECA92FB5299D646000F28299 /* Login */,
 				ECA92F8E299C2D7800F28299 /* Assets.xcassets */,
 				ECA92FBD299D6D6400F28299 /* Info.plist */,
@@ -401,7 +415,9 @@
 				ECA5E7EF29BFC6A800D9E85F /* DashboardView.swift in Sources */,
 				ECD079FD29E7511800914593 /* Container+Repositories.swift in Sources */,
 				ECA92FB4299D640500F28299 /* LoginView.swift in Sources */,
+				01B5E27F2BA9DA9B00C5E80C /* UsersView.swift in Sources */,
 				ECA92F8D299C2D7700F28299 /* ContentView.swift in Sources */,
+				01B5E2812BA9DAB200C5E80C /* UsersFeature.swift in Sources */,
 				015024E62BA8834900E6C130 /* OrderHistoryFeature.swift in Sources */,
 				015024E12BA882A200E6C130 /* OrderHistoryView.swift in Sources */,
 				ECCE5BB029D4B09D009AB280 /* NowViewModel.swift in Sources */,
