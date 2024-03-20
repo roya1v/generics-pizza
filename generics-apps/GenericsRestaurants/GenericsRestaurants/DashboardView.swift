@@ -33,14 +33,6 @@ struct DashboardView: View {
                     NavigationLink("Users", value: Items.users)
                 }
             }
-            Button {
-                Task {
-                    try? await repository.signOut()
-                }
-            } label: {
-                Text("Sign out")
-            }
-            .padding()
         } detail: {
             switch selected {
             case .now:
