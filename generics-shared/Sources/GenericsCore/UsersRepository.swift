@@ -10,12 +10,11 @@ import Combine
 import SharedModels
 import SwiftlyHttp
 
-public func buildUsersRepository(url: String) -> UsersRepository {
-    UsersRepositoryImpl(baseURL: url)
+public func buildUsersRepository(url: String, authenticationProvider: some AuthenticationProvider) -> UsersRepository {
+    UsersRepositoryImpl(baseURL: url, authenticationProvider: authenticationProvider)
 }
 
 public protocol UsersRepository {
-    var authFactory: (() -> SwiftlyHttp.Authentication?)? { get set }
     func getAll() async throws -> [UserModel]
     func updateAccessLevel(for user: UserModel, to newAccessLevel: UserAccess) async throws
 }
@@ -23,21 +22,21 @@ public protocol UsersRepository {
 final class UsersRepositoryImpl: UsersRepository {
 
     private let baseURL: String
+    private let authenticationProvider: AuthenticationProvider
 
-    init(baseURL: String) {
+    init(baseURL: String, authenticationProvider: some AuthenticationProvider) {
         self.baseURL = baseURL
+        self.authenticationProvider = authenticationProvider
     }
 
     // MARK: - UsersRepository
-
-    var authFactory: (() -> SwiftlyHttp.Authentication?)?
 
     func getAll() async throws -> [UserModel] {
         try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "user")
             .method(.get)
             .authentication({
-                self.authFactory?()
+                try? self.authenticationProvider.getAuthentication()
             })
             .decode(to: [UserModel].self)
             .perform()
@@ -49,7 +48,7 @@ final class UsersRepositoryImpl: UsersRepository {
             .add(path: "\(user.id!)")
             .method(.put)
             .authentication({
-                self.authFactory?()
+                try? self.authenticationProvider.getAuthentication()
             })
             .body(newAccessLevel)
             .perform()

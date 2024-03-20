@@ -18,12 +18,12 @@ extension Container {
     }
 
     var orderRestaurantRepository: Factory<OrderRestaurantRepository> {
-        self { buildOrderRestaurantRepository(url: url) }
+        self { buildOrderRestaurantRepository(url: url, authenticationProvider: self.authenticationRepository()) }
             .singleton
     }
 
     var menuRepository: Factory<MenuRepository> {
-        self { buildMenuRepository(url: url) }
+        self { buildMenuRepository(url: url, authenticationProvider: self.authenticationRepository()) }
     }
 
     var orderRepository: Factory<OrderRepository> {
@@ -32,7 +32,7 @@ extension Container {
     }
 
     var usersRepository: Factory<UsersRepository> {
-        self { buildUsersRepository(url: url) }
+        self { buildUsersRepository(url: url, authenticationProvider: self.authenticationRepository()) }
             .singleton
     }
 }

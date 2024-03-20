@@ -30,8 +30,6 @@ final class NowViewModel: ObservableObject {
 
     func fetch() {
         state = .loading
-        repository.authFactory = { try? self.authRepository.getAuthentication() }
-        tempRepository.authFactory = { try? self.authRepository.getAuthentication() } // FIX THIS
         Task {
             do {
                 try await repository

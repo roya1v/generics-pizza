@@ -15,10 +15,6 @@ public func buildAuthenticationRepository(url: String) -> AuthenticationReposito
     AuthenticationRepositoryImpl(baseURL: url)
 }
 
-public func mockAuthenticationRepository() -> AuthenticationRepository {
-    AuthenticationRepositoryMck()
-}
-
 public enum AuthenticationState {
     case unknown
     case loggedIn
@@ -26,18 +22,18 @@ public enum AuthenticationState {
 }
 
 @Spyable
-public protocol AuthenticationRepository {
+public protocol AuthenticationRepository: AuthenticationProvider {
     var statePublisher: AnyPublisher<AuthenticationState, Never> { get }
     var state: AuthenticationState { get }
     func login(email: String, password: String) async throws
     func reload()
     func signOut() async throws
     func getMe() async throws -> UserModel
+    // https://github.com/Matejkob/swift-spyable/issues/47
     func getAuthentication() throws -> SwiftlyHttp.Authentication
 }
 
 final class AuthenticationRepositoryImpl: AuthenticationRepository {
-
 
     private let stateSubject = PassthroughSubject<AuthenticationState, Never>()
 
@@ -111,29 +107,5 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
         }
 
         return .bearer(token: token)
-    }
-}
-
-final class AuthenticationRepositoryMck: AuthenticationRepository {
-    var state = AuthenticationState.unknown
-
-    var statePublisher: AnyPublisher<AuthenticationState, Never> = PassthroughSubject().eraseToAnyPublisher()
-
-
-    func login(email: String, password: String) async throws {
-    }
-
-    func reload() {
-    }
-
-    func getAuthentication() throws -> SwiftlyHttp.Authentication {
-        fatalError()
-    }
-    
-    func getMe() async throws -> UserModel {
-        fatalError()
-    }
-
-    func signOut() async throws {
     }
 }
