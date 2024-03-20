@@ -10,8 +10,8 @@ import SharedModels
 import SwiftlyHttp
 import Spyable
 
-public func buildMenuRepository(url: String) -> MenuRepository {
-    MenuRepositoryImp(baseURL: url)
+public func buildMenuRepository(url: String, authenticationProvider: AuthenticationProvider? = nil) -> MenuRepository {
+    MenuRepositoryImp(baseURL: url, authenticationProvider: authenticationProvider)
 }
 
 @Spyable
@@ -19,7 +19,6 @@ public protocol MenuRepository {
     func fetchMenu() async throws -> [MenuItem]
     func create(item: MenuItem) async throws -> MenuItem
     func delete(item: MenuItem) async throws
-    var authFactory: (() -> SwiftlyHttp.Authentication?)? { get set }
     func imageUrl(for item: MenuItem) -> URL?
     func setImage(from localUrl: URL, for item: MenuItem) async throws
 }
@@ -30,16 +29,15 @@ enum MenuRepositoryError: Error {
 
 final class MenuRepositoryImp: MenuRepository {
 
-
     private let baseURL: String
+    private let authenticationProvider: AuthenticationProvider?
 
-    init(baseURL: String) {
+    init(baseURL: String, authenticationProvider: AuthenticationProvider?) {
         self.baseURL = baseURL
+        self.authenticationProvider = authenticationProvider
     }
 
     // MARK: - MenuRepository
-    
-    var authFactory: (() -> SwiftlyHttp.Authentication?)?
 
     public func fetchMenu() async throws -> [MenuItem] {
          return try await getRequest()
@@ -52,7 +50,7 @@ final class MenuRepositoryImp: MenuRepository {
         try await getRequest()
             .method(.post)
             .authentication({
-                self.authFactory?()
+                try? self.authenticationProvider?.getAuthentication()
             })
             .body(item)
             .decode(to: MenuItem.self)
@@ -81,7 +79,7 @@ final class MenuRepositoryImp: MenuRepository {
             .add(path: item.id!.uuidString)
             .add(path: "image")
             .authentication({
-                self.authFactory?()
+                try? self.authenticationProvider?.getAuthentication()
             })
             .setHeader("Content-Type", to: "image/jpeg")
             .body(imageData)
@@ -93,7 +91,7 @@ final class MenuRepositoryImp: MenuRepository {
             .method(.delete)
             .add(path: item.id!.uuidString)
             .authentication({
-                self.authFactory?()
+                try? self.authenticationProvider?.getAuthentication()
             })
             .perform()
     }

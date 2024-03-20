@@ -36,7 +36,6 @@ final class NewMenuItemViewModel: ObservableObject {
             return
         }
 
-        menuRepository.authFactory = { try? self.authRepository.getAuthentication() }
         let item = MenuItem(id: nil,
                             title: title,
                             description: description,

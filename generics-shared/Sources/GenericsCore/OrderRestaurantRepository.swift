@@ -10,8 +10,8 @@ import Combine
 import SharedModels
 import SwiftlyHttp
 
-public func buildOrderRestaurantRepository(url: String) -> OrderRestaurantRepository {
-    OrderRestaurantRepositoryImpl(baseURL: url)
+public func buildOrderRestaurantRepository(url: String, authenticationProvider: some AuthenticationProvider) -> OrderRestaurantRepository {
+    OrderRestaurantRepositoryImpl(baseURL: url, authenticationProvider: authenticationProvider)
 }
 
 public func mockOrderRestaurantRepository() -> OrderRestaurantRepository {
@@ -19,7 +19,6 @@ public func mockOrderRestaurantRepository() -> OrderRestaurantRepository {
 }
 
 public protocol OrderRestaurantRepository {
-    var authFactory: (() -> SwiftlyHttp.Authentication?)? { get set }
     func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error>
     func send(message: RestaurantToServerMessage) async throws
     func getHistory() async throws -> [OrderModel]
@@ -29,14 +28,14 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
 
     private var socket: SwiftlyWebSocketConnection?
     private let baseURL: String
+    private let authenticationProvider: AuthenticationProvider
 
-    init(baseURL: String) {
+    init(baseURL: String, authenticationProvider: some AuthenticationProvider) {
         self.baseURL = baseURL
+        self.authenticationProvider = authenticationProvider
     }
 
     // MARK: - OrderRestaurantRepository
-
-    var authFactory: (() -> SwiftlyHttp.Authentication?)?
 
     func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error> {
         let currentOrders = try await getCurrentOrders()
@@ -46,7 +45,7 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
             .add(path: "activity")
             .websocket()
 
-        if case let .bearer(token) = authFactory?() {
+        if case let .bearer(token) = try? authenticationProvider.getAuthentication() {
             try await socket?.send(message: .string(token))
         }
 
@@ -79,7 +78,7 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
             .add(path: "history")
             .method(.get)
             .authentication({
-                self.authFactory?()
+                try? self.authenticationProvider.getAuthentication()
             })
             .decode(to: [OrderModel].self)
             .set(jsonDecoder: decoder)
@@ -95,7 +94,7 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
             .add(path: "current")
             .method(.get)
             .authentication({
-                self.authFactory?()
+                try? self.authenticationProvider.getAuthentication()
             })
             .decode(to: [OrderModel].self)
             .set(jsonDecoder: decoder)
@@ -105,7 +104,6 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
 
 final class OrderRestaurantRepositoryMck: OrderRestaurantRepository {
 
-    var authFactory: (() -> SwiftlyHttp.Authentication?)?
 
     func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error> {
         return PassthroughSubject().eraseToAnyPublisher()
