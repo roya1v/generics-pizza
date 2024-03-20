@@ -392,8 +392,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Matejkob/swift-spyable.git",
       "state" : {
-        "revision" : "6e05626600604e0fa1459a772b578ca5b0759d80",
-        "version" : "0.2.0"
+        "revision" : "76717f82c9658e7c01c8e7b2e5f106beb4d80ecf",
+        "version" : "0.4.0"
       }
     },
     {
