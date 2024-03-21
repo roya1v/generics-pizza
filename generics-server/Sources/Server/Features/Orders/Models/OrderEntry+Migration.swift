@@ -17,6 +17,7 @@ extension OrderEntry {
                 .id()
                 .field("state", .string, .required)
                 .field("created_at", .double)
+                .field("address", .string)
                 .create()
         }
 

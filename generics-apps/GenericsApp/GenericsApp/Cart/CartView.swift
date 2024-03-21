@@ -111,14 +111,20 @@ struct CartView: View {
     @ViewBuilder
     var detailsSection: some View {
         Section {
-            NavigationLink {
-                Text("Address view")
-            } label: {
-                SelectorView(caption: "Your delivery address",
-                             icon: "location",
-                             text: "Select your address")
+            Picker("Delivery method", selection: $model.isPickUp) {
+                Text("Pick up").tag(true)
+                Text("Delivery").tag(false)
             }
-            .disabled(true)
+            .pickerStyle(.segmented)
+            if (!model.isPickUp) {
+                NavigationLink {
+                    Text("Address view")
+                } label: {
+                    SelectorView(caption: "Your delivery address",
+                                 icon: "location",
+                                 text: "Enter your address")
+                }
+            }
             NavigationLink {
                 Text("Payment view")
             } label: {

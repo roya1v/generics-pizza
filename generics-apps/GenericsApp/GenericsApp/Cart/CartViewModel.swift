@@ -24,6 +24,7 @@ final class CartViewModel: ObservableObject {
         case error
     }
 
+    @Published var isPickUp = true
     @Published private(set) var items: [MenuItem] = []
     @Published private(set) var subtotal: [SubtotalModel] = []
     @Published private(set) var state: State = .needItems

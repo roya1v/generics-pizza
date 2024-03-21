@@ -71,7 +71,7 @@ final class OrderRepositoryImpl: OrderRepository {
         //TODO: Make address optional
         return try await getRequest()
             .add(path: "check_price")
-            .body(OrderModel(createdAt: nil, items: items))
+            .body(OrderModel(createdAt: nil, items: items, type: .pickUp))
             .decode(to: [SubtotalModel].self)
             .perform()
     }
@@ -110,7 +110,7 @@ final class OrderRepositoryImpl: OrderRepository {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         return try await getRequest()
-            .body(OrderModel(createdAt: nil, items: items))
+            .body(OrderModel(createdAt: nil, items: items, type: .pickUp))
             .decode(to: OrderModel.self)
             .set(jsonDecoder: decoder)
             .perform()
