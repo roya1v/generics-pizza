@@ -118,7 +118,12 @@ struct CartView: View {
             .pickerStyle(.segmented)
             if (!model.isPickUp) {
                 NavigationLink {
-                    Text("Address view")
+                    VStack {
+                        TextField("Address", text: $model.address)
+                            .textFieldStyle(.roundedBorder)
+                            .padding()
+                        Spacer()
+                    }
                 } label: {
                     SelectorView(caption: "Your delivery address",
                                  icon: "location",

@@ -38,6 +38,13 @@ struct NowView: View {
                     .font(.caption)
                 let items = order.items.reduce("", {$0 + $1.title})
                 Text("**Items:** \(items)")
+                switch order.type {
+                case .delivery(let address):
+                    Text("Delivery address: \(address)")
+                case .pickUp:
+                    Text("Self pick up order")
+                }
+
             }
             Spacer()
             Button(order.state!.rawValue) {

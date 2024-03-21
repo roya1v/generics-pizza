@@ -24,7 +24,7 @@ public enum OrderError: Error {
 
 public protocol OrderRepository {
     var items: [MenuItem] { get }
-    var address: AddressModel? { get set }
+    var orderType: OrderType { get set }
     func add(item: MenuItem)
     func remove(item: MenuItem)
     func checkPrice() async throws -> [SubtotalModel]
@@ -48,7 +48,7 @@ final class OrderRepositoryImpl: OrderRepository {
 
     private(set) var items = [MenuItem]()
 
-    var address: AddressModel?
+    var orderType: OrderType = .pickUp
 
     func add(item: MenuItem) {
         items.append(item)
@@ -71,7 +71,7 @@ final class OrderRepositoryImpl: OrderRepository {
         //TODO: Make address optional
         return try await getRequest()
             .add(path: "check_price")
-            .body(OrderModel(createdAt: nil, items: items, type: .pickUp))
+            .body(OrderModel(createdAt: nil, items: items, type: orderType))
             .decode(to: [SubtotalModel].self)
             .perform()
     }
@@ -110,7 +110,7 @@ final class OrderRepositoryImpl: OrderRepository {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         return try await getRequest()
-            .body(OrderModel(createdAt: nil, items: items, type: .pickUp))
+            .body(OrderModel(createdAt: nil, items: items, type: orderType))
             .decode(to: OrderModel.self)
             .set(jsonDecoder: decoder)
             .perform()
@@ -125,7 +125,7 @@ final class OrderRepositoryImpl: OrderRepository {
 
 final class OrderRepositoryMck: OrderRepository {
 
-    var address: AddressModel?
+    var orderType: OrderType = .pickUp
 
     var items: [MenuItem] = [
         .init(id: .init(), title: "Margarita simplita", description: "Tomatoe souce, cheese and weird leaves", price: 1299),
