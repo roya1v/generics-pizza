@@ -24,11 +24,15 @@ final class OrderEntry: Model {
     @Children(for: \.$order)
     var items: [OrderItemEntry]
 
+    @Field(key: "address")
+    var address: String?
+
     init() { }
 
-    public init(id: UUID? = nil, state: OrderState) {
+    public init(id: UUID? = nil, state: OrderState, address: String?) {
         self.id = id
         self.state = state
+        self.address = address
     }
 }
 
@@ -47,6 +51,7 @@ extension OrderEntry: SharedModelRepresentable {
         .init(id: id,
               createdAt: createdAt,
               items: items.map { $0.item.toSharedModel() },
-              state: state)
+              state: state,
+              type: address != nil ? .delivery(address: address!) : .pickUp)
     }
 }
