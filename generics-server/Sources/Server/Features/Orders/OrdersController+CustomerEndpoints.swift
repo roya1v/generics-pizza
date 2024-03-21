@@ -32,7 +32,15 @@ extension OrdersController {
         }
         let orderModel = try req.content.decode(OrderModel.self)
 
-        let order = OrderEntry(state: .new)
+        let address: String?
+        switch(orderModel.type) {
+        case .delivery(let orderAddress):
+            address = orderAddress
+        case .pickUp:
+            address = nil
+        }
+
+        let order = OrderEntry(state: .new, address: address)
         try await order.save(on: req.db)
 
         let items = orderModel.items.map { OrderItemEntry(item: $0.id!) }

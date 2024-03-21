@@ -25,6 +25,7 @@ final class CartViewModel: ObservableObject {
     }
 
     @Published var isPickUp = true
+    @Published var address: String = ""
     @Published private(set) var items: [MenuItem] = []
     @Published private(set) var subtotal: [SubtotalModel] = []
     @Published private(set) var state: State = .needItems
@@ -52,6 +53,10 @@ final class CartViewModel: ObservableObject {
 
     func placeOrder() {
         state = .loading
+        if !isPickUp && address.isEmpty {
+            return
+        }
+        repository.orderType = isPickUp ? .pickUp : .delivery(address: address)
         Task {
             do {
                 try await repository.placeOrder()

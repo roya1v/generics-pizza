@@ -63,7 +63,8 @@ final class NowViewModel: ObservableObject {
                 orders[index] = OrderModel(id: order.id,
                                            createdAt: order.createdAt,
                                            items: order.items,
-                                           state: newState)
+                                           state: newState,
+                                           type: order.type)
 
             }
         }
