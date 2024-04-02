@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/console-kit.git",
       "state" : {
-        "revision" : "18262d24c98c4b76aed2d6def3544b58d0cbad63",
-        "version" : "4.13.0"
+        "revision" : "a31f44ebfbd15a2cc0fda705279676773ac16355",
+        "version" : "4.14.1"
       }
     },
     {
@@ -140,8 +140,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/routing-kit.git",
       "state" : {
-        "revision" : "17a7a3facce8285fd257aa7c72d5e480351e7698",
-        "version" : "4.8.2"
+        "revision" : "2a92a7eac411a82fb3a03731be5e76773ebe1b3e",
+        "version" : "4.9.0"
       }
     },
     {
@@ -455,8 +455,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/vapor.git",
       "state" : {
-        "revision" : "c710b8f4412aaa69ab03e77b4be27ce799f5fc1e",
-        "version" : "4.88.0"
+        "revision" : "11cdb29614a5c7f8c5289f3c97b3398c3d89b395",
+        "version" : "4.92.5"
       }
     },
     {

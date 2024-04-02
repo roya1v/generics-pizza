@@ -2,7 +2,7 @@
 import PackageDescription
 
 let baseDependencies: [Package.Dependency] = [
-    .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
+    .package(url: "https://github.com/vapor/vapor.git", from: "4.90.0"),
     .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
     .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
     .package(url: "https://github.com/kylef/PathKit", from: "1.0.1"),
