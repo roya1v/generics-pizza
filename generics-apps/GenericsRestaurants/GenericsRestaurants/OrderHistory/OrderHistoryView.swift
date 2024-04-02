@@ -18,7 +18,7 @@ struct OrderHistoryView: View {
             List {
                 Section("Orders") {
                     ForEach(store.items) { order in
-                        orderRow(for: order)
+                        OrderListRowView(order: order, onTap: nil)
                         Divider()
                     }
                 }
@@ -26,18 +26,6 @@ struct OrderHistoryView: View {
             .onAppear {
                 store.send(.shown)
             }
-        }
-    }
-
-    @ViewBuilder
-    func orderRow(for order: OrderModel) -> some View {
-        VStack(alignment: .leading) {
-            Text("ID: \(order.id!.uuidString)")
-                .font(.caption)
-            Text(order.createdAt!, style: .time)
-                .font(.caption)
-            let items = order.items.reduce("", {$0 + $1.title})
-            Text("**Items:** \(items)")
         }
     }
 }

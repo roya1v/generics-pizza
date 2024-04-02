@@ -14,10 +14,6 @@ public func buildOrderRestaurantRepository(url: String, authenticationProvider: 
     OrderRestaurantRepositoryImpl(baseURL: url, authenticationProvider: authenticationProvider)
 }
 
-public func mockOrderRestaurantRepository() -> OrderRestaurantRepository {
-    OrderRestaurantRepositoryMck()
-}
-
 public protocol OrderRestaurantRepository {
     func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error>
     func send(message: RestaurantToServerMessage) async throws
@@ -99,20 +95,5 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
             .decode(to: [OrderModel].self)
             .set(jsonDecoder: decoder)
             .perform()
-    }
-}
-
-final class OrderRestaurantRepositoryMck: OrderRestaurantRepository {
-
-
-    func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error> {
-        return PassthroughSubject().eraseToAnyPublisher()
-    }
-
-    func send(message: RestaurantToServerMessage) async throws {
-    }
-
-    func getHistory() async throws -> [SharedModels.OrderModel] {
-        fatalError()
     }
 }
