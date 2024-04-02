@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0110104C2BBC78EA005CCFEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 0110104B2BBC78E9005CCFEE /* PrivacyInfo.xcprivacy */; };
 		0122FD6E2A8B7A5400D015C5 /* CartViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122FD6D2A8B7A5400D015C5 /* CartViewModelTests.swift */; };
 		016934142A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */; };
 		01B5081D2AC4AB7900CFCA32 /* MenuViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5081C2AC4AB7900CFCA32 /* MenuViewModelTests.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0110104B2BBC78E9005CCFEE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		0122FD6D2A8B7A5400D015C5 /* CartViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModelTests.swift; sourceTree = "<group>"; };
 		016934132A3E5CC900DD93A9 /* MenuItem+formattedPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuItem+formattedPrice.swift"; sourceTree = "<group>"; };
 		01B5081C2AC4AB7900CFCA32 /* MenuViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModelTests.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				EC14E81E298B0C1C00A6540C /* Menu */,
 				EC688C2129CA38C100450D2E /* Cart */,
 				ECD845AC298AE51E0036454C /* Assets.xcassets */,
+				0110104B2BBC78E9005CCFEE /* PrivacyInfo.xcprivacy */,
 				EC611F33299432A30000427A /* Info.plist */,
 				ECD845AE298AE51E0036454C /* Preview Content */,
 				ECD845B8298AE51E0036454C /* Tests */,
@@ -320,6 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0110104C2BBC78EA005CCFEE /* PrivacyInfo.xcprivacy in Resources */,
 				ECD845B0298AE51E0036454C /* Preview Assets.xcassets in Resources */,
 				ECD845AD298AE51E0036454C /* Assets.xcassets in Resources */,
 			);
