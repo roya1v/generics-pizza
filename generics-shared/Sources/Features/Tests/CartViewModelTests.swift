@@ -7,7 +7,7 @@
 
 import XCTest
 import Factory
-@testable import GenericsApp
+@testable import CustomerCart
 @testable import GenericsCore
 
 @MainActor

@@ -4,7 +4,8 @@ import PackageDescription
 
 
 let features = [
-    "CustomerMenu"
+    "CustomerMenu",
+    "CustomerCart"
 ]
 
 let featureDependencies: [Target.Dependency] = [
@@ -39,7 +40,7 @@ let otherTargets: [Target] = [
         name: "Tests",
         dependencies: ["GenericsCore", "GenericsHelpers", "GenericsUI",
                        .product(name: "Factory", package: "Factory"),
-                       .product(name: "SharedModels", package: "generics-server"), "CustomerMenu"], path: "Sources/Features/Tests"),
+                       .product(name: "SharedModels", package: "generics-server"), "CustomerMenu", "CustomerCart"], path: "Sources/Features/Tests"),
 ]
 
 let package = Package(

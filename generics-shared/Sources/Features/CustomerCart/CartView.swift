@@ -11,11 +11,13 @@ import GenericsCore
 import GenericsUI
 import SharedModels
 
-struct CartView: View {
+public struct CartView: View {
 
     @StateObject var model = CartViewModel()
 
-    var body: some View {
+    public init() { }
+
+    public var body: some View {
         NavigationView {
             switch model.state {
             case .needItems:
