@@ -10,12 +10,6 @@
 		0110104C2BBC78EA005CCFEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 0110104B2BBC78E9005CCFEE /* PrivacyInfo.xcprivacy */; };
 		0129BF712BBDC93300316570 /* CustomerCart in Frameworks */ = {isa = PBXBuildFile; productRef = 0129BF702BBDC93300316570 /* CustomerCart */; };
 		015560BE2BBDBD1400408044 /* CustomerMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 015560BD2BBDBD1400408044 /* CustomerMenu */; };
-		01E666342B379E58008CC055 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 01E666332B379E58008CC055 /* Factory */; };
-		01E666362B379E58008CC055 /* SharedModels in Frameworks */ = {isa = PBXBuildFile; productRef = 01E666352B379E58008CC055 /* SharedModels */; };
-		01E666382B379E58008CC055 /* GenericsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 01E666372B379E58008CC055 /* GenericsCore */; };
-		01E6663A2B379E58008CC055 /* GenericsHelpers in Frameworks */ = {isa = PBXBuildFile; productRef = 01E666392B379E58008CC055 /* GenericsHelpers */; };
-		01E6663C2B379E58008CC055 /* GenericsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 01E6663B2B379E58008CC055 /* GenericsUI */; };
-		01E6663E2B379E58008CC055 /* GenericsUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 01E6663D2B379E58008CC055 /* GenericsUIKit */; };
 		ECD845A9298AE51D0036454C /* GenericsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD845A8298AE51D0036454C /* GenericsApp.swift */; };
 		ECD845AB298AE51D0036454C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD845AA298AE51D0036454C /* ContentView.swift */; };
 		ECD845AD298AE51E0036454C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECD845AC298AE51E0036454C /* Assets.xcassets */; };
@@ -74,13 +68,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0129BF712BBDC93300316570 /* CustomerCart in Frameworks */,
-				01E6663C2B379E58008CC055 /* GenericsUI in Frameworks */,
-				01E666382B379E58008CC055 /* GenericsCore in Frameworks */,
-				01E666342B379E58008CC055 /* Factory in Frameworks */,
-				01E6663A2B379E58008CC055 /* GenericsHelpers in Frameworks */,
 				015560BE2BBDBD1400408044 /* CustomerMenu in Frameworks */,
-				01E666362B379E58008CC055 /* SharedModels in Frameworks */,
-				01E6663E2B379E58008CC055 /* GenericsUIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,12 +164,6 @@
 			);
 			name = GenericsApp;
 			packageProductDependencies = (
-				01E666332B379E58008CC055 /* Factory */,
-				01E666352B379E58008CC055 /* SharedModels */,
-				01E666372B379E58008CC055 /* GenericsCore */,
-				01E666392B379E58008CC055 /* GenericsHelpers */,
-				01E6663B2B379E58008CC055 /* GenericsUI */,
-				01E6663D2B379E58008CC055 /* GenericsUIKit */,
 				015560BD2BBDBD1400408044 /* CustomerMenu */,
 				0129BF702BBDC93300316570 /* CustomerCart */,
 			);
@@ -706,36 +688,6 @@
 		015560BD2BBDBD1400408044 /* CustomerMenu */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CustomerMenu;
-		};
-		01E666332B379E58008CC055 /* Factory */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */;
-			productName = Factory;
-		};
-		01E666352B379E58008CC055 /* SharedModels */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0164CF0D2B040078000E1433 /* XCLocalSwiftPackageReference "../../generics-server" */;
-			productName = SharedModels;
-		};
-		01E666372B379E58008CC055 /* GenericsCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 014F2F3F2B378E7B006907D6 /* XCLocalSwiftPackageReference "../../generics-shared" */;
-			productName = GenericsCore;
-		};
-		01E666392B379E58008CC055 /* GenericsHelpers */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 014F2F3F2B378E7B006907D6 /* XCLocalSwiftPackageReference "../../generics-shared" */;
-			productName = GenericsHelpers;
-		};
-		01E6663B2B379E58008CC055 /* GenericsUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 014F2F3F2B378E7B006907D6 /* XCLocalSwiftPackageReference "../../generics-shared" */;
-			productName = GenericsUI;
-		};
-		01E6663D2B379E58008CC055 /* GenericsUIKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 014F2F3F2B378E7B006907D6 /* XCLocalSwiftPackageReference "../../generics-shared" */;
-			productName = GenericsUIKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
