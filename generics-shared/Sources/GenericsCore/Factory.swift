@@ -7,16 +7,12 @@
 import Foundation
 import Factory
 
-fileprivate let url = "http://localhost:8080"
+// TODO: Move somewhere else
+let url = "http://localhost:8080"
 
 extension Container {
     public var orderRepository: Factory<OrderRepository> {
         self { buildOrderRepository(url: url) }
-            .singleton
-    }
-
-    public var menuRepository: Factory<MenuRepository> {
-        self { buildMenuRepository(url: url) }
             .singleton
     }
 }

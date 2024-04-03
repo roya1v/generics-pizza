@@ -9,7 +9,16 @@ import Foundation
 import SharedModels
 import SwiftlyHttp
 import Spyable
+import Factory
 
+extension Container {
+    public var menuRepository: Factory<MenuRepository> {
+        self { MenuRepositoryImp(baseURL: url, authenticationProvider: nil) }
+            .onPreview { MenuRepositoryPreview() }
+    }
+}
+
+// Kept temporarily for restaurant app
 public func buildMenuRepository(url: String, authenticationProvider: AuthenticationProvider? = nil) -> MenuRepository {
     MenuRepositoryImp(baseURL: url, authenticationProvider: authenticationProvider)
 }
@@ -94,5 +103,27 @@ final class MenuRepositoryImp: MenuRepository {
                 try? self.authenticationProvider?.getAuthentication()
             })
             .perform()
+    }
+}
+
+private class MenuRepositoryPreview: MenuRepository {
+    func fetchMenu() async throws -> [SharedModels.MenuItem] {
+        [.init(id: nil, title: "Preview pizza", description: "Pizza for previews", price: 999)]
+    }
+    
+    func create(item: SharedModels.MenuItem) async throws -> SharedModels.MenuItem {
+        fatalError()
+    }
+    
+    func delete(item: SharedModels.MenuItem) async throws {
+        fatalError()
+    }
+    
+    func imageUrl(for item: SharedModels.MenuItem) -> URL? {
+        return nil
+    }
+    
+    func setImage(from localUrl: URL, for item: SharedModels.MenuItem) async throws {
+        fatalError()
     }
 }
