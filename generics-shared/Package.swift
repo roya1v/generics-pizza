@@ -2,6 +2,19 @@
 
 import PackageDescription
 
+
+let features = [
+    "CustomerMenu"
+]
+
+let featureDependencies: [Target.Dependency] = [
+    .product(name: "SharedModels", package: "generics-server"),
+    "GenericsUI",
+    "GenericsCore",
+    "GenericsHelpers",
+    .product(name: "Factory", package: "Factory")
+]
+
 let package = Package(
     name: "generics-shared",
     platforms: [.iOS(.v16), .macOS(.v13)],
@@ -17,11 +30,10 @@ let package = Package(
             targets: ["GenericsUI"]),
         .library(
             name: "GenericsUIKit",
-            targets: ["GenericsUIKit"]),
-        .library(
-            name: "CustomerMenu",
-            targets: ["CustomerMenu"]),
-    ],
+            targets: ["GenericsUIKit"])
+    ] + features.map {
+        .library(name: $0, targets: [$0])
+    },
     dependencies: [
         .package(url: "https://github.com/Matejkob/swift-spyable.git", from: "0.2.0"),
         .package(url: "https://github.com/roya1v/SwiftlyHttp", branch: "main"),
@@ -45,12 +57,12 @@ let package = Package(
             name: "GenericsUIKit", dependencies: [.product(name: "Spyable", package: "swift-spyable"),
                                                  .product(name: "SwiftlyHttp", package: "SwiftlyHttp"),
                                                  .product(name: "SharedModels", package: "generics-server"), "GenericsUI"]),
-        .target(
-            name: "CustomerMenu", dependencies: [.product(name: "Spyable", package: "swift-spyable"),
-                                                 .product(name: "SwiftlyHttp", package: "SwiftlyHttp"),
-                                                 .product(name: "SharedModels", package: "generics-server"), "GenericsUI", "GenericsCore"]),
         .testTarget(
             name: "GenericsCoreTests",
             dependencies: ["GenericsCore", "GenericsHelpers"]),
-    ]
+    ] + features.map {
+        .target(name: $0,
+                dependencies: featureDependencies,
+                path: "Sources/Features/" + $0)
+    }
 )
