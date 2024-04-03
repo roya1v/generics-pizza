@@ -10,11 +10,13 @@ import Factory
 import SharedModels
 import GenericsCore
 
-struct MenuView: View {
+public struct MenuView: View {
 
     @StateObject var model = MenuViewModel()
 
-    var body: some View {
+    public init() { }
+
+    public var body: some View {
         NavigationView {
             Group {
                 switch model.state {

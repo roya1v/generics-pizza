@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "factory",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hmlongco/Factory.git",
+      "state" : {
+        "revision" : "587995f7d5cc667951d635fbf6b4252324ba0439",
+        "version" : "2.3.2"
+      }
+    },
+    {
       "identity" : "swift-spyable",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Matejkob/swift-spyable.git",
