@@ -15,6 +15,33 @@ let featureDependencies: [Target.Dependency] = [
     .product(name: "Factory", package: "Factory")
 ]
 
+let otherTargets: [Target] = [
+    .target(
+        name: "GenericsCore", dependencies: [.product(name: "Spyable", package: "swift-spyable"),
+                                             .product(name: "SwiftlyHttp", package: "SwiftlyHttp"),
+                                             .product(name: "SharedModels", package: "generics-server"), .product(name: "Factory", package: "Factory")]),
+    .target(
+        name: "GenericsHelpers", dependencies: [.product(name: "Spyable", package: "swift-spyable"),
+                                                .product(name: "SwiftlyHttp", package: "SwiftlyHttp"),
+                                                .product(name: "SharedModels", package: "generics-server")]),
+    .target(
+        name: "GenericsUI", dependencies: [.product(name: "Spyable", package: "swift-spyable"),
+                                             .product(name: "SwiftlyHttp", package: "SwiftlyHttp"),
+                                             .product(name: "SharedModels", package: "generics-server")]),
+    .target(
+        name: "GenericsUIKit", dependencies: [.product(name: "Spyable", package: "swift-spyable"),
+                                             .product(name: "SwiftlyHttp", package: "SwiftlyHttp"),
+                                             .product(name: "SharedModels", package: "generics-server"), "GenericsUI"]),
+    .testTarget(
+        name: "GenericsCoreTests",
+        dependencies: ["GenericsCore", "GenericsHelpers"]),
+    .testTarget(
+        name: "Tests",
+        dependencies: ["GenericsCore", "GenericsHelpers", "GenericsUI",
+                       .product(name: "Factory", package: "Factory"),
+                       .product(name: "SharedModels", package: "generics-server"), "CustomerMenu"], path: "Sources/Features/Tests"),
+]
+
 let package = Package(
     name: "generics-shared",
     platforms: [.iOS(.v16), .macOS(.v13)],
@@ -40,27 +67,7 @@ let package = Package(
         .package(url: "https://github.com/hmlongco/Factory.git", from: "2.3.2"),
         .package(path: "../generics-server")
     ],
-    targets: [
-        .target(
-            name: "GenericsCore", dependencies: [.product(name: "Spyable", package: "swift-spyable"),
-                                                 .product(name: "SwiftlyHttp", package: "SwiftlyHttp"),
-                                                 .product(name: "SharedModels", package: "generics-server"), .product(name: "Factory", package: "Factory")]),
-        .target(
-            name: "GenericsHelpers", dependencies: [.product(name: "Spyable", package: "swift-spyable"),
-                                                    .product(name: "SwiftlyHttp", package: "SwiftlyHttp"),
-                                                    .product(name: "SharedModels", package: "generics-server")]),
-        .target(
-            name: "GenericsUI", dependencies: [.product(name: "Spyable", package: "swift-spyable"),
-                                                 .product(name: "SwiftlyHttp", package: "SwiftlyHttp"),
-                                                 .product(name: "SharedModels", package: "generics-server")]),
-        .target(
-            name: "GenericsUIKit", dependencies: [.product(name: "Spyable", package: "swift-spyable"),
-                                                 .product(name: "SwiftlyHttp", package: "SwiftlyHttp"),
-                                                 .product(name: "SharedModels", package: "generics-server"), "GenericsUI"]),
-        .testTarget(
-            name: "GenericsCoreTests",
-            dependencies: ["GenericsCore", "GenericsHelpers"]),
-    ] + features.map {
+    targets: otherTargets + features.map {
         .target(name: $0,
                 dependencies: featureDependencies,
                 path: "Sources/Features/" + $0)
