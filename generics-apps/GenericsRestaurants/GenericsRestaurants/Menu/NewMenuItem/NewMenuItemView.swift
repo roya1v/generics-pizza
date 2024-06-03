@@ -109,8 +109,6 @@ struct NewMenuItemView: View {
     }
 }
 
-struct NewMenuItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewMenuItemView()
-    }
+#Preview {
+    NewMenuItemView()
 }

@@ -28,8 +28,8 @@ struct ContentView: View {
         }
         .onReceive(
             repository
-            .statePublisher
-            .receive(on: DispatchQueue.main)
+                .statePublisher
+                .receive(on: DispatchQueue.main)
         ) { state in
             self.state = state
         }
@@ -39,8 +39,6 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView()
 }
