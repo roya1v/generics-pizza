@@ -119,10 +119,8 @@ struct MenuView: View {
     }
 }
 
-struct MenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        MenuView(store: Store(initialState: MenuFeature.State(items: [], isLoading: false, imageUrls: [:])){
-            MenuFeature()
-        })
-    }
+#Preview {
+    MenuView(store: Store(initialState: MenuFeature.State(items: [], isLoading: false, imageUrls: [:])){
+        MenuFeature()
+    })
 }
