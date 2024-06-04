@@ -16,7 +16,7 @@ public func buildUsersRepository(url: String, authenticationProvider: some Authe
 
 public protocol UsersRepository {
     func getAll() async throws -> [UserModel]
-    func updateAccessLevel(for user: UserModel, to newAccessLevel: UserAccess) async throws
+    func updateAccessLevel(for user: UserModel, to newAccessLevel: UserModel.AccessLevel) async throws
 }
 
 final class UsersRepositoryImpl: UsersRepository {
@@ -42,7 +42,7 @@ final class UsersRepositoryImpl: UsersRepository {
             .perform()
     }
 
-    func updateAccessLevel(for user: UserModel, to newAccessLevel: UserAccess) async throws {
+    func updateAccessLevel(for user: UserModel, to newAccessLevel: UserModel.AccessLevel) async throws {
         try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "user")
             .add(path: "\(user.id!)")
