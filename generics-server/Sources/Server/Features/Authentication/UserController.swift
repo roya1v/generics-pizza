@@ -53,7 +53,7 @@ struct UserController: RouteCollection {
         guard let user = try await UserEntry.find(req.parameters.get("userID"), on: req.db) else {
             throw Abort(.notFound)
         }
-        let newAccess = try req.content.decode(UserAccess.self)
+        let newAccess = try req.content.decode(UserModel.AccessLevel.self)
 
         let newAccessEntry: AccessLevel = switch(newAccess) {
         case .client:

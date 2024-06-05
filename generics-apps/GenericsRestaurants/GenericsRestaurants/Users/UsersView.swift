@@ -45,7 +45,12 @@ struct UsersView: View {
                             Text("Admin")
                         }
                         Button("Delete user") {
-
+                            if let userId = selectedId.first,
+                               let userId,
+                               let user = store.users.first(where: { $0.id == userId}) {
+                                store.send(.deleteTapped(user: user))
+                                selectedId = [] // Temporary solution
+                            }
                         }
                     }
                     Button("Close") {
