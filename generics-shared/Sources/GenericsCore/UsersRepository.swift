@@ -17,6 +17,7 @@ public func buildUsersRepository(url: String, authenticationProvider: some Authe
 public protocol UsersRepository {
     func getAll() async throws -> [UserModel]
     func updateAccessLevel(for user: UserModel, to newAccessLevel: UserModel.AccessLevel) async throws
+    func delete(user: UserModel) async throws
 }
 
 final class UsersRepositoryImpl: UsersRepository {
@@ -51,6 +52,17 @@ final class UsersRepositoryImpl: UsersRepository {
                 try? self.authenticationProvider.getAuthentication()
             })
             .body(newAccessLevel)
+            .perform()
+    }
+
+    func delete(user: UserModel) async throws {
+        try await SwiftlyHttp(baseURL: baseURL)!
+            .add(path: "user")
+            .add(path: "\(user.id!)")
+            .method(.delete)
+            .authentication({
+                try? self.authenticationProvider.getAuthentication()
+            })
             .perform()
     }
 }
