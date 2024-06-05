@@ -10,7 +10,7 @@ import ComposableArchitecture
 import SharedModels
 
 struct UsersView: View {
-    
+
     let store: StoreOf<UsersFeature>
     @State private var selectedId: Set<UUID?> = []
 
@@ -32,33 +32,39 @@ struct UsersView: View {
                 store.send(.shown)
             }
             .sheet(isPresented: isShowingSheet) {
-                VStack {
-                    Text("User email: ")
-                        .font(.title)
-                    HStack {
-                        Menu {
-                            ForEach([UserModel.AccessLevel.admin, .employee], id: \.self) {
-                                Text("\($0)")
-                                Divider()
+                if let userId = selectedId.first,
+                   let userId,
+                   let user = store.users.first(where: { $0.id == userId}) {
+                    VStack {
+                        Text("User email: \(user.email)")
+                            .font(.title)
+                        HStack {
+                            if store.isLoading {
+                                // TODO: Make it smaller
+                                ProgressView()
                             }
-                        } label: {
-                            Text("Admin")
-                        }
-                        Button("Delete user") {
-                            if let userId = selectedId.first,
-                               let userId,
-                               let user = store.users.first(where: { $0.id == userId}) {
+                            Menu {
+                                ForEach([UserModel.AccessLevel.admin, .employee], id: \.self) { accessLevel in
+                                    Button("\(accessLevel)") {
+                                        store.send(.newAccessSelected(forUser: user, newAccess: accessLevel))
+                                    }
+                                }
+                            } label: {
+                                Text("\(user.access)")
+                            }
+                            Button("Delete user") {
                                 store.send(.deleteTapped(user: user))
                                 selectedId = [] // Temporary solution
                             }
                         }
+                        Button("Close") {
+                            selectedId = []
+                        }
                     }
-                    Button("Close") {
-                        selectedId = []
-                    }
+                    .padding()
+                    .frame(width: 300.0, height: 100.0, alignment: .center)
                 }
-                .padding()
-                .frame(width: 300.0, height: 100.0, alignment: .center)
+
             }
         }
     }
