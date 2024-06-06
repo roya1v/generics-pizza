@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import Factory
 import GenericsCore
+import ComposableArchitecture
 
 struct ContentView: View {
 
@@ -23,7 +24,9 @@ struct ContentView: View {
             case .loggedIn:
                 DashboardView()
             case .loggedOut:
-                LoginView()
+                LoginView(store: Store(initialState: LoginFeature.State()){
+                    LoginFeature()
+                })
             }
         }
         .onReceive(

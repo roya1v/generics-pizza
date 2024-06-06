@@ -6,38 +6,44 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct LoginView: View {
 
-    @StateObject var model = LoginViewModel()
-    @State var email = ""
-    @State var password = ""
+    @State private var email = ""
+    @State private var password = ""
+
+    let store: StoreOf<LoginFeature>
 
     var body: some View {
-        VStack {
-            Image("generics-header")
-                .resizable()
-                .scaledToFit()
-            TextField("Email", text: $model.email)
-            SecureField("Password", text: $model.password)
-            if model.state == .error {
-                Text("Something went wrong!")
-            }
-            if model.state == .loading {
-                ProgressView()
-            } else {
-                Button {
-                    model.login()
-                } label: {
-                    Text("Login")
+        WithPerceptionTracking {
+            VStack {
+                Image("generics-header")
+                    .resizable()
+                    .scaledToFit()
+                TextField("Email", text: $email)
+                SecureField("Password", text: $password)
+                if let message = store.errorMessage {
+                    Text(message)
+                }
+                if store.isLoading {
+                    ProgressView()
+                } else {
+                    Button {
+                        store.send(.loginTapped(login: email, password: password))
+                    } label: {
+                        Text("Login")
+                    }
                 }
             }
+            .padding()
+            .frame(minWidth: 300.0, maxWidth: 300.0, minHeight: 300.0)
         }
-        .padding()
-        .frame(minWidth: 300.0, maxWidth: 300.0, minHeight: 300.0)
     }
 }
 
 #Preview {
-    LoginView()
+    LoginView(store: Store(initialState: LoginFeature.State()){
+        LoginFeature()
+    })
 }
