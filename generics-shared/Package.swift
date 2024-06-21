@@ -11,7 +11,6 @@ let features = [
 // Dependencies
 
 let Spyable = Target.Dependency.product(name: "Spyable", package: "swift-spyable")
-let SwiftlyHttp = Target.Dependency.product(name: "SwiftlyHttp", package: "SwiftlyHttp")
 let Factory = Target.Dependency.product(name: "Factory", package: "Factory")
 let SharedModels = Target.Dependency.product(name: "SharedModels", package: "generics-server")
 
@@ -28,7 +27,7 @@ let otherTargets: [Target] = [
         name: "GenericsCore",
         dependencies: [
             Spyable,
-            SwiftlyHttp,
+            "SwiftlyHttp",
             SharedModels,
             Factory
         ]
@@ -37,7 +36,7 @@ let otherTargets: [Target] = [
         name: "GenericsHelpers",
         dependencies: [
             Spyable,
-            SwiftlyHttp,
+            "SwiftlyHttp",
             SharedModels
         ]
     ),
@@ -51,6 +50,7 @@ let otherTargets: [Target] = [
             "GenericsUI"
         ]
     ),
+    .target(name: "SwiftlyHttp"),
     .testTarget(
         name: "Tests",
         dependencies: [
@@ -81,11 +81,13 @@ let package = Package(
             targets: ["GenericsUI"]),
         .library(
             name: "GenericsUIKit",
-            targets: ["GenericsUIKit"])
+            targets: ["GenericsUIKit"]),
+        .library(
+            name: "SwiftlyHttp",
+            targets: ["SwiftlyHttp"])
     ] + features.map { .library(name: $0, targets: [$0]) },
     dependencies: [
         .package(url: "https://github.com/Matejkob/swift-spyable.git", from: "0.2.0"),
-        .package(url: "https://github.com/roya1v/SwiftlyHttp", branch: "main"),
         .package(url: "https://github.com/hmlongco/Factory.git", from: "2.3.2"),
         .package(path: "../generics-server")
     ],

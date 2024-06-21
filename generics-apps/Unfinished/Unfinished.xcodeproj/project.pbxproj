@@ -99,18 +99,18 @@
 		013B957B2AD8758300BA4154 /* MakeDriverOfferShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeDriverOfferShortcut.swift; sourceTree = "<group>"; };
 		014834A12A7823D90018C322 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		014834A82A7827900018C322 /* IdleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdleViewController.swift; sourceTree = "<group>"; };
-		01610B682B379D4E000E641D /* GenericsTester */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = GenericsTester; path = "/Users/roya1/Developer/generics-pizza/generics-apps/Unfinished/build/Debug/GenericsTester"; sourceTree = "<absolute>"; };
+		016BF6C32C2577D3008C2703 /* GenericsDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		016BF6C42C2577D3008C2703 /* GenericsDriverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsDriverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		016BF6C52C2577D3008C2703 /* GenericsDriverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsDriverUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		016BF6C62C2577D3008C2703 /* GenericsTester */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GenericsTester; sourceTree = BUILT_PRODUCTS_DIR; };
 		01BEAEC42A9E7FE000106F48 /* dotmatrix.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = dotmatrix.TTF; sourceTree = "<group>"; };
 		01BEAEC62A9E836F00106F48 /* FontFix.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FontFix.storyboard; sourceTree = "<group>"; };
-		01C9DFB82A0AF16B001DC47D /* GenericsDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = GenericsDriver.app; path = "/Users/roya1/Developer/generics-pizza/generics-apps/Unfinished/build/Debug-iphoneos/GenericsDriver.app"; sourceTree = "<absolute>"; };
 		01C9DFBA2A0AF16B001DC47D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01C9DFBC2A0AF16B001DC47D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		01C9DFC32A0AF16D001DC47D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01C9DFC62A0AF16D001DC47D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		01C9DFC82A0AF16D001DC47D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		01C9DFCD2A0AF16D001DC47D /* GenericsDriverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = GenericsDriverTests.xctest; path = "/Users/roya1/Developer/generics-pizza/generics-apps/Unfinished/build/Debug-iphoneos/GenericsDriverTests.xctest"; sourceTree = "<absolute>"; };
 		01C9DFD12A0AF16D001DC47D /* GenericsDriverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsDriverTests.swift; sourceTree = "<group>"; };
-		01C9DFD72A0AF16E001DC47D /* GenericsDriverUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = GenericsDriverUITests.xctest; path = "/Users/roya1/Developer/generics-pizza/generics-apps/Unfinished/build/Debug-iphoneos/GenericsDriverUITests.xctest"; sourceTree = "<absolute>"; };
 		01C9DFDB2A0AF16E001DC47D /* GenericsDriverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsDriverUITests.swift; sourceTree = "<group>"; };
 		01C9DFDD2A0AF16E001DC47D /* GenericsDriverUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericsDriverUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		01D537F92A7AD093000CC221 /* OrderStickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStickerView.swift; sourceTree = "<group>"; };
@@ -255,6 +255,10 @@
 			children = (
 				01C9DFB92A0AF16B001DC47D /* GenericsDriver */,
 				013B956B2AD86F9000BA4154 /* GenericsTester */,
+				016BF6C32C2577D3008C2703 /* GenericsDriver.app */,
+				016BF6C42C2577D3008C2703 /* GenericsDriverTests.xctest */,
+				016BF6C52C2577D3008C2703 /* GenericsDriverUITests.xctest */,
+				016BF6C62C2577D3008C2703 /* GenericsTester */,
 			);
 			sourceTree = "<group>";
 		};
@@ -278,7 +282,7 @@
 			packageProductDependencies = (
 			);
 			productName = GenericsTester;
-			productReference = 01610B682B379D4E000E641D /* GenericsTester */;
+			productReference = 016BF6C62C2577D3008C2703 /* GenericsTester */;
 			productType = "com.apple.product-type.tool";
 		};
 		01C9DFB72A0AF16B001DC47D /* GenericsDriver */ = {
@@ -300,7 +304,7 @@
 				01F889C72A8CD5AE001ACB69 /* Factory */,
 			);
 			productName = GenericsDriver;
-			productReference = 01C9DFB82A0AF16B001DC47D /* GenericsDriver.app */;
+			productReference = 016BF6C32C2577D3008C2703 /* GenericsDriver.app */;
 			productType = "com.apple.product-type.application";
 		};
 		01C9DFCC2A0AF16D001DC47D /* GenericsDriverTests */ = {
@@ -318,7 +322,7 @@
 			);
 			name = GenericsDriverTests;
 			productName = GenericsDriverTests;
-			productReference = 01C9DFCD2A0AF16D001DC47D /* GenericsDriverTests.xctest */;
+			productReference = 016BF6C42C2577D3008C2703 /* GenericsDriverTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		01C9DFD62A0AF16D001DC47D /* GenericsDriverUITests */ = {
@@ -336,7 +340,7 @@
 			);
 			name = GenericsDriverUITests;
 			productName = GenericsDriverUITests;
-			productReference = 01C9DFD72A0AF16E001DC47D /* GenericsDriverUITests.xctest */;
+			productReference = 016BF6C52C2577D3008C2703 /* GenericsDriverUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -376,7 +380,6 @@
 			mainGroup = ECD8459C298AE51D0036454C;
 			packageReferences = (
 				EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */,
-				018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */,
 				01F889D32A8CE4C0001ACB69 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 				0164CF0D2B040078000E1433 /* XCLocalSwiftPackageReference "../generics-server" */,
 				014869212B31C96000BC3350 /* XCRemoteSwiftPackageReference "swift-spyable" */,
@@ -860,14 +863,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.2.0;
-			};
-		};
-		018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/roya1v/SwiftlyHttp";
-			requirement = {
-				branch = main;
-				kind = branch;
 			};
 		};
 		01F889D32A8CE4C0001ACB69 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {

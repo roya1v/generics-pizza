@@ -241,7 +241,6 @@
 			mainGroup = ECD8459C298AE51D0036454C;
 			packageReferences = (
 				EC14E821298C515E00A6540C /* XCRemoteSwiftPackageReference "Factory" */,
-				018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */,
 				01F889D32A8CE4C0001ACB69 /* XCRemoteSwiftPackageReference "SwiftLint" */,
 				0164CF0D2B040078000E1433 /* XCLocalSwiftPackageReference "../../generics-server" */,
 				014869212B31C96000BC3350 /* XCRemoteSwiftPackageReference "swift-spyable" */,
@@ -652,14 +651,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.2.0;
-			};
-		};
-		018A6AA02A1212770015D716 /* XCRemoteSwiftPackageReference "SwiftlyHttp" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/roya1v/SwiftlyHttp";
-			requirement = {
-				branch = main;
-				kind = branch;
 			};
 		};
 		01F889D32A8CE4C0001ACB69 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
