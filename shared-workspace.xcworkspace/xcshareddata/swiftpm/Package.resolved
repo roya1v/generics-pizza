@@ -415,15 +415,6 @@
       }
     },
     {
-      "identity" : "swiftlyhttp",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/roya1v/SwiftlyHttp",
-      "state" : {
-        "branch" : "main",
-        "revision" : "f51ba5c66975bf1816a1c2616cca5f918a4de757"
-      }
-    },
-    {
       "identity" : "swiftui-navigation",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swiftui-navigation",
