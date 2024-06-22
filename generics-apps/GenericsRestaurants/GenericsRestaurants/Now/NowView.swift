@@ -7,30 +7,34 @@
 
 import SwiftUI
 import GenericsCore
-import Factory
+import ComposableArchitecture
 import SharedModels
 
 struct NowView: View {
 
-    @StateObject var model = NowViewModel()
+    let store: StoreOf<NowFeature>
 
     var body: some View {
-        List {
-            Section("Orders") {
-                ForEach(model.orders) { order in
-                    OrderListRowView(order: order) {
-                        model.update(order, to: order.state!.next())
+        WithPerceptionTracking {
+            List {
+                Section("Orders") {
+                    ForEach(store.state.orders) { order in
+                        OrderListRowView(order: order) {
+                            store.send(.update(orderId: order.id!, state: order.state!.next()))
+                        }
+                        Divider()
                     }
-                    Divider()
                 }
             }
-        }
-        .onAppear {
-            model.fetch()
+            .onAppear {
+                store.send(.shown)
+            }
         }
     }
 }
 
 #Preview {
-    NowView()
+    NowView(store: Store(initialState: NowFeature.State(orders: [], isLoading: false), reducer: {
+        NowFeature()
+    }))
 }

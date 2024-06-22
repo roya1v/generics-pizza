@@ -36,7 +36,9 @@ struct DashboardView: View {
         } detail: {
             switch selected {
             case .now:
-                NowView()
+                NowView(store: Store(initialState: NowFeature.State(orders: [], isLoading: false), reducer: {
+                    NowFeature()
+                }))
             case .orderHistory:
                 OrderHistoryView(store: Store(initialState: OrderHistoryFeature.State(items: [])) {
                     OrderHistoryFeature()
