@@ -166,7 +166,7 @@ public class SwiftlyHttp {
     /// Creates a websocket request.
     ///  - Returns: An instance of ``SwiftlyWebSocketConnection``.
     public func websocket() async throws -> SwiftlyWebSocketConnection {
-        let request = try await getRequest()
+        let request = await getRequest()
         // TODO: Add scheme check and/or change
         guard request.url?.scheme == "ws" || request.url?.scheme == "wss" else {
             throw SwiftlyHttpError.badScheme
@@ -179,10 +179,10 @@ public class SwiftlyHttp {
     ///  - Returns: A tuple of `Data` and `URLResponse`. Same way as an `URLRequest`.
     @discardableResult
     public func perform() async throws -> (Data, URLResponse) {
-        try await urlSession.data(for: try await getRequest())
+        try await urlSession.data(for: await getRequest())
     }
 
-    private func getRequest() async throws -> URLRequest {
+    private func getRequest() async -> URLRequest {
         let url = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)!
         var request = URLRequest(url: url.url!)
 
