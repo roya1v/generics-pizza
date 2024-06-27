@@ -1,0 +1,79 @@
+openapi: 3.0.0
+info:
+  title: Generic's Pizza Rest API
+  description: This is the Rest API that is used by Generic's Pizza Apps.
+  version: 0.0.1
+paths:
+  /menu:
+    get:
+      summary: Returns a list of all menu items.
+      responses:
+        '200':
+          description: A JSON array of menu items
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/MenuItem'
+    post:
+      summary: Create a new menu item.
+      responses:
+        '200':
+          description: The newly created menu item.
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/MenuItem'
+  /menu/{id}:
+    delete:
+      summary: Delete a menu item.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: UUID of the menu item.
+      responses:
+        '200':
+          description: Item was successfully deleted.
+  /menu/{id}/image:
+    get:
+      summary: Get the menu item image.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: UUID of the menu item.
+      responses:
+        '200':
+          description: Image bytes
+    post:
+      summary: Add a menu item image.
+      responses:
+        '200':
+          description: Ok
+    delete:
+      summary: Delete the menu item image.
+      responses:
+        '200':
+          description: Ok
+components:
+  schemas:
+    MenuItem:
+      type: object
+      required:
+        - name
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+      
