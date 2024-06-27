@@ -61,6 +61,90 @@ paths:
       responses:
         '200':
           description: Ok
+  /order:
+    post:
+      summary: Create a new order
+      responses:
+        '200':
+          description: Ok
+  /order/check_price:
+    post:
+      summary: Get the estimated order price.
+      responses:
+        '200':
+          description: Ok
+  /order/check_location:
+    post:
+      summary: Get the location of the restaurant.
+      responses:
+        '200':
+          description: Ok
+  /order/current:
+    get:
+      summary: Get the current orders.
+      responses:
+        '200':
+          description: Ok
+  /order/history:
+    get:
+      summary: Get the orders history.
+      responses:
+        '200':
+          description: Ok
+  /auth/user:
+    post:
+      summary: Create a new account.
+      responses:
+        '200':
+          description: Ok
+    get:
+      summary: Get info about current user.
+      responses:
+        '200':
+          description: Ok
+  /auth/login:
+    post:
+      summary: Login.
+      responses:
+        '200':
+          description: Ok
+  /auth/signout:
+    post:
+      summary: Sign out.
+      responses:
+        '200':
+          description: Ok
+  /user:
+    get:
+      summary: Get all existign users.
+      responses:
+        '200':
+          description: Ok
+  /user/{id}:
+    delete:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: UUID of the user.
+      summary: Detele the user.
+      responses:
+        '200':
+          description: Ok
+    put:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: UUID of the user.
+      summary: Update the user.
+      responses:
+        '200':
+          description: Ok
 components:
   schemas:
     MenuItem:
