@@ -22,11 +22,12 @@ struct UserController: RouteCollection {
     }
 
     /// Get all users
-    func index(req: Request) async throws -> [UserEntry] {
+    func index(req: Request) async throws -> [UserModel] {
         try req.requireAdminUser()
         return try await UserEntry
             .query(on: req.db)
             .all()
+            .toSharedModels()
     }
 
     /// Delete a user
@@ -48,7 +49,7 @@ struct UserController: RouteCollection {
     }
 
     /// Update a user's access
-    func updateUserAccess(req: Request) async throws -> UserEntry {
+    func updateUserAccess(req: Request) async throws -> UserModel {
         try req.requireAdminUser()
         guard let user = try await UserEntry.find(req.parameters.get("userID"), on: req.db) else {
             throw Abort(.notFound)
@@ -67,6 +68,6 @@ struct UserController: RouteCollection {
         user.access = newAccessEntry
 
         try await user.update(on: req.db)
-        return user
+        return user.toSharedModel()
     }
 }

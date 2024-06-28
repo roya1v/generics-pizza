@@ -7,6 +7,7 @@
 
 import Fluent
 import Vapor
+import SharedModels
 
 final class UserEntry: Model, Content {
     static let schema = "users"
@@ -46,6 +47,20 @@ final class UserEntry: Model, Content {
         var email: String
         var password: String
         var confirmPassword: String
+    }
+}
+
+extension UserEntry: SharedModelRepresentable {
+    func toSharedModel() -> UserModel {
+        let access: UserModel.AccessLevel = switch access {
+        case .client:
+                .client
+        case .employee:
+                .employee
+        case .admin:
+                .admin
+        }
+        return UserModel(id: id, email: email, access: access)
     }
 }
 
