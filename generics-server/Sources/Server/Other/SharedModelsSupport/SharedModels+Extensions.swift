@@ -18,6 +18,8 @@ extension AddressModel: Content { }
 
 extension SubtotalModel: Content { }
 
+extension UserModel: Content { }
+
 extension MenuItem: EntryRepresentable {
     func toEntry() -> MenuEntry {
         .init(id: id, title: title, description: description, price: price, imageUrl: nil)

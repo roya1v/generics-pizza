@@ -150,7 +150,9 @@ components:
     MenuItem:
       type: object
       required:
-        - name
+        - title
+        - description
+        - price
       properties:
         id:
           type: integer
@@ -160,4 +162,16 @@ components:
           type: string
         price:
           type: integer
+    User:
+      type: object
+      required:
+        - email
+        - access
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        access:
+          enum: ["client", "employee", "admin"] 
       
