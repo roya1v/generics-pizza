@@ -7,6 +7,7 @@
 
 import Fluent
 import Vapor
+import SharedModels
 
 struct AuthenticationController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
@@ -21,7 +22,7 @@ struct AuthenticationController: RouteCollection {
     }
 
     /// Create new user
-    func create(req: Request) async throws -> UserEntry {
+    func create(req: Request) async throws -> UserModel {
         let create = try req.content.decode(UserEntry.Create.self)
         guard create.password == create.confirmPassword else {
             throw Abort(.badRequest, reason: "Passwords did not match")
@@ -32,7 +33,7 @@ struct AuthenticationController: RouteCollection {
             access: .client
         )
         try await user.save(on: req.db)
-        return user
+        return user.toSharedModel()
     }
 
     /// Login and get an auth token
@@ -44,8 +45,8 @@ struct AuthenticationController: RouteCollection {
     }
 
     /// Check current user
-    func me(req: Request) async throws -> UserEntry {
-        try req.requireAnyUser()
+    func me(req: Request) async throws -> UserModel {
+        try req.requireAnyUser().toSharedModel()
     }
 
     /// Sign out deleting auth token
