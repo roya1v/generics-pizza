@@ -6,62 +6,65 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct NewMenuItemView: View {
-
-    @StateObject var model = NewMenuItemViewModel()
+    
+    @State var store: StoreOf<NewMenuItemFeature>
     @State var isSelectingImage = false
     @Environment(\.presentationMode) var presentationMode
-
+    
     var body: some View {
-        VStack {
-            Text("New Item")
-                .font(.title)
-            HStack {
-                form
-                imageSelection
-            }
-            if model.state == .error {
-                Text("Error occured!")
-            }
-            if model.state == .loading {
-                ProgressView()
-            } else {
+        WithPerceptionTracking {
+            VStack {
+                Text("New Item")
+                    .font(.title)
                 HStack {
-                    Button {
-                        model.createMenuItem()
-                    } label: {
-                        Text("Create")
-                    }
-                    Button(role: .cancel) {
-                        presentationMode.wrappedValue.dismiss()
-                    } label: {
-                        Text("Cancel")
+                    form
+                    imageSelection
+                }
+                if store.hasError {
+                    Text("Error occured!")
+                }
+                if store.isLoading {
+                    ProgressView()
+                } else {
+                    HStack {
+                        Button {
+                            store.send(.createTapped)
+                        } label: {
+                            Text("Create")
+                        }
+                        Button(role: .cancel) {
+                            presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            Text("Cancel")
+                        }
                     }
                 }
             }
-        }
-        .padding()
-        .frame(width: 400, height: 200)
-        .onReceive(model.$shouldDismiss, perform: { shouldDismiss in
-            if shouldDismiss {
-                presentationMode.wrappedValue.dismiss()
+            .padding()
+            .frame(width: 400, height: 200)
+            .onChange(of: store.shouldDismiss) { shouldDismiss in
+                if shouldDismiss {
+                    presentationMode.wrappedValue.dismiss()
+                }
             }
-        })
+        }
     }
-
+    
     var form: some View {
         Form {
-            TextField("Title", text: $model.title)
-            TextField("Description", text: $model.description)
-            TextField("Price", value: $model.price, format: .currency(code: "USD"))
+            TextField("Title", text: $store.title)
+            TextField("Description", text: $store.description)
+            TextField("Price", value: $store.price, format: .currency(code: "USD"))
             Spacer()
         }
     }
-
+    
     var imageSelection: some View {
         VStack {
-            if let url = model.imageUrl {
+            if let url = store.imageUrl {
                 AsyncImage(url: url) { phase in
                     switch phase {
                     case .success(let image):
@@ -87,7 +90,7 @@ struct NewMenuItemView: View {
                         .scaledToFit()
                         .frame(width: 35.0)
                 }
-
+                
             }
             Button {
                 isSelectingImage = true
@@ -99,7 +102,7 @@ struct NewMenuItemView: View {
             do {
                 let fileURL = try result.get()
                 if fileURL.startAccessingSecurityScopedResource() {
-                    model.imageUrl = fileURL
+                    store.send(.imageSelected(fileURL))
                 }
             } catch {
                 print ("error reading")
@@ -110,5 +113,7 @@ struct NewMenuItemView: View {
 }
 
 #Preview {
-    NewMenuItemView()
+    NewMenuItemView(store: Store(initialState: NewMenuItemFeature.State(), reducer: {
+        NewMenuItemFeature()
+    }))
 }
