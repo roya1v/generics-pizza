@@ -47,7 +47,9 @@ struct MenuView: View {
                 store.send(.shown)
             },
                    content: {
-                NewMenuItemView()
+                NewMenuItemView(store: Store(initialState: NewMenuItemFeature.State(), reducer: {
+                    NewMenuItemFeature()
+                }))
             })
             .alert("Are you sure you want to delete \(itemToDelete?.title ?? "this item")?",
                    isPresented: $isDeleting,

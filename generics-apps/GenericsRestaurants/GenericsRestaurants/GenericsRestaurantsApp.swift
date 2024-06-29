@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Factory
+import ComposableArchitecture
 
 @main
 struct GenericsRestaurantsApp: App {
@@ -26,9 +27,5 @@ struct GenericsRestaurantsApp: App {
                 }
             }
         }
-        Window("New pizza", id: "new-pizza") {
-            NewMenuItemView()
-        }
-        .windowResizability(.contentSize)
     }
 }

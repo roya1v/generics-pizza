@@ -38,3 +38,20 @@ struct NowView: View {
         NowFeature()
     }))
 }
+
+extension OrderState {
+    func next() -> Self {
+        switch self {
+        case .new:
+                .inProgress
+        case .inProgress:
+                .readyForDelivery
+        case .readyForDelivery:
+                .inDelivery
+        case .inDelivery:
+                .finished
+        case .finished:
+            fatalError()
+        }
+    }
+}
