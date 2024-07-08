@@ -2,6 +2,11 @@ load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_binary")
 load("@gazelle//:def.bzl", "gazelle", "gazelle_binary")
+load(
+    "@rules_xcodeproj//xcodeproj:defs.bzl",
+    "top_level_target",
+    "xcodeproj",
+)
 
 # Ignore the `.build` folder that is created by running Swift package manager
 # commands. Be sure to configure your source control to ignore it, as well.
@@ -97,7 +102,7 @@ swift_library(
 )
 
 ios_application(
-    name = "iOSApp",
+    name = "GenericsApp",
     bundle_id = "build.bazel.rules-apple-example",
     families = [
         "iphone",
@@ -120,4 +125,15 @@ swift_binary(
         "@swiftpkg_soto//:SotoS3",
         "@swiftpkg_vapor//:Vapor",
     ]
+)
+
+xcodeproj(
+    name = "xcodeproj",
+    build_mode = "bazel",
+    project_name = "Generics",
+    tags = ["manual"],
+    top_level_targets = [
+        ":GenericsApp",
+    ],
+
 )
