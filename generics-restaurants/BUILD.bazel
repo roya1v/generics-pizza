@@ -1,0 +1,37 @@
+load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
+load(
+    "@build_bazel_rules_apple//apple:macos.bzl",
+    "macos_application",
+    "macos_extension",
+)
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_binary")
+load(
+    "@rules_xcodeproj//xcodeproj:defs.bzl",
+    "top_level_target",
+    "xcodeproj",
+)
+
+swift_library(
+    name = "generics-restaurants",
+    srcs = glob([
+        "sources/**/*.swift",
+        
+        ]),
+    deps = [
+        "@swiftpkg_factory//:Factory",
+        "//:GenericsCore",
+        "//:SharedModels",
+        "@swiftpkg_swift_composable_architecture//:ComposableArchitecture",
+    ],
+)
+
+macos_application(
+    name = "GenericsRestaurants",
+    bundle_id = "build.bazel.rules-apple-example",
+    infoplists = ["Info.plist"],
+    minimum_os_version = "13.0",
+    visibility = ["//visibility:public"],
+    deps = [":generics-restaurants"],
+)
+

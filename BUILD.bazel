@@ -37,11 +37,13 @@ swift_library(
         ":GenericsHelpers",
         ":SharedModels",
     ],
+    visibility = [":__subpackages__"]
 )
 
 swift_library(
     name = "SharedModels",
     srcs = glob(["generics-server/Sources/SharedModels/**/*.swift"]),
+    visibility = [":__subpackages__"]
 )
 
 swift_library(
@@ -70,32 +72,6 @@ swift_library(
     visibility = [":__subpackages__"]
 )
 
-swift_library(
-    name = "generics-restaurants",
-    srcs = glob([
-        "generics-apps/GenericsRestaurants/GenericsRestaurants/**/*.swift",
-        "generics-apps/GenericsApp/GenericsApp/MenuItem+formattedPrice.swift" 
-        ],
-        exclude=[
-            "generics-apps/GenericsRestaurants/GenericsRestaurants/UITests/**/*.swift"
-            ]),
-    deps = [
-        "@swiftpkg_factory//:Factory",
-        ":GenericsCore",
-        ":SharedModels",
-        "@swiftpkg_swift_composable_architecture//:ComposableArchitecture",
-    ],
-)
-
-macos_application(
-    name = "GenericsRestaurants",
-    bundle_id = "build.bazel.rules-apple-example",
-    infoplists = ["Info_bazel.plist"],
-    minimum_os_version = "13.0",
-    visibility = ["//visibility:public"],
-    deps = [":generics-restaurants"],
-)
-
 swift_binary(
     name = "server",
     srcs = glob(["generics-server/Sources/Server/**/*.swift"]),
@@ -116,7 +92,7 @@ xcodeproj(
     tags = ["manual"],
     top_level_targets = [
         "//generics-app:GenericsApp",
-        ":GenericsRestaurants"
+        "//generics-restaurants:GenericsRestaurants"
     ],
 
 )
