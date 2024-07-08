@@ -41,3 +41,5 @@ eclipse-*bin/
 user.bazelrc
 
 /.build
+
+/Generics.xcodeproj
