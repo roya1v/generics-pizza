@@ -28,6 +28,7 @@ use_repo(
     "swiftpkg_fluent_postgres_driver",
     "swiftpkg_pathkit",
     "swiftpkg_soto",
+    "swiftpkg_swift_composable_architecture",
     "swiftpkg_swift_spyable",
     "swiftpkg_vapor",
     # The name of the Swift package repositories will be added to this declaration in step 4 after

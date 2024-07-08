@@ -1,4 +1,9 @@
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
+load(
+    "@build_bazel_rules_apple//apple:macos.bzl",
+    "macos_application",
+    "macos_extension",
+)
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_binary")
 load("@gazelle//:def.bzl", "gazelle", "gazelle_binary")
@@ -62,7 +67,8 @@ swift_library(
         ":SwiftlyHttp",
         "@swiftpkg_swift_spyable//:Spyable",
         "@swiftpkg_factory//:Factory",
-        ":GenericsHelpers"
+        ":GenericsHelpers",
+        ":SharedModels",
     ],
 )
 
@@ -96,7 +102,7 @@ swift_library(
 )
 
 swift_library(
-    name = "lib",
+    name = "generics-app",
     srcs = glob(["generics-apps/GenericsApp/GenericsApp/*.swift"]),
     deps = [":CustomerMenu", ":CustomerCart"],
 )
@@ -111,7 +117,33 @@ ios_application(
     infoplists = ["Info_bazel.plist"],
     minimum_os_version = "17.0",
     visibility = ["//visibility:public"],
-    deps = [":lib"],
+    deps = [":generics-app"],
+)
+
+swift_library(
+    name = "generics-restaurants",
+    srcs = glob([
+        "generics-apps/GenericsRestaurants/GenericsRestaurants/**/*.swift",
+        "generics-apps/GenericsApp/GenericsApp/MenuItem+formattedPrice.swift" 
+        ],
+        exclude=[
+            "generics-apps/GenericsRestaurants/GenericsRestaurants/UITests/**/*.swift"
+            ]),
+    deps = [
+        "@swiftpkg_factory//:Factory",
+        ":GenericsCore",
+        ":SharedModels",
+        "@swiftpkg_swift_composable_architecture//:ComposableArchitecture",
+    ],
+)
+
+macos_application(
+    name = "GenericsRestaurants",
+    bundle_id = "build.bazel.rules-apple-example",
+    infoplists = ["Info_bazel.plist"],
+    minimum_os_version = "13.0",
+    visibility = ["//visibility:public"],
+    deps = [":generics-restaurants"],
 )
 
 swift_binary(
