@@ -43,3 +43,4 @@ user.bazelrc
 /.build
 
 /Generics.xcodeproj
+.env
