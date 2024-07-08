@@ -6,7 +6,6 @@ load(
 )
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_binary")
-load("@gazelle//:def.bzl", "gazelle", "gazelle_binary")
 load(
     "@rules_xcodeproj//xcodeproj:defs.bzl",
     "top_level_target",
@@ -55,6 +54,7 @@ swift_library(
         ":SwiftlyHttp",
         "@swiftpkg_factory//:Factory",
     ],
+    visibility = [":__subpackages__"]
 )
 
 swift_library(
@@ -67,25 +67,7 @@ swift_library(
         ":SwiftlyHttp",
         "@swiftpkg_factory//:Factory",
     ],
-)
-
-swift_library(
-    name = "generics-app",
-    srcs = glob(["generics-apps/GenericsApp/GenericsApp/*.swift"]),
-    deps = [":CustomerMenu", ":CustomerCart"],
-)
-
-ios_application(
-    name = "GenericsApp",
-    bundle_id = "build.bazel.rules-apple-example",
-    families = [
-        "iphone",
-        "ipad",
-    ],
-    infoplists = ["Info_bazel.plist"],
-    minimum_os_version = "17.0",
-    visibility = ["//visibility:public"],
-    deps = [":generics-app"],
+    visibility = [":__subpackages__"]
 )
 
 swift_library(
@@ -133,7 +115,7 @@ xcodeproj(
     project_name = "Generics",
     tags = ["manual"],
     top_level_targets = [
-        ":GenericsApp",
+        "//generics-app:GenericsApp",
         ":GenericsRestaurants"
     ],
 
