@@ -20,7 +20,7 @@ swift_library(
         ]),
     deps = [
         "@swiftpkg_factory//:Factory",
-        "//:GenericsCore",
+        "//clients/libraries:GenericsCore",
         "//:SharedModels",
         "@swiftpkg_swift_composable_architecture//:ComposableArchitecture",
     ],

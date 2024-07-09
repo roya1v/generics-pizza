@@ -7,7 +7,7 @@
 
 import Foundation
 import SharedModels
-import SwiftlyHttp
+import clients_libraries_SwiftlyHttp
 import Combine
 
 public func buildOrderRepository(url: String) -> OrderRepository {

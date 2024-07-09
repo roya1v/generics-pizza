@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 import Factory
-import GenericsCore
+import clients_libraries_GenericsCore
 import ComposableArchitecture
 
 struct ContentView: View {

@@ -73,7 +73,7 @@
       }
     },
     {
-      "identity" : "swiftlyhttp",
+      "identity" : "SwiftlyHttp",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/roya1v/SwiftlyHttp",
       "state" : {

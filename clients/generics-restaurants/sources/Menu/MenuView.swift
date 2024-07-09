@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Factory
-import GenericsCore
+import clients_libraries_GenericsCore
 import SharedModels
 import ComposableArchitecture
 

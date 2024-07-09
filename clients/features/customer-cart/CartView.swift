@@ -7,8 +7,8 @@
 
 import SwiftUI
 import Factory
-import GenericsCore
-import GenericsUI
+import clients_libraries_GenericsCore
+import clients_libraries_GenericsUI
 import SharedModels
 
 public struct CartView: View {

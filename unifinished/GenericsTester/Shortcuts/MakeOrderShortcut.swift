@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import GenericsCore
+import clients_libraries_GenericsCore
 
 final class MakeOrderShortcut: TestShortcut {
     let name = "Make order"

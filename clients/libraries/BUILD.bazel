@@ -1,0 +1,38 @@
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+swift_library(
+    name = "SwiftlyHttp",
+    srcs = glob(["swiftly-http/SwiftlyHttp.swift"]),
+    visibility = ["//visibility:public"]
+)
+
+swift_library(
+    name = "GenericsUI",
+    srcs = glob(["ui/**/*.swift"]),
+    visibility = ["//visibility:public"]
+)
+
+swift_library(
+    name = "GenericsUIKit",
+    srcs = glob(["uikit/**/*.swift"]),
+    visibility = ["//visibility:public"],
+)
+
+swift_library(
+    name = "GenericsHelpers",
+    srcs = glob(["helpers/**/*.swift"]),
+    visibility = ["//visibility:public"]
+)
+
+swift_library(
+    name = "GenericsCore",
+    srcs = glob(["core/**/*.swift", "swiftly-http/SwiftlyHttp.swift"]),
+    deps = [
+        ":SwiftlyHttp",
+        "@swiftpkg_swift_spyable//:Spyable",
+        "@swiftpkg_factory//:Factory",
+        ":GenericsHelpers",
+        "//:SharedModels",
+    ],
+    visibility = ["//visibility:public"]
+)

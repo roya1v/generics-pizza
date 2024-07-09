@@ -1,6 +1,6 @@
 //
 //  LocalSettingsService.swift
-//  GenericsCore
+//  clients_libraries_GenericsCore
 //
 //  Created by Mike S. on 16/08/2023.
 //
