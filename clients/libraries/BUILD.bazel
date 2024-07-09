@@ -26,7 +26,7 @@ swift_library(
 
 swift_library(
     name = "GenericsCore",
-    srcs = glob(["core/**/*.swift", "swiftly-http/SwiftlyHttp.swift"]),
+    srcs = glob(["core/**/*.swift"]),
     deps = [
         ":SwiftlyHttp",
         "@swiftpkg_swift_spyable//:Spyable",
