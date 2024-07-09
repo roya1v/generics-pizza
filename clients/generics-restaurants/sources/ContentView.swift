@@ -12,32 +12,30 @@ import clients_libraries_GenericsCore
 import ComposableArchitecture
 
 struct ContentView: View {
-
-    @State var state: AuthenticationState = .unknown
-    @Injected(\.authenticationRepository) private var repository
+    
+    var store: StoreOf<AppFeature> = Store(initialState: AppFeature.State.loading) {
+        AppFeature()
+    }
 
     var body: some View {
-        Group {
-            switch state {
-            case .unknown:
-                Text("")
-            case .loggedIn:
-                DashboardView()
-            case .loggedOut:
-                LoginView(store: Store(initialState: LoginFeature.State()){
-                    LoginFeature()
-                })
+        WithPerceptionTracking {
+            Group {
+                switch store.state {
+                case .loading:
+                    Text("")
+                case .login:
+                    if let store = store.scope(
+                        state: \.login,
+                        action: \.login) {
+                        LoginView(store: store)
+                    }
+                case .dashboard:
+                    DashboardView()
+                }
             }
-        }
-        .onReceive(
-            repository
-                .statePublisher
-                .receive(on: DispatchQueue.main)
-        ) { state in
-            self.state = state
-        }
-        .onAppear {
-            repository.reload()
+            .task {
+                store.send(.launched)
+            }
         }
     }
 }
