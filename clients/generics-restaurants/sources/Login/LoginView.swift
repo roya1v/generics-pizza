@@ -10,10 +10,7 @@ import ComposableArchitecture
 
 struct LoginView: View {
 
-    @State private var email = ""
-    @State private var password = ""
-
-    let store: StoreOf<LoginFeature>
+    @Perception.Bindable var store: StoreOf<LoginFeature>
 
     var body: some View {
         WithPerceptionTracking {
@@ -21,8 +18,10 @@ struct LoginView: View {
                 Image("generics-header")
                     .resizable()
                     .scaledToFit()
-                TextField("Email", text: $email)
-                SecureField("Password", text: $password)
+                TextField("Email",
+                          text: $store.email.sending(\.sendEmail))
+                SecureField("Password",
+                            text: $store.password.sending(\.sendPassword))
                 if let message = store.errorMessage {
                     Text(message)
                 }
@@ -30,7 +29,7 @@ struct LoginView: View {
                     ProgressView()
                 } else {
                     Button {
-                        store.send(.loginTapped(login: email, password: password))
+                        store.send(.loginTapped)
                     } label: {
                         Text("Login")
                     }
