@@ -8,7 +8,7 @@
 import SwiftUI
 import Factory
 import SharedModels
-import GenericsCore
+import clients_libraries_GenericsCore
 
 public struct MenuView: View {
 

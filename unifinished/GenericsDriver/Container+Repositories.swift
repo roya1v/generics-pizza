@@ -7,7 +7,7 @@
 
 import Foundation
 import Factory
-import GenericsCore
+import clients_libraries_GenericsCore
 
 fileprivate let url = "http://localhost:8080"
 

@@ -9,8 +9,8 @@ import Foundation
 import SharedModels
 import Factory
 import Combine
-import GenericsCore
-import GenericsHelpers
+import clients_libraries_GenericsCore
+import clients_libraries_GenericsHelpers
 
 @MainActor
 final class CartViewModel: ObservableObject {

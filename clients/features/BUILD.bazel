@@ -1,0 +1,27 @@
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+swift_library(
+    name = "CustomerMenu",
+    srcs = glob(["customer-menu/**/*.swift"]),
+    deps = [
+        "//clients/libraries:GenericsCore",
+        "//clients/libraries:GenericsUI",
+        "//:SharedModels",
+        "//clients/libraries:SwiftlyHttp",
+        "@swiftpkg_factory//:Factory",
+    ],
+     visibility = ["//visibility:public"]
+)
+
+swift_library(
+    name = "CustomerCart",
+    srcs = glob(["customer-cart/**/*.swift"]),
+    deps = [
+        "//clients/libraries:GenericsCore",
+        "//clients/libraries:GenericsUI",
+        "//:SharedModels",
+        "//clients/libraries:SwiftlyHttp",
+        "@swiftpkg_factory//:Factory",
+    ],
+     visibility = ["//visibility:public"]
+)

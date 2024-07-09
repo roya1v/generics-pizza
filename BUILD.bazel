@@ -13,63 +13,9 @@ load(
 )
 
 swift_library(
-    name = "SwiftlyHttp",
-    srcs = glob(["generics-shared/Sources/SwiftlyHttp/**/*.swift"]),
-)
-
-swift_library(
-    name = "GenericsUI",
-    srcs = glob(["generics-shared/Sources/GenericsUI/**/*.swift"]),
-)
-
-swift_library(
-    name = "GenericsHelpers",
-    srcs = glob(["generics-shared/Sources/GenericsHelpers/**/*.swift"]),
-)
-
-swift_library(
-    name = "GenericsCore",
-    srcs = glob(["generics-shared/Sources/GenericsCore/**/*.swift"]),
-    deps = [
-        ":SwiftlyHttp",
-        "@swiftpkg_swift_spyable//:Spyable",
-        "@swiftpkg_factory//:Factory",
-        ":GenericsHelpers",
-        ":SharedModels",
-    ],
-    visibility = [":__subpackages__"]
-)
-
-swift_library(
     name = "SharedModels",
     srcs = glob(["generics-server/Sources/SharedModels/**/*.swift"]),
-    visibility = [":__subpackages__"]
-)
-
-swift_library(
-    name = "CustomerMenu",
-    srcs = glob(["generics-shared/Sources/Features/CustomerMenu/**/*.swift"]),
-    deps = [
-        ":GenericsCore",
-        ":GenericsUI",
-        ":SharedModels",
-        ":SwiftlyHttp",
-        "@swiftpkg_factory//:Factory",
-    ],
-    visibility = [":__subpackages__"]
-)
-
-swift_library(
-    name = "CustomerCart",
-    srcs = glob(["generics-shared/Sources/Features/CustomerCart/**/*.swift"]),
-    deps = [
-        ":GenericsCore",
-        ":GenericsUI",
-        ":SharedModels",
-        ":SwiftlyHttp",
-        "@swiftpkg_factory//:Factory",
-    ],
-    visibility = [":__subpackages__"]
+    visibility = ["//visibility:public"]
 )
 
 swift_binary(
@@ -94,5 +40,4 @@ xcodeproj(
         "//clients/generics-app:GenericsApp",
         "//clients/generics-restaurants:GenericsRestaurants"
     ],
-
 )

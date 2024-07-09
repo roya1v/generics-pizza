@@ -8,8 +8,8 @@
 import Foundation
 import Factory
 import SharedModels
-import GenericsUI
-import GenericsHelpers
+import clients_libraries_GenericsUI
+import clients_libraries_GenericsHelpers
 
 @MainActor
 final class MenuViewModel: ObservableObject {

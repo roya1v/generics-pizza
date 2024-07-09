@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import CustomerMenu
-import CustomerCart
+import clients_features_CustomerMenu
+import clients_features_CustomerCart
 
 struct ContentView: View {
 

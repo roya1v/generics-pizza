@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import SwiftlyHttp
+import clients_libraries_SwiftlyHttp
 import SharedModels
 import Spyable
 

@@ -15,7 +15,7 @@ load(
 swift_library(
     name = "generics-app",
     srcs = glob(["sources/*.swift"]),
-    deps = ["//:CustomerMenu", "//:CustomerCart"],
+    deps = ["//clients/features:CustomerMenu", "//clients/features:CustomerCart"],
 )
 
 ios_application(

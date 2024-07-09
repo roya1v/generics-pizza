@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 import SharedModels
-import SwiftlyHttp
+import clients_libraries_SwiftlyHttp
 
 public func buildUsersRepository(url: String, authenticationProvider: some AuthenticationProvider) -> UsersRepository {
     UsersRepositoryImpl(baseURL: url, authenticationProvider: authenticationProvider)

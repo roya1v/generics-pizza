@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftlyHttp
+import clients_libraries_SwiftlyHttp
 import SharedModels
 
 public final class AuthenticationService {
