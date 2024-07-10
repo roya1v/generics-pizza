@@ -13,7 +13,7 @@ import ComposableArchitecture
 
 struct MenuView: View {
 
-    let store: StoreOf<MenuFeature>
+    @Perception.Bindable var store: StoreOf<MenuFeature>
 
     @Environment(\.openWindow) var openWindow
 
@@ -51,15 +51,7 @@ struct MenuView: View {
                     NewMenuItemFeature()
                 }))
             })
-            .alert("Are you sure you want to delete \(itemToDelete?.title ?? "this item")?",
-                   isPresented: $isDeleting,
-                   presenting: itemToDelete) { item in
-                Button(role: .destructive) {
-                    store.send(.delete(item.id!))
-                } label: {
-                    Text("Delete")
-                }
-            }
+            .confirmationDialog($store.scope(state: \.deleteConfirmationDialog, action: \.deleteConfirmationDialog))
         }
     }
 
@@ -110,19 +102,21 @@ struct MenuView: View {
             .buttonStyle(.link)
             .padding()
         }
-        .contextMenu(menuItems: {
+        .contextMenu {
             Button {
-                isDeleting = true
-                itemToDelete = item
+                store.send(.delete(item))
             } label: {
                 Text("Delete item")
             }
-        })
+        }
     }
 }
 
 #Preview {
-    MenuView(store: Store(initialState: MenuFeature.State(items: [], isLoading: false, imageUrls: [:])){
-        MenuFeature()
-    })
+    MenuView(
+        store: Store(
+            initialState: MenuFeature.State()) {
+                MenuFeature()
+            }
+    )
 }
