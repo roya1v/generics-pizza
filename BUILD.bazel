@@ -1,11 +1,10 @@
-load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
-load("@build_bazel_rules_swift//swift:swift.bzl", "swift_binary")
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_binary", "swift_library")
 load("@rules_xcodeproj//xcodeproj:defs.bzl", "xcodeproj")
 
 swift_library(
     name = "SharedModels",
     srcs = glob(["generics-server/Sources/SharedModels/**/*.swift"]),
-    visibility = ["//visibility:public"]
+    visibility = ["//visibility:public"],
 )
 
 swift_binary(
@@ -18,7 +17,7 @@ swift_binary(
         "@swiftpkg_pathkit//:PathKit",
         "@swiftpkg_soto//:SotoS3",
         "@swiftpkg_vapor//:Vapor",
-    ]
+    ],
 )
 
 xcodeproj(
@@ -28,6 +27,7 @@ xcodeproj(
     tags = ["manual"],
     top_level_targets = [
         "//clients/generics-app:GenericsApp",
-        "//clients/generics-restaurants:GenericsRestaurants"
+        "//clients/generics-restaurants:GenericsRestaurants",
+        "//clients/generics-restaurants:GenericsRestaurantsTests",
     ],
 )

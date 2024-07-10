@@ -4,20 +4,22 @@ load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 swift_library(
     name = "generics-app",
     srcs = glob(["sources/*.swift"]),
-    deps = ["//clients/features:CustomerMenu", "//clients/features:CustomerCart"],
+    deps = [
+        "//clients/features:CustomerCart",
+        "//clients/features:CustomerMenu",
+    ],
 )
 
 ios_application(
     name = "GenericsApp",
-    bundle_id = "build.bazel.rules-apple-example",
+    bundle_id = "com.roya1v.GenericsApp",
     families = [
         "iphone",
         "ipad",
     ],
     infoplists = ["Info.plist"],
+    minimum_os_version = "16.1",
     resources = glob(["resources/**/*"]),
-    minimum_os_version = "17.0",
     visibility = ["//visibility:public"],
     deps = [":generics-app"],
 )
-

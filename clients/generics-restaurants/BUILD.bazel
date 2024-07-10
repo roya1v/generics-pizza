@@ -1,27 +1,46 @@
+load("@build_bazel_rules_apple//apple:macos.bzl", "macos_application", "macos_unit_test")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
-load("@build_bazel_rules_apple//apple:macos.bzl", "macos_application")
+
+swift_library(
+    name = "generics-restaurants-tests",
+    testonly = True,
+    srcs = glob([
+        "tests/**/*.swift",
+    ]),
+    tags = ["manual"],
+    deps = [
+        ":generics-restaurants",
+        "@swiftpkg_factory//:Factory",
+        "@swiftpkg_swift_composable_architecture//:ComposableArchitecture",
+    ],
+)
+
+macos_unit_test(
+    name = "GenericsRestaurantsTests",
+    minimum_os_version = "13.0",
+    visibility = ["//visibility:public"],
+    deps = [":generics-restaurants-tests"],
+)
 
 swift_library(
     name = "generics-restaurants",
     srcs = glob([
         "sources/**/*.swift",
-        
-        ]),
+    ]),
     deps = [
-        "@swiftpkg_factory//:Factory",
-        "//clients/libraries:GenericsCore",
         "//:SharedModels",
+        "//clients/libraries:GenericsCore",
+        "@swiftpkg_factory//:Factory",
         "@swiftpkg_swift_composable_architecture//:ComposableArchitecture",
     ],
 )
 
 macos_application(
     name = "GenericsRestaurants",
-    bundle_id = "build.bazel.rules-apple-example",
+    bundle_id = "com.roya1v.GenericsRestaurants",
     infoplists = ["Info.plist"],
-    resources = glob(["resources/**/*"]),
     minimum_os_version = "13.0",
+    resources = glob(["resources/**/*"]),
     visibility = ["//visibility:public"],
     deps = [":generics-restaurants"],
 )
-
