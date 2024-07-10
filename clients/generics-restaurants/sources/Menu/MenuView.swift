@@ -15,12 +15,6 @@ struct MenuView: View {
 
     @Perception.Bindable var store: StoreOf<MenuFeature>
 
-    @Environment(\.openWindow) var openWindow
-
-    @State var itemToDelete: MenuItem?
-    @State var isDeleting = false
-    @State var isCreating = false
-
     var body: some View {
         WithPerceptionTracking {
             VStack {
@@ -36,22 +30,15 @@ struct MenuView: View {
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     Button("New") {
-                        isCreating = true
+                        store.send(.newItemButtonTapped)
                     }
                 }
             }
             .navigationTitle("Menu")
-            .sheet(isPresented: $isCreating,
-                   onDismiss: {
-                isCreating = false
-                store.send(.shown)
-            },
-                   content: {
-                NewMenuItemView(store: Store(initialState: NewMenuItemFeature.State(), reducer: {
-                    NewMenuItemFeature()
-                }))
-            })
             .confirmationDialog($store.scope(state: \.deleteConfirmationDialog, action: \.deleteConfirmationDialog))
+            .sheet(item: $store.scope(state: \.newItem, action: \.newItem)) { newItemStore in
+                NewMenuItemView(store: newItemStore)
+            }
         }
     }
 

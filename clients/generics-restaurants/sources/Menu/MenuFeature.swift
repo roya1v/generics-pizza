@@ -15,6 +15,7 @@ struct MenuFeature {
     @ObservableState
     struct State: Equatable {
         @Presents var deleteConfirmationDialog: ConfirmationDialogState<Action.DeleteConfirmationDialogAction>?
+        @Presents var newItem: NewMenuItemFeature.State?
         var items = IdentifiedArrayOf<MenuItem>()
         var isLoading = false
         var imageUrls = [MenuItem.ID: URL]()
@@ -25,6 +26,8 @@ struct MenuFeature {
         case loaded([MenuItem])
         case delete(MenuItem)
         case deleteConfirmationDialog(PresentationAction<DeleteConfirmationDialogAction>)
+        case newItem(PresentationAction<NewMenuItemFeature.Action>)
+        case newItemButtonTapped
         
         @CasePathable
         enum DeleteConfirmationDialogAction: Equatable {
@@ -65,10 +68,21 @@ struct MenuFeature {
                 return .none
             case .deleteConfirmationDialog(.presented(.delete(let item))):
                 return .none
-            case .deleteConfirmationDialog(_):
+            case .newItemButtonTapped:
+                state.newItem = NewMenuItemFeature.State()
+                return .none
+            case .newItem(.presented(.cancelTapped)):
+                state.newItem = nil
+                return .none
+            case .deleteConfirmationDialog:
+                return .none
+            case .newItem:
                 return .none
             }
         }
         .ifLet(\.$deleteConfirmationDialog, action: \.deleteConfirmationDialog)
+        .ifLet(\.$newItem, action: \.newItem) {
+            NewMenuItemFeature()
+        }
     }
 }
