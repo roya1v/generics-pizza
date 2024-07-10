@@ -14,15 +14,22 @@ import Factory
 struct MenuFeature {
     @ObservableState
     struct State: Equatable {
-        var items: [MenuItem]
-        var isLoading: Bool
-        var imageUrls: [MenuItem.ID: URL]
+        @Presents var deleteConfirmationDialog: ConfirmationDialogState<Action.DeleteConfirmationDialogAction>?
+        var items = IdentifiedArrayOf<MenuItem>()
+        var isLoading = false
+        var imageUrls = [MenuItem.ID: URL]()
     }
 
     enum Action {
         case shown
         case loaded([MenuItem])
-        case delete(MenuItem.ID)
+        case delete(MenuItem)
+        case deleteConfirmationDialog(PresentationAction<DeleteConfirmationDialogAction>)
+        
+        @CasePathable
+        enum DeleteConfirmationDialogAction: Equatable {
+            case delete(MenuItem)
+        }
     }
 
     @Injected(\.menuRepository)
@@ -38,15 +45,30 @@ struct MenuFeature {
                     await send(.loaded(items))
                 }
             case .loaded(let items):
-                state.items = items
+                state.items = IdentifiedArray(uniqueElements: items)
                 items.forEach { item in
                     state.imageUrls[item.id] = repository.imageUrl(for: item)
                 }
                 state.isLoading = false
                 return .none
-            case .delete(_):
+            case .delete(let item):
+                state.deleteConfirmationDialog = ConfirmationDialogState {
+                    TextState("Are you sure?")
+                } actions: {
+                    ButtonState(role: .cancel) {
+                        TextState("Cancel")
+                    }
+                    ButtonState(action: .delete(item)) {
+                        TextState("Delete")
+                    }
+                }
+                return .none
+            case .deleteConfirmationDialog(.presented(.delete(let item))):
+                return .none
+            case .deleteConfirmationDialog(_):
                 return .none
             }
         }
+        .ifLet(\.$deleteConfirmationDialog, action: \.deleteConfirmationDialog)
     }
 }
