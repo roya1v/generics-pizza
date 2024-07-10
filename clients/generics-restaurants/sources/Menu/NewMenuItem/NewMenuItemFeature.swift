@@ -21,12 +21,12 @@ struct NewMenuItemFeature {
         var imageUrl: URL? = nil
         var isLoading = false
         var hasError = false
-        var shouldDismiss = false
     }
     
     enum Action: BindableAction {
         case binding(BindingAction<State>)
         case createTapped
+        case cancelTapped
         case imageSelected(URL)
         case createdNewItem(Error?)
     }
@@ -68,7 +68,8 @@ struct NewMenuItemFeature {
                     state.hasError = true
                     return .none
                 }
-                state.shouldDismiss = true
+                return .none
+            case .cancelTapped:
                 return .none
             }
         }

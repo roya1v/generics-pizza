@@ -12,7 +12,6 @@ struct NewMenuItemView: View {
     
     @State var store: StoreOf<NewMenuItemFeature>
     @State var isSelectingImage = false
-    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         WithPerceptionTracking {
@@ -36,7 +35,7 @@ struct NewMenuItemView: View {
                             Text("Create")
                         }
                         Button(role: .cancel) {
-                            presentationMode.wrappedValue.dismiss()
+                            store.send(.cancelTapped)
                         } label: {
                             Text("Cancel")
                         }
@@ -45,11 +44,6 @@ struct NewMenuItemView: View {
             }
             .padding()
             .frame(width: 400, height: 200)
-            .onChange(of: store.shouldDismiss) { shouldDismiss in
-                if shouldDismiss {
-                    presentationMode.wrappedValue.dismiss()
-                }
-            }
         }
     }
     
