@@ -19,17 +19,17 @@ struct LoginFeature {
         var password = ""
     }
 
-    enum Action {
+    enum Action: BindableAction {
         case loginTapped
         case loginCompleted(Error?)
-        case sendEmail(String)
-        case sendPassword(String)
+        case binding(BindingAction<State>)
     }
 
     @Injected(\.authenticationRepository)
     var repository
 
     var body: some ReducerOf<Self> {
+        BindingReducer()
         Reduce { state, action in
             switch action {
             case .loginTapped:
@@ -53,11 +53,7 @@ struct LoginFeature {
                     state.errorMessage = error.localizedDescription
                 }
                 return .none
-            case .sendEmail(let email):
-                state.email = email
-                return .none
-            case .sendPassword(let password):
-                state.password = password
+            case .binding:
                 return .none
             }
         }

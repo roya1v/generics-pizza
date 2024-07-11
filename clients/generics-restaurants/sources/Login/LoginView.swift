@@ -19,9 +19,9 @@ struct LoginView: View {
                     .resizable()
                     .scaledToFit()
                 TextField("Email",
-                          text: $store.email.sending(\.sendEmail))
+                          text: $store.email)
                 SecureField("Password",
-                            text: $store.password.sending(\.sendPassword))
+                            text: $store.password)
                 if let message = store.errorMessage {
                     Text(message)
                 }
