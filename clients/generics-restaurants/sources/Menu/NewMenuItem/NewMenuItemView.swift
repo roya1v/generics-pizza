@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 struct NewMenuItemView: View {
     
-    @State var store: StoreOf<NewMenuItemFeature>
+    @Perception.Bindable var store: StoreOf<NewMenuItemFeature>
     @State var isSelectingImage = false
     
     var body: some View {
