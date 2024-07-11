@@ -16,7 +16,7 @@ struct AppFeature {
     enum State: Equatable {
         case loading
         case login(LoginFeature.State)
-        case dashboard
+        case dashboard(DashboardFeature.State)
     }
     
     enum Action {
@@ -24,6 +24,7 @@ struct AppFeature {
         case stateUpdated(AuthenticationState)
         case logoutTapped
         case login(LoginFeature.Action)
+        case dashboard(DashboardFeature.Action)
     }
     
     @Injected(\.authenticationRepository)
@@ -32,6 +33,8 @@ struct AppFeature {
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
+            case .dashboard:
+                return .none
             case .launched:
                 repository.reload()
                 return .merge(
@@ -54,7 +57,12 @@ struct AppFeature {
                 case .unknown:
                     state = .loading
                 case .loggedIn:
-                    state = .dashboard
+                    state = .dashboard(
+                        DashboardFeature.State(now: NowFeature.State(),
+                                               orderHistory: OrderHistoryFeature.State(),
+                                               menu: MenuFeature.State(),
+                                               users: UsersFeature.State())
+                    )
                 case .loggedOut:
                     state = .login(LoginFeature.State())
                 }
@@ -62,8 +70,12 @@ struct AppFeature {
             case .login:
                 return .none
             }
-        }.ifCaseLet(\.login, action: \.login) {
+        }
+        .ifCaseLet(\.login, action: \.login) {
             LoginFeature()
+        }
+        .ifCaseLet(\.dashboard, action: \.dashboard) {
+            DashboardFeature()
         }
     }
 }

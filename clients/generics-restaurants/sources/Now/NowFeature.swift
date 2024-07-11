@@ -15,8 +15,8 @@ import Combine
 struct NowFeature {
     @ObservableState
     struct State: Equatable {
-        var orders: [OrderModel]
-        var isLoading: Bool
+        var orders: [OrderModel] = []
+        var isLoading = false
     }
 
     enum Action {

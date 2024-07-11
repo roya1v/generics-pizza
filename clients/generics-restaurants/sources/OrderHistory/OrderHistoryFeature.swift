@@ -14,7 +14,7 @@ import Factory
 struct OrderHistoryFeature {
     @ObservableState
     struct State: Equatable {
-        var items: [OrderModel]
+        var items = [OrderModel]()
     }
 
     enum Action {

@@ -30,7 +30,12 @@ struct ContentView: View {
                         LoginView(store: store)
                     }
                 case .dashboard:
-                    DashboardView()
+                    if let store = store.scope(
+                        state: \.dashboard,
+                        action: \.dashboard) {
+                        DashboardView(store: store)
+                    }
+                    
                 }
             }
             .task {

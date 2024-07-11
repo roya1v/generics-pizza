@@ -19,7 +19,7 @@ enum Items: String {
 struct DashboardView: View {
 
     @State private var selected: Items = .now
-    @Injected(\.authenticationRepository) private var repository
+    let store: StoreOf<DashboardFeature>
 
     var body: some View {
         NavigationSplitView {
@@ -36,26 +36,30 @@ struct DashboardView: View {
         } detail: {
             switch selected {
             case .now:
-                NowView(store: Store(initialState: NowFeature.State(orders: [], isLoading: false), reducer: {
-                    NowFeature()
-                }))
+                NowView(store: store.scope(state: \.now,
+                                           action: \.now))
             case .orderHistory:
-                OrderHistoryView(store: Store(initialState: OrderHistoryFeature.State(items: [])) {
-                    OrderHistoryFeature()
-                })
+                OrderHistoryView(store: store.scope(state: \.orderHistory,
+                                                    action: \.orderHistory))
             case .menu:
-                MenuView(store: Store(initialState: MenuFeature.State(items: [], isLoading: false, imageUrls: [:])){
-                    MenuFeature()
-                })
+                MenuView(store: store.scope(state: \.menu,
+                                            action: \.menu))
             case .users:
-                UsersView(store: Store(initialState: UsersFeature.State(isLoading: false, users: [])) {
-                    UsersFeature()
-                })
+                if let store = store.scope(state: \.users,
+                                           action: \.users) {
+                    UsersView(store: store)
+                }
             }
         }
     }
 }
 
 #Preview {
-    DashboardView()
+    DashboardView(store: Store(
+        initialState: DashboardFeature.State(now: NowFeature.State(),
+                                             orderHistory: OrderHistoryFeature.State(),
+                                             menu: MenuFeature.State())) {
+                                                 DashboardFeature()
+                                             }
+    )
 }
