@@ -14,8 +14,8 @@ import Factory
 struct UsersFeature {
     @ObservableState
     struct State: Equatable {
-        var isLoading: Bool
-        var users: [UserModel]
+        var isLoading = false
+        var users = [UserModel]()
     }
 
     enum Action {
