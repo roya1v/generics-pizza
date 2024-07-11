@@ -38,8 +38,7 @@ struct NewMenuItemFeature {
         BindingReducer()
         Reduce { state, action in
             switch action {
-            case .binding(_):
-                return .none
+                
             case .imageSelected(let url):
                 state.imageUrl = url
                 return .none
@@ -70,6 +69,8 @@ struct NewMenuItemFeature {
                 }
                 return .none
             case .cancelTapped:
+                return .none
+            case .binding:
                 return .none
             }
         }
