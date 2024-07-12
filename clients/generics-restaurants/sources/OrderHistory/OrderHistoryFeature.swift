@@ -14,7 +14,7 @@ import Factory
 struct OrderHistoryFeature {
     @ObservableState
     struct State: Equatable {
-        var items = [OrderModel]()
+        var items = IdentifiedArrayOf<OrderModel>()
     }
 
     enum Action {
@@ -34,7 +34,7 @@ struct OrderHistoryFeature {
                     await send(.loaded(items))
                 }
             case .loaded(let items):
-                state.items = items
+                state.items = IdentifiedArray(uniqueElements: items)
                 return .none
             }
         }

@@ -15,7 +15,7 @@ import Combine
 struct NowFeature {
     @ObservableState
     struct State: Equatable {
-        var orders: [OrderModel] = []
+        var orders = IdentifiedArrayOf<OrderModel>()
         var isLoading = false
     }
 
@@ -66,18 +66,17 @@ struct NowFeature {
                 }
             case .updated(orderId: let orderId, state: let orderState):
                 if orderState == .finished {
-                    state.orders = state.orders.filter { $0.id != orderId }
+                    state.orders.remove(id: orderId)
                     return .none
                 }
-                state.orders = state.orders.map { order in
-                    if order.id == orderId {
-                        return OrderModel(id: order.id,
-                                          createdAt: order.createdAt,
-                                          items: order.items,
-                                          state: orderState,
-                                          type: order.type)
-                    }
-                    return order
+                if let existing = state.orders[id: orderId] {
+                    state.orders[id: orderId] = OrderModel(
+                        id: existing.id,
+                        createdAt: existing.createdAt,
+                        items: existing.items,
+                        state: orderState,
+                        type: existing.type
+                    )
                 }
                 return .none
             }

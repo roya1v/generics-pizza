@@ -15,7 +15,7 @@ struct UsersFeature {
     @ObservableState
     struct State: Equatable {
         var isLoading = false
-        var users = [UserModel]()
+        var users = IdentifiedArrayOf<UserModel>()
     }
 
     enum Action {
@@ -40,8 +40,10 @@ struct UsersFeature {
                     let items = try! await repository.getAll()
                     await send(.loaded(items))
                 }
-            case .loaded(let items):
-                state.users = items ?? state.users
+            case .loaded(let newUsers):
+                if let newUsers {
+                    state.users = IdentifiedArray(uniqueElements: newUsers)
+                }
                 state.isLoading = false
                 return .none
             case .deleteTapped(let user):
