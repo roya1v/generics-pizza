@@ -194,8 +194,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-case-paths",
       "state" : {
-        "revision" : "b871e5ed11a23e52c2896a92ce2c829982ff8619",
-        "version" : "1.4.2"
+        "revision" : "b9ad2661b6e8fb411fef6a441c9955c3413afac0",
+        "version" : "1.5.0"
       }
     },
     {
@@ -210,10 +210,10 @@
     {
       "identity" : "swift-collections",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-collections.git",
+      "location" : "https://github.com/apple/swift-collections",
       "state" : {
-        "revision" : "ee97538f5b81ae89698fd95938896dec5217b148",
-        "version" : "1.1.1"
+        "revision" : "3d2dc41a01f9e49d84f0a3925fb858bed64f702d",
+        "version" : "1.1.2"
       }
     },
     {
@@ -257,8 +257,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-dependencies",
       "state" : {
-        "revision" : "00bc30ca03f98881329fab7f1bebef8eba472596",
-        "version" : "1.3.1"
+        "revision" : "9085501f168b08f5205b68f1b8a0d56bb52b8c1a",
+        "version" : "1.3.2"
       }
     },
     {
@@ -356,8 +356,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-perception",
       "state" : {
-        "revision" : "d3ab98dc2887d1cc3bed676f6fa354da4cb22b3c",
-        "version" : "1.2.4"
+        "revision" : "68901eac31c13c7d1ffef8e1bd8c3870ca2eaa95",
+        "version" : "1.3.2"
       }
     },
     {
@@ -410,8 +410,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/vapor.git",
       "state" : {
-        "revision" : "ebbe71c89aa1b76a0920277760b12be7a2ec7c70",
-        "version" : "4.102.0"
+        "revision" : "a823735db57b46100b0c61cdfc5a08525b1e7cad",
+        "version" : "4.102.1"
       }
     },
     {
