@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 6,
-  "moduleFileHash": "caac7b5bebd7d99d048322579a80a2b129f454285733bdacc005288d34cfd4fb",
+  "moduleFileHash": "c2263cfc5a222a2ec255ae4d3c5567b9f863e1e9effecbbbaca68796266b58fa",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -30,7 +30,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 8,
+            "line": 15,
             "column": 27
           },
           "imports": {
@@ -56,7 +56,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 12,
+                "line": 19,
                 "column": 24
               }
             }
@@ -69,7 +69,7 @@
         "apple_support": "apple_support@1.15.1",
         "build_bazel_rules_swift": "rules_swift@1.18.0",
         "build_bazel_rules_apple": "rules_apple@3.6.0",
-        "rules_swift_package_manager": "rules_swift_package_manager@0.34.1",
+        "rules_swift_package_manager": "rules_swift_package_manager@_",
         "gazelle": "gazelle@0.37.0",
         "rules_xcodeproj": "rules_xcodeproj@2.4.0",
         "bazel_tools": "bazel_tools@_",
@@ -290,10 +290,10 @@
         }
       }
     },
-    "rules_swift_package_manager@0.34.1": {
+    "rules_swift_package_manager@_": {
       "name": "rules_swift_package_manager",
-      "version": "0.34.1",
-      "key": "rules_swift_package_manager@0.34.1",
+      "version": "0.0.0",
+      "key": "rules_swift_package_manager@_",
       "repoName": "rules_swift_package_manager",
       "executionPlatformsToRegister": [],
       "toolchainsToRegister": [],
@@ -301,9 +301,9 @@
         {
           "extensionBzlFile": "@apple_support//crosstool:setup.bzl",
           "extensionName": "apple_cc_configure_extension",
-          "usingModule": "rules_swift_package_manager@0.34.1",
+          "usingModule": "rules_swift_package_manager@_",
           "location": {
-            "file": "https://bcr.bazel.build/modules/rules_swift_package_manager/0.34.1/MODULE.bazel",
+            "file": "@@rules_swift_package_manager~//:MODULE.bazel",
             "line": 40,
             "column": 35
           },
@@ -318,9 +318,9 @@
         {
           "extensionBzlFile": "@bazel_gazelle//:extensions.bzl",
           "extensionName": "go_deps",
-          "usingModule": "rules_swift_package_manager@0.34.1",
+          "usingModule": "rules_swift_package_manager@_",
           "location": {
-            "file": "https://bcr.bazel.build/modules/rules_swift_package_manager/0.34.1/MODULE.bazel",
+            "file": "@@rules_swift_package_manager~//:MODULE.bazel",
             "line": 46,
             "column": 24
           },
@@ -343,7 +343,7 @@
               },
               "devDependency": false,
               "location": {
-                "file": "https://bcr.bazel.build/modules/rules_swift_package_manager/0.34.1/MODULE.bazel",
+                "file": "@@rules_swift_package_manager~//:MODULE.bazel",
                 "line": 47,
                 "column": 18
               }
@@ -365,21 +365,6 @@
         "bazel_gazelle": "gazelle@0.37.0",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
-      },
-      "repoSpec": {
-        "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
-        "ruleClassName": "http_archive",
-        "attributes": {
-          "urls": [
-            "https://github.com/cgrindel/rules_swift_package_manager/releases/download/v0.34.1/rules_swift_package_manager.v0.34.1.tar.gz"
-          ],
-          "integrity": "sha256-THdD0dkZpyF7MY6ZIW/d/mYfxPYJrXi9nQyjviZROhY=",
-          "strip_prefix": "",
-          "remote_patches": {
-            "https://bcr.bazel.build/modules/rules_swift_package_manager/0.34.1/patches/module_dot_bazel_version.patch": "sha256-a/szYzjjGqqPOr5x1XnpyMKgi2+iR4CTrzZ1alGX7VA="
-          },
-          "remote_patch_strip": 1
-        }
       }
     },
     "gazelle@0.37.0": {
@@ -2986,9 +2971,9 @@
     },
     "@@rules_swift_package_manager~//:extensions.bzl%swift_deps": {
       "general": {
-        "bzlTransitiveDigest": "tjeTAQVbPA5veSdbRPuLqt4vDrL61LM6MOwCIsoxY3s=",
+        "bzlTransitiveDigest": "brgP85wDwgsPwEemMVz/SjcbSMTbvprXUbViDkb3aHc=",
         "recordedFileInputs": {
-          "@@//Package.resolved": "63b0b2ef9b7e44475e265ce9e195b6bedb6c7a53de136fc262d6c31d8058d5ba",
+          "@@//Package.resolved": "6fbfdd3227437221cd9edc61f5bbb4a4545d8964c0f4b07e84ef6c5cbc47feee",
           "@@//Package.swift": "e31fe7a0409b26ecfe3e2254c006f2156dd2c307da88f278c2a2c38ad8156fb3"
         },
         "recordedDirentsInputs": {},
@@ -3213,8 +3198,8 @@
             "ruleClassName": "swift_package",
             "attributes": {
               "bazel_package_name": "swiftpkg_swift_collections",
-              "commit": "ee97538f5b81ae89698fd95938896dec5217b148",
-              "remote": "https://github.com/apple/swift-collections.git",
+              "commit": "3d2dc41a01f9e49d84f0a3925fb858bed64f702d",
+              "remote": "https://github.com/apple/swift-collections",
               "init_submodules": false,
               "recursive_init_submodules": true,
               "patch_args": [
@@ -3231,7 +3216,7 @@
             "ruleClassName": "swift_package",
             "attributes": {
               "bazel_package_name": "swiftpkg_swift_case_paths",
-              "commit": "b871e5ed11a23e52c2896a92ce2c829982ff8619",
+              "commit": "b9ad2661b6e8fb411fef6a441c9955c3413afac0",
               "remote": "https://github.com/pointfreeco/swift-case-paths",
               "init_submodules": false,
               "recursive_init_submodules": true,
@@ -3267,7 +3252,7 @@
             "ruleClassName": "swift_package",
             "attributes": {
               "bazel_package_name": "swiftpkg_swift_perception",
-              "commit": "d3ab98dc2887d1cc3bed676f6fa354da4cb22b3c",
+              "commit": "68901eac31c13c7d1ffef8e1bd8c3870ca2eaa95",
               "remote": "https://github.com/pointfreeco/swift-perception",
               "init_submodules": false,
               "recursive_init_submodules": true,
@@ -3285,7 +3270,7 @@
             "ruleClassName": "swift_package",
             "attributes": {
               "bazel_package_name": "swiftpkg_vapor",
-              "commit": "ebbe71c89aa1b76a0920277760b12be7a2ec7c70",
+              "commit": "a823735db57b46100b0c61cdfc5a08525b1e7cad",
               "remote": "https://github.com/vapor/vapor.git",
               "init_submodules": false,
               "recursive_init_submodules": true,
@@ -3861,7 +3846,7 @@
             "ruleClassName": "swift_package",
             "attributes": {
               "bazel_package_name": "swiftpkg_swift_dependencies",
-              "commit": "00bc30ca03f98881329fab7f1bebef8eba472596",
+              "commit": "9085501f168b08f5205b68f1b8a0d56bb52b8c1a",
               "remote": "https://github.com/pointfreeco/swift-dependencies",
               "init_submodules": false,
               "recursive_init_submodules": true,
