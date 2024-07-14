@@ -10,6 +10,7 @@ swift_library(
 swift_binary(
     name = "server",
     srcs = glob(["generics-server/Sources/Server/**/*.swift"]),
+    visibility = ["//visibility:public"],
     deps = [
         ":SharedModels",
         "@swiftpkg_fluent//:Fluent",
@@ -29,5 +30,6 @@ xcodeproj(
         "//clients/generics-app:GenericsApp",
         "//clients/generics-restaurants:GenericsRestaurants",
         "//clients/generics-restaurants:GenericsRestaurantsTests",
+        ":server",
     ],
 )

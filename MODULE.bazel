@@ -5,6 +5,13 @@ bazel_dep(name = "rules_swift_package_manager", version = "0.34.1")
 bazel_dep(name = "gazelle", version = "0.37.0")
 bazel_dep(name = "rules_xcodeproj", version = "2.4.0")
 
+# Sloppy temporary fix for https://github.com/cgrindel/rules_swift_package_manager/issues/1111
+git_override(
+    module_name = "rules_swift_package_manager",
+    remote = "https://github.com/roya1v/rules_swift_package_manager",
+    commit = "f251a7fb6838364e051a954d7ebfe10819190b77",  # You can use a branch or tag instead of a commit hash
+)
+
 swift_deps = use_extension(
     "@rules_swift_package_manager//:extensions.bzl",
     "swift_deps",
