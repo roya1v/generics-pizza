@@ -1,16 +1,16 @@
 //
-//  LoginView.swift
+//  CreateAccountView.swift
 //  GenericsRestaurants
 //
-//  Created by Mike S. on 15/02/2023.
+//  Created by Mike S. on 15/07/2024.
 //
 
 import SwiftUI
 import ComposableArchitecture
 
-struct LoginView: View {
+struct CreateAccountView: View {
 
-    @Perception.Bindable var store: StoreOf<LoginFeature>
+    @Perception.Bindable var store: StoreOf<CreateAccountFeature>
 
     var body: some View {
         WithPerceptionTracking {
@@ -22,6 +22,8 @@ struct LoginView: View {
                           text: $store.email)
                 SecureField("Password",
                             text: $store.password)
+                SecureField("Confirm password",
+                            text: $store.confirmPassword)
                 if let message = store.errorMessage {
                     Text(message)
                 }
@@ -29,14 +31,14 @@ struct LoginView: View {
                     ProgressView()
                 } else {
                     Button {
-                        store.send(.loginTapped)
-                    } label: {
-                        Text("Login")
-                    }
-                    Button {
-                        store.send(.goToCreateAccountTapped)
+                        store.send(.createAccountTapped)
                     } label: {
                         Text("Create account")
+                    }
+                    Button {
+                        store.send(.goToLoginTapped)
+                    } label: {
+                        Text("Return to login")
                     }
                     .buttonStyle(LinkButtonStyle())
                 }
@@ -48,7 +50,9 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(store: Store(initialState: LoginFeature.State()){
-        LoginFeature()
-    })
+    CreateAccountView(store: Store(
+        initialState: CreateAccountFeature.State()) {
+            CreateAccountFeature()
+        }
+    )
 }

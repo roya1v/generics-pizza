@@ -32,6 +32,23 @@ public final class AuthenticationService {
 
         return response.value
     }
+    
+    public func createAccount(email: String, password: String, confirmPassword: String) async throws -> UserModel {
+        let response = try await SwiftlyHttp(baseURL: baseURL)!
+            .add(path: "auth")
+            .add(path: "user")
+        //TODO: Change to a shared model
+            .body([
+                "email": email,
+                "password": password,
+                "confirmPassword": confirmPassword
+                  ])
+            .method(.post)
+            .decode(to: UserModel.self)
+            .perform()
+
+        return response
+    }
 
     public func signOut(_ token: String) async throws {
         try await SwiftlyHttp(baseURL: baseURL)!

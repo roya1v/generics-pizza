@@ -1,5 +1,5 @@
 //
-//  LoginFeature.swift
+//  AppFeature.swift
 //  GenericsRestaurants
 //
 //  Created by Mike S. on 09/07/2024.
@@ -15,7 +15,7 @@ struct AppFeature {
     @ObservableState
     enum State: Equatable {
         case loading
-        case login(LoginFeature.State)
+        case auth(AuthFeature.State)
         case dashboard(DashboardFeature.State)
     }
     
@@ -23,7 +23,7 @@ struct AppFeature {
         case launched
         case stateUpdated(AuthenticationState)
         case logoutTapped
-        case login(LoginFeature.Action)
+        case auth(AuthFeature.Action)
         case dashboard(DashboardFeature.Action)
     }
     
@@ -64,15 +64,15 @@ struct AppFeature {
                                                users: UsersFeature.State())
                     )
                 case .loggedOut:
-                    state = .login(LoginFeature.State())
+                    state = .auth(.login(LoginFeature.State()))
                 }
                 return .none
-            case .login:
+            case .auth:
                 return .none
             }
         }
-        .ifCaseLet(\.login, action: \.login) {
-            LoginFeature()
+        .ifCaseLet(\.auth, action: \.auth) {
+            AuthFeature()
         }
         .ifCaseLet(\.dashboard, action: \.dashboard) {
             DashboardFeature()

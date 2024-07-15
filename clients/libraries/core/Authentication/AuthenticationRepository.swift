@@ -26,6 +26,7 @@ public protocol AuthenticationRepository: AuthenticationProvider {
     var statePublisher: AnyPublisher<AuthenticationState, Never> { get }
     var state: AuthenticationState { get }
     func login(email: String, password: String) async throws
+    func createAccount(email: String, password: String, confirmPassword: String) async throws
     func reload()
     func signOut() async throws
     func getMe() async throws -> UserModel
@@ -34,6 +35,7 @@ public protocol AuthenticationRepository: AuthenticationProvider {
 }
 
 final class AuthenticationRepositoryImpl: AuthenticationRepository {
+    
 
     private let stateSubject = PassthroughSubject<AuthenticationState, Never>()
 
@@ -67,6 +69,12 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
         settingsService.setAuthToken(token)
 
         state = .loggedIn
+    }
+    
+    func createAccount(email: String, password: String, confirmPassword: String) async throws {
+        _ = try await authenticationService.createAccount(email: email, password: password, confirmPassword: confirmPassword)
+
+        try await login(email: email, password: password)
     }
 
     func reload() {
