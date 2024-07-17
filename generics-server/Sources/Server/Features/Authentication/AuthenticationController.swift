@@ -21,7 +21,7 @@ struct AuthenticationController: RouteCollection {
         authenticated.post("signout", use: signOut)
     }
 
-    /// Create new user
+    /// Create a new user account.
     func create(req: Request) async throws -> UserModel {
         let create = try req.content.decode(UserEntry.Create.self)
         guard create.password == create.confirmPassword else {
@@ -36,7 +36,7 @@ struct AuthenticationController: RouteCollection {
         return user.toSharedModel()
     }
 
-    /// Login and get an auth token
+    /// Login and get an auth token.
     func login(req: Request) async throws -> UserTokenEntry {
         let user = try req.requireAnyUser()
         let token = try user.generateToken()
@@ -44,12 +44,12 @@ struct AuthenticationController: RouteCollection {
         return token
     }
 
-    /// Check current user
+    /// Check the current user account.
     func me(req: Request) async throws -> UserModel {
         try req.requireAnyUser().toSharedModel()
     }
 
-    /// Sign out deleting auth token
+    /// Sign out deleting auth token.
     func signOut(req: Request) async throws -> HTTPResponseStatus {
         let user = try req.requireAnyUser()
         if let id = user.id,

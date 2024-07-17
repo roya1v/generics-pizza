@@ -11,7 +11,7 @@ import SharedModels
 
 extension OrdersController {
 
-    /// Check price for order
+    /// Check price for an order.
     func checkPrice(req: Request) async throws -> [SubtotalModel] {
         let sum = try req.content.decode(OrderModel.self).items.reduce(0, {$0 + $1.price})
         return [
@@ -25,7 +25,7 @@ extension OrdersController {
         throw Abort(.notImplemented)
     }
 
-    /// Make a new order
+    /// Create a new order.
     func new(req: Request) async throws -> OrderModel {
         guard let restaurant else {
             throw Abort(.notAcceptable, reason: "Restaurant is offline.")
@@ -57,7 +57,7 @@ extension OrdersController {
         return order.toSharedModel()
     }
 
-    /// Connect to order activity as a customer
+    /// Connect to order activity as a customer.
     func orderActivity(req: Request, ws: WebSocket) async {
         guard let order = try? await OrderEntry.find(req.parameters.get("orderId"), on: req.db) else {
             try? await ws.close()

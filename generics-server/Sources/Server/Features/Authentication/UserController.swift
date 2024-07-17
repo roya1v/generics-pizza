@@ -21,7 +21,7 @@ struct UserController: RouteCollection {
         }
     }
 
-    /// Get all users
+    /// Get all users.
     func index(req: Request) async throws -> [UserModel] {
         try req.requireAdminUser()
         return try await UserEntry
@@ -30,7 +30,7 @@ struct UserController: RouteCollection {
             .toSharedModels()
     }
 
-    /// Delete a user
+    /// Delete a user.
     func deleteUser(req: Request) async throws -> HTTPStatus {
         guard let user = try await UserEntry.find(req.parameters.get("userID"), on: req.db) else {
             throw Abort(.notFound)
