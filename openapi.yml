@@ -6,7 +6,7 @@ info:
 paths:
   /menu:
     get:
-      summary: Returns a list of all menu items.
+      summary: Get all menu items.
       responses:
         '200':
           description: A JSON array of menu items
@@ -52,7 +52,7 @@ paths:
         '200':
           description: Image bytes
     post:
-      summary: Add a menu item image.
+      summary: Set the menu item image.
       responses:
         '200':
           description: Ok
@@ -63,13 +63,13 @@ paths:
           description: Ok
   /order:
     post:
-      summary: Create a new order
+      summary: Create a new order.
       responses:
         '200':
           description: Ok
   /order/check_price:
     post:
-      summary: Get the estimated order price.
+      summary: Check price for an order.
       responses:
         '200':
           description: Ok
@@ -87,13 +87,13 @@ paths:
           description: Ok
   /order/history:
     get:
-      summary: Get the orders history.
+      summary: Get all finished orders.
       responses:
         '200':
           description: Ok
   /auth/user:
     post:
-      summary: Create a new account.
+      summary: Create a new user account.
       responses:
         '200':
           description: Ok
@@ -104,19 +104,25 @@ paths:
           description: Ok
   /auth/login:
     post:
-      summary: Login.
+      summary: Login and get an auth token.
+      responses:
+        '200':
+          description: Ok
+  /auth:
+    get:
+      summary:  Check the current user account.
       responses:
         '200':
           description: Ok
   /auth/signout:
     post:
-      summary: Sign out.
+      summary: Sign out deleting auth token.
       responses:
         '200':
           description: Ok
   /user:
     get:
-      summary: Get all existign users.
+      summary: Get all users.
       responses:
         '200':
           description: Ok
@@ -129,7 +135,7 @@ paths:
             type: string
           required: true
           description: UUID of the user.
-      summary: Detele the user.
+      summary: Delete a user.
       responses:
         '200':
           description: Ok
@@ -141,7 +147,7 @@ paths:
             type: string
           required: true
           description: UUID of the user.
-      summary: Update the user.
+      summary: Update a user's access.
       responses:
         '200':
           description: Ok

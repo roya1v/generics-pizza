@@ -10,7 +10,7 @@ import Vapor
 import SharedModels
 
 extension OrdersController {
-    /// Get currently unfinished orders
+    /// Get the current orders.
     func getCurrent(req: Request) async throws -> [OrderModel] {
         try req.requireEmployeeOrAdminUser()
         return try await OrderEntry.query(on: req.db)
@@ -20,7 +20,7 @@ extension OrdersController {
             .toSharedModels()
     }
 
-    /// Get all finished orders
+    /// Get all finished orders.
     func getHistory(req: Request) async throws -> [OrderModel] {
         try req.requireEmployeeOrAdminUser()
         return try await OrderEntry.query(on: req.db)
@@ -30,7 +30,7 @@ extension OrdersController {
             .toSharedModels()
     }
 
-    /// Connect to order activity as a restaurant
+    /// Connect to order activity as a restaurant.
     func restaurantActivity(req: Request, ws: WebSocket) async {
 
         ws.onText { ws, text in
@@ -70,7 +70,5 @@ extension OrdersController {
                 }
             }
         }
-
-
     }
 }

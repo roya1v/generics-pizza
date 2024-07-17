@@ -26,7 +26,7 @@ struct MenuController: RouteCollection {
         }
     }
 
-    /// Get all menu items
+    /// Get all menu items.
     func index(req: Request) async throws -> [MenuItem] {
         try await MenuEntry
             .query(on: req.db)
@@ -34,7 +34,31 @@ struct MenuController: RouteCollection {
             .toSharedModels()
     }
 
-    /// Get image for a menu item
+    /// Create a new menu item.
+    func create(req: Request) async throws -> MenuItem {
+        try req.requireEmployeeOrAdminUser()
+        let entry = try req.content.decode(MenuItem.self).toEntry()
+        try await entry.create(on: req.db)
+        return entry.toSharedModel()
+    }
+
+    /// Delete a menu item.
+    func delete(req: Request) async throws -> HTTPStatus {
+        guard let menuItem = try await MenuEntry.find(req.parameters.get("itemID"), on: req.db) else {
+            throw Abort(.notFound)
+        }
+        
+        let id = menuItem.id!
+
+        if let imageData = try? await req.s3.getObject(.init(bucket: "menu-images", key: "\(id).jpeg")) {
+            _ = try await req.s3.deleteObject(.init(bucket: "menu-images", key: "\(id).jpeg"))
+        }
+
+        try await menuItem.delete(on: req.db)
+        return .ok
+    }
+
+    /// Get the menu item image.
     func getImage(req: Request) async throws -> Response {
         guard let menuItem = try await MenuEntry.find(req.parameters.get("itemID"), on: req.db),
               let id = menuItem.id else {
@@ -50,7 +74,7 @@ struct MenuController: RouteCollection {
         return resp
     }
 
-    /// Set image for menu item
+    /// Set the menu item image.
     func setImage(req: Request) async throws -> HTTPResponseStatus {
         try req.requireEmployeeOrAdminUser()
         guard let menuItem = try await MenuEntry.find(req.parameters.get("itemID"), on: req.db),
@@ -68,41 +92,7 @@ struct MenuController: RouteCollection {
         return .ok
     }
 
-    /// Create a menu item
-    func create(req: Request) async throws -> MenuItem {
-        try req.requireEmployeeOrAdminUser()
-        let entry = try req.content.decode(MenuItem.self).toEntry()
-        try await entry.create(on: req.db)
-        return entry.toSharedModel()
-    }
-
-    /// Delete a menu item
-    func delete(req: Request) async throws -> HTTPStatus {
-        guard let menuItem = try await MenuEntry.find(req.parameters.get("itemID"), on: req.db) else {
-            throw Abort(.notFound)
-        }
-        
-        let id = menuItem.id!
-
-        if let imageData = try? await req.s3.getObject(.init(bucket: "menu-images", key: "\(id).jpeg")) {
-            _ = try await req.s3.deleteObject(.init(bucket: "menu-images", key: "\(id).jpeg"))
-        }
-
-        try await menuItem.delete(on: req.db)
-        return .ok
-    }
-
-    /// Update a menu item
-    func update(req: Request) async throws -> MenuItem {
-        throw Abort(.notImplemented)
-    }
-
-    /// Update image for menu item
-    func updateImage(req: Request) async throws -> MenuItem {
-        throw Abort(.notImplemented)
-    }
-
-    /// Delete image for menu item
+    /// Delete the menu item image.
     func deleteImage(req: Request) async throws -> MenuItem {
         throw Abort(.notImplemented)
     }
