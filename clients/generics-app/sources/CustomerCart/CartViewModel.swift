@@ -86,15 +86,3 @@ final class CartViewModel: ObservableObject {
         menuRepository.imageUrl(for: item)
     }
 }
-
-extension MenuItem {
-    func formattedPrice() -> String {
-        String(format: "%.2f$", Double(price) / 100)
-    }
-}
-
-extension SubtotalModel {
-    func formattedPrice() -> String {
-        String(format: "%.2f$", Double(value) / 100)
-    }
-}
