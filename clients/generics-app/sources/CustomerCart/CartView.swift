@@ -61,7 +61,7 @@ public struct CartView: View {
             VStack(alignment: .leading) {
                 Text(item.title)
                 Text(item.description)
-                    .font(.genericsCaption)
+                    .font(.gCaption)
                     .foregroundColor(.gray)
                     .lineLimit(1)
                 HStack {
@@ -157,7 +157,7 @@ public struct CartView: View {
                             Text(part.formattedPrice())
                         }
                         .foregroundColor(Color.gray)
-                        .font(.genericsCaption)
+                        .font(.gCaption)
                     } else {
                         Divider()
                         HStack {
