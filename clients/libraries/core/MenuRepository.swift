@@ -107,8 +107,11 @@ final class MenuRepositoryImp: MenuRepository {
 }
 
 private class MenuRepositoryPreview: MenuRepository {
-    func fetchMenu() async throws -> [SharedModels.MenuItem] {
-        [.init(id: nil, title: "Preview pizza", description: "Pizza for previews", price: 999)]
+    func fetchMenu() async throws -> [MenuItem] {
+            Array(repeating: MenuItem(id: nil,
+                                      title: "Super Pepperoni",
+                                      description: "Tomato souce, double mozzarela, double pepperoni",
+                                      price: 699), count: 12)
     }
     
     func create(item: SharedModels.MenuItem) async throws -> SharedModels.MenuItem {
