@@ -22,7 +22,7 @@ public struct SelectorView: View {
     public var body: some View {
         VStack(alignment: .leading) {
             Text(caption)
-                .font(.genericsCaption)
+                .font(.gCaption)
                 .foregroundColor(Color.gray)
                 .padding(1.0)
             HStack {

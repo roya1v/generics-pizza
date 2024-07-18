@@ -21,7 +21,7 @@ struct MenuRowView: View {
                 Text(item.title)
                     .font(.headline)
                 Text(item.description)
-                    .font(.genericsCaption)
+                    .font(.gCaption)
                     .foregroundStyle(.secondary)
                 Button {
                     action()
