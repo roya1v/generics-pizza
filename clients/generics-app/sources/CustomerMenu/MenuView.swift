@@ -10,31 +10,18 @@ import Factory
 import SharedModels
 import clients_libraries_GenericsCore
 
-public struct MenuView: View {
+struct MenuView: View {
     
     @StateObject var model = MenuViewModel()
     
-    public init() { }
-    
-    public var body: some View {
+    var body: some View {
         NavigationView {
             ZStack {
                 Color(uiColor: .systemGray6)
                     .ignoresSafeArea()
                 VStack {
-                    HStack {
-                        Circle()
-                            .fill(Color.white)
-                            .frame(width: 40.0, height: 40.0)
-                        VStack {
-                            Text("New York, Bakers str. 123")
-                        }
-                        Spacer()
-                        Circle()
-                            .fill(Color.white)
-                            .frame(width: 40.0, height: 40.0)
-                    }
-                    .padding()
+                    MainHeaderView()
+                        .padding()
                     ZStack {
                         RoundedRectangle(cornerRadius: 16.0)
                             .fill(Color.white)
@@ -53,7 +40,7 @@ public struct MenuView: View {
                     }
                     .task {
                         model.fetch()
-                }
+                    }
                 }
             }
         }
@@ -67,6 +54,7 @@ public struct MenuView: View {
             ) {
                 model.add(item: item)
             }
+            .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
         
