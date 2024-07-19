@@ -11,13 +11,12 @@ import clients_libraries_GenericsCore
 import clients_libraries_GenericsUI
 import SharedModels
 
-public struct CartView: View {
+struct CartView: View {
 
     @StateObject var model = CartViewModel()
+    @Environment(\.dismiss) var dismiss
 
-    public init() { }
-
-    public var body: some View {
+    var body: some View {
         NavigationView {
             switch model.state {
             case .needItems:
@@ -26,7 +25,18 @@ public struct CartView: View {
                     .multilineTextAlignment(.center)
             case .readyForOrder, .loadingOrderDetails, .loading, .inOrderState(_), .error:
                 mainBody
-                    .navigationTitle("My cart")
+                    .navigationTitle("Cart")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button {
+                                dismiss()
+                            } label: {
+                                Text("Close")
+                            }
+
+                        }
+                    }
             }
         }
         .onAppear {

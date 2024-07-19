@@ -6,19 +6,29 @@
 //
 
 import SwiftUI
+import clients_libraries_GenericsUI
 
 struct ContentView: View {
-
+    
+    @State var isShowingMenu = false
+    
     var body: some View {
-        TabView {
+        ZStack(alignment: .bottomTrailing) {
             MenuView()
-                .tabItem {
-                    Label("Menu", systemImage: "menucard")
+            Button {
+                isShowingMenu = true
+            } label: {
+                HStack {
+                    Text("Cart")
+                    Image(systemName: "cart")
                 }
+                .padding(.gNormal)
+            }
+            .buttonStyle(GPrimaryButtonStyle())
+            .padding()
+        }
+        .sheet(isPresented: $isShowingMenu) {
             CartView()
-                .tabItem {
-                    Label("Cart", systemImage: "cart")
-                }
         }
     }
 }
