@@ -14,27 +14,27 @@ import AppKit
 public extension CGFloat {
 
     /// 2.0
-    static var tiny: CGFloat {
+    static var gTiny: CGFloat {
         2.0
     }
 
     /// 4.0
-    static var small: CGFloat {
+    static var gSmall: CGFloat {
         4.0
     }
 
     /// 8.0
-    static var normal: CGFloat {
+    static var gNormal: CGFloat {
         8.0
     }
 
     /// 16.0
-    static var big: CGFloat {
+    static var gBig: CGFloat {
         16.0
     }
 
     /// 48.0
-    static var huge: CGFloat {
+    static var gHuge: CGFloat {
         48.0
     }
 }
