@@ -10,7 +10,7 @@ import SharedModels
 import clients_libraries_GenericsUI
 
 struct MenuRowView: View {
-    
+
     let item: MenuItem
     let imageUrl: URL?
     let action: () -> Void
@@ -34,7 +34,7 @@ struct MenuRowView: View {
             }
         }
     }
-    
+
     func getImage(for item: MenuItem) -> some View {
         Group {
             if let imageUrl {
@@ -44,7 +44,7 @@ struct MenuRowView: View {
                         image
                             .resizable()
                             .scaledToFit()
-                    case .failure(_), .empty:
+                    case .failure, .empty:
                         Image("pizzza_placeholder")
                             .resizable()
                             .scaledToFit()
@@ -71,6 +71,6 @@ struct MenuRowView: View {
                        price: 699),
         imageUrl: nil
     ) {
-        
+
     }
 }

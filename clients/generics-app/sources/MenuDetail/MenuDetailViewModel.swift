@@ -18,13 +18,12 @@ final class MenuDetailViewModel: ObservableObject {
 
     @Injected(\.orderRepository)
     private var orderRepository
-    
+
     let item: MenuItem
-    
-    init(item: MenuItem) { 
+
+    init(item: MenuItem) {
         self.item = item
     }
-
 
     func add() {
         orderRepository.add(item: item)
@@ -34,4 +33,3 @@ final class MenuDetailViewModel: ObservableObject {
         menuRepository.imageUrl(for: item)
     }
 }
-

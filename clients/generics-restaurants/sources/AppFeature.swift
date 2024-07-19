@@ -18,7 +18,7 @@ struct AppFeature {
         case auth(AuthFeature.State)
         case dashboard(DashboardFeature.State)
     }
-    
+
     enum Action {
         case launched
         case stateUpdated(AuthenticationState)
@@ -26,10 +26,10 @@ struct AppFeature {
         case auth(AuthFeature.Action)
         case dashboard(DashboardFeature.Action)
     }
-    
+
     @Injected(\.authenticationRepository)
     var repository
-    
+
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
@@ -49,7 +49,7 @@ struct AppFeature {
                     }
                 )
             case .logoutTapped:
-                return .run { send in
+                return .run { _ in
                     try! await repository.signOut()
                 }
             case .stateUpdated(let newState):
@@ -79,4 +79,3 @@ struct AppFeature {
         }
     }
 }
-

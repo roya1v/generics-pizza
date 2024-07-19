@@ -9,7 +9,7 @@ import SwiftUI
 import clients_libraries_GenericsUI
 
 struct MenuHeaderView: View {
-    
+
     private let items = [
         "Sets",
         "Pizza",
@@ -18,9 +18,9 @@ struct MenuHeaderView: View {
         "Deserts",
         "Other"
     ]
-    
+
     @State var selected = "Sets"
-    
+
     var body: some View {
         ScrollView(.horizontal,
                    showsIndicators: false) {

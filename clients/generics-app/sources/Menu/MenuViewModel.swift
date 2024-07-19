@@ -32,7 +32,7 @@ final class MenuViewModel: ObservableObject {
         } onResult: { newItems in
             self.items = newItems
             self.state = .ready
-        } onError: { error in
+        } onError: { _ in
             self.state = .error
         }
     }

@@ -56,7 +56,7 @@ final class OrderRepositoryImpl: OrderRepository {
             UserDefaults.standard.setValue(data, forKey: "order-items")
         }
     }
-    
+
     func remove(item: SharedModels.MenuItem) {
         if let index = items.firstIndex(of: item) {
             items.remove(at: index)
@@ -68,7 +68,7 @@ final class OrderRepositoryImpl: OrderRepository {
     }
 
     func checkPrice() async throws -> [SubtotalModel] {
-        //TODO: Make address optional
+        // TODO: Make address optional
         return try await getRequest()
             .add(path: "check_price")
             .body(OrderModel(createdAt: nil, items: items, type: orderType))

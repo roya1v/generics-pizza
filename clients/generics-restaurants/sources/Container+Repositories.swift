@@ -9,7 +9,7 @@ import Foundation
 import Factory
 import clients_libraries_GenericsCore
 
-fileprivate let url = "http://localhost:8080"
+private let url = "http://localhost:8080"
 
 extension Container {
     var authenticationRepository: Factory<AuthenticationRepository> {

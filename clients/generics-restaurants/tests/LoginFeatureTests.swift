@@ -15,14 +15,13 @@ class LoginFeatureTests: XCTestCase {
         let store = TestStore(initialState: LoginFeature.State()) {
             LoginFeature()
         }
-        
+
         await store.send(.sendEmail("mock-email")) {
             $0.email = "mock-email"
         }
-        
+
         await store.send(.sendPassword("mock-password")) {
             $0.password = "mock-password"
         }
     }
 }
-

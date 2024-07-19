@@ -46,7 +46,7 @@ final class CartViewModel: ObservableObject {
         } onResult: { subtotal in
             self.subtotal = subtotal
             self.state = .readyForOrder
-        } onError: { error in
+        } onError: { _ in
             self.state = .error
         }
     }

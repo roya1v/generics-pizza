@@ -47,7 +47,7 @@ struct MenuController: RouteCollection {
         guard let menuItem = try await MenuEntry.find(req.parameters.get("itemID"), on: req.db) else {
             throw Abort(.notFound)
         }
-        
+
         let id = menuItem.id!
 
         if let imageData = try? await req.s3.getObject(.init(bucket: "menu-images", key: "\(id).jpeg")) {

@@ -5,7 +5,6 @@
 //  Created by Mike S. on 28/06/2024.
 //
 
-
 import Foundation
 import ComposableArchitecture
 import SharedModels
@@ -18,11 +17,11 @@ struct NewMenuItemFeature {
         var title = ""
         var description = ""
         var price = 0.0
-        var imageUrl: URL? = nil
+        var imageUrl: URL?
         var isLoading = false
         var hasError = false
     }
-    
+
     enum Action: BindableAction {
         case binding(BindingAction<State>)
         case createTapped
@@ -30,15 +29,15 @@ struct NewMenuItemFeature {
         case imageSelected(URL)
         case createdNewItem(Error?)
     }
-    
+
     @Injected(\.menuRepository)
     var repository
-    
+
     var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce { state, action in
             switch action {
-                
+
             case .imageSelected(let url):
                 state.imageUrl = url
                 return .none
@@ -59,7 +58,7 @@ struct NewMenuItemFeature {
                     } catch {
                         await send(.createdNewItem(error))
                     }
-                    
+
                 }
             case .createdNewItem(let error):
                 if let error {

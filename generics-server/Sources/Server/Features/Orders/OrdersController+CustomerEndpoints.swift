@@ -33,7 +33,7 @@ extension OrdersController {
         let orderModel = try req.content.decode(OrderModel.self)
 
         let address: String?
-        switch(orderModel.type) {
+        switch orderModel.type {
         case .delivery(let orderAddress):
             address = orderAddress
         case .pickUp:

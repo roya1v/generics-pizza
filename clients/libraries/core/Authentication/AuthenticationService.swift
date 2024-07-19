@@ -22,7 +22,7 @@ public final class AuthenticationService {
     }
 
     public func login(email: String, password: String) async throws -> String {
-        let response = try await SwiftlyHttp(baseURL: baseURL)!
+        let response: LoginResponse = try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "auth")
             .add(path: "login")
             .authentication(.basic(login: email, password: password))
@@ -32,12 +32,12 @@ public final class AuthenticationService {
 
         return response.value
     }
-    
+
     public func createAccount(email: String, password: String, confirmPassword: String) async throws -> UserModel {
-        let response = try await SwiftlyHttp(baseURL: baseURL)!
+        let response: UserModel = try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "auth")
             .add(path: "user")
-        //TODO: Change to a shared model
+        // TODO: Change to a shared model
             .body([
                 "email": email,
                 "password": password,

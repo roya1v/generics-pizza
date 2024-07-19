@@ -40,7 +40,7 @@ public func configure(_ app: Application) async throws {
     app.migrations.add(OrderItemEntry.Migration())
 
     // Should find a way to put that into migrations maybe?
-    if !((try await app.s3.listBuckets()).buckets?.contains(where:  { $0.name == "menu-images"}) ?? true) {
+    if !((try await app.s3.listBuckets()).buckets?.contains(where: { $0.name == "menu-images"}) ?? true) {
         app.logger.debug("Didn't find a 'menu-images' S3 bucket, so creating one.")
         _ = try await app.s3.createBucket(.init(bucket: "menu-images"))
     }

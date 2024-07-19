@@ -60,7 +60,7 @@ struct MenuView: View {
                         image
                             .resizable()
                             .scaledToFit()
-                    case .failure(_), .empty:
+                    case .failure, .empty:
                         Image("pizzza_placeholder")
                             .resizable()
                             .scaledToFit()

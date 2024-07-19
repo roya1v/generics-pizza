@@ -57,7 +57,7 @@ struct NowFeature {
                     state.orders.append(order)
                 }
                 return .none
-            case .receivedError(_):
+            case .receivedError:
                 return .none
             case .update(orderId: let orderId, state: let state):
                 return .run { send in
