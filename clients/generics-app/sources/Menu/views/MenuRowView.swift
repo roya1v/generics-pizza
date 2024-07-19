@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SharedModels
+import clients_libraries_GenericsUI
 
 struct MenuRowView: View {
     
@@ -29,7 +30,7 @@ struct MenuRowView: View {
                     Text(item.formattedPrice())
                         .font(.caption)
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(GPrimaryButtonStyle())
             }
         }
     }

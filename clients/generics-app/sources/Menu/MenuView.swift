@@ -18,13 +18,13 @@ struct MenuView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color(uiColor: .systemGray6)
+                Color.gLight
                     .ignoresSafeArea()
                 VStack {
                     MainHeaderView()
                         .padding()
                     ZStack {
-                        RoundedRectangle(cornerRadius: 16.0)
+                        RoundedRectangle(cornerRadius: .gBig)
                             .fill(Color.white)
                             .ignoresSafeArea()
                         VStack {

@@ -9,6 +9,7 @@ import SwiftUI
 import Factory
 import SharedModels
 import clients_libraries_GenericsCore
+import clients_libraries_GenericsUI
 
 struct MenuDetailView: View {
     
@@ -19,16 +20,21 @@ struct MenuDetailView: View {
         _model = StateObject(wrappedValue: MenuDetailViewModel(item: item))
     }
     
+    private let gradient = LinearGradient(
+        gradient: Gradient(
+            colors: [.white, .gLight]),
+        startPoint: UnitPoint(
+            x: 0.5, y: 0.2),
+        endPoint: UnitPoint(
+            x: 0.5, y: 1)
+      )
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView {
                 ZStack {
                     RoundedRectangle(cornerRadius: 32.0)
-                        .fill(LinearGradient(
-                            gradient: .init(colors: [.white, .gray]),
-                            startPoint: .init(x: 0.5, y: 0.2),
-                            endPoint: .init(x: 0.5, y: 1)
-                          ))
+                        .fill(gradient)
                     VStack {
                         Image("menu_pizza")
                             .resizable()
@@ -92,7 +98,7 @@ struct MenuDetailView: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: 32.0)
             }
-            .buttonStyle(BorderedProminentButtonStyle())
+            .buttonStyle(GPrimaryButtonStyle())
             .padding()
             .padding([.bottom])
             .background(.thinMaterial)
@@ -107,7 +113,7 @@ struct MenuDetailView: View {
                 } label: {
                     Image(systemName: "xmark")
                         .foregroundStyle(Color.white)
-                        .padding(8.0)
+                        .padding(.gNormal)
                         .background(Circle().fill(Color.gAccent))
                 }
             }

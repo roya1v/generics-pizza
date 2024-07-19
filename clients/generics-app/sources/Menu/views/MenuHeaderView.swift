@@ -6,37 +6,35 @@
 //
 
 import SwiftUI
+import clients_libraries_GenericsUI
 
 struct MenuHeaderView: View {
+    
+    private let items = [
+        "Sets",
+        "Pizza",
+        "Drinks",
+        "Alcohol",
+        "Deserts",
+        "Other"
+    ]
+    
+    @State var selected = "Sets"
     
     var body: some View {
         ScrollView(.horizontal,
                    showsIndicators: false) {
             HStack {
-                Button("Sets") {
-                    print("Test")
+                ForEach(items, id: \.self) { item in
+                    Button(item) {
+                        selected = item
+                    }
+                    .buttonStyle(GLinkButtonStyle(
+                        style: selected == item
+                        ? .active
+                        : .inactive))
+                    .padding(.gNormal)
                 }
-                .padding(8.0)
-                Button("Pizza") {
-                    print("Test")
-                }
-                .padding(8.0)
-                Button("Drinks") {
-                    print("Test")
-                }
-                .padding(8.0)
-                Button("Alcohol") {
-                    print("Test")
-                }
-                .padding(8.0)
-                Button("Deserts") {
-                    print("Test")
-                }
-                .padding(8.0)
-                Button("Other") {
-                    print("Test")
-                }
-                .padding(8.0)
             }
         }
     }
