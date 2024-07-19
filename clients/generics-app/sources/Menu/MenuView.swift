@@ -13,6 +13,7 @@ import clients_libraries_GenericsCore
 struct MenuView: View {
     
     @StateObject var model = MenuViewModel()
+    @State var detailItem: MenuItem? = nil
     
     var body: some View {
         NavigationView {
@@ -43,6 +44,11 @@ struct MenuView: View {
                     }
                 }
             }
+            .fullScreenCover(item: $detailItem) { item in
+                NavigationView { // So we see the nav title
+                    MenuDetailView(item: item)
+                }
+            }
         }
     }
     
@@ -52,7 +58,7 @@ struct MenuView: View {
                 item: item,
                 imageUrl: model.imageUrl(for: item)
             ) {
-                model.add(item: item)
+                detailItem = item
             }
             .listRowSeparator(.hidden)
         }

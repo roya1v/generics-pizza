@@ -37,10 +37,6 @@ final class MenuViewModel: ObservableObject {
         }
     }
 
-    func add(item: MenuItem) {
-        orderRepository.add(item: item)
-    }
-
     func imageUrl(for item: MenuItem) -> URL? {
         menuRepository.imageUrl(for: item)
     }

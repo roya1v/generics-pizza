@@ -12,8 +12,12 @@ import clients_libraries_GenericsCore
 
 struct MenuDetailView: View {
     
-    static let gradientStart = Color(red: 239.0 / 255, green: 120.0 / 255, blue: 221.0 / 255)
-    static let gradientEnd = Color(red: 239.0 / 255, green: 172.0 / 255, blue: 120.0 / 255)
+    @StateObject var model: MenuDetailViewModel
+    @Environment(\.dismiss) var dismiss
+    
+    init(item: MenuItem) {
+        _model = StateObject(wrappedValue: MenuDetailViewModel(item: item))
+    }
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -81,7 +85,8 @@ struct MenuDetailView: View {
 
             }
             Button {
-                print("Hello world")
+                model.add()
+                dismiss()
             } label: {
                 Text("Add to cart for 6.99$")
                     .frame(maxWidth: .infinity)
@@ -93,13 +98,30 @@ struct MenuDetailView: View {
             .background(.thinMaterial)
         }
         .ignoresSafeArea()
-        .navigationTitle("Super Pepperoni")
+        .navigationTitle(model.item.title)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                        .foregroundStyle(Color.white)
+                        .padding(8.0)
+                        .background(Circle().fill(Color.gAccent))
+                }
+            }
+        }
     }
 }
 
 #Preview {
     NavigationView {
-        MenuDetailView()
+        MenuDetailView(item: MenuItem(
+            id: nil,
+            title: "Super Pepperoni",
+            description: "",
+            price: 699)
+        )
     }
 }
