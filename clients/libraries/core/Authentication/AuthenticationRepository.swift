@@ -35,7 +35,6 @@ public protocol AuthenticationRepository: AuthenticationProvider {
 }
 
 final class AuthenticationRepositoryImpl: AuthenticationRepository {
-    
 
     private let stateSubject = PassthroughSubject<AuthenticationState, Never>()
 
@@ -70,7 +69,7 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
 
         state = .loggedIn
     }
-    
+
     func createAccount(email: String, password: String, confirmPassword: String) async throws {
         _ = try await authenticationService.createAccount(email: email, password: password, confirmPassword: confirmPassword)
 

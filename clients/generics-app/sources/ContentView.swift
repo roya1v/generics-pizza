@@ -9,9 +9,9 @@ import SwiftUI
 import clients_libraries_GenericsUI
 
 struct ContentView: View {
-    
+
     @State var isShowingMenu = false
-    
+
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             MenuView()
@@ -36,4 +36,3 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
-

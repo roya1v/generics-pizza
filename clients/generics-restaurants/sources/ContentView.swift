@@ -12,7 +12,7 @@ import clients_libraries_GenericsCore
 import ComposableArchitecture
 
 struct ContentView: View {
-    
+
     var store: StoreOf<AppFeature> = Store(initialState: AppFeature.State.loading) {
         AppFeature()
     }
@@ -41,7 +41,7 @@ struct ContentView: View {
                         action: \.dashboard) {
                         DashboardView(store: store)
                     }
-                    
+
                 }
             }
             .task {

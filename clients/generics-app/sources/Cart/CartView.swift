@@ -23,7 +23,7 @@ struct CartView: View {
                 Text("You have to first add items to your cart!")
                     .font(.largeTitle)
                     .multilineTextAlignment(.center)
-            case .readyForOrder, .loadingOrderDetails, .loading, .inOrderState(_), .error:
+            case .readyForOrder, .loadingOrderDetails, .loading, .inOrderState, .error:
                 mainBody
                     .navigationTitle("Cart")
                     .navigationBarTitleDisplayMode(.inline)
@@ -100,7 +100,7 @@ struct CartView: View {
                         image
                             .resizable()
                             .scaledToFit()
-                    case .failure(_), .empty:
+                    case .failure, .empty:
                         Image("pizzza_placeholder")
                             .resizable()
                             .scaledToFit()
@@ -128,7 +128,7 @@ struct CartView: View {
                 Text("Delivery").tag(false)
             }
             .pickerStyle(.segmented)
-            if (!model.isPickUp) {
+            if !model.isPickUp {
                 NavigationLink {
                     VStack {
                         TextField("Address", text: $model.address)
@@ -191,7 +191,7 @@ struct CartView: View {
                 orderButton
             case .loading:
                 ProgressView()
-            case .inOrderState(_):
+            case .inOrderState:
                 liveOrder
             case .error:
                 Text("Something didn't work out :(")
@@ -242,6 +242,6 @@ struct CartView: View {
 }
 
 #Preview {
-    let _ = Container.shared.orderRepository.register { mockOrderRepository() }
+    _ = Container.shared.orderRepository.register { mockOrderRepository() }
     return CartView()
 }

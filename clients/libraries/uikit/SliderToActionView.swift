@@ -8,7 +8,7 @@
 import UIKit
 import GenericsUI
 
-//TODO: Make dismiss interactable
+// TODO: Make dismiss interactable
 public final class SliderToActionView: UIView {
 
     private var sliderView: UIView = {

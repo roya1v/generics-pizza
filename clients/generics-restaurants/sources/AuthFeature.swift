@@ -17,15 +17,15 @@ struct AuthFeature {
         case login(LoginFeature.State)
         case createAccount(CreateAccountFeature.State)
     }
-    
+
     enum Action {
         case login(LoginFeature.Action)
         case createAccount(CreateAccountFeature.Action)
     }
-    
+
     @Injected(\.authenticationRepository)
     var repository
-    
+
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
@@ -47,5 +47,3 @@ struct AuthFeature {
         }
     }
 }
-
-

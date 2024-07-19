@@ -12,14 +12,14 @@ import clients_libraries_GenericsCore
 import clients_libraries_GenericsUI
 
 struct MenuDetailView: View {
-    
+
     @StateObject var model: MenuDetailViewModel
     @Environment(\.dismiss) var dismiss
-    
+
     init(item: MenuItem) {
         _model = StateObject(wrappedValue: MenuDetailViewModel(item: item))
     }
-    
+
     private let gradient = LinearGradient(
         gradient: Gradient(
             colors: [.white, .gLight]),
@@ -28,7 +28,7 @@ struct MenuDetailView: View {
         endPoint: UnitPoint(
             x: 0.5, y: 1)
       )
-    
+
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView {
@@ -42,7 +42,7 @@ struct MenuDetailView: View {
                             .padding()
                         // How to do that correctly on iOS 16?
                             .padding([.top], 72.0)
-                            
+
                         Picker(
                             "Size",
                             selection: .constant("medium")

@@ -28,7 +28,7 @@ struct MenuFeature {
         case deleteConfirmationDialog(PresentationAction<DeleteConfirmationDialogAction>)
         case newItem(PresentationAction<NewMenuItemFeature.Action>)
         case newItemButtonTapped
-        
+
         @CasePathable
         enum DeleteConfirmationDialogAction: Equatable {
             case delete(MenuItem)

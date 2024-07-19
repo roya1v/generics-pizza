@@ -8,7 +8,7 @@
 import Foundation
 
 public struct AddressModel: Codable {
-    
+
     public init(coordinate: MapPointModel, details: String) {
         self.coordinate = coordinate
         self.details = details

@@ -13,13 +13,13 @@ public struct UserModel: Codable, Equatable, Identifiable {
         case employee
         case admin
     }
-    
+
     public init(id: UUID? = nil, email: String, access: AccessLevel) {
         self.id = id
         self.email = email
         self.access = access
     }
-    
+
     public let id: UUID?
     public let email: String
     public let access: AccessLevel

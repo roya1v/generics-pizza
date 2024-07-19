@@ -1,9 +1,9 @@
 import SwiftUI
 
 public struct GPrimaryButtonStyle: ButtonStyle {
-    
+
     public init() { }
-    
+
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(.gNormal)
@@ -16,17 +16,17 @@ public struct GPrimaryButtonStyle: ButtonStyle {
 }
 
 public struct GLinkButtonStyle: ButtonStyle {
-    
+
     public enum Style: Equatable {
         case active, inactive
     }
-    
+
     private let style: Style
-    
-    public init(style: Style = .active) { 
+
+    public init(style: Style = .active) {
         self.style = style
     }
-    
+
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(.gNormal)
@@ -35,4 +35,3 @@ public struct GLinkButtonStyle: ButtonStyle {
                              : Color.gInactive)
     }
 }
-

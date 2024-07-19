@@ -9,10 +9,10 @@ import SwiftUI
 import ComposableArchitecture
 
 struct NewMenuItemView: View {
-    
+
     @Perception.Bindable var store: StoreOf<NewMenuItemFeature>
     @State var isSelectingImage = false
-    
+
     var body: some View {
         WithPerceptionTracking {
             VStack {
@@ -46,7 +46,7 @@ struct NewMenuItemView: View {
             .frame(width: 400, height: 200)
         }
     }
-    
+
     var form: some View {
         Form {
             TextField("Title", text: $store.title)
@@ -55,7 +55,7 @@ struct NewMenuItemView: View {
             Spacer()
         }
     }
-    
+
     var imageSelection: some View {
         VStack {
             if let url = store.imageUrl {
@@ -65,7 +65,7 @@ struct NewMenuItemView: View {
                         image
                             .resizable()
                             .scaledToFit()
-                    case .failure(_), .empty:
+                    case .failure, .empty:
                         Image("pizzza_placeholder")
                             .resizable()
                             .scaledToFit()
@@ -84,7 +84,7 @@ struct NewMenuItemView: View {
                         .scaledToFit()
                         .frame(width: 35.0)
                 }
-                
+
             }
             Button {
                 isSelectingImage = true
@@ -99,8 +99,8 @@ struct NewMenuItemView: View {
                     store.send(.imageSelected(fileURL))
                 }
             } catch {
-                print ("error reading")
-                print (error.localizedDescription)
+                print("error reading")
+                print(error.localizedDescription)
             }
         }
     }

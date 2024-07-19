@@ -11,10 +11,10 @@ import SharedModels
 import clients_libraries_GenericsCore
 
 struct MenuView: View {
-    
+
     @StateObject var model = MenuViewModel()
-    @State var detailItem: MenuItem? = nil
-    
+    @State var detailItem: MenuItem?
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -51,7 +51,7 @@ struct MenuView: View {
             }
         }
     }
-    
+
     var menu: some View {
         List(model.items) { item in
             MenuRowView(
@@ -63,7 +63,7 @@ struct MenuView: View {
             .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
-        
+
     }
 }
 

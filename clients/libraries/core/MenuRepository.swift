@@ -77,7 +77,7 @@ final class MenuRepositoryImp: MenuRepository {
         SwiftlyHttp(baseURL: baseURL)!
             .add(path: "menu")
     }
-    
+
     func setImage(from localUrl: URL, for item: MenuItem) async throws {
         guard localUrl.isFileURL else {
             throw MenuRepositoryError.invalidFile
@@ -113,19 +113,19 @@ private class MenuRepositoryPreview: MenuRepository {
                                       description: "Tomato souce, double mozzarela, double pepperoni",
                                       price: 699), count: 12)
     }
-    
+
     func create(item: SharedModels.MenuItem) async throws -> SharedModels.MenuItem {
         fatalError()
     }
-    
+
     func delete(item: SharedModels.MenuItem) async throws {
         fatalError()
     }
-    
+
     func imageUrl(for item: SharedModels.MenuItem) -> URL? {
         return nil
     }
-    
+
     func setImage(from localUrl: URL, for item: SharedModels.MenuItem) async throws {
         fatalError()
     }

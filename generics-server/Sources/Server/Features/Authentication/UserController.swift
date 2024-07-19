@@ -56,7 +56,7 @@ struct UserController: RouteCollection {
         }
         let newAccess = try req.content.decode(UserModel.AccessLevel.self)
 
-        let newAccessEntry: AccessLevel = switch(newAccess) {
+        let newAccessEntry: AccessLevel = switch newAccess {
         case .client:
                 .client
         case .employee:

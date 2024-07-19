@@ -19,14 +19,14 @@ struct DashboardFeature {
         var menu: MenuFeature.State
         var users: UsersFeature.State?
     }
-    
+
     enum Action {
         case now(NowFeature.Action)
         case orderHistory(OrderHistoryFeature.Action)
         case menu(MenuFeature.Action)
         case users(UsersFeature.Action)
     }
-    
+
     var body: some ReducerOf<Self> {
         Scope(state: \.now, action: \.now) {
             NowFeature()
@@ -37,7 +37,7 @@ struct DashboardFeature {
         Scope(state: \.menu, action: \.menu) {
             MenuFeature()
         }
-        Reduce { state, action in
+        Reduce { _, action in
             switch action {
             case .now:
                 return .none
@@ -54,4 +54,3 @@ struct DashboardFeature {
         }
     }
 }
-

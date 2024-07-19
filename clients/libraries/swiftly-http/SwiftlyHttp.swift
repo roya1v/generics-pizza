@@ -125,7 +125,7 @@ public class SwiftlyHttp {
         headers["Content-Type"] = "application/json"
         return self
     }
-    
+
     /// Sets the request's body to the provided data.
     ///  - Parameter body: The body data.
     ///  - Note: Also sets the request's `Content-Type` to `application/json`
@@ -221,7 +221,7 @@ public class SwiftlyHttp {
 public class SwiftlyHttpDecodedHttp<Response: Decodable>: SwiftlyHttp {
 
     var jsonDecoder: JSONDecoder = JSONDecoder()
-    
+
     init(baseURL: URL,
          pathComponents: [String],
          auth: Authentication?,
@@ -245,19 +245,12 @@ public class SwiftlyHttpDecodedHttp<Response: Decodable>: SwiftlyHttp {
         return self
     }
 
-    /// Override of the ``perform()-641f5`` method of ``SwiftlyHttp``. Shouldn't  be used here.
-    @_disfavoredOverload
-    @discardableResult
-    public override func perform() async throws -> (Data, URLResponse) {
-        try await super.perform()
-    }
-
     /// Performs the request.
     ///  - Returns: An instance of the type provided for decoding.
     @discardableResult
     public func perform() async throws -> Response {
         let response = try await super.perform()
-        
+
         return try jsonDecoder.decode(Response.self, from: response.0)
     }
 }

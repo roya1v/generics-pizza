@@ -10,5 +10,5 @@ import XCTest
 import ComposableArchitecture
 
 class AppFeatureTests: XCTestCase {
-    
+
 }

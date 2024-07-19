@@ -9,7 +9,7 @@ import SwiftUI
 import clients_libraries_GenericsUI
 
 struct MainHeaderView: View {
-    
+
     public var body: some View {
         HStack {
             Circle()
@@ -20,8 +20,7 @@ struct MainHeaderView: View {
                     Text("New York, Bakers str. 123")
                     Image(systemName: "chevron.down")
                         .foregroundStyle(Color.gAccent)
-                        
-                        
+
                 }
                 Text("Free delivery in 35 min")
                     .font(.gCaption)
@@ -37,4 +36,3 @@ struct MainHeaderView: View {
 #Preview {
     MainHeaderView()
 }
-
