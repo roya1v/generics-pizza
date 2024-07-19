@@ -1,5 +1,5 @@
 //
-//  MenuItemDetailView.swift
+//  MenuDetailView.swift
 //  GenericsApp
 //
 //  Created by Mike S. on 01/02/2023.
@@ -10,7 +10,7 @@ import Factory
 import SharedModels
 import clients_libraries_GenericsCore
 
-struct MenuItemDetailView: View {
+struct MenuDetailView: View {
     
     static let gradientStart = Color(red: 239.0 / 255, green: 120.0 / 255, blue: 221.0 / 255)
     static let gradientEnd = Color(red: 239.0 / 255, green: 172.0 / 255, blue: 120.0 / 255)
@@ -100,6 +100,6 @@ struct MenuItemDetailView: View {
 
 #Preview {
     NavigationView {
-        MenuItemDetailView()
+        MenuDetailView()
     }
 }
