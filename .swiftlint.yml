@@ -1,0 +1,6 @@
+excluded:
+  - .build
+  - unifinished
+
+force_try: warning
+identifier_name: warning
