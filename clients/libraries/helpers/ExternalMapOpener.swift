@@ -11,6 +11,7 @@ import CoreLocation
 
 enum MapsApp {
     case googleMaps // https://developers.google.com/maps/documentation/urls/ios-urlscheme
+    // swiftlint:disable:next line_length
     case appleMaps // https://developer.apple.com/library/archive/featuredarticles/iPhoneURLScheme_Reference/MapLinks/MapLinks.html#//apple_ref/doc/uid/TP40007899-CH5-SW1
     case waze // https://developers.google.com/waze/deeplinks
 

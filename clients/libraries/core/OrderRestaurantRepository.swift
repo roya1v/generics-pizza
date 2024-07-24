@@ -64,8 +64,8 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
 
     func send(message: RestaurantToServerMessage) async throws {
         let data = try JSONEncoder().encode(message)
-        let text = String(data: data, encoding: .utf8)
-        try await socket?.send(message: .string(text ?? ""))
+        let text = String(decoding: data, as: UTF8.self)
+        try await socket?.send(message: .string(text))
     }
 
     func getHistory() async throws -> [SharedModels.OrderModel] {
