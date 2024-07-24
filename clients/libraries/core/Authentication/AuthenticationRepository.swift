@@ -71,13 +71,15 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
     }
 
     func createAccount(email: String, password: String, confirmPassword: String) async throws {
-        _ = try await authenticationService.createAccount(email: email, password: password, confirmPassword: confirmPassword)
+        _ = try await authenticationService.createAccount(email: email,
+                                                          password: password,
+                                                          confirmPassword: confirmPassword)
 
         try await login(email: email, password: password)
     }
 
     func reload() {
-        if let _ = settingsService.getAuthToken() {
+        if settingsService.getAuthToken() != nil {
             Task {
                 if (try? await getMe()) != nil {
                     state = .loggedIn
