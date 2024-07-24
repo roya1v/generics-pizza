@@ -17,11 +17,19 @@ struct MenuView: View {
 
     var body: some View {
         WithPerceptionTracking {
-            VStack {
-                if store.isLoading {
+            Group {
+                switch store.menuState {
+                case .loading:
                     ProgressView()
-                } else {
-                    table
+                case .loaded(let items):
+                    List {
+                        ForEach(items) { item in
+                            listRow(for: item)
+                        }
+                    }
+                    .listStyle(.inset(alternatesRowBackgrounds: true))
+                case .error(let message):
+                    Text(message)
                 }
             }
             .onAppear {
@@ -40,15 +48,6 @@ struct MenuView: View {
                 NewMenuItemView(store: newItemStore)
             }
         }
-    }
-
-    var table: some View {
-        List {
-            ForEach(store.items) { item in
-                listRow(for: item)
-            }
-        }
-        .listStyle(.inset(alternatesRowBackgrounds: true))
     }
 
     func listRow(for item: MenuItem) -> some View {

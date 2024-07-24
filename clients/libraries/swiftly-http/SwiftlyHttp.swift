@@ -50,6 +50,19 @@ public class SwiftlyHttp {
         }
     }
 
+    public struct HttpException: Error, LocalizedError {
+        public let statusCode: Int
+        public let message: String?
+
+        public var errorDescription: String? {
+            if let message {
+                return "HTTP \(statusCode): \(message)"
+            } else {
+                return "HTTP \(statusCode)"
+            }
+        }
+    }
+
     var baseURL: URL
     var pathComponents = [String]()
     var auth: Authentication?
@@ -250,9 +263,15 @@ public class SwiftlyHttpDecodedHttp<Response: Decodable>: SwiftlyHttp {
     ///  - Returns: An instance of the type provided for decoding.
     @discardableResult
     public func perform() async throws -> Response {
-        let response = try await super.perform()
+        let (data, response) = try await super.perform()
 
-        return try jsonDecoder.decode(Response.self, from: response.0)
+        if let httpResponse = response as? HTTPURLResponse,
+           !(200...299).contains(httpResponse.statusCode) {
+            throw HttpException(statusCode: httpResponse.statusCode,
+                                message: String(data: data, encoding: .utf8))
+        }
+
+        return try jsonDecoder.decode(Response.self, from: data)
     }
 }
 

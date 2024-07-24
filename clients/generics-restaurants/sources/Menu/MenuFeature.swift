@@ -16,9 +16,15 @@ struct MenuFeature {
     struct State: Equatable {
         @Presents var deleteConfirmationDialog: ConfirmationDialogState<Action.DeleteConfirmationDialogAction>?
         @Presents var newItem: NewMenuItemFeature.State?
-        var items = IdentifiedArrayOf<MenuItem>()
-        var isLoading = false
+        var menuState = MenuState.loaded([])
         var imageUrls = [MenuItem.ID: URL]()
+
+        @CasePathable
+        enum MenuState: Equatable {
+            case loading
+            case error(String)
+            case loaded(IdentifiedArrayOf<MenuItem>)
+        }
     }
 
     enum Action {
@@ -42,7 +48,7 @@ struct MenuFeature {
         Reduce { state, action in
             switch action {
             case .shown:
-                state.isLoading = true
+                state.menuState = .loading
                 return .run { send in
                     await send(
                         .loaded(
@@ -51,15 +57,13 @@ struct MenuFeature {
                     )
                 }
             case .loaded(.success(let items)):
-                state.items = IdentifiedArray(uniqueElements: items)
                 items.forEach { item in
                     state.imageUrls[item.id] = repository.imageUrl(for: item)
                 }
-                state.isLoading = false
+                state.menuState = .loaded(IdentifiedArray(uniqueElements: items))
                 return .none
-            case .loaded(.failure):
-                // TODO: Implement proper error handling
-                print("Implement proper error handling!")
+            case .loaded(.failure(let error)):
+                state.menuState = .error(error.localizedDescription)
                 return .none
             case .delete(let item):
                 state.deleteConfirmationDialog = ConfirmationDialogState {
