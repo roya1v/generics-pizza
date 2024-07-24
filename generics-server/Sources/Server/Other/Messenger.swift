@@ -33,18 +33,14 @@ final class Messenger<IncomingMessage, OutgoingMessage>
 
     func send(message: OutgoingMessage) async throws {
         let data = try JSONEncoder().encode(message)
-        let string = String(data: data, encoding: .utf8)
-        if let string {
-            try await ws.send(string)
-        }
+        let string = String(decoding: data, as: UTF8.self)
+        try await ws.send(string)
     }
 
     func send(message: OutgoingMessage) throws {
         let data = try JSONEncoder().encode(message)
-        let string = String(data: data, encoding: .utf8)
-        if let string {
-            ws.send(string)
-        }
+        let string = String(decoding: data, as: UTF8.self)
+        ws.send(string)
     }
 }
 

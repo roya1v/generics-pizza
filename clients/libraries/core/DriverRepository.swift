@@ -68,7 +68,7 @@ final class DriverRepositoryImpl: DriverRepository {
 
     func send(_ message: DriverToServerMessage) async throws {
         let data = try JSONEncoder().encode(message)
-        let string = String(data: data, encoding: .utf8)!
+        let string = String(decoding: data, as: UTF8.self)
         try await socket?.send(message: .string(string))
     }
 }

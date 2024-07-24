@@ -221,7 +221,7 @@ public class SwiftlyHttp {
         switch auth {
         case .basic(let login, let password):
             let token = String(format: "%@:%@", login, password).data(using: .utf8)!.base64EncodedData()
-            request.setValue("Basic \(String(data: token, encoding: .utf8)!)", forHTTPHeaderField: "Authorization")
+            request.setValue("Basic \(String(decoding: token, as: UTF8.self))", forHTTPHeaderField: "Authorization")
         case .bearer(let token):
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         case .notNeeded:
@@ -268,7 +268,7 @@ public class SwiftlyHttpDecodedHttp<Response: Decodable>: SwiftlyHttp {
         if let httpResponse = response as? HTTPURLResponse,
            !(200...299).contains(httpResponse.statusCode) {
             throw HttpException(statusCode: httpResponse.statusCode,
-                                message: String(data: data, encoding: .utf8))
+                                message: String(decoding: data, as: UTF8.self))
         }
 
         return try jsonDecoder.decode(Response.self, from: data)
