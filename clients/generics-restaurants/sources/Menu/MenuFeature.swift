@@ -23,7 +23,7 @@ struct MenuFeature {
 
     enum Action {
         case shown
-        case loaded([MenuItem])
+        case loaded(Result<[MenuItem], Error>)
         case delete(MenuItem)
         case deleteConfirmationDialog(PresentationAction<DeleteConfirmationDialogAction>)
         case newItem(PresentationAction<NewMenuItemFeature.Action>)
@@ -44,15 +44,22 @@ struct MenuFeature {
             case .shown:
                 state.isLoading = true
                 return .run { send in
-                    let items = try! await repository.fetchMenu()
-                    await send(.loaded(items))
+                    await send(
+                        .loaded(
+                            Result { try await repository.fetchMenu() }
+                        )
+                    )
                 }
-            case .loaded(let items):
+            case .loaded(.success(let items)):
                 state.items = IdentifiedArray(uniqueElements: items)
                 items.forEach { item in
                     state.imageUrls[item.id] = repository.imageUrl(for: item)
                 }
                 state.isLoading = false
+                return .none
+            case .loaded(.failure):
+                // TODO: Implement proper error handling
+                print("Implement proper error handling!")
                 return .none
             case .delete(let item):
                 state.deleteConfirmationDialog = ConfirmationDialogState {

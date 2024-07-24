@@ -3,4 +3,5 @@ excluded:
   - unifinished
 
 force_try: warning
-identifier_name: warning
+disabled_rules: 
+  - nesting

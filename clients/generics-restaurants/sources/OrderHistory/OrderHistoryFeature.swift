@@ -19,7 +19,7 @@ struct OrderHistoryFeature {
 
     enum Action {
         case shown
-        case loaded([OrderModel])
+        case loaded(Result<[OrderModel], Error>)
     }
 
     @Injected(\.orderRestaurantRepository)
@@ -30,11 +30,18 @@ struct OrderHistoryFeature {
             switch action {
             case .shown:
                 return .run { send in
-                    let items = try! await repository.getHistory()
-                    await send(.loaded(items))
+                    await send(
+                        .loaded(
+                            Result { try await repository.getHistory() }
+                        )
+                    )
                 }
-            case .loaded(let items):
+            case .loaded(.success(let items)):
                 state.items = IdentifiedArray(uniqueElements: items)
+                return .none
+            case .loaded(.failure):
+                // TODO: Implement proper error handling
+                print("Implement proper error handling!")
                 return .none
             }
         }

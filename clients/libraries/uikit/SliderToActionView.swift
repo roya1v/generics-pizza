@@ -32,7 +32,9 @@ public final class SliderToActionView: UIView {
     }()
 
     private lazy var gradient = makeGradient()
-    private lazy var panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(_:)))
+    private lazy var panGestureRecognizer = UIPanGestureRecognizer(
+        target: self, action: #selector(self.handlePanGesture(_:))
+    )
 
     private lazy var sliderConstraint = sliderView.leadingAnchor.constraint(equalTo: leadingAnchor)
 

@@ -11,6 +11,7 @@ let baseDependencies: [Package.Dependency] = [
 ]
 
 #if !RELESE
+// swiftlint:disable:next line_length
 let dependencies = baseDependencies + [.package(url: "https://github.com/realm/SwiftLint", .upToNextMajor(from: "0.52.4"))]
 #else
 let dependencies = baseDependencies
