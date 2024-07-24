@@ -21,7 +21,7 @@ struct NowFeature {
 
     enum Action {
         case shown
-        case connected(AnyPublisher<RestaurantFromServerMessage, any Error>)
+        case connected(Result<AnyPublisher<RestaurantFromServerMessage, any Error>, Error>)
         case newServerMessage(RestaurantFromServerMessage)
         case receivedError(Error)
         case update(orderId: UUID, state: OrderState)
@@ -37,10 +37,13 @@ struct NowFeature {
             case .shown:
                 state.isLoading = true
                 return .run { send in
-                    let publisher = try await repository.getFeed()
-                    await send(.connected(publisher))
+                    await send(
+                        .connected(
+                            Result { try await repository.getFeed() }
+                        )
+                    )
                 }
-            case .connected(let publisher):
+            case .connected(.success(let publisher)):
                 return .publisher {
                     publisher
                         .map { message in
@@ -51,6 +54,10 @@ struct NowFeature {
                         }
                         .receive(on: DispatchQueue.main)
                 }
+            case .connected(.failure):
+                // TODO: Implement proper error handling
+                print("Implement proper error handling!")
+                return .none
             case .newServerMessage(let message):
                 switch message {
                 case .newOrder(let order):
