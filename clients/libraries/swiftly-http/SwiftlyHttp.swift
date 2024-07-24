@@ -217,7 +217,8 @@ public class SwiftlyHttp {
     }
 }
 
-/// A SwiftlyHttp request that decodes it's response body. Use ``SwiftlyHttp/SwiftlyHttp/decode(to:)`` on ``SwiftlyHttp/SwiftlyHttp`` to create.
+/// A SwiftlyHttp request that decodes it's response body.
+/// Use ``SwiftlyHttp/SwiftlyHttp/decode(to:)`` on ``SwiftlyHttp/SwiftlyHttp`` to create.
 public class SwiftlyHttpDecodedHttp<Response: Decodable>: SwiftlyHttp {
 
     var jsonDecoder: JSONDecoder = JSONDecoder()

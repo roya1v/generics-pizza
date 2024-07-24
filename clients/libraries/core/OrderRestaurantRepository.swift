@@ -10,8 +10,10 @@ import Combine
 import SharedModels
 import clients_libraries_SwiftlyHttp
 
-public func buildOrderRestaurantRepository(url: String,
-                                           authenticationProvider: some AuthenticationProvider) -> OrderRestaurantRepository {
+public func buildOrderRestaurantRepository(
+    url: String,
+    authenticationProvider: some AuthenticationProvider
+) -> OrderRestaurantRepository {
     OrderRestaurantRepositoryImpl(baseURL: url, authenticationProvider: authenticationProvider)
 }
 

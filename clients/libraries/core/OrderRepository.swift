@@ -128,9 +128,18 @@ final class OrderRepositoryMck: OrderRepository {
     var orderType: OrderType = .pickUp
 
     var items: [MenuItem] = [
-        .init(id: .init(), title: "Margarita simplita", description: "Tomatoe souce, cheese and weird leaves", price: 1299),
-        .init(id: .init(), title: "Pepperoni Meroni", description: "Tomatoe souce, cheese and weird leaves", price: 1299),
-        .init(id: .init(), title: "Super pepperoni", description: "Tomatoe souce, cheese and weird leaves", price: 1299)
+        .init(id: .init(),
+              title: "Margarita simplita",
+              description: "Tomatoe souce, cheese and weird leaves",
+              price: 1299),
+        .init(id: .init(),
+              title: "Pepperoni Meroni",
+              description: "Tomatoe souce, cheese and weird leaves",
+              price: 1299),
+        .init(id: .init(),
+              title: "Super pepperoni",
+              description: "Tomatoe souce, cheese and weird leaves",
+              price: 1299)
     ]
 
     var addImplementation: ((MenuItem) -> Void)?

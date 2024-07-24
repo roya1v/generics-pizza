@@ -20,7 +20,7 @@ struct UsersFeature {
 
     enum Action {
         case shown
-        case loaded([UserModel]?)
+        case loaded(Result<[UserModel]?, Error>)
         case deleteTapped(user: UserModel)
         case newAccessSelected(forUser: UserModel, newAccess: UserModel.AccessLevel)
     }
@@ -37,26 +37,33 @@ struct UsersFeature {
             case .shown:
                 state.isLoading = true
                 return .run { send in
-                    let items = try! await repository.getAll()
-                    await send(.loaded(items))
+                    await send(
+                        .loaded(
+                            Result { try await repository.getAll() }
+                        )
+                    )
                 }
-            case .loaded(let newUsers):
+            case .loaded(.success(let newUsers)):
                 if let newUsers {
                     state.users = IdentifiedArray(uniqueElements: newUsers)
                 }
                 state.isLoading = false
                 return .none
+            case .loaded(.failure):
+                // TODO: Implement proper error handling
+                print("Implement proper error handling!")
+                return .none
             case .deleteTapped(let user):
                 state.isLoading = true
                 return .run { send in
-                    try! await repository.delete(user: user)
+                    try await repository.delete(user: user)
                     await send(.shown)
                 }
             case .newAccessSelected(let user, let newAccess):
                 state.isLoading = true
                 return .run { send in
-                    try! await repository.updateAccessLevel(for: user, to: newAccess)
-                    await send(.loaded(nil))
+                    try await repository.updateAccessLevel(for: user, to: newAccess)
+                    await send(.loaded(.success(nil)))
                 }
             }
         }

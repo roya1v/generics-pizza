@@ -50,7 +50,8 @@ struct AppFeature {
                 )
             case .logoutTapped:
                 return .run { _ in
-                    try! await repository.signOut()
+                    // TODO: Implement proper error handling
+                    try await repository.signOut()
                 }
             case .stateUpdated(let newState):
                 switch newState {
