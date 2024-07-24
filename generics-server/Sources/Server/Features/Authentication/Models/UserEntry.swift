@@ -7,9 +7,11 @@
 
 import Fluent
 import Vapor
+// Why??
+// swiftlint:disable:next entry_shared_model_content
 import SharedModels
 
-final class UserEntry: Model, Content {
+final class UserEntry: Model {
     static let schema = "users"
 
     @ID(key: .id)
