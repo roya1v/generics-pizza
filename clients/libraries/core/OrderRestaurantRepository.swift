@@ -37,7 +37,6 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
     // MARK: - OrderRestaurantRepository
 
     func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error> {
-        let currentOrders = try await getCurrentOrders()
 
         socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
             .add(path: "order")
@@ -58,7 +57,6 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
                 }
             })
             .decode(type: RestaurantFromServerMessage.self, decoder: JSONDecoder())
-            .prepend(currentOrders.map { .newOrder($0) })
             .eraseToAnyPublisher()
     }
 

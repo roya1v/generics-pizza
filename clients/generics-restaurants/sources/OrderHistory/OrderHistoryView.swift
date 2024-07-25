@@ -19,7 +19,6 @@ struct OrderHistoryView: View {
                 Section("Orders") {
                     ForEach(store.items) { order in
                         OrderListRowView(order: order, onTap: nil)
-                        Divider()
                     }
                 }
             }

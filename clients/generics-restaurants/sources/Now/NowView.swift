@@ -16,13 +16,21 @@ struct NowView: View {
 
     var body: some View {
         WithPerceptionTracking {
-            List {
-                Section("Orders") {
-                    ForEach(store.state.orders) { order in
-                        OrderListRowView(order: order) {
-                            store.send(.update(orderId: order.id!, state: order.state!.next()))
+            Group {
+                switch store.connectionState {
+                case .connecting:
+                    ProgressView()
+                case .failure(let message):
+                    Text(message)
+                case .success:
+                    List {
+                        Section("Orders") {
+                            ForEach(store.state.orders) { order in
+                                OrderListRowView(order: order) {
+                                    store.send(.update(orderId: order.id!, state: order.state!.next()))
+                                }
+                            }
                         }
-                        Divider()
                     }
                 }
             }
@@ -34,9 +42,12 @@ struct NowView: View {
 }
 
 #Preview {
-    NowView(store: Store(initialState: NowFeature.State(orders: [], isLoading: false), reducer: {
-        NowFeature()
-    }))
+    NowView(
+        store: Store(
+            initialState: NowFeature.State()) {
+                NowFeature()
+            }
+    )
 }
 
 extension OrderState {

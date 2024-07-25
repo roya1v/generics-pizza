@@ -29,23 +29,28 @@ struct MenuView: View {
                     }
                     .listStyle(.inset(alternatesRowBackgrounds: true))
                 case .error(let message):
-                    Text(message)
+                    VStack {
+                        Text(message)
+                        Button("Retry") {
+                            store.send(.shown)
+                        }
+                    }
                 }
             }
-            .onAppear {
-                store.send(.shown)
-            }
             .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    Button("New") {
-                        store.send(.newItemButtonTapped)
-                    }
+                    ToolbarItem(placement: .automatic) {
+                        Button("New") {
+                            store.send(.newItemButtonTapped)
+                        }
                 }
             }
             .navigationTitle("Menu")
             .confirmationDialog($store.scope(state: \.deleteConfirmationDialog, action: \.deleteConfirmationDialog))
             .sheet(item: $store.scope(state: \.newItem, action: \.newItem)) { newItemStore in
                 NewMenuItemView(store: newItemStore)
+            }
+            .onAppear {
+                store.send(.shown)
             }
         }
     }
