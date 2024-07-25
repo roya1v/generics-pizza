@@ -16,7 +16,13 @@ struct NowFeature {
     @ObservableState
     struct State: Equatable {
         var orders = IdentifiedArrayOf<OrderModel>()
-        var isLoading = false
+        var connectionState = ConnectionState.connecting
+
+        enum ConnectionState: Equatable {
+            case connecting
+            case success
+            case failure(String)
+        }
     }
 
     enum Action {
@@ -28,6 +34,8 @@ struct NowFeature {
         case updated(orderId: UUID, state: OrderState) // Find a better name for this?
     }
 
+    enum CancelId: Hashable { case messages }
+
     @Injected(\.orderRestaurantRepository)
     private var repository
 
@@ -35,7 +43,10 @@ struct NowFeature {
         Reduce { state, action in
             switch action {
             case .shown:
-                state.isLoading = true
+                if state.connectionState == .success {
+                    return .none
+                }
+                state.connectionState = .connecting
                 return .run { send in
                     await send(
                         .connected(
@@ -54,18 +65,22 @@ struct NowFeature {
                         }
                         .receive(on: DispatchQueue.main)
                 }
-            case .connected(.failure):
-                // TODO: Implement proper error handling
-                print("Implement proper error handling!")
+                .cancellable(id: CancelId.messages)
+            case .connected(.failure(let error)):
+                state.connectionState = .failure(error.localizedDescription)
                 return .none
             case .newServerMessage(let message):
+                if state.connectionState != .success {
+                    state.connectionState = .success
+                }
                 switch message {
                 case .newOrder(let order):
                     state.orders.append(order)
                 }
                 return .none
-            case .receivedError:
-                return .none
+            case .receivedError(let error):
+                state.connectionState = .failure(error.localizedDescription)
+                return .cancel(id: CancelId.messages)
             case .update(orderId: let orderId, state: let state):
                 return .run { send in
                     try await repository.send(message: .update(orderId: orderId, state: state))
