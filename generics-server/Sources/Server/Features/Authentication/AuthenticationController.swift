@@ -23,7 +23,7 @@ struct AuthenticationController: RouteCollection {
 
     /// Create a new user account.
     func create(req: Request) async throws -> UserModel {
-        let create = try req.content.decode(UserEntry.Create.self)
+        let create = try req.content.decode(UserModel.Create.self)
         guard create.password == create.confirmPassword else {
             throw Abort(.badRequest, reason: "Passwords did not match")
         }

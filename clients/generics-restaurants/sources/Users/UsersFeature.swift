@@ -12,11 +12,6 @@ import Factory
 
 @Reducer
 struct UsersFeature {
-    @ObservableState
-    struct State: Equatable {
-        var isLoading = false
-        var users = IdentifiedArrayOf<UserModel>()
-    }
 
     enum Action {
         case shown
@@ -31,11 +26,11 @@ struct UsersFeature {
     @Injected(\.authenticationRepository)
     var authRepository
 
-    var body: some Reducer<State, Action> {
+    var body: some Reducer<SimpleListState<UserModel>, Action> {
         Reduce { state, action in
             switch action {
             case .shown:
-                state.isLoading = true
+                state = .loading
                 return .run { send in
                     await send(
                         .loaded(
@@ -45,22 +40,20 @@ struct UsersFeature {
                 }
             case .loaded(.success(let newUsers)):
                 if let newUsers {
-                    state.users = IdentifiedArray(uniqueElements: newUsers)
+                    state = .loaded(IdentifiedArray(uniqueElements: newUsers))
                 }
-                state.isLoading = false
                 return .none
-            case .loaded(.failure):
-                // TODO: Implement proper error handling
-                print("Implement proper error handling!")
+            case .loaded(.failure(let error)):
+                state = .error(error.localizedDescription)
                 return .none
             case .deleteTapped(let user):
-                state.isLoading = true
+                state = .loading
                 return .run { send in
                     try await repository.delete(user: user)
                     await send(.shown)
                 }
             case .newAccessSelected(let user, let newAccess):
-                state.isLoading = true
+                state = .loading
                 return .run { send in
                     try await repository.updateAccessLevel(for: user, to: newAccess)
                     await send(.loaded(.success(nil)))

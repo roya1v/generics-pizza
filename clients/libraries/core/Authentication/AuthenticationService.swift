@@ -37,12 +37,11 @@ public final class AuthenticationService {
         let response: UserModel = try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "auth")
             .add(path: "user")
-        // TODO: Change to a shared model
-            .body([
-                "email": email,
-                "password": password,
-                "confirmPassword": confirmPassword
-                  ])
+            .body(UserModel.Create(
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword)
+            )
             .method(.post)
             .decode(to: UserModel.self)
             .perform()

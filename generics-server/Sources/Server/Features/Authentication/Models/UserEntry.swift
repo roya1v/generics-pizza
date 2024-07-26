@@ -44,12 +44,6 @@ final class UserEntry: Model {
             userID: self.requireID()
         )
     }
-
-    struct Create: Content {
-        var email: String
-        var password: String
-        var confirmPassword: String
-    }
 }
 
 extension UserEntry: SharedModelRepresentable {

@@ -180,7 +180,6 @@ public class SwiftlyHttp {
     ///  - Returns: An instance of ``SwiftlyWebSocketConnection``.
     public func websocket() async throws -> SwiftlyWebSocketConnection {
         let request = await getRequest()
-        // TODO: Add scheme check and/or change
         guard request.url?.scheme == "ws" || request.url?.scheme == "wss" else {
             throw SwiftlyHttpError.badScheme
         }

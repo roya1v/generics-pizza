@@ -9,30 +9,31 @@ import Foundation
 import Factory
 import clients_libraries_GenericsCore
 
-private let url = "http://localhost:8080"
-
 extension Container {
     var authenticationRepository: Factory<AuthenticationRepository> {
-        self { buildAuthenticationRepository(url: url) }
+        self { buildAuthenticationRepository(url: self.serverUrl()) }
             .singleton
     }
 
     var orderRestaurantRepository: Factory<OrderRestaurantRepository> {
-        self { buildOrderRestaurantRepository(url: url, authenticationProvider: self.authenticationRepository()) }
-            .singleton
+        self { buildOrderRestaurantRepository(
+            url: self.serverUrl(),
+            authenticationProvider: self.authenticationRepository())
+        }
+        .singleton
     }
 
     var menuRepository: Factory<MenuRepository> {
-        self { buildMenuRepository(url: url, authenticationProvider: self.authenticationRepository()) }
+        self { buildMenuRepository(url: self.serverUrl(), authenticationProvider: self.authenticationRepository()) }
     }
 
     var orderRepository: Factory<OrderRepository> {
-        self { buildOrderRepository(url: url) }
+        self { buildOrderRepository(url: self.serverUrl()) }
             .singleton
     }
 
     var usersRepository: Factory<UsersRepository> {
-        self { buildUsersRepository(url: url, authenticationProvider: self.authenticationRepository()) }
+        self { buildUsersRepository(url: self.serverUrl(), authenticationProvider: self.authenticationRepository()) }
             .singleton
     }
 }

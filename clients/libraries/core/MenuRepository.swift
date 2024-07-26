@@ -13,7 +13,7 @@ import Factory
 
 extension Container {
     public var menuRepository: Factory<MenuRepository> {
-        self { MenuRepositoryImp(baseURL: url, authenticationProvider: nil) }
+        self { MenuRepositoryImp(baseURL: self.serverUrl(), authenticationProvider: nil) }
             .onPreview { MenuRepositoryPreview() }
     }
 }

@@ -7,12 +7,14 @@
 import Foundation
 import Factory
 
-// TODO: Move somewhere else
-let url = "http://localhost:8080"
-
 extension Container {
+
+    public var serverUrl: Factory<String> {
+        self { "http://localhost:8080" }
+    }
+
     public var orderRepository: Factory<OrderRepository> {
-        self { buildOrderRepository(url: url) }
+        self { buildOrderRepository(url: self.serverUrl()) }
             .singleton
     }
 }
