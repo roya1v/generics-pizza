@@ -12,10 +12,6 @@ import Factory
 
 @Reducer
 struct OrderHistoryFeature {
-    @ObservableState
-    struct State: Equatable {
-        var items = IdentifiedArrayOf<OrderModel>()
-    }
 
     enum Action {
         case shown
@@ -25,10 +21,11 @@ struct OrderHistoryFeature {
     @Injected(\.orderRestaurantRepository)
     var repository
 
-    var body: some Reducer<State, Action> {
+    var body: some Reducer<SimpleListState<OrderModel>, Action> {
         Reduce { state, action in
             switch action {
             case .shown:
+                state = .loading
                 return .run { send in
                     await send(
                         .loaded(
@@ -37,11 +34,10 @@ struct OrderHistoryFeature {
                     )
                 }
             case .loaded(.success(let items)):
-                state.items = IdentifiedArray(uniqueElements: items)
+                state = .loaded(IdentifiedArray(uniqueElements: items))
                 return .none
-            case .loaded(.failure):
-                // TODO: Implement proper error handling
-                print("Implement proper error handling!")
+            case .loaded(.failure(let error)):
+                state = .error(error.localizedDescription)
                 return .none
             }
         }

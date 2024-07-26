@@ -24,22 +24,33 @@ struct UsersView: View {
 
     var body: some View {
         WithPerceptionTracking {
-            Table(store.users, selection: $selectedId) {
-                TableColumn("Email", value: \.email)
-                TableColumn("Access", value: \.access.rawValue)
+            Group {
+                switch store.state {
+                case .loading:
+                    ProgressView()
+                case .loaded(let users):
+                    Table(users, selection: $selectedId) {
+                        TableColumn("Email", value: \.email)
+                        TableColumn("Access", value: \.access.rawValue)
+                    }
+                case .error(let message):
+                    Text(message)
+                }
             }
+
             .onAppear {
                 store.send(.shown)
             }
             .sheet(isPresented: isShowingSheet) {
                 if let userId = selectedId.first,
+                   case let .loaded(users) = store.state,
                    let userId,
-                   let user = store.users.first(where: { $0.id == userId}) {
+                   let user = users[id: userId] {
                     VStack {
                         Text("User email: \(user.email)")
                             .font(.title)
                         HStack {
-                            if store.isLoading {
+                            if store.state == .loading {
                                 // TODO: Make it smaller
                                 ProgressView()
                             }
@@ -71,7 +82,10 @@ struct UsersView: View {
 }
 
 #Preview {
-    UsersView(store: Store(initialState: UsersFeature.State(isLoading: false, users: [])) {
-        UsersFeature()
-    })
+    UsersView(
+        store: Store(
+            initialState: SimpleListState()) {
+                UsersFeature()
+            }
+    )
 }

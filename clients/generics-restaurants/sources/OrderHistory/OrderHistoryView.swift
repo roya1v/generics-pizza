@@ -15,11 +15,20 @@ struct OrderHistoryView: View {
 
     var body: some View {
         WithPerceptionTracking {
-            List {
-                Section("Orders") {
-                    ForEach(store.items) { order in
-                        OrderListRowView(order: order, onTap: nil)
+            Group {
+                switch store.state {
+                case .loading:
+                    Text("Hello")
+                case .loaded(let items):
+                    List {
+                        Section("Orders") {
+                            ForEach(items) { order in
+                                OrderListRowView(order: order, onTap: nil)
+                            }
+                        }
                     }
+                case .error(let message):
+                    Text(message)
                 }
             }
             .onAppear {
@@ -30,7 +39,10 @@ struct OrderHistoryView: View {
 }
 
 #Preview {
-    OrderHistoryView(store: Store(initialState: OrderHistoryFeature.State(items: [])) {
-        OrderHistoryFeature()
-    })
+    OrderHistoryView(
+        store: Store(
+            initialState: SimpleListState()) {
+                OrderHistoryFeature()
+            }
+    )
 }

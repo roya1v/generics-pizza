@@ -9,15 +9,16 @@ import Foundation
 import ComposableArchitecture
 import Factory
 import clients_libraries_GenericsCore
+import SharedModels
 
 @Reducer
 struct DashboardFeature {
     @ObservableState
     struct State: Equatable {
         var now: NowFeature.State
-        var orderHistory: OrderHistoryFeature.State
+        var orderHistory: SimpleListState<OrderModel>
         var menu: MenuFeature.State
-        var users: UsersFeature.State?
+        var users: SimpleListState<UserModel>?
     }
 
     enum Action {

@@ -23,4 +23,16 @@ public struct UserModel: Codable, Equatable, Identifiable {
     public let id: UUID?
     public let email: String
     public let access: AccessLevel
+
+    public struct Create: Codable, Equatable {
+        public init(email: String, password: String, confirmPassword: String) {
+            self.email = email
+            self.password = password
+            self.confirmPassword = confirmPassword
+        }
+
+        public let email: String
+        public let  password: String
+        public let confirmPassword: String
+    }
 }

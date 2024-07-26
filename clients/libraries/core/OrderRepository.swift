@@ -68,7 +68,6 @@ final class OrderRepositoryImpl: OrderRepository {
     }
 
     func checkPrice() async throws -> [SubtotalModel] {
-        // TODO: Make address optional
         return try await getRequest()
             .add(path: "check_price")
             .body(OrderModel(createdAt: nil, items: items, type: orderType))
