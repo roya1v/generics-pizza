@@ -3,5 +3,6 @@ excluded:
   - unifinished
 
 force_try: warning
+force_cast: warning
 disabled_rules: 
   - nesting
