@@ -2104,6 +2104,93 @@
         "recordedRepoMappingEntries": []
       }
     },
+    "@@rules_apple~//apple:apple.bzl%provisioning_profile_repository_extension": {
+      "general": {
+        "bzlTransitiveDigest": "oVag7izjY2IlsD5DJspFLnk4TDDsrl+qmBzEnKIaLcI=",
+        "recordedFileInputs": {},
+        "recordedDirentsInputs": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "local_provisioning_profiles": {
+            "bzlFile": "@@rules_apple~//apple/internal:local_provisioning_profiles.bzl",
+            "ruleClassName": "provisioning_profile_repository",
+            "attributes": {}
+          }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "apple_support~",
+            "bazel_skylib",
+            "bazel_skylib~"
+          ],
+          [
+            "rules_apple~",
+            "bazel_skylib",
+            "bazel_skylib~"
+          ],
+          [
+            "rules_apple~",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "rules_apple~",
+            "build_bazel_apple_support",
+            "apple_support~"
+          ],
+          [
+            "rules_apple~",
+            "build_bazel_rules_apple",
+            "rules_apple~"
+          ],
+          [
+            "rules_apple~",
+            "build_bazel_rules_swift",
+            "rules_swift~"
+          ],
+          [
+            "rules_swift~",
+            "bazel_skylib",
+            "bazel_skylib~"
+          ],
+          [
+            "rules_swift~",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "rules_swift~",
+            "build_bazel_apple_support",
+            "apple_support~"
+          ],
+          [
+            "rules_swift~",
+            "build_bazel_rules_swift",
+            "rules_swift~"
+          ],
+          [
+            "rules_swift~",
+            "build_bazel_rules_swift_local_config",
+            "rules_swift~~non_module_deps~build_bazel_rules_swift_local_config"
+          ],
+          [
+            "rules_swift~",
+            "com_github_apple_swift_protobuf",
+            "rules_swift~~non_module_deps~com_github_apple_swift_protobuf"
+          ],
+          [
+            "rules_swift~",
+            "com_github_grpc_grpc_swift",
+            "rules_swift~~non_module_deps~com_github_grpc_grpc_swift"
+          ],
+          [
+            "rules_swift~",
+            "rules_proto",
+            "rules_proto~"
+          ]
+        ]
+      }
+    },
     "@@rules_java~//java:extensions.bzl%toolchains": {
       "general": {
         "bzlTransitiveDigest": "0N5b5J9fUzo0sgvH4F3kIEaeXunz4Wy2/UtSFV/eXUY=",
