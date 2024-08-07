@@ -31,7 +31,7 @@ ios_application(
 
 local_provisioning_profile(
     name = "the_profile",
-    profile_name = "iOS Team Provisioning Profile: com.roya1.GenericsApp",
+    profile_name = "iOS Team Provisioning Profile: com.roya1v.GenericsApp",
     team_id = "1234567898",
 )
 
