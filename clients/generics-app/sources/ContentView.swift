@@ -7,25 +7,42 @@
 
 import SwiftUI
 import clients_libraries_GenericsUI
+import ComposableArchitecture
 
 struct ContentView: View {
 
     @State var isShowingMenu = false
+    var store: StoreOf<AppFeature> = Store(initialState: AppFeature.State()) {
+        AppFeature()
+    }
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            MenuView()
-            Button {
-                isShowingMenu = true
-            } label: {
-                HStack {
-                    Text("Cart")
-                    Image(systemName: "cart")
+            MenuView(
+                store: store.scope(
+                    state: \.menu,
+                    action: \.menu
+                )
+            )
+            WithPerceptionTracking {
+                if !store.cart.isEmpty {
+                    Button {
+                        isShowingMenu = true
+                    } label: {
+                        HStack {
+                            Text("Cart")
+                            Image(systemName: "cart")
+                        }
+                        .padding(.gNormal)
+                    }
+                    .buttonStyle(GPrimaryButtonStyle())
+                    .padding()
                 }
-                .padding(.gNormal)
             }
-            .buttonStyle(GPrimaryButtonStyle())
-            .padding()
+
+        }
+        .task {
+            store.send(.launched)
         }
         .sheet(isPresented: $isShowingMenu) {
             CartView()

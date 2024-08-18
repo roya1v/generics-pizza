@@ -11,6 +11,7 @@ swift_library(
         "//clients/libraries:GenericsCore",
         "//clients/libraries:GenericsUI",
         "@swiftpkg_factory//:Factory",
+        "@swiftpkg_swift_composable_architecture//:ComposableArchitecture",
     ],
 )
 

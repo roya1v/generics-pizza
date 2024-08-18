@@ -9,6 +9,7 @@ import Foundation
 import ComposableArchitecture
 import SharedModels
 import Factory
+import clients_libraries_GenericsCore
 
 @Reducer
 struct UsersFeature {

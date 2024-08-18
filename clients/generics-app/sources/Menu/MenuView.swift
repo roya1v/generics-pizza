@@ -9,11 +9,11 @@ import SwiftUI
 import Factory
 import SharedModels
 import clients_libraries_GenericsCore
+import ComposableArchitecture
 
 struct MenuView: View {
 
-    @StateObject var model = MenuViewModel()
-    @State var detailItem: MenuItem?
+    @Perception.Bindable var store: StoreOf<MenuFeature>
 
     var body: some View {
         NavigationView {
@@ -27,46 +27,59 @@ struct MenuView: View {
                         RoundedRectangle(cornerRadius: .gBig)
                             .fill(Color.white)
                             .ignoresSafeArea()
-                        VStack {
-                            MenuHeaderView()
-                            switch model.state {
-                            case .loading:
-                                ProgressView()
-                            case .ready:
-                                menu
-                            case .error:
-                                Text("Something didn't work out :(")
+                        WithPerceptionTracking {
+                            VStack {
+                                MenuHeaderView()
+                                switch store.content {
+                                case .loading:
+                                    ProgressView()
+                                case .error(let error):
+                                    Text(error)
+                                case .loaded:
+                                    menu(state: store.state)
+                                }
                             }
                         }
                     }
-                    .task {
-                        model.fetch()
-                    }
                 }
             }
-            .fullScreenCover(item: $detailItem) { item in
+            .fullScreenCover(
+                item: $store.scope(
+                    state: \.menuDetail,
+                    action: \.menuDetail
+                )
+            ) { item in
                 NavigationView { // So we see the nav title
-                    MenuDetailView(item: item)
+                    MenuDetailView(store: item)
                 }
+            }
+            .task {
+                store.send(.appeared)
             }
         }
     }
 
-    var menu: some View {
-        List(model.items) { item in
+    func menu(state: MenuFeature.State) -> some View {
+        guard case let .loaded(items) = state.content else {
+            fatalError()
+        }
+        return List(items) { item in
             MenuRowView(
                 item: item,
-                imageUrl: model.imageUrl(for: item)
+                imageUrl: item.id != nil
+                ? state.imageUrls[item.id!]
+                : nil
             ) {
-                detailItem = item
+                store.send(.didSelect(item))
             }
             .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
-
     }
 }
 
 #Preview {
-    MenuView()
+    MenuView(store: Store(initialState: MenuFeature.State(), reducer: {
+        MenuFeature()
+    }))
 }

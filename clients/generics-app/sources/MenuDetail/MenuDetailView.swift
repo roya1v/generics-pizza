@@ -10,15 +10,12 @@ import Factory
 import SharedModels
 import clients_libraries_GenericsCore
 import clients_libraries_GenericsUI
+import ComposableArchitecture
 
 struct MenuDetailView: View {
 
-    @StateObject var model: MenuDetailViewModel
     @Environment(\.dismiss) var dismiss
-
-    init(item: MenuItem) {
-        _model = StateObject(wrappedValue: MenuDetailViewModel(item: item))
-    }
+    var store: Store<MenuDetailFeature.State, MenuDetailFeature.Action>
 
     private let gradient = LinearGradient(
         gradient: Gradient(
@@ -91,7 +88,7 @@ struct MenuDetailView: View {
 
             }
             Button {
-                model.add()
+                store.send(.addTapped)
                 dismiss()
             } label: {
                 Text("Add to cart for 6.99$")
@@ -104,7 +101,7 @@ struct MenuDetailView: View {
             .background(.thinMaterial)
         }
         .ignoresSafeArea()
-        .navigationTitle(model.item.title)
+        .navigationTitle(store.item.title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -121,13 +118,13 @@ struct MenuDetailView: View {
     }
 }
 
-#Preview {
-    NavigationView {
-        MenuDetailView(item: MenuItem(
-            id: nil,
-            title: "Super Pepperoni",
-            description: "",
-            price: 699)
-        )
-    }
-}
+//#Preview {
+//    NavigationView {
+//        MenuDetailView(item: MenuItem(
+//            id: nil,
+//            title: "Super Pepperoni",
+//            description: "",
+//            price: 699)
+//        )
+//    }
+//}
