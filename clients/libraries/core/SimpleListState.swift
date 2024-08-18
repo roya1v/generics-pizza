@@ -1,12 +1,12 @@
 import ComposableArchitecture
 
 @ObservableState
-enum SimpleListState<Item: Identifiable & Equatable>: Equatable {
+public enum SimpleListState<Item: Identifiable & Equatable>: Equatable {
     case loading
     case loaded(IdentifiedArrayOf<Item>)
     case error(String)
 
-    init() {
+    public init() {
         self = .loaded([])
     }
 }

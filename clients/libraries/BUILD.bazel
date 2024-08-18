@@ -33,6 +33,7 @@ swift_library(
         ":SwiftlyHttp",
         "//:SharedModels",
         "@swiftpkg_factory//:Factory",
+        "@swiftpkg_swift_composable_architecture//:ComposableArchitecture",
         "@swiftpkg_swift_spyable//:Spyable",
     ],
 )
