@@ -7,14 +7,17 @@ import clients_libraries_GenericsCore
 @Reducer
 struct AppFeature {
     @ObservableState
-    struct State: Equatable {
+    struct State {
+        @Presents var cartState: CartFeature.State?
         var menu = MenuFeature.State()
-        var cart = [MenuItem]()
+        @Shared var cart: [MenuItem]
     }
 
     enum Action {
         case launched
+        case showMenu
         case menu(MenuFeature.Action)
+        case cart(PresentationAction<CartFeature.Action>)
     }
 
     @Injected(\.menuRepository)
@@ -30,13 +33,23 @@ struct AppFeature {
                 return .none
             case .menu(.menuDetail(.presented(.addTapped))):
                 if let item = state.menu.menuDetail?.item {
-                    orderRepository.add(item: item)
                     state.cart.append(item)
                 }
                 return .none
+            case .showMenu:
+                guard !state.cart.isEmpty else {
+                    fatalError("Hello")
+                }
+                state.cartState = CartFeature.State(items: state.$cart)
+                return .none
             case .menu:
                 return .none
+            case .cart:
+                return .none
             }
+        }
+        .ifLet(\.$cartState, action: \.cart) {
+            CartFeature()
         }
         Scope(state: \.menu, action: \.menu) {
             MenuFeature()

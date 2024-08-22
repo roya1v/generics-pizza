@@ -10,37 +10,32 @@ import Factory
 import clients_libraries_GenericsCore
 import clients_libraries_GenericsUI
 import SharedModels
+import ComposableArchitecture
 
 struct CartView: View {
 
-    @StateObject var model = CartViewModel()
+    let store: StoreOf<CartFeature>
+
     @Environment(\.dismiss) var dismiss
 
     var body: some View {
         NavigationView {
-            switch model.state {
-            case .needItems:
-                Text("You have to first add items to your cart!")
-                    .font(.largeTitle)
-                    .multilineTextAlignment(.center)
-            case .readyForOrder, .loadingOrderDetails, .loading, .inOrderState, .error:
-                mainBody
-                    .navigationTitle("Cart")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .topBarLeading) {
-                            Button {
-                                dismiss()
-                            } label: {
-                                Text("Close")
-                            }
-
+            mainBody
+                .navigationTitle("Cart")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            dismiss()
+                        } label: {
+                            Text("Close")
                         }
+
                     }
-            }
+                }
         }
-        .onAppear {
-            model.fetch()
+        .task {
+            store.send(.appeared)
         }
     }
 
@@ -48,7 +43,6 @@ struct CartView: View {
     var mainBody: some View {
         List {
             cartSection
-            detailsSection
             totalSection
             ctaSection
         }
@@ -59,7 +53,7 @@ struct CartView: View {
     @ViewBuilder
     var cartSection: some View {
         Section {
-            ForEach(model.items) { item in
+            ForEach(store.items) { item in
                 getCartItem(for: item)
             }
         }
@@ -81,7 +75,7 @@ struct CartView: View {
                 .padding(2.0)
             }
             Button {
-                model.remove(item)
+                store.send(.removeTapped(item))
             } label: {
                 Image(systemName: "minus")
             }
@@ -93,65 +87,32 @@ struct CartView: View {
 
     func getImage(for item: MenuItem) -> some View {
         Group {
-            if let url = model.imageUrl(for: item) {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFit()
-                    case .failure, .empty:
-                        Image("pizzza_placeholder")
-                            .resizable()
-                            .scaledToFit()
-                    @unknown default:
-                        fatalError()
-                    }
-                }
-                .frame(width: 75.0)
-            } else {
-                Image("pizzza_placeholder")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 75.0)
-            }
+//            if let url = model.imageUrl(for: item) {
+//                AsyncImage(url: url) { phase in
+//                    switch phase {
+//                    case .success(let image):
+//                        image
+//                            .resizable()
+//                            .scaledToFit()
+//                    case .failure, .empty:
+//                        Image("pizzza_placeholder")
+//                            .resizable()
+//                            .scaledToFit()
+//                    @unknown default:
+//                        fatalError()
+//                    }
+//                }
+//                .frame(width: 75.0)
+//            } else {
+//                Image("pizzza_placeholder")
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(width: 75.0)
+//            }
         }
     }
 
     // MARK: Details section
-
-    @ViewBuilder
-    var detailsSection: some View {
-        Section {
-            Picker("Delivery method", selection: $model.isPickUp) {
-                Text("Pick up").tag(true)
-                Text("Delivery").tag(false)
-            }
-            .pickerStyle(.segmented)
-            if !model.isPickUp {
-                NavigationLink {
-                    VStack {
-                        TextField("Address", text: $model.address)
-                            .textFieldStyle(.roundedBorder)
-                            .padding()
-                        Spacer()
-                    }
-                } label: {
-                    SelectorView(caption: "Your delivery address",
-                                 icon: "location",
-                                 text: "Enter your address")
-                }
-            }
-            NavigationLink {
-                Text("Payment view")
-            } label: {
-                SelectorView(caption: "Payment method",
-                             icon: "creditcard",
-                             text: "Cash")
-            }
-            .disabled(true)
-        }
-    }
 
     // MARK: Total section
 
@@ -159,7 +120,7 @@ struct CartView: View {
     var totalSection: some View {
         Section {
             VStack {
-                ForEach(model.subtotal, id: \.name) { part in
+                ForEach(store.subtotal, id: \.name) { part in
                     if part.isSecondary {
                         HStack {
                             Text(part.name)
@@ -186,7 +147,7 @@ struct CartView: View {
     @ViewBuilder
     var ctaSection: some View {
         Section {
-            switch model.state {
+            switch store.subState {
             case .readyForOrder:
                 orderButton
             case .loading:
@@ -205,7 +166,7 @@ struct CartView: View {
 
     @ViewBuilder
     var liveOrder: some View {
-        if case let .inOrderState(state) = model.state {
+        if case let .inOrderState(state) = store.subState {
             switch state {
             case .new:
                 Text("We have just received your order!")
@@ -226,7 +187,7 @@ struct CartView: View {
     @ViewBuilder
     var orderButton: some View {
         Button {
-            model.placeOrder()
+            store.send(.placeOrder)
         } label: {
             Text("Place order")
                 .font(.headline)
@@ -241,7 +202,7 @@ struct CartView: View {
     }
 }
 
-#Preview {
-    _ = Container.shared.orderRepository.register { mockOrderRepository() }
-    return CartView()
-}
+//#Preview {
+//    _ = Container.shared.orderRepository.register { mockOrderRepository() }
+//    return CartView()
+//}
