@@ -11,8 +11,7 @@ import ComposableArchitecture
 
 struct ContentView: View {
 
-    @State var isShowingMenu = false
-    var store: StoreOf<AppFeature> = Store(initialState: AppFeature.State()) {
+    @Perception.Bindable var store: StoreOf<AppFeature> = Store(initialState: AppFeature.State(cart: Shared([]))) {
         AppFeature()
     }
 
@@ -27,7 +26,7 @@ struct ContentView: View {
             WithPerceptionTracking {
                 if !store.cart.isEmpty {
                     Button {
-                        isShowingMenu = true
+                        store.send(.showMenu)
                     } label: {
                         HStack {
                             Text("Cart")
@@ -44,8 +43,12 @@ struct ContentView: View {
         .task {
             store.send(.launched)
         }
-        .sheet(isPresented: $isShowingMenu) {
-            CartView()
+        .sheet(item: $store.scope(
+            state: \.cartState,
+            action: \.cart
+        )
+        ) { store in
+            CartView(store: store)
         }
     }
 }

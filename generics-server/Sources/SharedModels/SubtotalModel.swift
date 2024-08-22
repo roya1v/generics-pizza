@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SubtotalModel: Codable {
+public struct SubtotalModel: Codable, Equatable {
     public init(name: String, value: Int, isSecondary: Bool = true) {
         self.name = name
         self.value = value
