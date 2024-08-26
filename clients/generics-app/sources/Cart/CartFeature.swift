@@ -24,6 +24,7 @@ struct CartFeature {
 
     enum Action {
         case appeared
+        case dismissTapped
         case removeTapped(MenuItem)
         case placeOrder
         case estimateUpdated(Result<[SubtotalModel], Error>)
@@ -84,6 +85,8 @@ struct CartFeature {
                 case .newState(let orderState):
                     state.subState = .inOrderState(state: orderState)
                 }
+                return .none
+            case .dismissTapped:
                 return .none
             }
         }

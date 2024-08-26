@@ -12,5 +12,6 @@ struct MenuDetailFeature {
 
     enum Action {
         case addTapped
+        case dismissTapped
     }
 }
