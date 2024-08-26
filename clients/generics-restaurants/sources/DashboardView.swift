@@ -55,13 +55,3 @@ struct DashboardView: View {
         }
     }
 }
-
-#Preview {
-    DashboardView(store: Store(
-        initialState: DashboardFeature.State(now: NowFeature.State(),
-                                             orderHistory: OrderHistoryFeature.State(),
-                                             menu: MenuFeature.State())) {
-                                                 DashboardFeature()
-                                             }
-    )
-}

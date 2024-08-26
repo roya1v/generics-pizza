@@ -81,12 +81,3 @@ struct UsersView: View {
         }
     }
 }
-
-#Preview {
-    UsersView(
-        store: Store(
-            initialState: SimpleListState()) {
-                UsersFeature()
-            }
-    )
-}

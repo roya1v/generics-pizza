@@ -62,15 +62,3 @@ struct MenuRowView: View {
         }
     }
 }
-
-#Preview {
-    MenuRowView(
-        item: MenuItem(id: nil,
-                       title: "Super Pepperoni",
-                       description: "Tomato souce, double mozzarela, double pepperoni",
-                       price: 699),
-        imageUrl: nil
-    ) {
-
-    }
-}

@@ -105,9 +105,3 @@ struct NewMenuItemView: View {
         }
     }
 }
-
-#Preview {
-    NewMenuItemView(store: Store(initialState: NewMenuItemFeature.State(), reducer: {
-        NewMenuItemFeature()
-    }))
-}

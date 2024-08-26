@@ -48,11 +48,3 @@ struct CreateAccountView: View {
         }
     }
 }
-
-#Preview {
-    CreateAccountView(store: Store(
-        initialState: CreateAccountFeature.State()) {
-            CreateAccountFeature()
-        }
-    )
-}

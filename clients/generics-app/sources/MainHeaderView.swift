@@ -32,7 +32,3 @@ struct MainHeaderView: View {
         }
     }
 }
-
-#Preview {
-    MainHeaderView()
-}

@@ -77,9 +77,3 @@ struct MenuView: View {
         .listStyle(.plain)
     }
 }
-
-#Preview {
-    MenuView(store: Store(initialState: MenuFeature.State(), reducer: {
-        MenuFeature()
-    }))
-}

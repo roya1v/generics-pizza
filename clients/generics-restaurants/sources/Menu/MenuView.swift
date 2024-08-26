@@ -102,12 +102,3 @@ struct MenuView: View {
         }
     }
 }
-
-#Preview {
-    MenuView(
-        store: Store(
-            initialState: MenuFeature.State()) {
-                MenuFeature()
-            }
-    )
-}

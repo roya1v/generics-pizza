@@ -201,8 +201,3 @@ struct CartView: View {
         .listRowInsets(EdgeInsets())
     }
 }
-
-//#Preview {
-//    _ = Container.shared.orderRepository.register { mockOrderRepository() }
-//    return CartView()
-//}

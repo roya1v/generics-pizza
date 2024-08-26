@@ -39,7 +39,3 @@ struct MenuHeaderView: View {
         }
     }
 }
-
-#Preview {
-    MenuHeaderView()
-}

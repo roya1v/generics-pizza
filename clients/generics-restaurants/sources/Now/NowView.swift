@@ -41,15 +41,6 @@ struct NowView: View {
     }
 }
 
-#Preview {
-    NowView(
-        store: Store(
-            initialState: NowFeature.State()) {
-                NowFeature()
-            }
-    )
-}
-
 extension OrderState {
     func next() -> Self {
         switch self {
