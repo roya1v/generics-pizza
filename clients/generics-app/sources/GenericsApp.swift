@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 @main
 struct GenericsApp: App {
+    static let store = Store(initialState: AppFeature.State(cart: Shared([]))) {
+        AppFeature()
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(store: GenericsApp.store)
         }
     }
 }

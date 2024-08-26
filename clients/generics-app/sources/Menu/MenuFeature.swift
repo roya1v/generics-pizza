@@ -48,10 +48,10 @@ struct MenuFeature {
             case .didSelect(let item):
                 state.menuDetail = MenuDetailFeature.State(item: item)
                 return .none
-            case .menuDetail(.presented(.addTapped)):
-                return .none
-            case .menuDetail(.dismiss):
+            case .menuDetail(.presented(.dismissTapped)):
                 state.menuDetail = .none
+                return .none
+            case .menuDetail:
                 return .none
             }
         }

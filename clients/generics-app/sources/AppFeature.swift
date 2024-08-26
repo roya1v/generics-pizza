@@ -35,6 +35,7 @@ struct AppFeature {
                 if let item = state.menu.menuDetail?.item {
                     state.cart.append(item)
                 }
+                state.menu.menuDetail = nil
                 return .none
             case .showMenu:
                 guard !state.cart.isEmpty else {
@@ -43,6 +44,9 @@ struct AppFeature {
                 state.cartState = CartFeature.State(items: state.$cart)
                 return .none
             case .menu:
+                return .none
+            case .cart(.presented(.dismissTapped)):
+                state.cartState = nil
                 return .none
             case .cart:
                 return .none

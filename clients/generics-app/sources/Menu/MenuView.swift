@@ -16,18 +16,19 @@ struct MenuView: View {
     @Perception.Bindable var store: StoreOf<MenuFeature>
 
     var body: some View {
-        NavigationView {
-            ZStack {
-                Color.gLight
-                    .ignoresSafeArea()
-                VStack {
-                    MainHeaderView()
-                        .padding()
-                    ZStack {
-                        RoundedRectangle(cornerRadius: .gBig)
-                            .fill(Color.white)
-                            .ignoresSafeArea()
-                        WithPerceptionTracking {
+        WithPerceptionTracking {
+            NavigationView {
+                ZStack {
+                    Color.gLight
+                        .ignoresSafeArea()
+                    VStack {
+                        MainHeaderView()
+                            .padding()
+                        ZStack {
+                            RoundedRectangle(cornerRadius: .gBig)
+                                .fill(Color.white)
+                                .ignoresSafeArea()
+
                             VStack {
                                 MenuHeaderView()
                                 switch store.content {
@@ -60,20 +61,22 @@ struct MenuView: View {
     }
 
     func menu(state: MenuFeature.State) -> some View {
-        guard case let .loaded(items) = state.content else {
-            fatalError()
-        }
-        return List(items) { item in
-            MenuRowView(
-                item: item,
-                imageUrl: item.id != nil
-                ? state.imageUrls[item.id!]
-                : nil
-            ) {
-                store.send(.didSelect(item))
+        WithPerceptionTracking {
+            guard case let .loaded(items) = state.content else {
+                fatalError()
             }
-            .listRowSeparator(.hidden)
+            return List(items) { item in
+                MenuRowView(
+                    item: item,
+                    imageUrl: item.id != nil
+                    ? state.imageUrls[item.id!]
+                    : nil
+                ) {
+                    store.send(.didSelect(item))
+                }
+                .listRowSeparator(.hidden)
+            }
+            .listStyle(.plain)
         }
-        .listStyle(.plain)
     }
 }
