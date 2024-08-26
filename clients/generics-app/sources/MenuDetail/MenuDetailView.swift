@@ -117,14 +117,3 @@ struct MenuDetailView: View {
         }
     }
 }
-
-//#Preview {
-//    NavigationView {
-//        MenuDetailView(item: MenuItem(
-//            id: nil,
-//            title: "Super Pepperoni",
-//            description: "",
-//            price: 699)
-//        )
-//    }
-//}

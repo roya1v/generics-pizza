@@ -38,12 +38,3 @@ struct OrderHistoryView: View {
         }
     }
 }
-
-#Preview {
-    OrderHistoryView(
-        store: Store(
-            initialState: SimpleListState()) {
-                OrderHistoryFeature()
-            }
-    )
-}

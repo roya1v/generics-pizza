@@ -71,7 +71,3 @@ struct OrderDestinationView: View {
         })
     }
 }
-
-#Preview {
-    OrderDestinationView()
-}

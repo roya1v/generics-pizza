@@ -39,12 +39,3 @@ struct OrderListRowView: View {
         }
     }
 }
-
-#Preview {
-    OrderListRowView(order: OrderModel(createdAt: Date.now,
-                                       items: [],
-                                       state: .new,
-                                       type: .pickUp)) {
-        print("Hello world!")
-    }
-}

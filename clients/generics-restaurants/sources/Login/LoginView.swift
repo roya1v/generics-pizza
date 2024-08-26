@@ -46,9 +46,3 @@ struct LoginView: View {
         }
     }
 }
-
-#Preview {
-    LoginView(store: Store(initialState: LoginFeature.State()) {
-        LoginFeature()
-    })
-}
