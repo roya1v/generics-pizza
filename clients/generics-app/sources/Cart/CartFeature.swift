@@ -10,6 +10,7 @@ struct CartFeature {
     @ObservableState
     struct State: Equatable {
         @Shared var items: [MenuItem]
+        @Shared var destination: OrderType
         var subtotal = [SubtotalModel]()
     }
 
@@ -29,20 +30,20 @@ struct CartFeature {
         Reduce { state, action in
             switch action {
             case .appeared:
-                return .run { send in
+                return .run { [state] send in
                     await send(
                         .estimateUpdated(
-                            Result { try await repository.checkPrice(for: []) }
+                            Result { try await repository.checkPrice(for: state.items, destination: state.destination) }
                         )
                     )
                 }
             case .removeTapped:
                 return .none
             case .placeOrder:
-                return .run { send in
+                return .run { [state] send in
                     await send(
                         .orderPlaced(
-                            Result { try await repository.placeOrder(for: []) }
+                            Result { try await repository.placeOrder(for: state.items, destination: state.destination) }
                         )
                     )
                 }

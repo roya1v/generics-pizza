@@ -16,12 +16,22 @@ struct ContentView: View {
     var body: some View {
         WithPerceptionTracking {
             ZStack(alignment: .bottomTrailing) {
-                MenuView(
-                    store: store.scope(
-                        state: \.menu,
-                        action: \.menu
-                    )
-                )
+                NavigationView {
+                    ZStack {
+                        Color.gLight
+                            .ignoresSafeArea()
+                        VStack {
+                            MainHeaderView(store: store)
+                                .padding()
+                            MenuView(
+                                store: store.scope(
+                                    state: \.menu,
+                                    action: \.menu
+                                )
+                            )
+                        }
+                    }
+                }
 
                 if !store.cart.isEmpty {
                     Button {
@@ -66,6 +76,13 @@ struct ContentView: View {
             )
             ) { store in
                 TrackingView(store: store)
+            }
+            .fullScreenCover(item: $store.scope(
+                state: \.orderDestination,
+                action: \.orderDestination
+            )
+            ) { store in
+                OrderDestinationView(store: store)
             }
         }
     }

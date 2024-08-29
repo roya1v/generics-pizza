@@ -11,16 +11,20 @@ struct AppFeature {
         var currentOrder: OrderModel?
         @Presents var cartState: CartFeature.State?
         @Presents var trackingState: TrackingFeature.State?
+        @Presents var orderDestination: OrderDestinationFeature.State? = .init()
         var menu = MenuFeature.State()
         @Shared var cart: [MenuItem]
+        @Shared var destination: OrderType
     }
 
     enum Action {
         case launched
         case showMenu
+        case showOrderDestination
         case menu(MenuFeature.Action)
         case cart(PresentationAction<CartFeature.Action>)
         case tracking(PresentationAction<TrackingFeature.Action>)
+        case orderDestination(PresentationAction<OrderDestinationFeature.Action>)
     }
 
     @Injected(\.menuRepository)
@@ -30,7 +34,7 @@ struct AppFeature {
     private var orderRepository
 
     var body: some ReducerOf<Self> {
-        Reduce { state, action in
+        Reduce<State, Action> { state, action in
             switch action {
             case .launched:
                 return .none
@@ -44,7 +48,8 @@ struct AppFeature {
                 guard !state.cart.isEmpty else {
                     fatalError("Hello")
                 }
-                state.cartState = CartFeature.State(items: state.$cart)
+                state.cartState = CartFeature.State(items: state.$cart,
+                                                    destination: state.$destination)
                 return .none
             case .menu:
                 return .none
@@ -64,6 +69,11 @@ struct AppFeature {
                 return .none
             case .tracking:
                 return .none
+            case .orderDestination:
+                return .none
+            case .showOrderDestination:
+                state.orderDestination = OrderDestinationFeature.State()
+                return .none
             }
         }
         .ifLet(\.$cartState, action: \.cart) {
@@ -71,6 +81,9 @@ struct AppFeature {
         }
         .ifLet(\.$trackingState, action: \.tracking) {
             TrackingFeature()
+        }
+        .ifLet(\.$orderDestination, action: \.orderDestination) {
+            OrderDestinationFeature()
         }
         Scope(state: \.menu, action: \.menu) {
             MenuFeature()
