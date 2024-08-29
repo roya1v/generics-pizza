@@ -17,33 +17,24 @@ struct MenuView: View {
 
     var body: some View {
         WithPerceptionTracking {
-            NavigationView {
-                ZStack {
-                    Color.gLight
-                        .ignoresSafeArea()
-                    VStack {
-                        MainHeaderView()
-                            .padding()
-                        ZStack {
-                            RoundedRectangle(cornerRadius: .gBig)
-                                .fill(Color.white)
-                                .ignoresSafeArea()
+            ZStack {
+                RoundedRectangle(cornerRadius: .gBig)
+                    .fill(Color.white)
+                    .ignoresSafeArea()
 
-                            VStack {
-                                MenuHeaderView()
-                                switch store.content {
-                                case .loading:
-                                    ProgressView()
-                                case .error(let error):
-                                    Text(error)
-                                case .loaded:
-                                    menu(state: store.state)
-                                }
-                            }
-                        }
+                VStack {
+                    MenuHeaderView()
+                    switch store.content {
+                    case .loading:
+                        ProgressView()
+                    case .error(let error):
+                        Text(error)
+                    case .loaded:
+                        menu(state: store.state)
                     }
                 }
             }
+
             .fullScreenCover(
                 item: $store.scope(
                     state: \.menuDetail,

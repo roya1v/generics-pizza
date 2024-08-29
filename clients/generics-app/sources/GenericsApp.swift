@@ -10,7 +10,8 @@ import ComposableArchitecture
 
 @main
 struct GenericsApp: App {
-    static let store = Store(initialState: AppFeature.State(cart: Shared([]))) {
+    static let store = Store(initialState: AppFeature.State(cart: Shared([]),
+                                                            destination: Shared(.pickUp))) {
         AppFeature()
     }
 

@@ -1,73 +1,56 @@
 import SwiftUI
 import MapKit
 import clients_libraries_GenericsUI
-
-enum OrderDestination: Hashable {
-    case restaurant, delivery
-}
+import ComposableArchitecture
+import SharedModels
 
 struct OrderDestinationView: View {
 
-    @State var destination = OrderDestination.delivery
+    @Perception.Bindable var store: StoreOf<OrderDestinationFeature>
 
     var body: some View {
-        ZStack(alignment: .top) {
-            Map(coordinateRegion: .constant(.init()))
-                .ignoresSafeArea()
-            HStack {
-                Button {
-
-                } label: {
-                    Image(systemName: "xmark")
-                        .foregroundStyle(Color.white)
-                        .padding(.gNormal)
-                        .background(Circle().fill(Color.gAccent))
-                }
-                Picker(
-                    "type",
-                    selection: $destination) {
-                        Text("Delivery")
-                            .tag(OrderDestination.delivery)
-                        Text("Restaurant")
-                            .tag(OrderDestination.restaurant)
+        WithPerceptionTracking {
+            ZStack(alignment: .top) {
+                Map(coordinateRegion: .constant(.init()))
+                    .ignoresSafeArea()
+                HStack {
+                    Button {
+                        store.send(.dismissTapped)
+                    } label: {
+                        Image(systemName: "xmark")
+                            .foregroundStyle(Color.white)
+                            .padding(.gNormal)
+                            .background(Circle().fill(Color.gAccent))
                     }
-                    .pickerStyle(.segmented)
+                    Picker(
+                        "type",
+                        selection: $store.destination) {
+                            Text("Delivery")
+                                .tag(OrderDestinationFeature.State.Destination.delivery)
+                            Text("Restaurant")
+                                .tag(OrderDestinationFeature.State.Destination.restaurant)
+                        }
+                        .pickerStyle(.segmented)
+                        .disabled(true)
+                }
+                .padding(.gBig)
             }
-            .padding(.gBig)
+            .sheet(isPresented: .constant(true)) {
+                VStack {
+                    Text("Restaurant #1")
+                    Button {
+                        store.send(.confirm)
+                    } label: {
+                        Text("Order here")
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 32.0)
+                    }
+                    .buttonStyle(GPrimaryButtonStyle())
+
+                }
+                .padding()
+                .presentationDetents([.height(120.0)])
+            }
         }
-        .sheet(isPresented: .constant(true), content: {
-            VStack {
-                TextField("Street and house number", text: .constant(""))
-                    .textFieldStyle(.roundedBorder)
-
-                HStack {
-                    TextField("Entrance", text: .constant(""))
-                        .textFieldStyle(.roundedBorder)
-
-                    TextField("Intercome", text: .constant(""))
-                        .textFieldStyle(.roundedBorder)
-
-                }
-                HStack {
-                    TextField("Floor", text: .constant(""))
-                        .textFieldStyle(.roundedBorder)
-
-                    TextField("Appartment", text: .constant(""))
-                        .textFieldStyle(.roundedBorder)
-
-                }
-                TextField("Comment", text: .constant(""))
-                    .textFieldStyle(.roundedBorder)
-                Button {
-                } label: {
-                    Text("Order here")
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 32.0)
-                }
-                .buttonStyle(GPrimaryButtonStyle())
-
-            }
-                .presentationDetents([.fraction(1.0 / 3.0)])
-        })
     }
 }
