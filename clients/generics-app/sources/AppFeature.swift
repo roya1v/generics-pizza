@@ -8,7 +8,9 @@ import clients_libraries_GenericsCore
 struct AppFeature {
     @ObservableState
     struct State {
+        var currentOrder: OrderModel?
         @Presents var cartState: CartFeature.State?
+        @Presents var trackingState: TrackingFeature.State?
         var menu = MenuFeature.State()
         @Shared var cart: [MenuItem]
     }
@@ -18,6 +20,7 @@ struct AppFeature {
         case showMenu
         case menu(MenuFeature.Action)
         case cart(PresentationAction<CartFeature.Action>)
+        case tracking(PresentationAction<TrackingFeature.Action>)
     }
 
     @Injected(\.menuRepository)
@@ -45,15 +48,29 @@ struct AppFeature {
                 return .none
             case .menu:
                 return .none
+            case .cart(.presented(.orderPlaced(.success(let order)))):
+                state.cart = []
+                state.cartState = nil
+                state.currentOrder = order
+                state.trackingState = TrackingFeature.State(order: order)
+                return .none
             case .cart(.presented(.dismissTapped)):
                 state.cartState = nil
                 return .none
             case .cart:
                 return .none
+            case .tracking(.presented(.newState(.finished))):
+                state.currentOrder = nil
+                return .none
+            case .tracking:
+                return .none
             }
         }
         .ifLet(\.$cartState, action: \.cart) {
             CartFeature()
+        }
+        .ifLet(\.$trackingState, action: \.tracking) {
+            TrackingFeature()
         }
         Scope(state: \.menu, action: \.menu) {
             MenuFeature()

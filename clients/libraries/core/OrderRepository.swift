@@ -20,7 +20,8 @@ public enum OrderError: Error {
 
 public protocol OrderRepository {
     func checkPrice(for items: [MenuItem]) async throws -> [SubtotalModel]
-    func placeOrder(for items: [MenuItem]) async throws -> AnyPublisher<CustomerFromServerMessage, Error>
+    func placeOrder(for items: [MenuItem]) async throws -> OrderModel
+    func trackOrder(_ order: OrderModel) async throws -> AnyPublisher<CustomerFromServerMessage, Error>
 }
 
 final class OrderRepositoryImpl: OrderRepository {
@@ -42,9 +43,17 @@ final class OrderRepositoryImpl: OrderRepository {
             .perform()
     }
 
-    func placeOrder(for items: [MenuItem]) async throws -> AnyPublisher<CustomerFromServerMessage, Error> {
-        let order = try await makeOrderRequest(items: items)
+    func placeOrder(for items: [MenuItem]) async throws -> OrderModel {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return try await getRequest()
+            .body(OrderModel(createdAt: nil, items: items, type: .pickUp))
+            .decode(to: OrderModel.self)
+            .set(jsonDecoder: decoder)
+            .perform()
+    }
 
+    func trackOrder(_ order: OrderModel) async throws -> AnyPublisher<CustomerFromServerMessage, Error> {
         socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
             .add(path: "order")
             .add(path: "activity")
@@ -62,16 +71,6 @@ final class OrderRepositoryImpl: OrderRepository {
             })
             .decode(type: CustomerFromServerMessage.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
-    }
-
-    private func makeOrderRequest(items: [MenuItem]) async throws -> OrderModel {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        return try await getRequest()
-            .body(OrderModel(createdAt: nil, items: items, type: .pickUp))
-            .decode(to: OrderModel.self)
-            .set(jsonDecoder: decoder)
-            .perform()
     }
 
     private func getRequest() -> SwiftlyHttp {

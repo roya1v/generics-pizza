@@ -22,13 +22,26 @@ struct ContentView: View {
                         action: \.menu
                     )
                 )
-                
+
                 if !store.cart.isEmpty {
                     Button {
                         store.send(.showMenu)
                     } label: {
                         HStack {
                             Text("Cart")
+                            Image(systemName: "cart")
+                        }
+                        .padding(.gNormal)
+                    }
+                    .buttonStyle(GPrimaryButtonStyle())
+                    .padding()
+                }
+                if store.currentOrder != nil {
+                    Button {
+                        store.send(.showMenu)
+                    } label: {
+                        HStack {
+                            Text("Track order")
                             Image(systemName: "cart")
                         }
                         .padding(.gNormal)
@@ -46,6 +59,13 @@ struct ContentView: View {
             )
             ) { store in
                 CartView(store: store)
+            }
+            .sheet(item: $store.scope(
+                state: \.trackingState,
+                action: \.tracking
+            )
+            ) { store in
+                TrackingView(store: store)
             }
         }
     }
