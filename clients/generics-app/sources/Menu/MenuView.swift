@@ -53,21 +53,18 @@ struct MenuView: View {
 
     func menu(state: MenuFeature.State) -> some View {
         WithPerceptionTracking {
-            guard case let .loaded(items) = state.content else {
-                fatalError()
-            }
-            return List(items) { item in
-                MenuRowView(
-                    item: item,
-                    imageUrl: item.id != nil
-                    ? state.imageUrls[item.id!]
-                    : nil
-                ) {
-                    store.send(.didSelect(item))
+            if let items = store.content.items {
+                List(items) { item in
+                    MenuRowView(
+                        item: item
+                    ) {
+                        store.send(.didSelect(item.id!))
+                    }
+                    .listRowSeparator(.hidden)
                 }
-                .listRowSeparator(.hidden)
+                .listStyle(.plain)
             }
-            .listStyle(.plain)
+
         }
     }
 }

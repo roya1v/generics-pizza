@@ -11,7 +11,7 @@ struct AppFeature {
         var currentOrder: OrderModel?
         @Presents var cartState: CartFeature.State?
         @Presents var trackingState: TrackingFeature.State?
-        @Presents var orderDestination: OrderDestinationFeature.State? = .init()
+        @Presents var orderDestination: OrderDestinationFeature.State?
         var menu = MenuFeature.State()
         @Shared var cart: [MenuItem]
         @Shared var destination: OrderType
