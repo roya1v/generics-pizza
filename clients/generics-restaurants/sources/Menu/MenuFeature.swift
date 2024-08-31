@@ -9,6 +9,7 @@ import Foundation
 import ComposableArchitecture
 import SharedModels
 import Factory
+import clients_libraries_GenericsCore
 
 @Reducer
 struct MenuFeature {
@@ -16,15 +17,8 @@ struct MenuFeature {
     struct State: Equatable {
         @Presents var deleteConfirmationDialog: ConfirmationDialogState<Action.DeleteConfirmationDialogAction>?
         @Presents var newItem: NewMenuItemFeature.State?
-        var menuState = MenuState.loaded([])
+        var menuState = SimpleListState<MenuItem>()
         var imageUrls = [MenuItem.ID: URL]()
-
-        @CasePathable
-        enum MenuState: Equatable {
-            case loading
-            case error(String)
-            case loaded(IdentifiedArrayOf<MenuItem>)
-        }
     }
 
     enum Action {
@@ -44,8 +38,8 @@ struct MenuFeature {
     @Injected(\.menuRepository)
     var repository
 
-    var body: some Reducer<State, Action> {
-        Reduce { state, action in
+    var body: some ReducerOf<Self> {
+        Reduce<State, Action> { state, action in
             switch action {
             case .shown:
                 state.menuState = .loading

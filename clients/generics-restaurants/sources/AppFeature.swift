@@ -31,7 +31,7 @@ struct AppFeature {
     var repository
 
     var body: some ReducerOf<Self> {
-        Reduce { state, action in
+        Reduce<State, Action> { state, action in
             switch action {
             case .dashboard:
                 return .none
