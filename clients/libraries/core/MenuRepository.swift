@@ -14,7 +14,6 @@ import Factory
 extension Container {
     public var menuRepository: Factory<MenuRepository> {
         self { MenuRepositoryImp(baseURL: self.serverUrl(), authenticationProvider: nil) }
-            .onPreview { MenuRepositoryPreview() }
     }
 }
 
@@ -29,11 +28,13 @@ public protocol MenuRepository {
     func create(item: MenuItem) async throws -> MenuItem
     func delete(item: MenuItem) async throws
     func imageUrl(for item: MenuItem) -> URL?
+    func getImage(forItemId id: UUID) async throws -> ImageData
     func setImage(from localUrl: URL, for item: MenuItem) async throws
 }
 
 enum MenuRepositoryError: Error {
     case invalidFile
+    case httpError(Int)
 }
 
 final class MenuRepositoryImp: MenuRepository {
@@ -73,6 +74,22 @@ final class MenuRepositoryImp: MenuRepository {
         return URL(string: "\(baseURL)/menu/\(idString)/image")
     }
 
+    func getImage(forItemId id: UUID) async throws -> ImageData {
+        let (data, response) = try await getRequest()
+            .method(.get)
+            .add(path: "\(id.uuidString)")
+            .add(path: "image")
+            .perform()
+        guard let response = response as? HTTPURLResponse,
+              (200...299).contains(response.statusCode) else {
+            throw MenuRepositoryError.httpError(500)
+        }
+        guard let image = ImageData(data: data) else {
+            fatalError()
+        }
+        return image
+    }
+
     private func getRequest() -> SwiftlyHttp {
         SwiftlyHttp(baseURL: baseURL)!
             .add(path: "menu")
@@ -103,30 +120,5 @@ final class MenuRepositoryImp: MenuRepository {
                 try? self.authenticationProvider?.getAuthentication()
             })
             .perform()
-    }
-}
-
-private class MenuRepositoryPreview: MenuRepository {
-    func fetchMenu() async throws -> [MenuItem] {
-            Array(repeating: MenuItem(id: nil,
-                                      title: "Super Pepperoni",
-                                      description: "Tomato souce, double mozzarela, double pepperoni",
-                                      price: 699), count: 12)
-    }
-
-    func create(item: SharedModels.MenuItem) async throws -> SharedModels.MenuItem {
-        fatalError()
-    }
-
-    func delete(item: SharedModels.MenuItem) async throws {
-        fatalError()
-    }
-
-    func imageUrl(for item: SharedModels.MenuItem) -> URL? {
-        return nil
-    }
-
-    func setImage(from localUrl: URL, for item: SharedModels.MenuItem) async throws {
-        fatalError()
     }
 }

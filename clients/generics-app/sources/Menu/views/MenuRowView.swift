@@ -11,23 +11,22 @@ import clients_libraries_GenericsUI
 
 struct MenuRowView: View {
 
-    let item: MenuItem
-    let imageUrl: URL?
+    let item: MenuFeature.State.Item
     let action: () -> Void
 
     var body: some View {
         HStack {
             getImage(for: item)
             VStack(alignment: .leading) {
-                Text(item.title)
+                Text(item.item.title)
                     .font(.headline)
-                Text(item.description)
+                Text(item.item.description)
                     .font(.gCaption)
                     .foregroundStyle(.secondary)
                 Button {
                     action()
                 } label: {
-                    Text(item.formattedPrice())
+                    Text(item.item.formattedPrice())
                         .font(.caption)
                 }
                 .buttonStyle(GPrimaryButtonStyle())
@@ -35,24 +34,13 @@ struct MenuRowView: View {
         }
     }
 
-    func getImage(for item: MenuItem) -> some View {
+    func getImage(for item: MenuFeature.State.Item) -> some View {
         Group {
-            if let imageUrl {
-                AsyncImage(url: imageUrl) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFit()
-                    case .failure, .empty:
-                        Image("pizzza_placeholder")
-                            .resizable()
-                            .scaledToFit()
-                    @unknown default:
-                        fatalError()
-                    }
-                }
-                .frame(width: 75.0)
+            if let image = item.image {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 75.0)
             } else {
                 Image("pizzza_placeholder")
                     .resizable()

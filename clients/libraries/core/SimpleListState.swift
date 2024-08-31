@@ -9,4 +9,20 @@ public enum SimpleListState<Item: Identifiable & Equatable>: Equatable {
     public init() {
         self = .loaded([])
     }
+
+    public var items: IdentifiedArrayOf<Item>? {
+        get {
+            if case let .loaded(items) = self {
+                return items
+            } else {
+                return nil
+            }
+        }
+        set {
+            if let newValue {
+                self = .loaded(newValue)
+            }
+        }
+
+    }
 }
