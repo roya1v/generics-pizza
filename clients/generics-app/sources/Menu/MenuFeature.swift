@@ -62,7 +62,7 @@ struct MenuFeature {
                 return .none
             case .didSelect(let id):
                 if let item = state.content.items?[id: id] {
-                    state.menuDetail = MenuDetailFeature.State(item: item.item)
+                    state.menuDetail = MenuDetailFeature.State(image: item.image, item: item.item)
                 }
                 return .none
             case .menuDetail(.presented(.dismissTapped)):

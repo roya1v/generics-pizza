@@ -33,12 +33,19 @@ struct MenuDetailView: View {
                         RoundedRectangle(cornerRadius: 32.0)
                             .fill(gradient)
                         VStack {
-                            Image("menu_pizza")
-                                .resizable()
-                                .scaledToFit()
-                                .padding()
+                            Group {
+                                if let image = store.image {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .scaledToFit()
+                                } else {
+                                    Image("pizzza_placeholder")
+                                        .resizable()
+                                        .scaledToFit()
+                                }
+                            }
                             // How to do that correctly on iOS 16?
-                                .padding([.top], 72.0)
+                            .padding([.top], 100.0)
 
                             Picker(
                                 "Size",

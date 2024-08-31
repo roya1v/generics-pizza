@@ -7,6 +7,7 @@ import clients_libraries_GenericsCore
 struct MenuDetailFeature {
     @ObservableState
     struct State: Equatable {
+        var image: ImageData?
         let item: MenuItem
     }
 
