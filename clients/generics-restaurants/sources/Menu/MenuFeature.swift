@@ -17,8 +17,16 @@ struct MenuFeature {
     struct State: Equatable {
         @Presents var deleteConfirmationDialog: ConfirmationDialogState<Action.DeleteConfirmationDialogAction>?
         @Presents var newItem: NewMenuItemFeature.State?
-        var menuState = SimpleListState<MenuItem>()
-        var imageUrls = [MenuItem.ID: URL]()
+        var menuState = SimpleListState<Item>()
+
+        struct Item: Equatable, Identifiable {
+            var item: MenuItem
+            var image: ImageData?
+
+            var id: UUID? {
+                item.id
+            }
+        }
     }
 
     enum Action {
@@ -26,6 +34,8 @@ struct MenuFeature {
         case loaded(Result<[MenuItem], Error>)
         case delete(MenuItem)
         case deleteConfirmationDialog(PresentationAction<DeleteConfirmationDialogAction>)
+        case deletionCompleted(id: State.Item.ID, result: Result<Void, Error>)
+        case imageLoaded(id: State.Item.ID, result: Result<ImageData, Error>)
         case newItem(PresentationAction<NewMenuItemFeature.Action>)
         case newItemButtonTapped
 
@@ -51,11 +61,19 @@ struct MenuFeature {
                     )
                 }
             case .loaded(.success(let items)):
-                items.forEach { item in
-                    state.imageUrls[item.id] = repository.imageUrl(for: item)
-                }
-                state.menuState = .loaded(IdentifiedArray(uniqueElements: items))
-                return .none
+                state.menuState = .loaded(IdentifiedArray(uniqueElements: items.map { State.Item(item: $0)}))
+                return .merge(
+                    items.map { item in
+                            .run { send in
+                                await send(
+                                    .imageLoaded(
+                                        id: item.id,
+                                        result: Result { try await repository.getImage(forItemId: item.id!) }
+                                    )
+                                )
+                            }
+                    }
+                )
             case .loaded(.failure(let error)):
                 state.menuState = .error(error.localizedDescription)
                 return .none
@@ -72,12 +90,31 @@ struct MenuFeature {
                 }
                 return .none
             case .deleteConfirmationDialog(.presented(.delete(let item))):
+                return .run { send in
+                    await send(
+                        .deletionCompleted(
+                            id: item.id,
+                            result: Result { try await repository.delete(item: item) }
+                        ),
+                        animation: .default)
+                }
+            case .deletionCompleted(id: let id, result: .success):
+                state.menuState.items?.remove(id: id)
+                return .none
+            case .deletionCompleted(id: let id, result: .failure(let error)):
+                print("Error: \(error) for id: \(String(describing: id))")
                 return .none
             case .newItemButtonTapped:
                 state.newItem = NewMenuItemFeature.State()
                 return .none
             case .newItem(.presented(.cancelTapped)):
                 state.newItem = nil
+                return .none
+            case .imageLoaded(id: let id, result: .success(let image)):
+                state.menuState.items?[id: id]?.image = image
+                return .none
+            case .imageLoaded(id: let id, result: .failure(let error)):
+                print("Error: \(error) for id: \(String(describing: id))")
                 return .none
             case .deleteConfirmationDialog:
                 return .none

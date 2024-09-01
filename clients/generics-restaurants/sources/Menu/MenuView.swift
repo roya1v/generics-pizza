@@ -55,33 +55,27 @@ struct MenuView: View {
         }
     }
 
-    func listRow(for item: MenuItem) -> some View {
+    func listRow(for item: MenuFeature.State.Item) -> some View {
         HStack {
-            if let url = store.imageUrls[item.id] {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFit()
-                    case .failure, .empty:
-                        Image("pizzza_placeholder")
-                            .resizable()
-                            .scaledToFit()
-                    @unknown default:
-                        fatalError()
-                    }
-                }
-                .frame(width: 75.0)
+            if let image = item.image {
+                Image(nsImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 75.0)
+            } else {
+                Image("pizzza_placeholder")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 75.0)
             }
             VStack(alignment: .leading) {
-                Text(item.title)
+                Text(item.item.title)
                     .font(.title2)
-                Text(item.description)
+                Text(item.item.description)
                     .font(.caption)
             }
             Spacer()
-            Text(item.formattedPrice())
+            Text(item.item.formattedPrice())
                 .bold()
                 .padding()
             Button {
@@ -95,7 +89,7 @@ struct MenuView: View {
         }
         .contextMenu {
             Button {
-                store.send(.delete(item))
+                store.send(.delete(item.item))
             } label: {
                 Text("Delete item")
             }
