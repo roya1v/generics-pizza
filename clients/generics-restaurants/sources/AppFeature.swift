@@ -22,7 +22,6 @@ struct AppFeature {
     enum Action {
         case launched
         case stateUpdated(AuthenticationState)
-        case logoutTapped
         case auth(AuthFeature.Action)
         case dashboard(DashboardFeature.Action)
     }
@@ -48,11 +47,6 @@ struct AppFeature {
                             .receive(on: DispatchQueue.main)
                     }
                 )
-            case .logoutTapped:
-                return .run { _ in
-                    // TODO: Implement proper error handling
-                    try await repository.signOut()
-                }
             case .stateUpdated(let newState):
                 switch newState {
                 case .unknown:

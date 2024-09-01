@@ -26,7 +26,11 @@ struct DashboardFeature {
         case orderHistory(OrderHistoryFeature.Action)
         case menu(MenuFeature.Action)
         case users(UsersFeature.Action)
+        case signOutTapped
     }
+
+    @Injected(\.authenticationRepository)
+    var repository
 
     var body: some ReducerOf<Self> {
         Scope(state: \.now, action: \.now) {
@@ -38,7 +42,7 @@ struct DashboardFeature {
         Scope(state: \.menu, action: \.menu) {
             MenuFeature()
         }
-        Reduce { _, action in
+        Reduce<State, Action> { _, action in
             switch action {
             case .now:
                 return .none
@@ -48,6 +52,11 @@ struct DashboardFeature {
                 return .none
             case .users:
                 return .none
+            case .signOutTapped:
+                return .run { _ in
+                    // TODO: Add loading and error handling
+                    try await repository.signOut()
+                }
             }
         }
         .ifLet(\.users, action: \.users) {

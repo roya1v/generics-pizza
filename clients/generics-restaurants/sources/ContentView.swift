@@ -13,9 +13,7 @@ import ComposableArchitecture
 
 struct ContentView: View {
 
-    var store: StoreOf<AppFeature> = Store(initialState: AppFeature.State.loading) {
-        AppFeature()
-    }
+    let store: StoreOf<AppFeature>
 
     var body: some View {
         WithPerceptionTracking {
