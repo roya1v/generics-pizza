@@ -11,19 +11,19 @@ import ComposableArchitecture
 
 @main
 struct GenericsRestaurantsApp: App {
-
-    @Injected(\.authenticationRepository) private var repository
+    
+    static let store = Store(initialState: AppFeature.State.loading) {
+        AppFeature()
+    }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(store: Self.store)
         }
         .commands {
             CommandGroup(after: .appSettings) {
                 Button("Sign out") {
-                    Task {
-                        try? await repository.signOut()
-                    }
+                    Self.store.send(.dashboard(.signOutTapped))
                 }
             }
         }
