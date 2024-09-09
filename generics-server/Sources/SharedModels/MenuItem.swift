@@ -1,10 +1,3 @@
-//
-//  MenuItem.swift
-//  
-//
-//  Created by Mike S. on 12/03/2023.
-//
-
 import Foundation
 
 public struct MenuItem: Codable, Identifiable, Equatable {

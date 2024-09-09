@@ -1,10 +1,3 @@
-//
-//  MapPointModel.swift
-//  
-//
-//  Created by Mike S. on 31/08/2023.
-//
-
 import Foundation
 
 public struct AddressModel: Codable {

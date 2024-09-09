@@ -1,10 +1,3 @@
-//
-//  SwiftUIView.swift
-//  
-//
-//  Created by Mike S. on 14/05/2023.
-//
-
 import SwiftUI
 
 public struct SelectorView: View {

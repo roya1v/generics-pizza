@@ -1,10 +1,3 @@
-//
-//  CreateAccountView.swift
-//  GenericsRestaurants
-//
-//  Created by Mike S. on 15/07/2024.
-//
-
 import SwiftUI
 import ComposableArchitecture
 

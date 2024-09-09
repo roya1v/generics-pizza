@@ -1,10 +1,3 @@
-//
-//  MenuItem+formattedPrice.swift
-//  GenericsApp
-//
-//  Created by Mike S. on 17/06/2023.
-//
-
 import Foundation
 import SharedModels
 

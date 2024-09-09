@@ -1,10 +1,3 @@
-//
-//  Container+Repositories.swift
-//  GenericsRestaurants
-//
-//  Created by Mike S. on 12/04/2023.
-//
-
 import Foundation
 import Factory
 import clients_libraries_GenericsCore

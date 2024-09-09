@@ -1,10 +1,3 @@
-//
-//  UserEntry+Migration.swift
-//  
-//
-//  Created by Mike Shevelinsky on 13/02/2023.
-//
-
 import Fluent
 import Vapor
 

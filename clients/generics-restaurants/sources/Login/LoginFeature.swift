@@ -1,10 +1,3 @@
-//
-//  LoginFeature.swift
-//  GenericsRestaurants
-//
-//  Created by Mike S. on 06/06/2024.
-//
-
 import Foundation
 import ComposableArchitecture
 import Factory

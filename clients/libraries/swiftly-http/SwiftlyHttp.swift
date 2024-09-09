@@ -1,10 +1,3 @@
-//
-//  SwiftlyHttp.swift
-//  
-//
-//  Created by Mike Shevelinsky on 15/02/2023.
-//
-
 import Foundation
 import Combine
 

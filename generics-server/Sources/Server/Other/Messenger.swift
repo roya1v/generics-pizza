@@ -1,10 +1,3 @@
-//
-//  Messenger.swift
-//  
-//
-//  Created by Mike S. on 16/08/2023.
-//
-
 import Vapor
 
 final class Messenger<IncomingMessage, OutgoingMessage>

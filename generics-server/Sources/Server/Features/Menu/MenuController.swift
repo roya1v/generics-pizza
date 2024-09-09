@@ -1,10 +1,3 @@
-//
-//  MenuController.swift
-//  
-//
-//  Created by Mike Shevelinsky on 01/02/2023.
-//
-
 import Fluent
 import Vapor
 import SharedModels

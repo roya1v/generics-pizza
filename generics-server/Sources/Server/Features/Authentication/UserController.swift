@@ -1,10 +1,3 @@
-//
-//  UserController.swift
-//
-//
-//  Created by Mike S. on 19/11/2023.
-//
-
 import Fluent
 import Vapor
 

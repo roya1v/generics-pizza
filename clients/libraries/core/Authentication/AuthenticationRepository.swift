@@ -1,10 +1,3 @@
-//
-//  AuthenticationRepository.swift
-//  GenericsRestaurants
-//
-//  Created by Mike S. on 15/02/2023.
-//
-
 import Foundation
 import Combine
 import clients_libraries_SwiftlyHttp

@@ -1,10 +1,3 @@
-//
-//  LoginView.swift
-//  GenericsRestaurants
-//
-//  Created by Mike S. on 15/02/2023.
-//
-
 import SwiftUI
 import ComposableArchitecture
 

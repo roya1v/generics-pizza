@@ -1,10 +1,3 @@
-//
-//  DriverMessages.swift
-//  
-//
-//  Created by Mike S. on 16/08/2023.
-//
-
 import Foundation
 
 public enum DriverToServerMessage: Codable {

@@ -1,10 +1,3 @@
-//
-//  LocalSettingsService.swift
-//  clients_libraries_GenericsCore
-//
-//  Created by Mike S. on 16/08/2023.
-//
-
 import Foundation
 
 protocol LocalSettingsService {

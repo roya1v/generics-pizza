@@ -1,10 +1,3 @@
-//
-//  UserEntry+ModelTokenAuthenticatable.swift
-//  
-//
-//  Created by Mike Shevelinsky on 13/02/2023.
-//
-
 import Vapor
 import Fluent
 

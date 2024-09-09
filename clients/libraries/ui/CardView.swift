@@ -1,10 +1,3 @@
-//
-//  CardView.swift
-//  
-//
-//  Created by Mike S. on 06/03/2023.
-//
-
 import SwiftUI
 
 public struct CardView<Content>: View where Content: View {

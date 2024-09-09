@@ -1,10 +1,3 @@
-//
-//  GenericsAppApp.swift
-//  GenericsApp
-//
-//  Created by Mike S. on 01/02/2023.
-//
-
 import SwiftUI
 import ComposableArchitecture
 

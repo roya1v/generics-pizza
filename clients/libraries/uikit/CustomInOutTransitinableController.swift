@@ -1,10 +1,3 @@
-//
-//  CustomInOutTransitinableController.swift
-//  GenericsDriver
-//
-//  Created by Mike S. on 31/07/2023.
-//
-
 import UIKit
 
 // This this the best way thought?
