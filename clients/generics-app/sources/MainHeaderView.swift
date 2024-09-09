@@ -1,10 +1,3 @@
-//
-//  MainHeaderView.swift
-//  GenericsApp
-//
-//  Created by Mike S. on 19/07/2024.
-//
-
 import SwiftUI
 import clients_libraries_GenericsUI
 import ComposableArchitecture

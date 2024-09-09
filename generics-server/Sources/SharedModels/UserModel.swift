@@ -1,10 +1,3 @@
-//
-//  User.swift
-//
-//
-//  Created by Mike S. on 20/11/2023.
-//
-
 import Foundation
 
 public struct UserModel: Codable, Equatable, Identifiable {

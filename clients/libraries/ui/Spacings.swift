@@ -1,10 +1,3 @@
-//
-//  Spacings.swift
-//  
-//
-//  Created by Mike S. on 14/05/2023.
-//
-
 #if os(iOS)
 import UIKit
 #else

@@ -1,10 +1,3 @@
-//
-//  NowView.swift
-//  GenericsRestaurants
-//
-//  Created by Mike S. on 13/03/2023.
-//
-
 import SwiftUI
 import clients_libraries_GenericsCore
 import ComposableArchitecture

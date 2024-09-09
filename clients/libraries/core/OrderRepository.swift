@@ -1,10 +1,3 @@
-//
-//  OrderRepository.swift
-//  GenericsApp
-//
-//  Created by Mike S. on 21/03/2023.
-//
-
 import Foundation
 import SharedModels
 import clients_libraries_SwiftlyHttp

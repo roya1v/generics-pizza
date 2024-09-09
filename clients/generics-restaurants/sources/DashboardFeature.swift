@@ -1,10 +1,3 @@
-//
-//  DashboardFeature.swift
-//  GenericsRestaurants
-//
-//  Created by Mike S. on 11/07/2024.
-//
-
 import Foundation
 import ComposableArchitecture
 import Factory

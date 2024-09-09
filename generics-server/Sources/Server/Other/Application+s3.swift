@@ -1,10 +1,3 @@
-//
-//  Application+s3.swift
-//  
-//
-//  Created by Mike S. on 15/08/2023.
-//
-
 import Vapor
 import SotoS3
 

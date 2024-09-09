@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  GenericsApp
-//
-//  Created by Mike S. on 01/02/2023.
-//
-
 import SwiftUI
 import clients_libraries_GenericsUI
 import ComposableArchitecture

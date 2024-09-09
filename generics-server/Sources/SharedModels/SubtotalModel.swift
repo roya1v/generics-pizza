@@ -1,10 +1,3 @@
-//
-//  SubtotalModel.swift
-//  
-//
-//  Created by Mike S. on 20/06/2023.
-//
-
 import Foundation
 
 public struct SubtotalModel: Codable, Equatable {

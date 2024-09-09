@@ -1,10 +1,3 @@
-//
-//  CartView.swift
-//  GenericsApp
-//
-//  Created by Mike S. on 21/03/2023.
-//
-
 import SwiftUI
 import Factory
 import clients_libraries_GenericsCore

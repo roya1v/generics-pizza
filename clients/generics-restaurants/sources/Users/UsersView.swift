@@ -1,10 +1,3 @@
-//
-//  UsersView.swift
-//  GenericsRestaurants
-//
-//  Created by Mike S. on 19/03/2024.
-//
-
 import SwiftUI
 import ComposableArchitecture
 import SharedModels

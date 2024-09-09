@@ -1,10 +1,3 @@
-//
-//  MenuFeature.swift
-//  GenericsRestaurants
-//
-//  Created by Mike S. on 18/03/2024.
-//
-
 import Foundation
 import ComposableArchitecture
 import SharedModels

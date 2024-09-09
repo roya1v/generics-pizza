@@ -1,10 +1,3 @@
-//
-//  OrderItem+Migration.swift
-//  
-//
-//  Created by Mike S. on 19/03/2023.
-//
-
 import Fluent
 import Vapor
 

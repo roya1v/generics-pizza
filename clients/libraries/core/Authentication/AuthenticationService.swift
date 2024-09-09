@@ -1,10 +1,3 @@
-//
-//  AuthenticationService.swift
-//  GenericsHelpers
-//
-//  Created by Mike S. on 23/09/2023.
-//
-
 import Foundation
 import clients_libraries_SwiftlyHttp
 import SharedModels

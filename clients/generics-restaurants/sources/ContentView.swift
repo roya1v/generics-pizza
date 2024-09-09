@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  GenericsRestaurants
-//
-//  Created by Mike S. on 14/02/2023.
-//
-
 import SwiftUI
 import Combine
 import Factory

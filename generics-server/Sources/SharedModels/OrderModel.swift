@@ -1,10 +1,3 @@
-//
-//  OrderModel.swift
-//  
-//
-//  Created by Mike S. on 20/03/2023.
-//
-
 import Foundation
 
 public struct OrderModel: Codable, Identifiable, Equatable {

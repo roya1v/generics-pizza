@@ -1,10 +1,3 @@
-//
-//  Request+requireUser.swift
-//
-//
-//  Created by Mike S. on 19/11/2023.
-//
-
 import Vapor
 
 extension Request {

@@ -1,10 +1,3 @@
-//
-//  NowFeature.swift
-//  GenericsRestaurants
-//
-//  Created by Mike S. on 22/06/2024.
-//
-
 import Foundation
 import ComposableArchitecture
 import SharedModels

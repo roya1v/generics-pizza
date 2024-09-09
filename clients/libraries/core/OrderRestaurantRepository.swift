@@ -1,10 +1,3 @@
-//
-//  OrderRestaurantRepository.swift
-//  GenericsRestaurants
-//
-//  Created by Mike S. on 29/03/2023.
-//
-
 import Foundation
 import Combine
 import SharedModels

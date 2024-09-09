@@ -1,10 +1,3 @@
-//
-//  NewMenuItemView.swift
-//  GenericsRestaurants
-//
-//  Created by Mike S. on 14/03/2023.
-//
-
 import SwiftUI
 import ComposableArchitecture
 
