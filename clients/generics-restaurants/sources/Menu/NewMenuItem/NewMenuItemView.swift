@@ -85,7 +85,7 @@ struct NewMenuItemView: View {
                 Text("Select image")
             }
         }
-        .fileImporter(isPresented: $isSelectingImage, allowedContentTypes: [.jpeg]) { result in
+        .fileImporter(isPresented: $isSelectingImage, allowedContentTypes: [.jpeg, .png]) { result in
             do {
                 let fileURL = try result.get()
                 if fileURL.startAccessingSecurityScopedResource() {
