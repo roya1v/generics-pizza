@@ -38,7 +38,8 @@ struct NewMenuItemFeature {
                 let item = MenuItem(id: nil,
                                     title: state.title,
                                     description: state.description,
-                                    price: Int(state.price * 100))
+                                    price: Int(state.price * 100),
+                                    isHidden: true)
                 let imageUrl = state.imageUrl
                 state.isLoading = true
                 return .run { [item, imageUrl] send in

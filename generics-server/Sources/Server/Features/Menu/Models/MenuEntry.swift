@@ -20,23 +20,28 @@ final class MenuEntry: Model {
     @Field(key: "price")
     var price: Int
 
+    @Field(key: "is_hidden")
+    var isHidden: Bool
+
     init() { }
 
     init(id: UUID? = nil,
          title: String,
          description: String,
          price: Int,
-         imageUrl: String? = nil) {
+         imageUrl: String? = nil,
+         isHidden: Bool = false) {
         self.id = id
         self.title = title
         self.description = description
         self.price = price
         self.imageUrl = imageUrl
+        self.isHidden = true
     }
 }
 
 extension MenuEntry: SharedModelRepresentable {
     func toSharedModel() -> MenuItem {
-        .init(id: id, title: title, description: description, price: price)
+        MenuItem(id: id, title: title, description: description, price: price, isHidden: isHidden)
     }
 }
