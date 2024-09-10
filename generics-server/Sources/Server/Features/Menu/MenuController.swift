@@ -75,13 +75,20 @@ struct MenuController: RouteCollection {
             throw Abort(.notFound)
         }
 
-        guard req.headers.contentType == .jpeg else {
+        let filename: String
+
+        switch req.headers.contentType {
+        case .jpeg:
+            filename = "\(id).jpeg"
+        case .png:
+            filename = "\(id).png"
+        default:
             throw Abort(.badRequest, reason: "Content must be jpeg")
         }
 
         _ = try await req.s3.putObject(.init(body: .byteBuffer(req.body.data!),
                                              bucket: "menu-images",
-                                             key: "\(id).jpeg"))
+                                             key: filename))
         return .ok
     }
 
