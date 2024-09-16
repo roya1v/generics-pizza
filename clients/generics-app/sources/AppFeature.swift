@@ -14,7 +14,7 @@ struct AppFeature {
         @Presents var orderDestination: OrderDestinationFeature.State?
         var menu = MenuFeature.State()
         @Shared var cart: [MenuItem]
-        @Shared var destination: OrderType
+        @Shared var destination: OrderModel.Destination
     }
 
     enum Action {

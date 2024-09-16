@@ -12,7 +12,7 @@ final class OrderEntry: Model {
     var createdAt: Date?
 
     @Enum(key: "state")
-    var state: OrderState
+    var state: OrderModel.State
 
     @Children(for: \.$order)
     var items: [OrderItemEntry]
@@ -22,7 +22,7 @@ final class OrderEntry: Model {
 
     init() { }
 
-    public init(id: UUID? = nil, state: OrderState, address: String?) {
+    public init(id: UUID? = nil, state: OrderModel.State, address: String?) {
         self.id = id
         self.state = state
         self.address = address
@@ -41,10 +41,12 @@ extension OrderEntry: Hashable {
 
 extension OrderEntry: SharedModelRepresentable {
     func toSharedModel() -> OrderModel {
-        .init(id: id,
-              createdAt: createdAt,
-              items: items.map { $0.item.toSharedModel() },
-              state: state,
-              type: address != nil ? .delivery(address: address!) : .pickUp)
+        OrderModel(
+            id: id,
+            createdAt: createdAt,
+            items: items.map { $0.toSharedModel() },
+            state: state,
+            destination: address != nil ? .delivery(address: address!) : .pickUp
+        )
     }
 }

@@ -9,14 +9,14 @@ struct TrackingFeature {
     @ObservableState
     struct State: Equatable {
         var order: OrderModel
-        var orderState: OrderState?
+        var orderState: OrderModel.State?
     }
 
     enum Action {
         case appeared
         case dismissTapped
         case trackingLoaded(Result<AnyPublisher<CustomerFromServerMessage, Error>, Error>)
-        case newState(OrderState)
+        case newState(OrderModel.State)
     }
 
     @Injected(\.orderRepository)

@@ -6,7 +6,7 @@ extension OrdersController {
 
     /// Check price for an order.
     func checkPrice(req: Request) async throws -> [SubtotalModel] {
-        let sum = try req.content.decode(OrderModel.self).items.reduce(0, {$0 + $1.price})
+        let sum = try req.content.decode(OrderModel.self).items.reduce(0, {$0 + $1.menuItem.price})
         return [
             .init(name: "Subtotal", value: sum),
             .init(name: "Total", value: sum, isSecondary: false)
@@ -26,7 +26,7 @@ extension OrdersController {
         let orderModel = try req.content.decode(OrderModel.self)
 
         let address: String?
-        switch orderModel.type {
+        switch orderModel.destination {
         case .delivery(let orderAddress):
             address = orderAddress
         case .pickUp:
@@ -36,7 +36,7 @@ extension OrdersController {
         let order = OrderEntry(state: .new, address: address)
         try await order.save(on: req.db)
 
-        let items = orderModel.items.map { OrderItemEntry(item: $0.id!) }
+        let items = orderModel.items.map { OrderItemEntry(item: $0.menuItem.id!) }
         try await order.$items.create(items, on: req.db)
 
         try await order.$items.load(on: req.db)

@@ -34,7 +34,7 @@ struct NowView: View {
     }
 }
 
-extension OrderState {
+extension OrderModel.State {
     func next() -> Self {
         switch self {
         case .new:

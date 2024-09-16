@@ -27,3 +27,10 @@ final class OrderItemEntry: Model {
         self.$item.id = item
     }
 }
+
+extension OrderItemEntry: SharedModelRepresentable {
+    func toSharedModel() -> OrderModel.Item {
+        // TODO: Fix
+        OrderModel.Item(menuItem: item.toSharedModel(), count: 0)
+    }
+}
