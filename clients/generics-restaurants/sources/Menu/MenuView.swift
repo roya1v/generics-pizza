@@ -14,10 +14,13 @@ struct MenuView: View {
                 switch store.menuState {
                 case .loading:
                     ProgressView()
-                case .loaded(let items):
+                case .loaded:
                     List {
-                        ForEach(items) { item in
-                            listRow(for: item)
+                        ForEach(
+                            store.scope(state: \.menuState.items, action: \.item),
+                            id: \.state.id
+                        ) { childStore in
+                            MenuItemView(store: childStore)
                         }
                     }
                     .listStyle(.inset(alternatesRowBackgrounds: true))
@@ -31,60 +34,19 @@ struct MenuView: View {
                 }
             }
             .toolbar {
-                    ToolbarItem(placement: .automatic) {
-                        Button("New") {
-                            store.send(.newItemButtonTapped)
-                        }
+                ToolbarItem(placement: .automatic) {
+                    Button("New") {
+                        store.send(.newItemButtonTapped)
+                    }
                 }
             }
             .navigationTitle("Menu")
             .confirmationDialog($store.scope(state: \.deleteConfirmationDialog, action: \.deleteConfirmationDialog))
-            .sheet(item: $store.scope(state: \.newItem, action: \.newItem)) { newItemStore in
-                NewMenuItemView(store: newItemStore)
+            .sheet(item: $store.scope(state: \.itemForm, action: \.itemForm)) { childStore in
+                MenuItemFormView(store: childStore)
             }
             .onAppear {
                 store.send(.shown)
-            }
-        }
-    }
-
-    func listRow(for item: MenuFeature.State.Item) -> some View {
-        HStack {
-            if let image = item.image {
-                Image(nsImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 75.0)
-            } else {
-                Image("pizzza_placeholder")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 75.0)
-            }
-            VStack(alignment: .leading) {
-                Text(item.item.title)
-                    .font(.title2)
-                Text(item.item.description)
-                    .font(.caption)
-            }
-            Spacer()
-            Text(item.item.formattedPrice())
-                .bold()
-                .padding()
-            Button {
-
-            } label: {
-                Text("Edit")
-                    .underline()
-            }
-            .buttonStyle(.link)
-            .padding()
-        }
-        .contextMenu {
-            Button {
-                store.send(.delete(item.item))
-            } label: {
-                Text("Delete item")
             }
         }
     }

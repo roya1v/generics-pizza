@@ -10,19 +10,16 @@ public enum SimpleListState<Item: Identifiable & Equatable>: Equatable {
         self = .loaded([])
     }
 
-    public var items: IdentifiedArrayOf<Item>? {
+    public var items: IdentifiedArrayOf<Item> {
         get {
             if case let .loaded(items) = self {
                 return items
             } else {
-                return nil
+                return []
             }
         }
         set {
-            if let newValue {
-                self = .loaded(newValue)
-            }
+            self = .loaded(newValue)
         }
-
     }
 }

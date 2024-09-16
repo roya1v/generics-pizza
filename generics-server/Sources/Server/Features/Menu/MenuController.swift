@@ -7,13 +7,18 @@ struct MenuController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         let menu = routes.grouped("menu")
 
-        menu.get(use: index)
-        menu.grouped(UserTokenEntry.authenticator()).post(use: create)
+        let authenticated = menu.grouped(UserTokenEntry.authenticator())
+        authenticated.get(use: index)
+        authenticated.post(use: create)
+        authenticated.put(use: update)
+
         menu.group(":itemID") { item in
             item.group("image") { image in
                 image.get(use: getImage)
-                image.grouped(UserTokenEntry.authenticator()).post(use: setImage)
-                image.grouped(UserTokenEntry.authenticator()).delete(use: deleteImage)
+
+                let authenticated = image.grouped(UserTokenEntry.authenticator())
+                authenticated.post(use: setImage)
+                authenticated.delete(use: deleteImage)
             }
             item.grouped(UserTokenEntry.authenticator()).delete(use: delete)
         }
@@ -41,6 +46,21 @@ struct MenuController: RouteCollection {
         try req.requireEmployeeOrAdminUser()
         let entry = try req.content.decode(MenuItem.self).toEntry()
         try await entry.create(on: req.db)
+        return entry.toSharedModel()
+    }
+
+    /// Update a menu item.
+    func update(req: Request) async throws -> MenuItem {
+        try req.requireEmployeeOrAdminUser()
+        let model = try req.content.decode(MenuItem.self)
+        guard let entry = try await MenuEntry.find(model.id, on: req.db) else {
+            throw Abort(.notFound)
+        }
+        entry.title = model.title
+        entry.description = model.description
+        entry.price = model.price
+        entry.isHidden = model.isHidden
+        try await entry.update(on: req.db)
         return entry.toSharedModel()
     }
 

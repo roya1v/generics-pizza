@@ -18,8 +18,10 @@ public func buildMenuRepository(url: String, authenticationProvider: Authenticat
 @Spyable
 public protocol MenuRepository {
     func fetchMenu() async throws -> [MenuItem]
+    func fetchMenu(showHidden: Bool) async throws -> [MenuItem]
     func create(item: MenuItem) async throws -> MenuItem
     func delete(item: MenuItem) async throws
+    func update(item: MenuItem) async throws -> MenuItem
     func imageUrl(for item: MenuItem) -> URL?
     func getImage(forItemId id: UUID) async throws -> ImageData
     func setImage(from localUrl: URL, for item: MenuItem) async throws
@@ -43,8 +45,16 @@ final class MenuRepositoryImp: MenuRepository {
     // MARK: - MenuRepository
 
     public func fetchMenu() async throws -> [MenuItem] {
+         try await fetchMenu(showHidden: false)
+    }
+
+    public func fetchMenu(showHidden: Bool) async throws -> [MenuItem] {
          return try await getRequest()
             .method(.get)
+            .add(queryParameter: "showHidden", value: "\(showHidden)")
+            .authentication({
+                try? self.authenticationProvider?.getAuthentication()
+            })
             .decode(to: [MenuItem].self)
             .perform()
     }
@@ -52,6 +62,17 @@ final class MenuRepositoryImp: MenuRepository {
     public func create(item: MenuItem) async throws -> MenuItem {
         try await getRequest()
             .method(.post)
+            .authentication({
+                try? self.authenticationProvider?.getAuthentication()
+            })
+            .body(item)
+            .decode(to: MenuItem.self)
+            .perform()
+    }
+
+    func update(item: MenuItem) async throws -> MenuItem {
+        try await getRequest()
+            .method(.put)
             .authentication({
                 try? self.authenticationProvider?.getAuthentication()
             })

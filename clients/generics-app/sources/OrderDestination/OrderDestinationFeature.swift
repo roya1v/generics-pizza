@@ -25,17 +25,5 @@ struct OrderDestinationFeature {
 
     var body: some ReducerOf<Self> {
         BindingReducer()
-        Reduce<State, Action> { state, action in
-            switch action {
-            case .appeared:
-                return .none
-            case .dismissTapped:
-                return .none
-            case .confirm:
-                return .none
-            case .binding:
-                return .none
-            }
-        }
     }
 }

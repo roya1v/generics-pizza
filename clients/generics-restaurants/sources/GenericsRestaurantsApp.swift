@@ -4,7 +4,7 @@ import ComposableArchitecture
 
 @main
 struct GenericsRestaurantsApp: App {
-    
+
     static let store = Store(initialState: AppFeature.State.loading) {
         AppFeature()
     }

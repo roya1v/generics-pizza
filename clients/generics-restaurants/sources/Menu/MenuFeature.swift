@@ -9,28 +9,18 @@ struct MenuFeature {
     @ObservableState
     struct State: Equatable {
         @Presents var deleteConfirmationDialog: ConfirmationDialogState<Action.DeleteConfirmationDialogAction>?
-        @Presents var newItem: NewMenuItemFeature.State?
-        var menuState = SimpleListState<Item>()
-
-        struct Item: Equatable, Identifiable {
-            var item: MenuItem
-            var image: ImageData?
-
-            var id: UUID? {
-                item.id
-            }
-        }
+        @Presents var itemForm: MenuItemFormFeature.State?
+        var menuState = SimpleListState<MenuItemFeature.State>()
     }
 
     enum Action {
         case shown
         case loaded(Result<[MenuItem], Error>)
-        case delete(MenuItem)
         case deleteConfirmationDialog(PresentationAction<DeleteConfirmationDialogAction>)
-        case deletionCompleted(id: State.Item.ID, result: Result<Void, Error>)
-        case imageLoaded(id: State.Item.ID, result: Result<ImageData, Error>)
-        case newItem(PresentationAction<NewMenuItemFeature.Action>)
+        case deletionCompleted(id: MenuItemFeature.State.ID, result: Result<Void, Error>)
+        case itemForm(PresentationAction<MenuItemFormFeature.Action>)
         case newItemButtonTapped
+        case item(IdentifiedActionOf<MenuItemFeature>)
 
         @CasePathable
         enum DeleteConfirmationDialogAction: Equatable {
@@ -49,28 +39,39 @@ struct MenuFeature {
                 return .run { send in
                     await send(
                         .loaded(
-                            Result { try await repository.fetchMenu() }
+                            Result { try await repository.fetchMenu(showHidden: true) }
                         )
                     )
                 }
             case .loaded(.success(let items)):
-                state.menuState = .loaded(IdentifiedArray(uniqueElements: items.map { State.Item(item: $0)}))
+                state.menuState = .loaded(
+                    IdentifiedArray(
+                        uniqueElements: items.map { MenuItemFeature.State(item: $0)}
+                    )
+                )
                 return .merge(
-                    items.map { item in
-                            .run { send in
-                                await send(
-                                    .imageLoaded(
-                                        id: item.id,
-                                        result: Result { try await repository.getImage(forItemId: item.id!) }
+                    items
+                        .map { item in
+                                .run { send in
+                                    await send(
+                                        .item(
+                                            .element(id: item.id,
+                                                     action: .imageLoaded(
+                                                        Result {
+                                                            try await repository.getImage(forItemId: item.id!)
+                                                        }
+                                                     )
+                                                    )
+                                        )
                                     )
-                                )
-                            }
-                    }
+                                }
+                        }
                 )
             case .loaded(.failure(let error)):
                 state.menuState = .error(error.localizedDescription)
                 return .none
-            case .delete(let item):
+            case .item(.element(id: let id, action: .deleteTapped)):
+                let item = state.menuState.items[id: id]!.item
                 state.deleteConfirmationDialog = ConfirmationDialogState {
                     TextState("Are you sure?")
                 } actions: {
@@ -82,6 +83,9 @@ struct MenuFeature {
                     }
                 }
                 return .none
+            case .item(.element(id: let id, action: .editTapped)):
+                state.itemForm = MenuItemFormFeature.State(menuItem: state.menuState.items[id: id]!.item)
+                return .none
             case .deleteConfirmationDialog(.presented(.delete(let item))):
                 return .run { send in
                     await send(
@@ -92,32 +96,35 @@ struct MenuFeature {
                         animation: .default)
                 }
             case .deletionCompleted(id: let id, result: .success):
-                state.menuState.items?.remove(id: id)
+                state.menuState.items.remove(id: id)
                 return .none
             case .deletionCompleted(id: let id, result: .failure(let error)):
                 print("Error: \(error) for id: \(String(describing: id))")
                 return .none
+            case .item:
+                return .none
             case .newItemButtonTapped:
-                state.newItem = NewMenuItemFeature.State()
+                state.itemForm = MenuItemFormFeature.State()
                 return .none
-            case .newItem(.presented(.cancelTapped)):
-                state.newItem = nil
+            case .itemForm(.presented(.cancelTapped)):
+                state.itemForm = nil
                 return .none
-            case .imageLoaded(id: let id, result: .success(let image)):
-                state.menuState.items?[id: id]?.image = image
+            case .itemForm(.presented(.createdNewItem(.success(let newItem)))):
+                state.itemForm = nil
+                state.menuState.items[id: newItem.id]?.item = newItem
                 return .none
-            case .imageLoaded(id: let id, result: .failure(let error)):
-                print("Error: \(error) for id: \(String(describing: id))")
+            case .itemForm:
                 return .none
             case .deleteConfirmationDialog:
-                return .none
-            case .newItem:
                 return .none
             }
         }
         .ifLet(\.$deleteConfirmationDialog, action: \.deleteConfirmationDialog)
-        .ifLet(\.$newItem, action: \.newItem) {
-            NewMenuItemFeature()
+        .ifLet(\.$itemForm, action: \.itemForm) {
+            MenuItemFormFeature()
+        }
+        .forEach(\.menuState.items, action: \.item) {
+            MenuItemFeature()
         }
     }
 }
