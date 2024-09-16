@@ -13,9 +13,9 @@ struct OrderListRowView: View {
                     .font(.caption)
                 Text(order.createdAt!, style: .time)
                     .font(.caption)
-                let items = order.items.reduce("", {$0 + $1.title})
+                let items = order.items.reduce("", {$0 + $1.menuItem.title})
                 Text("**Items:** \(items)")
-                switch order.type {
+                switch order.destination {
                 case .delivery(let address):
                     Text("Delivery address: \(address)")
                 case .pickUp:

@@ -12,8 +12,8 @@ public enum OrderError: Error {
 }
 
 public protocol OrderRepository {
-    func checkPrice(for items: [MenuItem], destination: OrderType) async throws -> [SubtotalModel]
-    func placeOrder(for items: [MenuItem], destination: OrderType) async throws -> OrderModel
+    func checkPrice(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws -> [SubtotalModel]
+    func placeOrder(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws -> OrderModel
     func trackOrder(_ order: OrderModel) async throws -> AnyPublisher<CustomerFromServerMessage, Error>
 }
 
@@ -28,19 +28,19 @@ final class OrderRepositoryImpl: OrderRepository {
 
     // MARK: - OrderRepository
 
-    func checkPrice(for items: [MenuItem], destination: OrderType) async throws -> [SubtotalModel] {
+    func checkPrice(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws -> [SubtotalModel] {
         return try await getRequest()
             .add(path: "check_price")
-            .body(OrderModel(createdAt: nil, items: items, type: destination))
+            .body(OrderModel(createdAt: nil, items: items, destination: destination))
             .decode(to: [SubtotalModel].self)
             .perform()
     }
 
-    func placeOrder(for items: [MenuItem], destination: OrderType) async throws -> OrderModel {
+    func placeOrder(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws -> OrderModel {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         return try await getRequest()
-            .body(OrderModel(createdAt: nil, items: items, type: destination))
+            .body(OrderModel(createdAt: nil, items: items, destination: destination))
             .decode(to: OrderModel.self)
             .set(jsonDecoder: decoder)
             .perform()

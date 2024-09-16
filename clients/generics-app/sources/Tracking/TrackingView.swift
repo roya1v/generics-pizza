@@ -12,7 +12,7 @@ struct TrackingView: View {
                 title
                     .font(.largeTitle)
                 HStack {
-                    ForEach([OrderState.new,
+                    ForEach([OrderModel.State.new,
                              .inProgress,
                              .readyForDelivery,
                              .inDelivery,

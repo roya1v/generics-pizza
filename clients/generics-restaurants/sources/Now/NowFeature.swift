@@ -23,8 +23,8 @@ struct NowFeature {
         case connected(Result<AnyPublisher<RestaurantFromServerMessage, any Error>, Error>)
         case newServerMessage(RestaurantFromServerMessage)
         case receivedError(Error)
-        case update(orderId: UUID, state: OrderState)
-        case updated(orderId: UUID, state: OrderState) // Find a better name for this?
+        case update(orderId: UUID, state: OrderModel.State)
+        case updated(orderId: UUID, state: OrderModel.State) // TODO: Find a better name for this?
     }
 
     enum CancelId: Hashable { case messages }
@@ -33,7 +33,7 @@ struct NowFeature {
     private var repository
 
     var body: some Reducer<State, Action> {
-        Reduce { state, action in
+        Reduce<State, Action> { state, action in
             switch action {
             case .shown:
                 if state.connectionState == .success {
@@ -90,7 +90,7 @@ struct NowFeature {
                         createdAt: existing.createdAt,
                         items: existing.items,
                         state: orderState,
-                        type: existing.type
+                        destination: existing.destination
                     )
                 }
                 return .none
