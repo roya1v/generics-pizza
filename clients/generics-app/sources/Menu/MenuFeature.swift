@@ -54,14 +54,20 @@ struct MenuFeature {
                 return .merge(
                     items.map { item in
                             .run { send in
-                                await send(.imageLoaded(id: item.id!, result: Result { try await menuRepository.getImage(forItemId: item.id!)}))
+                                await send(.imageLoaded(
+                                    id: item.id!,
+                                    result: Result {
+                                        try await menuRepository.getImage(forItemId: item.id!)
+                                    }
+                                )
+                                )
                             }
                     }
                 )
             case .loaded(.failure(let error)):
                 return .none
             case .didSelect(let id):
-                if let item = state.content.items?[id: id] {
+                if let item = state.content.items[id: id] {
                     state.menuDetail = MenuDetailFeature.State(image: item.image, item: item.item)
                 }
                 return .none
@@ -71,7 +77,7 @@ struct MenuFeature {
             case .menuDetail:
                 return .none
             case .imageLoaded(id: let id, result: .success(let image)):
-                state.content.items?[id: id]?.image = image
+                state.content.items[id: id]?.image = image
                 return .none
             case .imageLoaded(id: let id, result: .failure(let error)):
                 return .none

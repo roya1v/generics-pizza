@@ -12,6 +12,7 @@ struct DashboardFeature {
         var orderHistory: SimpleListState<OrderModel>
         var menu: MenuFeature.State
         var users: SimpleListState<UserModel>?
+        var isLoggingOut = false
     }
 
     enum Action {
@@ -20,6 +21,7 @@ struct DashboardFeature {
         case menu(MenuFeature.Action)
         case users(UsersFeature.Action)
         case signOutTapped
+        case signOutComplete(Result<Void, Error>)
     }
 
     @Injected(\.authenticationRepository)
@@ -35,7 +37,7 @@ struct DashboardFeature {
         Scope(state: \.menu, action: \.menu) {
             MenuFeature()
         }
-        Reduce<State, Action> { _, action in
+        Reduce<State, Action> { state, action in
             switch action {
             case .now:
                 return .none
@@ -46,10 +48,19 @@ struct DashboardFeature {
             case .users:
                 return .none
             case .signOutTapped:
-                return .run { _ in
-                    // TODO: Add loading and error handling
-                    try await repository.signOut()
+                state.isLoggingOut = true
+                return .run { send in
+                    await send(
+                        .signOutComplete(
+                            Result { try await repository.signOut() }
+                        )
+                    )
                 }
+            case .signOutComplete(.success):
+                return .none
+            case .signOutComplete(.failure(let error)):
+                // TODO: Add error handling
+                return .none
             }
         }
         .ifLet(\.users, action: \.users) {

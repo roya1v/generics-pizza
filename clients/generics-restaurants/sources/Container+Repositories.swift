@@ -17,7 +17,10 @@ extension Container {
     }
 
     var menuRepository: Factory<MenuRepository> {
-        self { buildMenuRepository(url: self.serverUrl(), authenticationProvider: self.authenticationRepository()) }
+        self { buildMenuRepository(
+            url: self.serverUrl(),
+            authenticationProvider: self.authenticationRepository())
+        }
     }
 
     var orderRepository: Factory<OrderRepository> {

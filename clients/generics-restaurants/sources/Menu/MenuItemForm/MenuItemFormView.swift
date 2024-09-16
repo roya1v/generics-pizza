@@ -1,9 +1,9 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct NewMenuItemView: View {
+struct MenuItemFormView: View {
 
-    @Perception.Bindable var store: StoreOf<NewMenuItemFeature>
+    @Perception.Bindable var store: StoreOf<MenuItemFormFeature>
     @State var isSelectingImage = false
 
     var body: some View {
@@ -15,17 +15,21 @@ struct NewMenuItemView: View {
                     form
                     imageSelection
                 }
-                if store.hasError {
-                    Text("Error occured!")
+                if let error = store.errorMessage {
+                    Text(error)
                 }
                 if store.isLoading {
                     ProgressView()
                 } else {
                     HStack {
                         Button {
-                            store.send(.createTapped)
+                            store.send(.submitTapped)
                         } label: {
-                            Text("Create")
+                            if store.state.id != nil {
+                                Text("Update")
+                            } else {
+                                Text("Create")
+                            }
                         }
                         Button(role: .cancel) {
                             store.send(.cancelTapped)

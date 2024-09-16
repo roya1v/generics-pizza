@@ -12,13 +12,11 @@ struct OrderHistoryView: View {
             Group {
                 switch store.state {
                 case .loading:
-                    Text("Hello")
+                    ProgressView()
                 case .loaded(let items):
                     List {
-                        Section("Orders") {
-                            ForEach(items) { order in
-                                OrderListRowView(order: order, onTap: nil)
-                            }
+                        ForEach(items) { order in
+                            OrderListRowView(order: order, onTap: nil)
                         }
                     }
                 case .error(let message):
