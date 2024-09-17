@@ -26,6 +26,9 @@ struct CartFeature {
     @Injected(\.orderRepository)
     private var repository
 
+    @Injected(\.menuRepository)
+    private var menuRepository
+
     @Dependency(\.dismiss)
     private var dismiss
 
@@ -33,23 +36,41 @@ struct CartFeature {
         Reduce { state, action in
             switch action {
             case .appeared:
-                return .run { [state] send in
-                    await send(
-                        .estimateUpdated(
-                            Result {
-                                try await repository.checkPrice(
-                                    for: state.items.map {
-                                        OrderModel.Item(
-                                            menuItem: $0.menuItem,
-                                            count: $0.count
-                                        )
-                                    },
-                                    destination: state.destination
-                                )
-                            }
+                return .merge(
+                    .run { [state] send in
+                        await send(
+                            .estimateUpdated(
+                                Result {
+                                    try await repository.checkPrice(
+                                        for: state.items.map {
+                                            OrderModel.Item(
+                                                menuItem: $0.menuItem,
+                                                count: $0.count
+                                            )
+                                        },
+                                        destination: state.destination
+                                    )
+                                }
+                            )
                         )
+                    },
+                    .merge(
+                        state.items.map { item in
+                                .run { send in
+                                    await send(
+                                        .item(
+                                            .element(
+                                                id: item.id,
+                                                action: .imageLoaded(
+                                                    Result { try await menuRepository.getImage(forItemId: item.id!) }
+                                                )
+                                            )
+                                        )
+                                    )
+                                }
+                        }
                     )
-                }
+                )
             case .item(.element(id: let id, action: .increaseTapped)):
                 state.items[id: id]?.count += 1
                 return .none
@@ -68,7 +89,11 @@ struct CartFeature {
                     state.items[id: id]?.count -= 1
                 }
                 return .none
-            case .item:
+            case .item(.element(id: let id, action: .imageLoaded(.success(let image)))):
+                state.items[id: id]?.image = image
+                return .none
+            case .item(.element(id: let id, action: .imageLoaded(.failure(let error)))):
+                print("\(String(describing: id)): \(error)") // TODO: Add error handling
                 return .none
             case .placeOrder:
                 return .run { [state] send in
