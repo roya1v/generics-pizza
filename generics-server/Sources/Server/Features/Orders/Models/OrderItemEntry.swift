@@ -14,6 +14,9 @@ final class OrderItemEntry: Model {
     @Parent(key: "order")
     var order: OrderEntry
 
+    @Field(key: "count")
+    var count: Int
+
     init() { }
 
     public init(id: UUID? = nil, item: MenuEntry, order: OrderEntry) {
@@ -22,15 +25,15 @@ final class OrderItemEntry: Model {
         self.order = order
     }
 
-    public init(id: UUID? = nil, item: UUID) {
+    public init(id: UUID? = nil, item: UUID, count: Int) {
         self.id = id
+        self.count = count
         self.$item.id = item
     }
 }
 
 extension OrderItemEntry: SharedModelRepresentable {
     func toSharedModel() -> OrderModel.Item {
-        // TODO: Fix
-        OrderModel.Item(menuItem: item.toSharedModel(), count: 0)
+        OrderModel.Item(menuItem: item.toSharedModel(), count: count)
     }
 }

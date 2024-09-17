@@ -13,7 +13,7 @@ struct AppFeature {
         @Presents var trackingState: TrackingFeature.State?
         @Presents var orderDestination: OrderDestinationFeature.State?
         var menu = MenuFeature.State()
-        @Shared var cart: [MenuItem]
+        @Shared var cart: IdentifiedArrayOf<CartItemFeature.State>
         @Shared var destination: OrderModel.Destination
     }
 
@@ -40,7 +40,7 @@ struct AppFeature {
                 return .none
             case .menu(.menuDetail(.presented(.addTapped))):
                 if let item = state.menu.menuDetail?.item {
-                    state.cart.append(item)
+                    state.cart.append(.init(menuItem: item, count: 1))
                 }
                 state.menu.menuDetail = nil
                 return .none

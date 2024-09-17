@@ -49,24 +49,7 @@ struct MenuFeature {
                         uniqueElements: items.map { MenuItemFeature.State(item: $0)}
                     )
                 )
-                return .merge(
-                    items
-                        .map { item in
-                                .run { send in
-                                    await send(
-                                        .item(
-                                            .element(id: item.id,
-                                                     action: .imageLoaded(
-                                                        Result {
-                                                            try await repository.getImage(forItemId: item.id!)
-                                                        }
-                                                     )
-                                                    )
-                                        )
-                                    )
-                                }
-                        }
-                )
+                return .merge(items .map { loadImage(for: $0) })
             case .loaded(.failure(let error)):
                 state.menuState = .error(error.localizedDescription)
                 return .none
@@ -111,8 +94,13 @@ struct MenuFeature {
                 return .none
             case .itemForm(.presented(.createdNewItem(.success(let newItem)))):
                 state.itemForm = nil
-                state.menuState.items[id: newItem.id]?.item = newItem
-                return .none
+                if state.menuState.items[id: newItem.id] != nil {
+                    state.menuState.items[id: newItem.id]?.item = newItem
+                    return .none
+                } else {
+                    state.menuState.items.append(MenuItemFeature.State(item: newItem))
+                    return loadImage(for: newItem)
+                }
             case .itemForm:
                 return .none
             case .deleteConfirmationDialog:
@@ -125,6 +113,21 @@ struct MenuFeature {
         }
         .forEach(\.menuState.items, action: \.item) {
             MenuItemFeature()
+        }
+    }
+
+    func loadImage(for item: MenuItem) -> Effect<Action> {
+        .run { send in
+            await send(
+                .item(
+                    .element(
+                        id: item.id,
+                        action: .imageLoaded(
+                            Result { try await repository.getImage(forItemId: item.id!) }
+                        )
+                    )
+                )
+            )
         }
     }
 }

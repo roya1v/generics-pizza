@@ -15,12 +15,12 @@ extension UserModel: Content { }
 
 extension MenuItem: EntryRepresentable {
     func toEntry() -> MenuEntry {
-        .init(id: id, title: title, description: description, price: price, imageUrl: nil)
+        MenuEntry(id: id, title: title, description: description, price: price)
     }
 }
 
 extension AddressModel: EntryRepresentable {
     func toEntry() -> AddressEntry {
-        .init(details: details, latitude: coordinate.latitude, longitude: coordinate.longitude)
+        AddressEntry(details: details, latitude: coordinate.latitude, longitude: coordinate.longitude)
     }
 }

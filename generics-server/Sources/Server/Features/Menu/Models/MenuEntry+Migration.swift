@@ -11,7 +11,6 @@ extension MenuEntry {
                 .field("title", .string, .required)
                 .field("description", .string, .required)
                 .field("price", .int, .required)
-                .field("image_url", .string)
                 .field("is_hidden", .bool, .required)
                 .create()
         }

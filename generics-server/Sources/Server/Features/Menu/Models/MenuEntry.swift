@@ -14,9 +14,6 @@ final class MenuEntry: Model {
     @Field(key: "description")
     var description: String
 
-    @Field(key: "image_url")
-    var imageUrl: String?
-
     @Field(key: "price")
     var price: Int
 
@@ -29,14 +26,12 @@ final class MenuEntry: Model {
          title: String,
          description: String,
          price: Int,
-         imageUrl: String? = nil,
          isHidden: Bool = false) {
         self.id = id
         self.title = title
         self.description = description
         self.price = price
-        self.imageUrl = imageUrl
-        self.isHidden = true
+        self.isHidden = isHidden
     }
 }
 
