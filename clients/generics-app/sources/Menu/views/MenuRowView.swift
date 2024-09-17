@@ -28,18 +28,16 @@ struct MenuRowView: View {
     }
 
     func getImage(for item: MenuFeature.State.Item) -> some View {
-        Group {
-            if let image = item.image {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 75.0)
-            } else {
-                Image("pizzza_placeholder")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 75.0)
-            }
+        if let image = item.image {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 75.0)
+        } else {
+            Image("pizzza_placeholder")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 75.0)
         }
     }
 }

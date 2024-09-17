@@ -15,10 +15,17 @@ struct CartItemsView: View {
                 WithPerceptionTracking {
                     VStack(alignment: .leading) {
                         HStack {
-                            Image("menu_pizza")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 75.0)
+                            if let image = childStore.image {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 75.0)
+                            } else {
+                                Image("pizzza_placeholder")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 75.0)
+                            }
                             VStack {
                                 Text(childStore.menuItem.title)
                                 Text(childStore.menuItem.description)
