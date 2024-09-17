@@ -24,7 +24,7 @@ public struct OrderModel: Codable, Identifiable, Equatable {
             self.menuItem = menuItem
             self.count = count
         }
-        
+
         public let menuItem: MenuItem
         public let count: Int
     }
