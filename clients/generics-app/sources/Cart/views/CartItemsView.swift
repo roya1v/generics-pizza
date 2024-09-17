@@ -8,7 +8,10 @@ struct CartItemsView: View {
 
     var body: some View {
         WithPerceptionTracking {
-            ForEach(store.items) { item in
+            ForEach(
+                store.scope(state: \.items, action: \.item),
+                id: \.state.id
+            ) { childStore in
                 WithPerceptionTracking {
                     VStack(alignment: .leading) {
                         HStack {
@@ -17,27 +20,51 @@ struct CartItemsView: View {
                                 .scaledToFit()
                                 .frame(width: 75.0)
                             VStack {
-                                Text(item.title)
-                                Text(item.description)
+                                Text(childStore.menuItem.title)
+                                Text(childStore.menuItem.description)
                                     .font(.gCaption)
                                     .foregroundColor(.gray)
                                     .lineLimit(1)
                             }
                         }
                         HStack {
-                            Text(item.formattedPrice())
+                            Text(childStore.menuItem.formattedPrice())
                             Spacer()
-                            Button {
-                                store.send(.removeTapped(item))
-                            } label: {
-                                Text("Delete")
-                                    .font(.caption)
-                            }
-                            .buttonStyle(GPrimaryButtonStyle())
+                            CountButton(store: childStore)
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+struct CountButton: View {
+
+    let store: StoreOf<CartItemFeature>
+
+    var body: some View {
+        WithPerceptionTracking {
+            HStack {
+                Button {
+                    store.send(.decreaseTapped)
+                } label: {
+                    Text("-")
+
+                }
+                .buttonStyle(GLinkButtonStyle())
+                Text("\(store.count)")
+                Button {
+                    store.send(.increaseTapped)
+                } label: {
+                    Text("+")
+
+                }
+                .buttonStyle(GLinkButtonStyle())
+            }
+            .background(Color.gLight)
+            .padding()
+            .clipShape(RoundedRectangle(cornerRadius: 8.0))
         }
     }
 }
