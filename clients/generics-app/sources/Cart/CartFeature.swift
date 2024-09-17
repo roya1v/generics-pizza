@@ -36,7 +36,17 @@ struct CartFeature {
                 return .run { [state] send in
                     await send(
                         .estimateUpdated(
-                            Result { try await repository.checkPrice(for: state.items.map { OrderModel.Item(menuItem: $0.menuItem, count: $0.count)}, destination: state.destination) }
+                            Result {
+                                try await repository.checkPrice(
+                                    for: state.items.map {
+                                        OrderModel.Item(
+                                            menuItem: $0.menuItem,
+                                            count: $0.count
+                                        )
+                                    },
+                                    destination: state.destination
+                                )
+                            }
                         )
                     )
                 }
@@ -64,7 +74,16 @@ struct CartFeature {
                 return .run { [state] send in
                     await send(
                         .orderPlaced(
-                            Result { try await repository.placeOrder(for: state.items.map { OrderModel.Item(menuItem: $0.menuItem, count: $0.count)}, destination: state.destination) }
+                            Result {
+                                try await repository.placeOrder(
+                                    for: state.items.map {
+                                        OrderModel.Item(menuItem: $0.menuItem,
+                                                        count: $0.count
+                                        )
+                                    },
+                                    destination: state.destination
+                                )
+                            }
                         )
                     )
                 }
@@ -74,10 +93,10 @@ struct CartFeature {
             case .estimateUpdated(.failure(let error)):
                 print(error)
                 return .none
-            case .orderPlaced(.success(let order)):
-                return .none
             case .orderPlaced(.failure(let error)):
-                print(error)
+                print(error) // TODO: Add error handling
+                return .none
+            case .orderPlaced:
                 return .none
             case .dismissTapped:
                 return .none
