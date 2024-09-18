@@ -69,9 +69,9 @@ struct CountButton: View {
                 }
                 .buttonStyle(GLinkButtonStyle())
             }
+            .padding([.leading, .trailing])
             .background(Color.gLight)
-            .padding()
-            .clipShape(RoundedRectangle(cornerRadius: 8.0))
+            .clipShape(RoundedRectangle(cornerRadius: 16.0))
         }
     }
 }
