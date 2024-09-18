@@ -19,10 +19,11 @@ final class OrderItemEntry: Model {
 
     init() { }
 
-    public init(id: UUID? = nil, item: MenuEntry, order: OrderEntry) {
+    public init(id: UUID? = nil, item: MenuEntry, order: OrderEntry, count: Int) {
         self.id = id
         self.item = item
         self.order = order
+        self.count = count
     }
 
     public init(id: UUID? = nil, item: UUID, count: Int) {

@@ -8,7 +8,7 @@ extension OrderItemEntry {
         func prepare(on database: Database) async throws {
             try await database.schema("order_items")
                 .id()
-                .field("count", .int8, .required)
+                .field("count", .int, .required)
                 .field("menu_item", .uuid, .required, .references("menu", "id"))
                 .field("order", .uuid, .required, .references("orders", "id"))
                 .create()
