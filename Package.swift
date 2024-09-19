@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 5.10
 
 import PackageDescription
 
@@ -13,6 +13,6 @@ let package = Package(
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
         .package(url: "https://github.com/kylef/PathKit", from: "1.0.1"),
         .package(url: "https://github.com/soto-project/soto.git", from: "6.0.0"),
-        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.11.2")
+        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.15.0")
     ]
 )
