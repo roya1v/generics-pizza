@@ -32,12 +32,12 @@ struct ContentView: View {
                         action: \.dashboard) {
                         DashboardView(store: store)
                     }
-
                 }
             }
-            .task {
-                store.send(.launched)
-            }
+
+        }
+        .task {
+            store.send(.launched)
         }
     }
 }

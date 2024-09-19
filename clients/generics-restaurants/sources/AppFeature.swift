@@ -14,7 +14,7 @@ struct AppFeature {
 
     enum Action {
         case launched
-        case stateUpdated(AuthenticationState)
+        case stateUpdated(isSignedIn: Bool)
         case auth(AuthFeature.Action)
         case dashboard(DashboardFeature.Action)
     }
@@ -25,37 +25,42 @@ struct AppFeature {
     var body: some ReducerOf<Self> {
         Reduce<State, Action> { state, action in
             switch action {
-            case .dashboard:
-                return .none
             case .launched:
-                repository.reload()
-                return .merge(
-                    .send(.stateUpdated(repository.state)),
-                    .publisher {
-                        repository
-                            .statePublisher
-                            .map { state in
-                                Action.stateUpdated(state)
-                            }
-                            .receive(on: DispatchQueue.main)
-                    }
-                )
-            case .stateUpdated(let newState):
-                switch newState {
-                case .unknown:
-                    state = .loading
-                case .loggedIn:
+                state = .loading
+                return .run { send in
+                    let currentUser = await repository.checkState()
+                    await send(.stateUpdated(isSignedIn: currentUser != nil))
+                }
+            case .stateUpdated(let isSignedIn):
+                if isSignedIn {
                     state = .dashboard(
-                        DashboardFeature.State(now: NowFeature.State(),
-                                               orderHistory: OrderHistoryFeature.State(),
-                                               menu: MenuFeature.State(),
-                                               users: UsersFeature.State())
+                        DashboardFeature.State(
+                            now: NowFeature.State(),
+                            orderHistory: OrderHistoryFeature.State(),
+                            menu: MenuFeature.State(),
+                            users: UsersFeature.State()
+                        )
                     )
-                case .loggedOut:
+                } else {
                     state = .auth(.login(LoginFeature.State()))
                 }
                 return .none
+            case .dashboard(.signOutComplete(.success)):
+                state = .auth(.login(LoginFeature.State()))
+                return .none
+            case .auth(.login(.loginCompleted(.none))), .auth(.createAccount(.createAccountCompleted(.none))):
+                state = .dashboard(
+                    DashboardFeature.State(
+                        now: NowFeature.State(),
+                        orderHistory: OrderHistoryFeature.State(),
+                        menu: MenuFeature.State(),
+                        users: UsersFeature.State()
+                    )
+                )
+                return .none
             case .auth:
+                return .none
+            case .dashboard:
                 return .none
             }
         }
