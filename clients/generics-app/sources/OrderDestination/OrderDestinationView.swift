@@ -11,7 +11,19 @@ struct OrderDestinationView: View {
     var body: some View {
         WithPerceptionTracking {
             ZStack(alignment: .top) {
-                Map(coordinateRegion: .constant(.init()))
+                Map(
+                    coordinateRegion: .constant(
+                        MKCoordinateRegion(
+                            center: CLLocationCoordinate2D(
+                                latitude: 52.2318,
+                                longitude: 21.0060),
+                            span: MKCoordinateSpan(
+                                latitudeDelta: 0.01,
+                                longitudeDelta: 0.01
+                            )
+                        )
+                    )
+                )
                     .ignoresSafeArea()
                 HStack {
                     Button {
@@ -49,7 +61,10 @@ struct OrderDestinationView: View {
 
                 }
                 .padding()
+                .presentationBackgroundInteraction(.enabled(upThrough: .height(120.0)))
+                .interactiveDismissDisabled()
                 .presentationDetents([.height(120.0)])
+
             }
         }
     }

@@ -16,7 +16,8 @@ struct MenuView: View {
                     .ignoresSafeArea()
 
                 VStack {
-                    MenuHeaderView()
+                    // This will be used later
+                    // MenuHeaderView()
                     switch store.content {
                     case .loading:
                         ProgressView()
@@ -53,6 +54,7 @@ struct MenuView: View {
                     store.send(.didSelect(item.id!))
                 }
                 .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
             }
             .listStyle(.plain)
         }

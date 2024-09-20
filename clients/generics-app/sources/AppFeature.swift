@@ -69,6 +69,10 @@ struct AppFeature {
                 return .none
             case .tracking:
                 return .none
+            case .orderDestination(.presented(.dismissTapped)),
+                    .orderDestination(.presented(.confirm)):
+                state.orderDestination = nil
+                return .none
             case .orderDestination:
                 return .none
             case .showOrderDestination:

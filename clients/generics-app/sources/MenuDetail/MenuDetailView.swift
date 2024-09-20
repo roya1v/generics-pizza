@@ -39,52 +39,53 @@ struct MenuDetailView: View {
                             }
                             // How to do that correctly on iOS 16?
                             .padding([.top], 100.0)
-
-                            Picker(
-                                "Size",
-                                selection: .constant("medium")
-                            ) {
-                                Text("Small")
-                                    .tag("small")
-                                Text("Medium")
-                                    .tag("medium")
-                                Text("Large")
-                                    .tag("large")
-                            }
-                            .pickerStyle(.segmented)
-                            .padding([.horizontal])
-                            Picker(
-                                "Dough",
-                                selection: .constant("regular")
-                            ) {
-                                Text("Regular")
-                                    .tag("regular")
-                                Text("Thin")
-                                    .tag("thin")
-                            }
-                            .pickerStyle(.segmented)
-                            .padding([.horizontal, .bottom])
+                            // This will be used later
+//                            Picker(
+//                                "Size",
+//                                selection: .constant("medium")
+//                            ) {
+//                                Text("Small")
+//                                    .tag("small")
+//                                Text("Medium")
+//                                    .tag("medium")
+//                                Text("Large")
+//                                    .tag("large")
+//                            }
+//                            .pickerStyle(.segmented)
+//                            .padding([.horizontal])
+//                            Picker(
+//                                "Dough",
+//                                selection: .constant("regular")
+//                            ) {
+//                                Text("Regular")
+//                                    .tag("regular")
+//                                Text("Thin")
+//                                    .tag("thin")
+//                            }
+//                            .pickerStyle(.segmented)
+//                            .padding([.horizontal, .bottom])
                         }
                     }
-                    Grid {
-                        ForEach(0..<9) { _ in
-                            GridRow {
-                                ForEach(0..<3) { _ in
-                                    VStack {
-                                        Image(systemName: "wineglass")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 54.0)
-                                        Text("Extra ingridient")
-                                            .font(.gCaption)
-                                            .multilineTextAlignment(.center)
-                                        Text("0.99$")
-                                    }
-                                    .padding()
-                                }
-                            }
-                        }
-                    }
+                    // This will be used later
+//                    Grid {
+//                        ForEach(0..<9) { _ in
+//                            GridRow {
+//                                ForEach(0..<3) { _ in
+//                                    VStack {
+//                                        Image(systemName: "wineglass")
+//                                            .resizable()
+//                                            .scaledToFit()
+//                                            .frame(width: 54.0)
+//                                        Text("Extra ingridient")
+//                                            .font(.gCaption)
+//                                            .multilineTextAlignment(.center)
+//                                        Text("0.99$")
+//                                    }
+//                                    .padding()
+//                                }
+//                            }
+//                        }
+//                    }
 
                 }
                 Button {
