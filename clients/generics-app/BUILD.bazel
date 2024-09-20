@@ -23,7 +23,7 @@ ios_application(
         "ipad",
     ],
     infoplists = ["Info.plist"],
-    minimum_os_version = "16.1",
+    minimum_os_version = "16.4",
     provisioning_profile = ":xcode_profile",
     resources = glob(["resources/**/*"]),
     visibility = ["//visibility:public"],
