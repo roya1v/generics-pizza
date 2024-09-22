@@ -96,7 +96,7 @@ struct MenuFeature {
                 state.itemForm = nil
                 if state.menuState.items[id: newItem.id] != nil {
                     state.menuState.items[id: newItem.id]?.item = newItem
-                    return .none
+                    return loadImage(for: newItem)
                 } else {
                     state.menuState.items.append(MenuItemFeature.State(item: newItem))
                     return loadImage(for: newItem)

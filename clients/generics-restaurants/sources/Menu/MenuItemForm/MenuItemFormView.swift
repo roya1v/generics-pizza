@@ -1,5 +1,6 @@
 import SwiftUI
 import ComposableArchitecture
+import clients_libraries_GenericsCore
 
 struct MenuItemFormView: View {
 
@@ -42,6 +43,9 @@ struct MenuItemFormView: View {
             .padding()
             .frame(width: 400, height: 200)
         }
+        .task {
+            store.send(.appeared)
+        }
     }
 
     var form: some View {
@@ -55,21 +59,10 @@ struct MenuItemFormView: View {
 
     var imageSelection: some View {
         VStack {
-            if let url = store.imageUrl {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFit()
-                    case .failure, .empty:
-                        Image("pizzza_placeholder")
-                            .resizable()
-                            .scaledToFit()
-                    @unknown default:
-                        fatalError()
-                    }
-                }
+            if let image = store.image {
+                Image(nsImage: image)
+                    .resizable()
+                    .scaledToFit()
                 .frame(width: 75.0)
             } else {
                 ZStack {
@@ -92,8 +85,9 @@ struct MenuItemFormView: View {
         .fileImporter(isPresented: $isSelectingImage, allowedContentTypes: [.jpeg, .png]) { result in
             do {
                 let fileURL = try result.get()
-                if fileURL.startAccessingSecurityScopedResource() {
-                    store.send(.imageSelected(fileURL))
+                if fileURL.startAccessingSecurityScopedResource(),
+                   let image =  ImageData(contentsOf: fileURL) {
+                    store.send(.imageSelected(image))
                 }
             } catch {
                 print("error reading")
