@@ -24,7 +24,7 @@ public protocol MenuRepository {
     func update(item: MenuItem) async throws -> MenuItem
     func imageUrl(for item: MenuItem) -> URL?
     func getImage(forItemId id: UUID) async throws -> ImageData
-    func setImage(from localUrl: URL, for item: MenuItem) async throws
+    func setImage(withPngData imageData: Data, for item: MenuItem) async throws
 }
 
 enum MenuRepositoryError: Error {
@@ -109,21 +109,18 @@ final class MenuRepositoryImp: MenuRepository {
             .add(path: "menu")
     }
 
-    func setImage(from localUrl: URL, for item: MenuItem) async throws {
-        guard localUrl.isFileURL else {
-            throw MenuRepositoryError.invalidFile
-        }
-        let imageData = try Data(contentsOf: localUrl)
-        try await getRequest()
+    func setImage(withPngData imageData: Data, for item: SharedModels.MenuItem) async throws {
+        let test = try await getRequest()
             .method(.post)
             .add(path: item.id!.uuidString)
             .add(path: "image")
             .authentication({
                 try? self.authenticationProvider?.getAuthentication()
             })
-            .setHeader("Content-Type", to: "image/jpeg")
+            .setHeader("Content-Type", to: "image/png")
             .body(imageData)
             .perform()
+        return
     }
 
     func delete(item: MenuItem) async throws {
