@@ -27,6 +27,11 @@
       },
       "post": {
         "summary": "Create a new menu item.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "The newly created menu item.",
@@ -44,6 +49,11 @@
     "/menu/{id}": {
       "delete": {
         "summary": "Delete a menu item.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
@@ -84,6 +94,11 @@
       },
       "post": {
         "summary": "Set the menu item image.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -92,6 +107,11 @@
       },
       "delete": {
         "summary": "Delete the menu item image.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -104,7 +124,14 @@
         "summary": "Create a new order.",
         "responses": {
           "200": {
-            "description": "Ok"
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MenuItem"
+                }
+              }
+            }
           }
         }
       }
@@ -132,9 +159,24 @@
     "/order/current": {
       "get": {
         "summary": "Get the current orders.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Ok"
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderModel"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -142,9 +184,24 @@
     "/order/history": {
       "get": {
         "summary": "Get all finished orders.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Ok"
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderModel"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -170,6 +227,11 @@
     "/auth/login": {
       "post": {
         "summary": "Login and get an auth token.",
+        "security": [
+          {
+            "BearerBasic": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -180,6 +242,11 @@
     "/auth": {
       "get": {
         "summary": "Check the current user account.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -190,6 +257,11 @@
     "/auth/signout": {
       "post": {
         "summary": "Sign out deleting auth token.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -200,6 +272,11 @@
     "/user": {
       "get": {
         "summary": "Get all users.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -221,6 +298,11 @@
           }
         ],
         "summary": "Delete a user.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -240,6 +322,11 @@
           }
         ],
         "summary": "Update a user's access.",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Ok"
@@ -249,6 +336,17 @@
     }
   },
   "components": {
+    "securitySchemes": {
+      "BasicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+
     "schemas": {
       "MenuItem": {
         "type": "object",
@@ -265,6 +363,42 @@
           },
           "price": {
             "type": "integer"
+          }
+        }
+      },
+      "OrderModel": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "menuItem": {},
+                "count": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "state": {
+            "enum": [
+              " new",
+              "inProgress",
+              "readyForDelivery",
+              "inDelivery",
+              "finished"
+            ]
+          },
+          "destination": {
+            "type": "object"
           }
         }
       },
