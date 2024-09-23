@@ -16,7 +16,7 @@ Stuff that I'm using here in no particular order:
 # Customer app
 
 <img src="assets/readme/customer-app-icon.png" height="100" width="100" />
-<img src="assets/readme/customer-app.gif" height="400" width="660" />
+<img src="assets/readme/customer-app.gif" height="400" width="580" />
 
 # Restaurant app
 
