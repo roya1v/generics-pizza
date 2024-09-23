@@ -1,22 +1,6 @@
 // swift-tools-version:5.7
 import PackageDescription
 
-let baseDependencies: [Package.Dependency] = [
-    .package(url: "https://github.com/vapor/vapor.git", from: "4.90.0"),
-    .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
-    .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
-    .package(url: "https://github.com/kylef/PathKit", from: "1.0.1"),
-    .package(url: "https://github.com/soto-project/soto.git", from: "6.0.0")
-
-]
-
-#if !RELESE
-// swiftlint:disable:next line_length
-let dependencies = baseDependencies + [.package(url: "https://github.com/realm/SwiftLint", .upToNextMajor(from: "0.52.4"))]
-#else
-let dependencies = baseDependencies
-#endif
-
 let package = Package(
     name: "generics-server",
     platforms: [
@@ -25,7 +9,14 @@ let package = Package(
     products: [
         .library(name: "SharedModels", targets: ["SharedModels"])
     ],
-    dependencies: dependencies,
+    dependencies: [
+    .package(url: "https://github.com/vapor/vapor.git", from: "4.90.0"),
+    .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
+    .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
+    .package(url: "https://github.com/kylef/PathKit", from: "1.0.1"),
+    .package(url: "https://github.com/soto-project/soto.git", from: "6.0.0")
+
+],
     targets: [
         .executableTarget(
             name: "Server",
@@ -45,10 +36,6 @@ let package = Package(
         .target(
             name: "SharedModels",
             dependencies: []
-        ),
-        .testTarget(name: "AppTests", dependencies: [
-            // .target(name: "App"),
-            .product(name: "XCTVapor", package: "vapor")
-        ])
+        )
     ]
 )
