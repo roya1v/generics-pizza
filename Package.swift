@@ -3,8 +3,8 @@
 import PackageDescription
 
 let package = Package(
-    name: "my-project",
-    platforms: [.macOS("14.0"), .iOS("16.0")],
+    name: "generics-pizza",
+    platforms: [.macOS("14.0"), .iOS("16.4")],
     dependencies: [
         .package(url: "https://github.com/Matejkob/swift-spyable.git", from: "0.2.0"),
         .package(url: "https://github.com/hmlongco/Factory.git", from: "2.3.2"),
@@ -16,6 +16,8 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.15.0")
     ],
     targets: [
+        // We build it for Docker from here and not using bazel
+        // because: https://github.com/cgrindel/rules_swift_package_manager/issues/1174
         .executableTarget(
             name: "Server",
             dependencies: [
@@ -29,8 +31,7 @@ let package = Package(
             path: "generics-server/sources/server",
             swiftSettings: [
                 .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release))
-            ],
-            plugins: []
+            ]
         ),
         .target(
             name: "SharedModels",
