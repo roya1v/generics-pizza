@@ -4,6 +4,9 @@ import SharedModels
 import PathKit
 
 struct MenuController: RouteCollection {
+
+    private let imagesBucket = "menu-images"
+
     func boot(routes: RoutesBuilder) throws {
         let menu = routes.grouped("menu")
 
@@ -87,13 +90,16 @@ struct MenuController: RouteCollection {
             throw Abort(.notFound)
         }
 
-        let imageData = try await req.s3.getObject(.init(bucket: "menu-images", key: "\(id).jpeg"))
+        do {
+            let imageData = try await req.s3.getObject(.init(bucket: imagesBucket, key: "\(id).png"))
+            let resp = Response()
+            resp.body = Response.Body(data: (imageData.body?.asData()!)!)
+            resp.headers.contentType = .jpeg
 
-        let resp = Response()
-        resp.body = Response.Body(data: (imageData.body?.asData()!)!)
-        resp.headers.contentType = .jpeg
-
-        return resp
+            return resp
+        } catch  {
+            throw Abort(.notFound, reason: "No image for this item exists.")
+        }
     }
 
     /// Set the menu item image.
@@ -115,8 +121,9 @@ struct MenuController: RouteCollection {
             throw Abort(.badRequest, reason: "Content must be jpeg")
         }
 
+        req.logger.debug("Putting object into s3 bucket - \(imagesBucket), key - \(filename)")
         _ = try await req.s3.putObject(.init(body: .byteBuffer(req.body.data!),
-                                             bucket: "menu-images",
+                                             bucket: imagesBucket,
                                              key: filename))
         return .ok
     }

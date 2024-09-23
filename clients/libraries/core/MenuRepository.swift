@@ -110,7 +110,7 @@ final class MenuRepositoryImp: MenuRepository {
     }
 
     func setImage(withPngData imageData: Data, for item: SharedModels.MenuItem) async throws {
-        let test = try await getRequest()
+        try await getRequest()
             .method(.post)
             .add(path: item.id!.uuidString)
             .add(path: "image")
@@ -120,7 +120,6 @@ final class MenuRepositoryImp: MenuRepository {
             .setHeader("Content-Type", to: "image/png")
             .body(imageData)
             .perform()
-        return
     }
 
     func delete(item: MenuItem) async throws {
