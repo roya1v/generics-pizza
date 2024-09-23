@@ -6,3 +6,14 @@ force_try: warning
 force_cast: warning
 disabled_rules: 
   - nesting
+  - identifier_name
+
+custom_rules:
+  model_inheritance_name_ends_with_entry:
+    name: "Database models names scheme"
+    regex: "(?<!Entry)(: Model)"
+    message: "Class names representing database models should end with 'Entry'"
+  entry_shared_model_content:
+    name: "Entries shouldn't be content"
+    regex: "(Model).*(, Content)"
+    message: "Entries shouldn't conform to 'Content' and should instead use 'SharedModelRepresentable'"
