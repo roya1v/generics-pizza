@@ -4,12 +4,6 @@ import clients_libraries_SwiftlyHttp
 import Spyable
 import Factory
 
-extension Container {
-    public var menuRepository: Factory<MenuRepository> {
-        self { MenuRepositoryImp(baseURL: self.serverUrl(), authenticationProvider: nil) }
-    }
-}
-
 // Kept temporarily for restaurant app
 public func buildMenuRepository(url: String, authenticationProvider: AuthenticationProvider? = nil) -> MenuRepository {
     MenuRepositoryImp(baseURL: url, authenticationProvider: authenticationProvider)
