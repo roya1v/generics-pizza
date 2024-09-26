@@ -74,7 +74,7 @@ class LoginFeatureTests: XCTestCase {
         let mockPassword = "test123"
 
         authRepositorySpy.loginEmailPasswordClosure = { _, _ in
-            throw SomeError()
+            throw MockError()
         }
 
         await store.send(.binding(.set(\.email, mockEmail)))
@@ -86,6 +86,6 @@ class LoginFeatureTests: XCTestCase {
     }
 }
 
-struct SomeError: Error {
-
+struct MockError: Error, LocalizedError {
+    let errorDescription: String? = "mock-error"
 }
