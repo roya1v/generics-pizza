@@ -3,13 +3,22 @@ import ComposableArchitecture
 import Factory
 import SharedModels
 import Combine
+import MapKit
 
 @Reducer
 struct TrackingFeature {
     @ObservableState
     struct State: Equatable {
+        let mapPins = [
+            MapPin(id: UUID(), coordinate: restaurantCoordinates)
+        ]
         var order: OrderModel
         var orderState: OrderModel.State?
+
+        struct MapPin: Equatable, Identifiable {
+            let id: UUID
+            let coordinate: CLLocationCoordinate2D
+        }
     }
 
     enum Action {
@@ -60,5 +69,11 @@ struct TrackingFeature {
                 return .none
             }
         }
+    }
+}
+
+extension CLLocationCoordinate2D: Equatable {
+    public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        lhs.latitude == rhs.latitude && lhs.longitude == lhs.latitude
     }
 }

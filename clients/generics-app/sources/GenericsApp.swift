@@ -1,6 +1,12 @@
 import SwiftUI
 import ComposableArchitecture
 
+import MapKit
+let restaurantCoordinates = CLLocationCoordinate2D(
+    latitude: 52.2318,
+    longitude: 21.0060
+)
+
 @main
 struct GenericsApp: App {
     static let store = Store(initialState: AppFeature.State(cart: Shared([]),
