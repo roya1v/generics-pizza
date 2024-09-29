@@ -14,9 +14,7 @@ struct OrderDestinationView: View {
                 Map(
                     coordinateRegion: .constant(
                         MKCoordinateRegion(
-                            center: CLLocationCoordinate2D(
-                                latitude: 52.2318,
-                                longitude: 21.0060),
+                            center: restaurantCoordinates,
                             span: MKCoordinateSpan(
                                 latitudeDelta: 0.01,
                                 longitudeDelta: 0.01
@@ -64,7 +62,6 @@ struct OrderDestinationView: View {
                 .presentationBackgroundInteraction(.enabled(upThrough: .height(120.0)))
                 .interactiveDismissDisabled()
                 .presentationDetents([.height(120.0)])
-
             }
         }
     }

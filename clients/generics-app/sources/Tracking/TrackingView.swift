@@ -1,6 +1,7 @@
 import SwiftUI
 import ComposableArchitecture
 import SharedModels
+import MapKit
 
 struct TrackingView: View {
 
@@ -8,33 +9,39 @@ struct TrackingView: View {
 
     var body: some View {
         WithPerceptionTracking {
-            VStack {
-                title
-                    .font(.largeTitle)
-                HStack {
-                    ForEach([OrderModel.State.new,
-                             .inProgress,
-                             .readyForDelivery,
-                             .inDelivery,
-                             .finished],
-                            id: \.rawValue) { state in
-                        WithPerceptionTracking {
-                            RoundedRectangle(cornerRadius: 3.0)
-                                .foregroundStyle(
-                                    store.orderState == state
-                                    ? Color.red
-                                    : Color.gray
-                                )
-                                .frame(height: 4.0)
+            map
+                .sheet(isPresented: .constant(true)) {
+                    VStack(alignment: .leading) {
+                        title
+                            .font(.largeTitle)
+                        HStack {
+                            ForEach([OrderModel.State.new,
+                                     .inProgress,
+                                     .readyForDelivery,
+                                     .inDelivery,
+                                     .finished],
+                                    id: \.rawValue) { state in
+                                WithPerceptionTracking {
+                                    RoundedRectangle(cornerRadius: 3.0)
+                                        .foregroundStyle(
+                                            store.orderState == state
+                                            ? Color.red
+                                            : Color.gray
+                                        )
+                                        .frame(height: 4.0)
+                                }
+                            }
                         }
+                        .padding()
                     }
+                    .padding()
+                    .presentationBackgroundInteraction(.enabled(upThrough: .height(120.0)))
+                    .interactiveDismissDisabled()
+                    .presentationDetents([.height(120.0)])
                 }
-                .padding()
-            }
-
-            .task {
-                store.send(.appeared)
-            }
+                .task {
+                    store.send(.appeared)
+                }
         }
     }
 
@@ -42,18 +49,38 @@ struct TrackingView: View {
         WithPerceptionTracking {
             switch store.orderState {
             case .new:
-                Text("Restaurant is starting the order")
+                Text("Starting the order")
             case .inProgress:
-                Text("The order is being prepared")
+                Text("In preparation")
             case .readyForDelivery:
-                Text("The order is waiting for a driver")
+                Text("Waiting for a driver")
             case .inDelivery:
-                Text("The order is being delivered")
+                Text("In delivery")
             case .finished:
-                Text("The order was delivered")
+                Text("Delivered")
             default:
                 Text("Loading")
             }
+        }
+    }
+
+    var map: some View {
+        WithPerceptionTracking {
+            Map(
+                coordinateRegion: .constant(
+                    MKCoordinateRegion(
+                        center: restaurantCoordinates,
+                        span: MKCoordinateSpan(
+                            latitudeDelta: 0.01,
+                            longitudeDelta: 0.01
+                        )
+                    )
+                ),
+                annotationItems: store.mapPins
+            ) { pin in
+                MapMarker(coordinate: pin.coordinate)
+            }
+            .ignoresSafeArea()
         }
     }
 }
