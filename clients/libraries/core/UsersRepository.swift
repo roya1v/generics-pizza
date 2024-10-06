@@ -4,8 +4,7 @@ import SharedModels
 import SwiftlyHttp
 
 public func buildUsersRepository(url: String, authenticationProvider: some AuthenticationProvider)
-    -> UsersRepository
-{
+    -> UsersRepository {
     UsersRepositoryImpl(baseURL: url, authenticationProvider: authenticationProvider)
 }
 
@@ -40,8 +39,7 @@ final class UsersRepositoryImpl: UsersRepository {
     }
 
     func updateAccessLevel(for user: UserModel, to newAccessLevel: UserModel.AccessLevel)
-        async throws
-    {
+        async throws {
         try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "user")
             .add(path: "\(user.id!)")

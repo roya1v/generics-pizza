@@ -6,8 +6,7 @@ import SwiftlyHttp
 
 // Kept temporarily for restaurant app
 public func buildMenuRepository(url: String, authenticationProvider: AuthenticationProvider? = nil)
-    -> MenuRepository
-{
+    -> MenuRepository {
     MenuRepositoryImp(baseURL: url, authenticationProvider: authenticationProvider)
 }
 

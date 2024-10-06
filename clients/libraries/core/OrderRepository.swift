@@ -33,8 +33,7 @@ final class OrderRepositoryImpl: OrderRepository {
     // MARK: - OrderRepository
 
     func checkPrice(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws
-        -> [SubtotalModel]
-    {
+        -> [SubtotalModel] {
         return try await getRequest()
             .add(path: "check_price")
             .body(OrderModel(createdAt: nil, items: items, destination: destination))
@@ -43,8 +42,7 @@ final class OrderRepositoryImpl: OrderRepository {
     }
 
     func placeOrder(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws
-        -> OrderModel
-    {
+        -> OrderModel {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         return try await getRequest()

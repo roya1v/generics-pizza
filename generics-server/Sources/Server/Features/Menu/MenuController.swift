@@ -97,7 +97,7 @@ struct MenuController: RouteCollection {
             resp.headers.contentType = .jpeg
 
             return resp
-        } catch  {
+        } catch {
             throw Abort(.notFound, reason: "No image for this item exists.")
         }
     }

@@ -49,7 +49,7 @@ struct Restaurant: AsyncParsableCommand {
                     }
                 }
             }
-
+        
         try await Task.sleep(for: .seconds(9_999_999))
     }
 }

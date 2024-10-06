@@ -82,13 +82,11 @@ struct MenuItemFormView: View {
                 Text("Select image")
             }
         }
-        .fileImporter(isPresented: $isSelectingImage, allowedContentTypes: [.jpeg, .png]) {
-            result in
+        .fileImporter(isPresented: $isSelectingImage, allowedContentTypes: [.jpeg, .png]) { result in
             do {
                 let fileURL = try result.get()
                 if fileURL.startAccessingSecurityScopedResource(),
-                    let image = ImageData(contentsOf: fileURL)
-                {
+                    let image = ImageData(contentsOf: fileURL) {
                     store.send(.imageSelected(image))
                 }
             } catch {

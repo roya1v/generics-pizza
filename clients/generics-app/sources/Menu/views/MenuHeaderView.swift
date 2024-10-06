@@ -9,7 +9,7 @@ struct MenuHeaderView: View {
         "Drinks",
         "Alcohol",
         "Deserts",
-        "Other",
+        "Other"
     ]
 
     @State var selected = "Sets"
