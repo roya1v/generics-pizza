@@ -31,7 +31,7 @@ xcodeproj(
         top_level_target(
             "//clients/generics-app:GenericsApp",
             target_environments = [
-                "device",
+                # "device",
                 "simulator",
             ],
         ),
