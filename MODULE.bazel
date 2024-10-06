@@ -21,6 +21,7 @@ use_repo(
     "swiftpkg_fluent_postgres_driver",
     "swiftpkg_pathkit",
     "swiftpkg_soto",
+    "swiftpkg_swift_argument_parser",
     "swiftpkg_swift_composable_architecture",
     "swiftpkg_swift_spyable",
     "swiftpkg_vapor",

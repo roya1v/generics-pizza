@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 6,
-  "moduleFileHash": "90290c3f2522c47173024bf49e5aa2fd862893628a7ac0991fa412e57bd8448f",
+  "moduleFileHash": "66f2c18db62d2fb1443dcc43bec8c1510d94719b3ca25c3c1494af40d6a5498e",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -40,6 +40,7 @@
             "swiftpkg_fluent_postgres_driver": "swiftpkg_fluent_postgres_driver",
             "swiftpkg_pathkit": "swiftpkg_pathkit",
             "swiftpkg_soto": "swiftpkg_soto",
+            "swiftpkg_swift_argument_parser": "swiftpkg_swift_argument_parser",
             "swiftpkg_swift_composable_architecture": "swiftpkg_swift_composable_architecture",
             "swiftpkg_swift_spyable": "swiftpkg_swift_spyable",
             "swiftpkg_vapor": "swiftpkg_vapor"
@@ -3144,8 +3145,8 @@
       "general": {
         "bzlTransitiveDigest": "qvz2Ln2ubaVgWlFkVWTwkamdNhjTF1nPdfX0uBfwViY=",
         "recordedFileInputs": {
-          "@@//Package.resolved": "3ea5ba794594d6ae63bd7bad298cd1a5becbb5c1e9ad7a0d3dc715f453f8b174",
-          "@@//Package.swift": "278bb8e5c89d7d4f0da066e28383ee596f7054be72dfc59b652dcb48b8731b10"
+          "@@//Package.resolved": "f090b849f212e1d8cc80a808e25ed6710575c1b4eefd831c810dd940fc59d8ad",
+          "@@//Package.swift": "4a08e7841e6aff1a9a4760bc4b47811b73ae3e37f17f101c0d0e3bd2dddb7dfb"
         },
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -3321,6 +3322,25 @@
               "patches": []
             }
           },
+          "swiftpkg_swift_argument_parser": {
+            "bzlFile": "@@rules_swift_package_manager~//swiftpkg/internal:swift_package.bzl",
+            "ruleClassName": "swift_package",
+            "attributes": {
+              "bazel_package_name": "swiftpkg_swift_argument_parser",
+              "commit": "41982a3656a71c768319979febd796c6fd111d5c",
+              "remote": "https://github.com/apple/swift-argument-parser",
+              "version": "1.5.0",
+              "init_submodules": false,
+              "recursive_init_submodules": true,
+              "patch_args": [
+                "-p0"
+              ],
+              "patch_cmds": [],
+              "patch_cmds_win": [],
+              "patch_tool": "",
+              "patches": []
+            }
+          },
           "swiftpkg_swift_identified_collections": {
             "bzlFile": "@@rules_swift_package_manager~//swiftpkg/internal:swift_package.bzl",
             "ruleClassName": "swift_package",
@@ -3352,7 +3372,8 @@
                 "@swiftpkg_fluent_postgres_driver//:pkg_info.json": "fluent-postgres-driver",
                 "@swiftpkg_pathkit//:pkg_info.json": "pathkit",
                 "@swiftpkg_soto//:pkg_info.json": "soto",
-                "@swiftpkg_swift_composable_architecture//:pkg_info.json": "swift-composable-architecture"
+                "@swiftpkg_swift_composable_architecture//:pkg_info.json": "swift-composable-architecture",
+                "@swiftpkg_swift_argument_parser//:pkg_info.json": "swift-argument-parser"
               }
             }
           },
@@ -4089,6 +4110,7 @@
             "swiftpkg_pathkit",
             "swiftpkg_soto",
             "swiftpkg_swift_composable_architecture",
+            "swiftpkg_swift_argument_parser",
             "swift_deps_info"
           ],
           "explicitRootModuleDirectDevDeps": [],

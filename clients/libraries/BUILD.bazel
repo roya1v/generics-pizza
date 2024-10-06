@@ -19,6 +19,7 @@ swift_library(
     srcs = glob(["helpers/**/*.swift"]),
     module_name = "GenericsHelpers",
     visibility = ["//visibility:public"],
+    deps = ["@swiftpkg_swift_composable_architecture//:ComposableArchitecture"],
 )
 
 swift_library(
@@ -27,11 +28,9 @@ swift_library(
     module_name = "GenericsCore",
     visibility = ["//visibility:public"],
     deps = [
-        ":GenericsHelpers",
         ":SwiftlyHttp",
         "//:SharedModels",
         "@swiftpkg_factory//:Factory",
-        "@swiftpkg_swift_composable_architecture//:ComposableArchitecture",
         "@swiftpkg_swift_spyable//:Spyable",
     ],
 )
