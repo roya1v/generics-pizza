@@ -105,8 +105,7 @@ struct MenuItemFormFeature {
                                     hasNewImage,
                                     let bitmapData = NSBitmapImageRep(data: imageData),
                                     let pngData = bitmapData.representation(
-                                        using: .png, properties: [:])
-                                {
+                                        using: .png, properties: [:]) {
                                     try await repository.setImage(
                                         withPngData: pngData, for: menuItem)
                                 }

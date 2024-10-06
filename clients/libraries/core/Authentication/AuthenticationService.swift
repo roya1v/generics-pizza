@@ -27,8 +27,7 @@ public final class AuthenticationService {
     }
 
     public func createAccount(email: String, password: String, confirmPassword: String) async throws
-        -> UserModel
-    {
+        -> UserModel {
         let response: UserModel = try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "auth")
             .add(path: "user")

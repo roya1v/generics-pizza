@@ -17,22 +17,19 @@ struct ContentView: View {
                 case .auth(.login):
                     if let store = store.scope(
                         state: \.auth?.login,
-                        action: \.auth.login)
-                    {
+                        action: \.auth.login) {
                         LoginView(store: store)
                     }
                 case .auth(.createAccount):
                     if let store = store.scope(
                         state: \.auth?.createAccount,
-                        action: \.auth.createAccount)
-                    {
+                        action: \.auth.createAccount) {
                         CreateAccountView(store: store)
                     }
                 case .dashboard:
                     if let store = store.scope(
                         state: \.dashboard,
-                        action: \.dashboard)
-                    {
+                        action: \.dashboard) {
                         DashboardView(store: store)
                     }
                 }

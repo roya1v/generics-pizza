@@ -53,8 +53,7 @@ final class DriverRepositoryImpl: DriverRepository {
             .messagePublisher
             .tryMap({
                 if case let .string(message) = $0,
-                    let data = message.data(using: .utf8)
-                {
+                    let data = message.data(using: .utf8) {
                     return data
                 } else {
                     throw DriverFeedError.unknownMessage($0)

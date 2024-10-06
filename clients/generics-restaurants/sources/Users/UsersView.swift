@@ -39,8 +39,7 @@ struct UsersView: View {
                 if let userId = selectedId.first,
                     case let .loaded(users) = store.state,
                     let userId,
-                    let user = users[id: userId]
-                {
+                    let user = users[id: userId] {
                     VStack {
                         Text("User email: \(user.email)")
                             .font(.title)
@@ -50,8 +49,7 @@ struct UsersView: View {
                                 ProgressView()
                             }
                             Menu {
-                                ForEach([UserModel.AccessLevel.admin, .employee], id: \.self) {
-                                    accessLevel in
+                                ForEach([UserModel.AccessLevel.admin, .employee], id: \.self) { accessLevel in
                                     Button("\(accessLevel)") {
                                         store.send(
                                             .newAccessSelected(
