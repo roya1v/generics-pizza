@@ -30,6 +30,7 @@ swift_library(
     deps = [
         "//:SharedModels",
         "//clients/libraries:GenericsCore",
+        "//clients/libraries:GenericsHelpers",
         "@swiftpkg_factory//:Factory",
         "@swiftpkg_swift_composable_architecture//:ComposableArchitecture",
     ],

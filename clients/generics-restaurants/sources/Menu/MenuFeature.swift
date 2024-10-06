@@ -3,6 +3,7 @@ import Factory
 import Foundation
 import GenericsCore
 import SharedModels
+import GenericsHelpers
 
 @Reducer
 struct MenuFeature {

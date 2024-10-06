@@ -4,6 +4,7 @@ import Foundation
 import GenericsCore
 import SharedModels
 import UIKit
+import GenericsHelpers
 
 @Reducer
 struct MenuFeature {

@@ -39,6 +39,7 @@ xcodeproj(
         # ",
         "//clients/generics-restaurants:GenericsRestaurants",
         "//clients/generics-restaurants:GenericsRestaurantsTests",
+        "//clients/bot:bot",
         ":server",
     ],
 )
