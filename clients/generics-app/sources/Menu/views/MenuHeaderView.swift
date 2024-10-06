@@ -1,5 +1,5 @@
+import GenericsUI
 import SwiftUI
-import clients_libraries_GenericsUI
 
 struct MenuHeaderView: View {
 
@@ -9,23 +9,27 @@ struct MenuHeaderView: View {
         "Drinks",
         "Alcohol",
         "Deserts",
-        "Other"
+        "Other",
     ]
 
     @State var selected = "Sets"
 
     var body: some View {
-        ScrollView(.horizontal,
-                   showsIndicators: false) {
+        ScrollView(
+            .horizontal,
+            showsIndicators: false
+        ) {
             HStack {
                 ForEach(items, id: \.self) { item in
                     Button(item) {
                         selected = item
                     }
-                    .buttonStyle(GLinkButtonStyle(
-                        style: selected == item
-                        ? .active
-                        : .inactive))
+                    .buttonStyle(
+                        GLinkButtonStyle(
+                            style: selected == item
+                                ? .active
+                                : .inactive)
+                    )
                     .padding(.gNormal)
                 }
             }

@@ -1,12 +1,13 @@
-import Foundation
 import Factory
-import clients_libraries_GenericsCore
+import Foundation
+import GenericsCore
 
 extension Container {
     var menuRepository: Factory<MenuRepository> {
-        self { buildMenuRepository(
-            url: self.serverUrl(),
-            authenticationProvider: nil)
+        self {
+            buildMenuRepository(
+                url: self.serverUrl(),
+                authenticationProvider: nil)
         }
     }
 }

@@ -1,5 +1,5 @@
 import Foundation
-import clients_libraries_SwiftlyHttp
+import SwiftlyHttp
 
 public protocol AuthenticationProvider {
     func getAuthentication() throws -> SwiftlyHttp.Authentication

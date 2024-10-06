@@ -1,6 +1,6 @@
-import SwiftUI
-import clients_libraries_GenericsUI
 import ComposableArchitecture
+import GenericsUI
+import SwiftUI
 
 struct MainHeaderView: View {
 

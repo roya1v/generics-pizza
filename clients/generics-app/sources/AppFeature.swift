@@ -1,8 +1,8 @@
-import Foundation
 import ComposableArchitecture
 import Factory
+import Foundation
+import GenericsCore
 import SharedModels
-import clients_libraries_GenericsCore
 
 @Reducer
 struct AppFeature {
@@ -48,8 +48,9 @@ struct AppFeature {
                 guard !state.cart.isEmpty else {
                     fatalError("Hello")
                 }
-                state.cartState = CartFeature.State(items: state.$cart,
-                                                    destination: state.$destination)
+                state.cartState = CartFeature.State(
+                    items: state.$cart,
+                    destination: state.$destination)
                 return .none
             case .menu:
                 return .none
@@ -70,7 +71,7 @@ struct AppFeature {
             case .tracking:
                 return .none
             case .orderDestination(.presented(.dismissTapped)),
-                    .orderDestination(.presented(.confirm)):
+                .orderDestination(.presented(.confirm)):
                 state.orderDestination = nil
                 return .none
             case .orderDestination:

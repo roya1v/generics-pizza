@@ -1,9 +1,9 @@
-import Foundation
+import Combine
 import ComposableArchitecture
 import Factory
+import Foundation
+import GenericsCore
 import SharedModels
-import clients_libraries_GenericsCore
-import Combine
 
 @Reducer
 struct OrderDestinationFeature {

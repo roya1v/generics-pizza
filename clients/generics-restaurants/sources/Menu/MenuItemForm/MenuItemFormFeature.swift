@@ -1,9 +1,9 @@
-import Foundation
-import ComposableArchitecture
-import SharedModels
-import Factory
-import clients_libraries_GenericsCore
 import AppKit
+import ComposableArchitecture
+import Factory
+import Foundation
+import GenericsCore
+import SharedModels
 
 @Reducer
 struct MenuItemFormFeature {
@@ -33,14 +33,15 @@ struct MenuItemFormFeature {
             description: String = "",
             price: Double = 0.0,
             isLoading: Bool = false,
-            errorMessage: String? = nil) {
-                self.id = id
-                self.title = title
-                self.description = description
-                self.price = price
-                self.isLoading = isLoading
-                self.errorMessage = errorMessage
-            }
+            errorMessage: String? = nil
+        ) {
+            self.id = id
+            self.title = title
+            self.description = description
+            self.price = price
+            self.isLoading = isLoading
+            self.errorMessage = errorMessage
+        }
     }
 
     enum Action: BindableAction {
@@ -62,7 +63,7 @@ struct MenuItemFormFeature {
             switch action {
             case .appeared:
                 if let id = state.id {
-                    return .run { [id ] send in
+                    return .run { [id] send in
                         await send(
                             .existingImageLoaded(
                                 Result { try await repository.getImage(forItemId: id) }
@@ -82,11 +83,12 @@ struct MenuItemFormFeature {
                 state.hasNewImage = true
                 return .none
             case .submitTapped:
-                let item = MenuItem(id: state.id,
-                                    title: state.title,
-                                    description: state.description,
-                                    price: Int(state.price * 100),
-                                    isHidden: state.isHidden)
+                let item = MenuItem(
+                    id: state.id,
+                    title: state.title,
+                    description: state.description,
+                    price: Int(state.price * 100),
+                    isHidden: state.isHidden)
                 let imageData = state.image?.tiffRepresentation
                 state.isLoading = true
                 return .run { [item, imageData, hasNewImage = state.hasNewImage] send in
@@ -100,10 +102,13 @@ struct MenuItemFormFeature {
                                     menuItem = try await repository.create(item: item)
                                 }
                                 if let imageData,
-                                   hasNewImage,
-                                   let bitmapData = NSBitmapImageRep(data: imageData),
-                                   let pngData = bitmapData.representation(using: .png, properties: [:]) {
-                                    try await repository.setImage(withPngData: pngData, for: menuItem)
+                                    hasNewImage,
+                                    let bitmapData = NSBitmapImageRep(data: imageData),
+                                    let pngData = bitmapData.representation(
+                                        using: .png, properties: [:])
+                                {
+                                    try await repository.setImage(
+                                        withPngData: pngData, for: menuItem)
                                 }
 
                                 return menuItem

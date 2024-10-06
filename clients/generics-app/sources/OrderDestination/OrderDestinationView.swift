@@ -1,8 +1,8 @@
-import SwiftUI
-import MapKit
-import clients_libraries_GenericsUI
 import ComposableArchitecture
+import GenericsUI
+import MapKit
 import SharedModels
+import SwiftUI
 
 struct OrderDestinationView: View {
 
@@ -22,7 +22,7 @@ struct OrderDestinationView: View {
                         )
                     )
                 )
-                    .ignoresSafeArea()
+                .ignoresSafeArea()
                 HStack {
                     Button {
                         store.send(.dismissTapped)
@@ -34,14 +34,15 @@ struct OrderDestinationView: View {
                     }
                     Picker(
                         "type",
-                        selection: $store.destination) {
-                            Text("Delivery")
-                                .tag(OrderDestinationFeature.State.Destination.delivery)
-                            Text("Restaurant")
-                                .tag(OrderDestinationFeature.State.Destination.restaurant)
-                        }
-                        .pickerStyle(.segmented)
-                        .disabled(true)
+                        selection: $store.destination
+                    ) {
+                        Text("Delivery")
+                            .tag(OrderDestinationFeature.State.Destination.delivery)
+                        Text("Restaurant")
+                            .tag(OrderDestinationFeature.State.Destination.restaurant)
+                    }
+                    .pickerStyle(.segmented)
+                    .disabled(true)
                 }
                 .padding(.gBig)
             }

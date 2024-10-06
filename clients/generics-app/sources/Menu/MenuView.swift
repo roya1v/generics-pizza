@@ -1,8 +1,8 @@
-import SwiftUI
-import Factory
-import SharedModels
-import clients_libraries_GenericsCore
 import ComposableArchitecture
+import Factory
+import GenericsCore
+import SharedModels
+import SwiftUI
 
 struct MenuView: View {
 
@@ -35,7 +35,7 @@ struct MenuView: View {
                     action: \.menuDetail
                 )
             ) { item in
-                NavigationView { // So we see the nav title
+                NavigationView {  // So we see the nav title
                     MenuDetailView(store: item)
                 }
             }

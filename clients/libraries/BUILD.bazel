@@ -3,30 +3,28 @@ load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
 swift_library(
     name = "SwiftlyHttp",
     srcs = glob(["swiftly-http/*.swift"]),
+    module_name = "SwiftlyHttp",
     visibility = ["//visibility:public"],
 )
 
 swift_library(
     name = "GenericsUI",
     srcs = glob(["ui/**/*.swift"]),
-    visibility = ["//visibility:public"],
-)
-
-swift_library(
-    name = "GenericsUIKit",
-    srcs = glob(["uikit/**/*.swift"]),
+    module_name = "GenericsUI",
     visibility = ["//visibility:public"],
 )
 
 swift_library(
     name = "GenericsHelpers",
     srcs = glob(["helpers/**/*.swift"]),
+    module_name = "GenericsHelpers",
     visibility = ["//visibility:public"],
 )
 
 swift_library(
     name = "GenericsCore",
     srcs = glob(["core/**/*.swift"]),
+    module_name = "GenericsCore",
     visibility = ["//visibility:public"],
     deps = [
         ":GenericsHelpers",

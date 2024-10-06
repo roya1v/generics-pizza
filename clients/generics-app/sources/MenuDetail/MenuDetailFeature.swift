@@ -1,8 +1,8 @@
-import Foundation
 import ComposableArchitecture
 import Factory
+import Foundation
+import GenericsCore
 import SharedModels
-import clients_libraries_GenericsCore
 
 struct MenuDetailFeature {
     @ObservableState

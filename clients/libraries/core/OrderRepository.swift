@@ -1,7 +1,7 @@
+import Combine
 import Foundation
 import SharedModels
-import clients_libraries_SwiftlyHttp
-import Combine
+import SwiftlyHttp
 
 public func buildOrderRepository(url: String) -> OrderRepository {
     OrderRepositoryImpl(baseURL: url)
@@ -12,9 +12,13 @@ public enum OrderError: Error {
 }
 
 public protocol OrderRepository {
-    func checkPrice(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws -> [SubtotalModel]
-    func placeOrder(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws -> OrderModel
-    func trackOrder(_ order: OrderModel) async throws -> AnyPublisher<CustomerFromServerMessage, Error>
+    func checkPrice(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws
+        -> [SubtotalModel]
+    func placeOrder(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws
+        -> OrderModel
+    func trackOrder(_ order: OrderModel) async throws -> AnyPublisher<
+        CustomerFromServerMessage, Error
+    >
 }
 
 final class OrderRepositoryImpl: OrderRepository {
@@ -28,7 +32,9 @@ final class OrderRepositoryImpl: OrderRepository {
 
     // MARK: - OrderRepository
 
-    func checkPrice(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws -> [SubtotalModel] {
+    func checkPrice(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws
+        -> [SubtotalModel]
+    {
         return try await getRequest()
             .add(path: "check_price")
             .body(OrderModel(createdAt: nil, items: items, destination: destination))
@@ -36,7 +42,9 @@ final class OrderRepositoryImpl: OrderRepository {
             .perform()
     }
 
-    func placeOrder(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws -> OrderModel {
+    func placeOrder(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws
+        -> OrderModel
+    {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
         return try await getRequest()
@@ -46,7 +54,9 @@ final class OrderRepositoryImpl: OrderRepository {
             .perform()
     }
 
-    func trackOrder(_ order: OrderModel) async throws -> AnyPublisher<CustomerFromServerMessage, Error> {
+    func trackOrder(_ order: OrderModel) async throws -> AnyPublisher<
+        CustomerFromServerMessage, Error
+    > {
         socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
             .add(path: "order")
             .add(path: "activity")

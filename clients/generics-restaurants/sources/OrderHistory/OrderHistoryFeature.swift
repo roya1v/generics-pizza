@@ -1,8 +1,8 @@
-import Foundation
 import ComposableArchitecture
-import SharedModels
 import Factory
-import clients_libraries_GenericsCore
+import Foundation
+import GenericsCore
+import SharedModels
 
 @Reducer
 struct OrderHistoryFeature {

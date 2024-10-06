@@ -1,7 +1,7 @@
-import Foundation
 import ComposableArchitecture
 import Factory
-import clients_libraries_GenericsCore
+import Foundation
+import GenericsCore
 import SharedModels
 
 @Reducer

@@ -1,8 +1,8 @@
-import SwiftUI
-import Factory
-import clients_libraries_GenericsCore
-import SharedModels
 import ComposableArchitecture
+import Factory
+import GenericsCore
+import SharedModels
+import SwiftUI
 
 struct MenuView: View {
 
@@ -41,7 +41,9 @@ struct MenuView: View {
                 }
             }
             .navigationTitle("Menu")
-            .confirmationDialog($store.scope(state: \.deleteConfirmationDialog, action: \.deleteConfirmationDialog))
+            .confirmationDialog(
+                $store.scope(state: \.deleteConfirmationDialog, action: \.deleteConfirmationDialog)
+            )
             .sheet(item: $store.scope(state: \.itemForm, action: \.itemForm)) { childStore in
                 MenuItemFormView(store: childStore)
             }

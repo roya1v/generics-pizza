@@ -1,6 +1,6 @@
-import SwiftUI
+import GenericsUI
 import SharedModels
-import clients_libraries_GenericsUI
+import SwiftUI
 
 struct MenuRowView: View {
 

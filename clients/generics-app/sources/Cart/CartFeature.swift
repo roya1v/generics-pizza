@@ -1,9 +1,9 @@
-import Foundation
+import Combine
 import ComposableArchitecture
 import Factory
+import Foundation
+import GenericsCore
 import SharedModels
-import clients_libraries_GenericsCore
-import Combine
 
 @Reducer
 struct CartFeature {
@@ -56,18 +56,21 @@ struct CartFeature {
                     },
                     .merge(
                         state.items.map { item in
-                                .run { send in
-                                    await send(
-                                        .item(
-                                            .element(
-                                                id: item.id,
-                                                action: .imageLoaded(
-                                                    Result { try await menuRepository.getImage(forItemId: item.id!) }
-                                                )
+                            .run { send in
+                                await send(
+                                    .item(
+                                        .element(
+                                            id: item.id,
+                                            action: .imageLoaded(
+                                                Result {
+                                                    try await menuRepository.getImage(
+                                                        forItemId: item.id!)
+                                                }
                                             )
                                         )
                                     )
-                                }
+                                )
+                            }
                         }
                     )
                 )
@@ -93,7 +96,7 @@ struct CartFeature {
                 state.items[id: id]?.image = image
                 return .none
             case .item(.element(id: let id, action: .imageLoaded(.failure(let error)))):
-                print("\(String(describing: id)): \(error)") // TODO: Add error handling
+                print("\(String(describing: id)): \(error)")  // TODO: Add error handling
                 return .none
             case .placeOrder:
                 return .run { [state] send in
@@ -102,8 +105,9 @@ struct CartFeature {
                             Result {
                                 try await repository.placeOrder(
                                     for: state.items.map {
-                                        OrderModel.Item(menuItem: $0.menuItem,
-                                                        count: $0.count
+                                        OrderModel.Item(
+                                            menuItem: $0.menuItem,
+                                            count: $0.count
                                         )
                                     },
                                     destination: state.destination
@@ -119,7 +123,7 @@ struct CartFeature {
                 print(error)
                 return .none
             case .orderPlaced(.failure(let error)):
-                print(error) // TODO: Add error handling
+                print(error)  // TODO: Add error handling
                 return .none
             case .orderPlaced:
                 return .none

@@ -1,8 +1,8 @@
 import ComposableArchitecture
-import SharedModels
-import clients_libraries_GenericsCore
-import Foundation
 import Factory
+import Foundation
+import GenericsCore
+import SharedModels
 
 @Reducer
 struct MenuItemFeature {

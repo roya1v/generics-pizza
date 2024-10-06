@@ -1,7 +1,7 @@
-import SwiftUI
-import clients_libraries_GenericsCore
 import ComposableArchitecture
+import GenericsCore
 import SharedModels
+import SwiftUI
 
 struct NowView: View {
 
@@ -20,7 +20,8 @@ struct NowView: View {
                         Section("Orders") {
                             ForEach(store.state.orders) { order in
                                 OrderListRowView(order: order) {
-                                    store.send(.update(orderId: order.id!, state: order.state!.next()))
+                                    store.send(
+                                        .update(orderId: order.id!, state: order.state!.next()))
                                 }
                             }
                         }
@@ -38,13 +39,13 @@ extension OrderModel.State {
     func next() -> Self {
         switch self {
         case .new:
-                .inProgress
+            .inProgress
         case .inProgress:
-                .readyForDelivery
+            .readyForDelivery
         case .readyForDelivery:
-                .inDelivery
+            .inDelivery
         case .inDelivery:
-                .finished
+            .finished
         case .finished:
             fatalError()
         }

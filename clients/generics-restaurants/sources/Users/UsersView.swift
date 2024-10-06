@@ -1,7 +1,7 @@
-import SwiftUI
 import ComposableArchitecture
+import GenericsCore
 import SharedModels
-import clients_libraries_GenericsCore
+import SwiftUI
 
 struct UsersView: View {
 
@@ -37,9 +37,10 @@ struct UsersView: View {
             }
             .sheet(isPresented: isShowingSheet) {
                 if let userId = selectedId.first,
-                   case let .loaded(users) = store.state,
-                   let userId,
-                   let user = users[id: userId] {
+                    case let .loaded(users) = store.state,
+                    let userId,
+                    let user = users[id: userId]
+                {
                     VStack {
                         Text("User email: \(user.email)")
                             .font(.title)
@@ -49,9 +50,12 @@ struct UsersView: View {
                                 ProgressView()
                             }
                             Menu {
-                                ForEach([UserModel.AccessLevel.admin, .employee], id: \.self) { accessLevel in
+                                ForEach([UserModel.AccessLevel.admin, .employee], id: \.self) {
+                                    accessLevel in
                                     Button("\(accessLevel)") {
-                                        store.send(.newAccessSelected(forUser: user, newAccess: accessLevel))
+                                        store.send(
+                                            .newAccessSelected(
+                                                forUser: user, newAccess: accessLevel))
                                     }
                                 }
                             } label: {
@@ -59,7 +63,7 @@ struct UsersView: View {
                             }
                             Button("Delete user") {
                                 store.send(.deleteTapped(user: user))
-                                selectedId = [] // Temporary solution
+                                selectedId = []  // Temporary solution
                             }
                         }
                         Button("Close") {
