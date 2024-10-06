@@ -1,6 +1,6 @@
 import Foundation
-import clients_libraries_SwiftlyHttp
 import SharedModels
+import SwiftlyHttp
 
 public final class AuthenticationService {
 
@@ -26,14 +26,17 @@ public final class AuthenticationService {
         return response.value
     }
 
-    public func createAccount(email: String, password: String, confirmPassword: String) async throws -> UserModel {
+    public func createAccount(email: String, password: String, confirmPassword: String) async throws
+        -> UserModel
+    {
         let response: UserModel = try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "auth")
             .add(path: "user")
-            .body(UserModel.Create(
-                email: email,
-                password: password,
-                confirmPassword: confirmPassword)
+            .body(
+                UserModel.Create(
+                    email: email,
+                    password: password,
+                    confirmPassword: confirmPassword)
             )
             .method(.post)
             .decode(to: UserModel.self)

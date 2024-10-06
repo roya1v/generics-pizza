@@ -1,6 +1,6 @@
-import SwiftUI
-import clients_libraries_GenericsUI
 import ComposableArchitecture
+import GenericsUI
+import SwiftUI
 
 struct ContentView: View {
 
@@ -56,24 +56,27 @@ struct ContentView: View {
             .task {
                 store.send(.launched)
             }
-            .sheet(item: $store.scope(
-                state: \.cartState,
-                action: \.cart
-            )
+            .sheet(
+                item: $store.scope(
+                    state: \.cartState,
+                    action: \.cart
+                )
             ) { store in
                 CartView(store: store)
             }
-            .sheet(item: $store.scope(
-                state: \.trackingState,
-                action: \.tracking
-            )
+            .sheet(
+                item: $store.scope(
+                    state: \.trackingState,
+                    action: \.tracking
+                )
             ) { store in
                 TrackingView(store: store)
             }
-            .fullScreenCover(item: $store.scope(
-                state: \.orderDestination,
-                action: \.orderDestination
-            )
+            .fullScreenCover(
+                item: $store.scope(
+                    state: \.orderDestination,
+                    action: \.orderDestination
+                )
             ) { store in
                 OrderDestinationView(store: store)
             }

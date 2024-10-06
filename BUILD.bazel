@@ -4,6 +4,7 @@ load("@rules_xcodeproj//xcodeproj:defs.bzl", "top_level_target", "xcodeproj")
 swift_library(
     name = "SharedModels",
     srcs = glob(["generics-server/sources/shared-models/**/*.swift"]),
+    module_name = "SharedModels",
     visibility = ["//visibility:public"],
 )
 

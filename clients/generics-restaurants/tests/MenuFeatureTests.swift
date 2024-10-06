@@ -1,9 +1,10 @@
-import XCTest
-@testable import clients_generics_restaurants_generics_restaurants
 import ComposableArchitecture
 import Factory
-@testable import clients_libraries_GenericsCore
 import SharedModels
+import XCTest
+
+@testable import GenericsCore
+@testable import clients_generics_restaurants_generics_restaurants
 
 class MenuFeatureTests: XCTestCase {
 
@@ -62,7 +63,8 @@ class MenuFeatureTests: XCTestCase {
     func testEditItem() async {
         menuRepositorySpy.getImageForItemIdReturnValue = NSImage()
         store.exhaustivity = .off(showSkippedAssertions: true)
-        let mockItem = MenuItem(id: UUID(), title: "mock", description: "mock", price: 123, isHidden: false)
+        let mockItem = MenuItem(
+            id: UUID(), title: "mock", description: "mock", price: 123, isHidden: false)
 
         await store.send(.loaded(.success([mockItem]))) {
             $0.menuState = .loaded([MenuItemFeature.State(item: mockItem)])

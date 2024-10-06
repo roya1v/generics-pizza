@@ -1,7 +1,7 @@
-import Foundation
 import ComposableArchitecture
 import Factory
-import clients_libraries_GenericsCore
+import Foundation
+import GenericsCore
 
 @Reducer
 struct AppFeature {
@@ -48,7 +48,8 @@ struct AppFeature {
             case .dashboard(.signOutComplete(.success)):
                 state = .auth(.login(LoginFeature.State()))
                 return .none
-            case .auth(.login(.loginCompleted(.none))), .auth(.createAccount(.createAccountCompleted(.none))):
+            case .auth(.login(.loginCompleted(.none))),
+                .auth(.createAccount(.createAccountCompleted(.none))):
                 state = .dashboard(
                     DashboardFeature.State(
                         now: NowFeature.State(),

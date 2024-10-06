@@ -1,14 +1,15 @@
-import Foundation
 import ComposableArchitecture
-import SharedModels
 import Factory
-import clients_libraries_GenericsCore
+import Foundation
+import GenericsCore
+import SharedModels
 
 @Reducer
 struct MenuFeature {
     @ObservableState
     struct State: Equatable {
-        @Presents var deleteConfirmationDialog: ConfirmationDialogState<Action.DeleteConfirmationDialogAction>?
+        @Presents var deleteConfirmationDialog:
+            ConfirmationDialogState<Action.DeleteConfirmationDialogAction>?
         @Presents var itemForm: MenuItemFormFeature.State?
         var menuState = SimpleListState<MenuItemFeature.State>()
     }
@@ -46,10 +47,10 @@ struct MenuFeature {
             case .loaded(.success(let items)):
                 state.menuState = .loaded(
                     IdentifiedArray(
-                        uniqueElements: items.map { MenuItemFeature.State(item: $0)}
+                        uniqueElements: items.map { MenuItemFeature.State(item: $0) }
                     )
                 )
-                return .merge(items .map { loadImage(for: $0) })
+                return .merge(items.map { loadImage(for: $0) })
             case .loaded(.failure(let error)):
                 state.menuState = .error(error.localizedDescription)
                 return .none
@@ -67,7 +68,8 @@ struct MenuFeature {
                 }
                 return .none
             case .item(.element(id: let id, action: .editTapped)):
-                state.itemForm = MenuItemFormFeature.State(menuItem: state.menuState.items[id: id]!.item)
+                state.itemForm = MenuItemFormFeature.State(
+                    menuItem: state.menuState.items[id: id]!.item)
                 return .none
             case .deleteConfirmationDialog(.presented(.delete(let item))):
                 return .run { send in
@@ -78,10 +80,10 @@ struct MenuFeature {
                         ),
                         animation: .default)
                 }
-            case .deletionCompleted(id: let id, result: .success):
+            case .deletionCompleted(let id, result: .success):
                 state.menuState.items.remove(id: id)
                 return .none
-            case .deletionCompleted(id: let id, result: .failure(let error)):
+            case .deletionCompleted(let id, result: .failure(let error)):
                 print("Error: \(error) for id: \(String(describing: id))")
                 return .none
             case .item:

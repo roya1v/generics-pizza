@@ -1,6 +1,6 @@
-import Foundation
 import Factory
-import clients_libraries_GenericsCore
+import Foundation
+import GenericsCore
 
 extension Container {
     var authenticationRepository: Factory<AuthenticationRepository> {
@@ -9,17 +9,19 @@ extension Container {
     }
 
     var orderRestaurantRepository: Factory<OrderRestaurantRepository> {
-        self { buildOrderRestaurantRepository(
-            url: self.serverUrl(),
-            authenticationProvider: self.authenticationRepository())
+        self {
+            buildOrderRestaurantRepository(
+                url: self.serverUrl(),
+                authenticationProvider: self.authenticationRepository())
         }
         .singleton
     }
 
     var menuRepository: Factory<MenuRepository> {
-        self { buildMenuRepository(
-            url: self.serverUrl(),
-            authenticationProvider: self.authenticationRepository())
+        self {
+            buildMenuRepository(
+                url: self.serverUrl(),
+                authenticationProvider: self.authenticationRepository())
         }
     }
 
@@ -29,7 +31,10 @@ extension Container {
     }
 
     var usersRepository: Factory<UsersRepository> {
-        self { buildUsersRepository(url: self.serverUrl(), authenticationProvider: self.authenticationRepository()) }
-            .singleton
+        self {
+            buildUsersRepository(
+                url: self.serverUrl(), authenticationProvider: self.authenticationRepository())
+        }
+        .singleton
     }
 }

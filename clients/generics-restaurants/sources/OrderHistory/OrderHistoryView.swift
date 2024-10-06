@@ -1,7 +1,7 @@
-import SwiftUI
 import ComposableArchitecture
+import GenericsCore
 import SharedModels
-import clients_libraries_GenericsCore
+import SwiftUI
 
 struct OrderHistoryView: View {
 

@@ -1,6 +1,6 @@
 import ComposableArchitecture
+import GenericsCore
 import SharedModels
-import clients_libraries_GenericsCore
 
 @Reducer
 struct CartItemFeature {

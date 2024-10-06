@@ -1,8 +1,8 @@
-import Foundation
 import Combine
-import clients_libraries_SwiftlyHttp
+import Foundation
 import SharedModels
 import Spyable
+import SwiftlyHttp
 
 public func buildAuthenticationRepository(url: String) -> AuthenticationRepository {
     AuthenticationRepositoryImpl(baseURL: url)
@@ -37,9 +37,10 @@ final class AuthenticationRepositoryImpl: AuthenticationRepository {
     }
 
     func createAccount(email: String, password: String, confirmPassword: String) async throws {
-        _ = try await authenticationService.createAccount(email: email,
-                                                          password: password,
-                                                          confirmPassword: confirmPassword)
+        _ = try await authenticationService.createAccount(
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword)
 
         try await login(email: email, password: password)
     }

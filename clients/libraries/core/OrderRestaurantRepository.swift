@@ -1,7 +1,7 @@
-import Foundation
 import Combine
+import Foundation
 import SharedModels
-import clients_libraries_SwiftlyHttp
+import SwiftlyHttp
 
 public func buildOrderRestaurantRepository(
     url: String,

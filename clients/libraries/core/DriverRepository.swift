@@ -1,10 +1,12 @@
-import Foundation
-import clients_libraries_SwiftlyHttp
 import Combine
+import Foundation
 import SharedModels
+import SwiftlyHttp
 
-public func buildDriverRepository(url: String,
-                                  authenticationRepository: AuthenticationRepository) -> DriverRepository {
+public func buildDriverRepository(
+    url: String,
+    authenticationRepository: AuthenticationRepository
+) -> DriverRepository {
     DriverRepositoryImpl(baseURL: url, authenticationRepository: authenticationRepository)
 }
 
@@ -27,8 +29,10 @@ final class DriverRepositoryImpl: DriverRepository {
 
     private var socket: SwiftlyWebSocketConnection?
 
-    init(baseURL: String,
-         authenticationRepository: AuthenticationRepository) {
+    init(
+        baseURL: String,
+        authenticationRepository: AuthenticationRepository
+    ) {
         self.baseURL = baseURL
         self.authenticationRepository = authenticationRepository
     }
@@ -49,7 +53,8 @@ final class DriverRepositoryImpl: DriverRepository {
             .messagePublisher
             .tryMap({
                 if case let .string(message) = $0,
-                   let data = message.data(using: .utf8) {
+                    let data = message.data(using: .utf8)
+                {
                     return data
                 } else {
                     throw DriverFeedError.unknownMessage($0)

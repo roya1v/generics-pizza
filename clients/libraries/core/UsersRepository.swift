@@ -1,15 +1,18 @@
-import Foundation
 import Combine
+import Foundation
 import SharedModels
-import clients_libraries_SwiftlyHttp
+import SwiftlyHttp
 
-public func buildUsersRepository(url: String, authenticationProvider: some AuthenticationProvider) -> UsersRepository {
+public func buildUsersRepository(url: String, authenticationProvider: some AuthenticationProvider)
+    -> UsersRepository
+{
     UsersRepositoryImpl(baseURL: url, authenticationProvider: authenticationProvider)
 }
 
 public protocol UsersRepository {
     func getAll() async throws -> [UserModel]
-    func updateAccessLevel(for user: UserModel, to newAccessLevel: UserModel.AccessLevel) async throws
+    func updateAccessLevel(for user: UserModel, to newAccessLevel: UserModel.AccessLevel)
+        async throws
     func delete(user: UserModel) async throws
 }
 
@@ -36,7 +39,9 @@ final class UsersRepositoryImpl: UsersRepository {
             .perform()
     }
 
-    func updateAccessLevel(for user: UserModel, to newAccessLevel: UserModel.AccessLevel) async throws {
+    func updateAccessLevel(for user: UserModel, to newAccessLevel: UserModel.AccessLevel)
+        async throws
+    {
         try await SwiftlyHttp(baseURL: baseURL)!
             .add(path: "user")
             .add(path: "\(user.id!)")

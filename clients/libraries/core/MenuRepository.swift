@@ -1,11 +1,13 @@
+import Factory
 import Foundation
 import SharedModels
-import clients_libraries_SwiftlyHttp
 import Spyable
-import Factory
+import SwiftlyHttp
 
 // Kept temporarily for restaurant app
-public func buildMenuRepository(url: String, authenticationProvider: AuthenticationProvider? = nil) -> MenuRepository {
+public func buildMenuRepository(url: String, authenticationProvider: AuthenticationProvider? = nil)
+    -> MenuRepository
+{
     MenuRepositoryImp(baseURL: url, authenticationProvider: authenticationProvider)
 }
 
@@ -39,11 +41,11 @@ final class MenuRepositoryImp: MenuRepository {
     // MARK: - MenuRepository
 
     public func fetchMenu() async throws -> [MenuItem] {
-         try await fetchMenu(showHidden: false)
+        try await fetchMenu(showHidden: false)
     }
 
     public func fetchMenu(showHidden: Bool) async throws -> [MenuItem] {
-         return try await getRequest()
+        return try await getRequest()
             .method(.get)
             .add(queryParameter: "showHidden", value: "\(showHidden)")
             .authentication({
@@ -89,7 +91,8 @@ final class MenuRepositoryImp: MenuRepository {
             .add(path: "image")
             .perform()
         guard let response = response as? HTTPURLResponse,
-              (200...299).contains(response.statusCode) else {
+            (200...299).contains(response.statusCode)
+        else {
             throw MenuRepositoryError.httpError(500)
         }
         guard let image = ImageData(data: data) else {

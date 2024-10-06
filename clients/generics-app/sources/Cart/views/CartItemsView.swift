@@ -1,6 +1,6 @@
-import SwiftUI
 import ComposableArchitecture
-import clients_libraries_GenericsUI
+import GenericsUI
+import SwiftUI
 
 struct CartItemsView: View {
 

@@ -1,8 +1,8 @@
-import Foundation
 import ComposableArchitecture
 import Factory
+import Foundation
+import GenericsCore
 import SharedModels
-import clients_libraries_GenericsCore
 import UIKit
 
 @Reducer
@@ -40,28 +40,31 @@ struct MenuFeature {
                 return .run { send in
                     await send(
                         .loaded(
-                            Result { try await menuRepository.fetchMenu()}
+                            Result { try await menuRepository.fetchMenu() }
                         )
                     )
                 }
             case .loaded(.success(let items)):
                 state.content = .loaded(
                     IdentifiedArray(
-                        uniqueElements: items.map { State.Item(
-                            item: $0)}
+                        uniqueElements: items.map {
+                            State.Item(
+                                item: $0)
+                        }
                     )
                 )
                 return .merge(
                     items.map { item in
-                            .run { send in
-                                await send(.imageLoaded(
+                        .run { send in
+                            await send(
+                                .imageLoaded(
                                     id: item.id!,
                                     result: Result {
                                         try await menuRepository.getImage(forItemId: item.id!)
                                     }
                                 )
-                                )
-                            }
+                            )
+                        }
                     }
                 )
             case .loaded(.failure(let error)):
@@ -76,10 +79,10 @@ struct MenuFeature {
                 return .none
             case .menuDetail:
                 return .none
-            case .imageLoaded(id: let id, result: .success(let image)):
+            case .imageLoaded(let id, result: .success(let image)):
                 state.content.items[id: id]?.image = image
                 return .none
-            case .imageLoaded(id: let id, result: .failure(let error)):
+            case .imageLoaded(let id, result: .failure(let error)):
                 return .none
             }
         }

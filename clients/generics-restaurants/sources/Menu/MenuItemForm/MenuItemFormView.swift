@@ -1,6 +1,6 @@
-import SwiftUI
 import ComposableArchitecture
-import clients_libraries_GenericsCore
+import GenericsCore
+import SwiftUI
 
 struct MenuItemFormView: View {
 
@@ -63,7 +63,7 @@ struct MenuItemFormView: View {
                 Image(nsImage: image)
                     .resizable()
                     .scaledToFit()
-                .frame(width: 75.0)
+                    .frame(width: 75.0)
             } else {
                 ZStack {
                     Color.gray
@@ -82,11 +82,13 @@ struct MenuItemFormView: View {
                 Text("Select image")
             }
         }
-        .fileImporter(isPresented: $isSelectingImage, allowedContentTypes: [.jpeg, .png]) { result in
+        .fileImporter(isPresented: $isSelectingImage, allowedContentTypes: [.jpeg, .png]) {
+            result in
             do {
                 let fileURL = try result.get()
                 if fileURL.startAccessingSecurityScopedResource(),
-                   let image =  ImageData(contentsOf: fileURL) {
+                    let image = ImageData(contentsOf: fileURL)
+                {
                     store.send(.imageSelected(image))
                 }
             } catch {

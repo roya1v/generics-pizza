@@ -1,8 +1,9 @@
-import XCTest
-@testable import clients_generics_restaurants_generics_restaurants
 import ComposableArchitecture
 import Factory
-@testable import clients_libraries_GenericsCore
+import XCTest
+
+@testable import GenericsCore
+@testable import clients_generics_restaurants_generics_restaurants
 
 class LoginFeatureTests: XCTestCase {
 
