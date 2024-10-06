@@ -16,13 +16,13 @@ struct ContentView: View {
                     Text("")
                 case .auth(.login):
                     if let store = store.scope(
-                        state: \.auth.login,
+                        state: \.auth?.login,
                         action: \.auth.login) {
                         LoginView(store: store)
                     }
                 case .auth(.createAccount):
                     if let store = store.scope(
-                        state: \.auth.createAccount,
+                        state: \.auth?.createAccount,
                         action: \.auth.createAccount) {
                         CreateAccountView(store: store)
                     }
