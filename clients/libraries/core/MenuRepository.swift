@@ -14,9 +14,13 @@ public func buildMenuRepository(url: String, authenticationProvider: Authenticat
 public protocol MenuRepository {
     func fetchMenu() async throws -> [MenuItem]
     func fetchMenu(showHidden: Bool) async throws -> [MenuItem]
+    func fetchCategories() async throws -> [MenuItem.Category]
     func create(item: MenuItem) async throws -> MenuItem
     func delete(item: MenuItem) async throws
     func update(item: MenuItem) async throws -> MenuItem
+    func create(category: MenuItem.Category) async throws -> MenuItem.Category
+    func delete(category: MenuItem.Category) async throws
+    func update(category: MenuItem.Category) async throws -> MenuItem.Category
     func imageUrl(for item: MenuItem) -> URL?
     func getImage(forItemId id: UUID) async throws -> ImageData
     func setImage(withPngData imageData: Data, for item: MenuItem) async throws
@@ -76,6 +80,32 @@ final class MenuRepositoryImp: MenuRepository {
             .perform()
     }
 
+    func delete(item: MenuItem) async throws {
+        try await getRequest()
+            .method(.delete)
+            .add(path: item.id!.uuidString)
+            .authentication({
+                try? self.authenticationProvider?.getAuthentication()
+            })
+            .perform()
+    }
+
+    func fetchCategories() async throws -> [MenuItem.Category] {
+        fatalError("Not implemented")
+    }
+
+    func create(category: MenuItem.Category) async throws -> MenuItem.Category {
+        fatalError("Not implemented")
+    }
+
+    func delete(category: MenuItem.Category) async throws {
+        fatalError("Not implemented")
+    }
+
+    func update(category: MenuItem.Category) async throws -> MenuItem.Category {
+        fatalError("Not implemented")
+    }
+
     func imageUrl(for item: SharedModels.MenuItem) -> URL? {
         guard let idString = item.id?.uuidString else {
             return nil
@@ -100,11 +130,6 @@ final class MenuRepositoryImp: MenuRepository {
         return image
     }
 
-    private func getRequest() -> SwiftlyHttp {
-        SwiftlyHttp(baseURL: baseURL)!
-            .add(path: "menu")
-    }
-
     func setImage(withPngData imageData: Data, for item: SharedModels.MenuItem) async throws {
         try await getRequest()
             .method(.post)
@@ -118,13 +143,8 @@ final class MenuRepositoryImp: MenuRepository {
             .perform()
     }
 
-    func delete(item: MenuItem) async throws {
-        try await getRequest()
-            .method(.delete)
-            .add(path: item.id!.uuidString)
-            .authentication({
-                try? self.authenticationProvider?.getAuthentication()
-            })
-            .perform()
+    private func getRequest() -> SwiftlyHttp {
+        SwiftlyHttp(baseURL: baseURL)!
+            .add(path: "menu")
     }
 }
