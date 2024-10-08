@@ -36,6 +36,7 @@ public func configure(_ app: Application) async throws {
     app.migrations.add(UserEntry.Migration())
     app.migrations.add(UserTokenEntry.Migration())
     app.migrations.add(MenuEntry.Migration())
+    app.migrations.add(CategoryEntry.Migration())
     app.migrations.add(OrderEntry.Migration())
     app.migrations.add(OrderItemEntry.Migration())
 
