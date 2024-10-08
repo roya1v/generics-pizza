@@ -18,4 +18,15 @@ public struct MenuItem: Codable, Identifiable, Equatable {
     public let description: String
     public let price: Int
     public let isHidden: Bool
+
+    public struct Category: Codable, Identifiable, Equatable {
+
+        public init(id: UUID? = nil, name: String) {
+            self.id = id
+            self.name = name
+        }
+
+        public let id: UUID?
+        public let name: String
+    }
 }
