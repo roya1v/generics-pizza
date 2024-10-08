@@ -15,7 +15,7 @@ let package = Package(
         .package(url: "https://github.com/soto-project/soto.git", from: "6.0.0"),
         .package(
             url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.15.0"),
-        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.5.0")
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.5.0"),
     ],
     targets: [
         // We build it for Docker from here and not using bazel
@@ -28,7 +28,7 @@ let package = Package(
                 .product(name: "Vapor", package: "vapor"),
                 .target(name: "SharedModels"),
                 .product(name: "PathKit", package: "PathKit"),
-                .product(name: "SotoS3", package: "soto")
+                .product(name: "SotoS3", package: "soto"),
             ],
             path: "generics-server/sources/server",
             swiftSettings: [
@@ -38,7 +38,7 @@ let package = Package(
         .target(
             name: "SharedModels",
             dependencies: [],
-            path: "generics-server/sources/shared-models"
-        )
+            path: "shared-models/sources"
+        ),
     ]
 )
