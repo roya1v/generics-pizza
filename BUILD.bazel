@@ -10,7 +10,7 @@ swift_library(
 
 swift_binary(
     name = "server",
-    srcs = glob(["generics-server/sources/server/**/*.swift"]),
+    srcs = glob(["generics-server/sources/**/*.swift"]),
     visibility = ["//visibility:public"],
     deps = [
         ":SharedModels",

@@ -30,7 +30,7 @@ let package = Package(
                 .product(name: "PathKit", package: "PathKit"),
                 .product(name: "SotoS3", package: "soto"),
             ],
-            path: "generics-server/sources/server",
+            path: "generics-server/sources",
             swiftSettings: [
                 .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release))
             ]
