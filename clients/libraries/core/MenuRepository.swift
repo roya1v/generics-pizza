@@ -91,19 +91,45 @@ final class MenuRepositoryImp: MenuRepository {
     }
 
     func fetchCategories() async throws -> [MenuItem.Category] {
-        fatalError("Not implemented")
+        return try await getRequest()
+            .method(.get)
+            .add(path: "categories")
+            .decode(to: [MenuItem.Category].self)
+            .perform()
     }
 
     func create(category: MenuItem.Category) async throws -> MenuItem.Category {
-        fatalError("Not implemented")
+        try await getRequest()
+            .method(.post)
+            .authentication({
+                try? self.authenticationProvider?.getAuthentication()
+            })
+            .body(category)
+            .decode(to: MenuItem.Category.self)
+            .perform()
     }
 
     func delete(category: MenuItem.Category) async throws {
-        fatalError("Not implemented")
+        try await getRequest()
+            .add(path: "categories")
+            .method(.delete)
+            .add(path: category.id!.uuidString)
+            .authentication({
+                try? self.authenticationProvider?.getAuthentication()
+            })
+            .perform()
     }
 
     func update(category: MenuItem.Category) async throws -> MenuItem.Category {
-        fatalError("Not implemented")
+        try await getRequest()
+            .add(path: "categories")
+            .method(.put)
+            .authentication({
+                try? self.authenticationProvider?.getAuthentication()
+            })
+            .body(category)
+            .decode(to: MenuItem.Category.self)
+            .perform()
     }
 
     func imageUrl(for item: SharedModels.MenuItem) -> URL? {

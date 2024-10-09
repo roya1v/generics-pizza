@@ -1,26 +1,30 @@
 import Vapor
 import SharedModels
 
-extension MenuItem: Content { }
+extension OrderModel: @retroactive Content { }
 
-extension OrderModel: Content { }
+extension MapPointModel: @retroactive Content { }
 
-extension MapPointModel: Content { }
+extension AddressModel: @retroactive Content { }
 
-extension AddressModel: Content { }
+extension SubtotalModel: @retroactive Content { }
 
-extension SubtotalModel: Content { }
+extension UserModel: @retroactive Content { }
 
-extension UserModel: Content { }
-
-extension MenuItem: EntryRepresentable {
+extension MenuItem: EntryRepresentable, @retroactive Content {
     func toEntry() -> MenuEntry {
-        MenuEntry(id: id, title: title, description: description, price: price)
+        MenuEntry(id: id, title: title, description: description, price: price, category: nil)
     }
 }
 
 extension AddressModel: EntryRepresentable {
     func toEntry() -> AddressEntry {
         AddressEntry(details: details, latitude: coordinate.latitude, longitude: coordinate.longitude)
+    }
+}
+
+extension MenuItem.Category: EntryRepresentable, @retroactive Content {
+    func toEntry() -> CategoryEntry {
+        CategoryEntry(id: id, name: name)
     }
 }

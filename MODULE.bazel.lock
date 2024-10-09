@@ -3146,7 +3146,7 @@
         "bzlTransitiveDigest": "qvz2Ln2ubaVgWlFkVWTwkamdNhjTF1nPdfX0uBfwViY=",
         "recordedFileInputs": {
           "@@//Package.resolved": "f090b849f212e1d8cc80a808e25ed6710575c1b4eefd831c810dd940fc59d8ad",
-          "@@//Package.swift": "37664aca25f9be7a973b222355390e3a7dd0a8f98a217671c538de232c1fceeb"
+          "@@//Package.swift": "6e06c1b6276f7160a178c099083b5b3484b04c2b7dcab1a91e1c5abb6e435a48"
         },
         "recordedDirentsInputs": {},
         "envVariables": {},

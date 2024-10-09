@@ -19,4 +19,16 @@ extension MenuEntry {
             try await database.schema("menu").delete()
         }
     }
+
+    struct AddCategoriesMigration: AsyncMigration {
+        let name = "AddCategories"
+
+        func prepare(on database: Database) async throws {
+            try await database.schema("menu")
+                .field("category_id", .uuid, .references("categories", "id"))
+                .update()
+        }
+
+        func revert(on database: Database) async throws { }
+    }
 }

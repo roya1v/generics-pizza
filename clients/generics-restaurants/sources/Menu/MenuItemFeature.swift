@@ -39,7 +39,8 @@ struct MenuItemFeature {
                     title: item.title,
                     description: item.description,
                     price: item.price,
-                    isHidden: newValue
+                    isHidden: newValue,
+                    category: item.category
                 )
                 return .run { send in
                     await send(
