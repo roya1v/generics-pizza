@@ -11,6 +11,9 @@ final class CategoryEntry: Model {
     @Field(key: "name")
     var name: String
 
+    @Children(for: \.$category)
+    var menuItems: [MenuEntry]
+
     init() { }
 
     init(id: UUID? = nil,

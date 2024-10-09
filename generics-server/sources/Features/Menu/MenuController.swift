@@ -10,10 +10,10 @@ struct MenuController: RouteCollection {
     func boot(routes: RoutesBuilder) throws {
         let menu = routes.grouped("menu")
 
-        let authenticated = menu.grouped(UserTokenEntry.authenticator())
-        authenticated.get(use: index)
-        authenticated.post(use: create)
-        authenticated.put(use: update)
+        let authenticatedMenu = menu.grouped(UserTokenEntry.authenticator())
+        authenticatedMenu.get(use: index)
+        authenticatedMenu.post(use: create)
+        authenticatedMenu.put(use: update)
 
         menu.group(":itemID") { item in
             item.group("image") { image in
@@ -24,6 +24,17 @@ struct MenuController: RouteCollection {
                 authenticated.delete(use: deleteImage)
             }
             item.grouped(UserTokenEntry.authenticator()).delete(use: delete)
+        }
+
+        let categories = menu.grouped("categories")
+
+        let authenticatedCategories = menu.grouped(UserTokenEntry.authenticator())
+        authenticatedCategories.get(use: indexCategories)
+        authenticatedCategories.post(use: createCategory)
+        authenticatedCategories.put(use: updateCategory)
+
+        categories.group(":itemID") { item in
+            item.grouped(UserTokenEntry.authenticator()).delete(use: deleteCategory)
         }
     }
 
@@ -131,5 +142,43 @@ struct MenuController: RouteCollection {
     /// Delete the menu item image.
     func deleteImage(req: Request) async throws -> MenuItem {
         throw Abort(.notImplemented)
+    }
+
+    /// Get all menu categories.
+    func indexCategories(req: Request) async throws -> [MenuItem.Category] {
+        return try await CategoryEntry
+            .query(on: req.db)
+            .all()
+            .toSharedModels()
+    }
+
+    /// Create a new menu category.
+    func createCategory(req: Request) async throws -> MenuItem.Category {
+        try req.requireEmployeeOrAdminUser()
+        let entry = try req.content.decode(MenuItem.Category.self).toEntry()
+        try await entry.create(on: req.db)
+        return entry.toSharedModel()
+    }
+
+    /// Update a menu category.
+    func updateCategory(req: Request) async throws -> MenuItem.Category {
+        try req.requireEmployeeOrAdminUser()
+        let model = try req.content.decode(MenuItem.Category.self)
+        guard let entry = try await CategoryEntry.find(model.id, on: req.db) else {
+            throw Abort(.notFound)
+        }
+        entry.name = model.name
+        try await entry.update(on: req.db)
+        return entry.toSharedModel()
+    }
+
+    /// Delete a menu category.
+    func deleteCategory(req: Request) async throws -> HTTPStatus {
+        guard let category = try await CategoryEntry.find(req.parameters.get("itemID"), on: req.db) else {
+            throw Abort(.notFound)
+        }
+
+        try await category.delete(on: req.db)
+        return .ok
     }
 }

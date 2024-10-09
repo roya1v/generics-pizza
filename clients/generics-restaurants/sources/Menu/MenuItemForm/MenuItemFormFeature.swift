@@ -18,6 +18,7 @@ struct MenuItemFormFeature {
         var isLoading = false
         var errorMessage: String?
         var isHidden = true
+        var categories = IdentifiedArrayOf<MenuItem.Category>()
 
         init(menuItem: MenuItem) {
             id = menuItem.id
@@ -33,7 +34,8 @@ struct MenuItemFormFeature {
             description: String = "",
             price: Double = 0.0,
             isLoading: Bool = false,
-            errorMessage: String? = nil
+            errorMessage: String? = nil,
+            categories: IdentifiedArrayOf<MenuItem.Category> = IdentifiedArrayOf<MenuItem.Category>()
         ) {
             self.id = id
             self.title = title
@@ -41,6 +43,7 @@ struct MenuItemFormFeature {
             self.price = price
             self.isLoading = isLoading
             self.errorMessage = errorMessage
+            self.categories = categories
         }
     }
 
@@ -51,6 +54,7 @@ struct MenuItemFormFeature {
         case cancelTapped
         case imageSelected(ImageData)
         case existingImageLoaded(Result<ImageData, Error>)
+        case existingCategoriesLoaded(Result<[MenuItem.Category], Error>)
         case createdNewItem(Result<MenuItem, Error>)
     }
 
@@ -78,6 +82,11 @@ struct MenuItemFormFeature {
                 return .none
             case .existingImageLoaded(.failure):
                 return .none
+            case .existingCategoriesLoaded(.success(let categories)):
+//                state.categories = IdentifiedArray(categories)
+                return .none
+            case .existingCategoriesLoaded(.failure):
+                return .none
             case .imageSelected(let image):
                 state.image = image
                 state.hasNewImage = true
@@ -88,7 +97,8 @@ struct MenuItemFormFeature {
                     title: state.title,
                     description: state.description,
                     price: Int(state.price * 100),
-                    isHidden: state.isHidden)
+                    isHidden: state.isHidden,
+                    category: nil)
                 let imageData = state.image?.tiffRepresentation
                 state.isLoading = true
                 return .run { [item, imageData, hasNewImage = state.hasNewImage] send in

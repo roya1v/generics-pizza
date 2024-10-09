@@ -5,12 +5,15 @@ public struct MenuItem: Codable, Identifiable, Equatable {
     public init(id: UUID?,
                 title: String,
                 description: String,
-                price: Int, isHidden: Bool) {
+                price: Int,
+                isHidden: Bool,
+                category: Category?) {
         self.id = id
         self.title = title
         self.description = description
         self.price = price
         self.isHidden = isHidden
+        self.category = category
     }
 
     public let id: UUID?
@@ -18,6 +21,7 @@ public struct MenuItem: Codable, Identifiable, Equatable {
     public let description: String
     public let price: Int
     public let isHidden: Bool
+    public let category: Category?
 
     public struct Category: Codable, Identifiable, Equatable {
 
