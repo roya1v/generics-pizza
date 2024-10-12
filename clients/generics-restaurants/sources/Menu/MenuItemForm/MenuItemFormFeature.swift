@@ -28,6 +28,7 @@ struct MenuItemFormFeature {
             description = menuItem.description
             isHidden = menuItem.isHidden
             price = Double(menuItem.price) / 100.0
+            category = menuItem.category
         }
 
         init(
@@ -100,6 +101,10 @@ struct MenuItemFormFeature {
             case .newCategory(.presented(.cancelTapped)):
                 state.newCategory = nil
                 return .none
+            case .newCategory(.presented(.newCategoryCreated(.success(let newCategory)))):
+                state.categories.append(newCategory)
+                state.newCategory = nil
+                return .none
             case .submitTapped:
                 let item = MenuItem(
                     id: state.id,
@@ -107,7 +112,7 @@ struct MenuItemFormFeature {
                     description: state.description,
                     price: Int(state.price * 100),
                     isHidden: state.isHidden,
-                    category: nil)
+                    category: state.category)
                 let imageData = state.image?.tiffRepresentation
                 state.isLoading = true
                 return .run { [item, imageData, hasNewImage = state.hasNewImage] send in

@@ -45,12 +45,14 @@ struct MenuController: RouteCollection {
             try req.requireEmployeeOrAdminUser()
             return try await MenuEntry
                 .query(on: req.db)
+                .with(\.$category)
                 .all()
                 .toSharedModels()
         }
         return try await MenuEntry
             .query(on: req.db)
             .filter(\.$isHidden == false)
+            .with(\.$category)
             .all()
             .toSharedModels()
     }
@@ -74,6 +76,7 @@ struct MenuController: RouteCollection {
         entry.description = model.description
         entry.price = model.price
         entry.isHidden = model.isHidden
+        entry.$category.id = model.category?.id
         try await entry.update(on: req.db)
         return entry.toSharedModel()
     }
