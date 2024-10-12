@@ -1,6 +1,7 @@
 import ComposableArchitecture
 import GenericsCore
 import SwiftUI
+import SharedModels
 
 struct MenuItemFormView: View {
 
@@ -59,6 +60,8 @@ struct MenuItemFormView: View {
                         Text(category.name)
                             .tag(category)
                     }
+                    Text("None")
+                        .tag(Optional<MenuItem.Category>.none)
                 }
                 Button("+") {
                     store.send(.newCategoryTapped)

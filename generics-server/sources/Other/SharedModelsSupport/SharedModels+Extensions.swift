@@ -13,7 +13,7 @@ extension UserModel: @retroactive Content { }
 
 extension MenuItem: EntryRepresentable, @retroactive Content {
     func toEntry() -> MenuEntry {
-        MenuEntry(id: id, title: title, description: description, price: price, category: nil)
+        MenuEntry(id: id, title: title, description: description, price: price, categoryId: category?.id)
     }
 }
 

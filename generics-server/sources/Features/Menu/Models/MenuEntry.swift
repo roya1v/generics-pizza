@@ -30,13 +30,13 @@ final class MenuEntry: Model {
          description: String,
          price: Int,
          isHidden: Bool = false,
-         category: CategoryEntry?) {
+         categoryId: CategoryEntry.IDValue?) {
         self.id = id
         self.title = title
         self.description = description
         self.price = price
         self.isHidden = isHidden
-        self.category = category
+        self.$category.id = categoryId
     }
 }
 
