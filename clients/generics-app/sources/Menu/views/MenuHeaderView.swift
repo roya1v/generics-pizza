@@ -5,8 +5,6 @@ import SharedModels
 
 struct MenuHeaderView: View {
 
-    @State var selected: MenuItem.Category?
-
     let store: StoreOf<MenuFeature>
 
     var body: some View {
@@ -17,11 +15,11 @@ struct MenuHeaderView: View {
             HStack {
                 ForEach(store.categories) { category in
                     Button(category.name) {
-                        selected = category
+                        store.send(.didSelectCategory(category.id!))
                     }
                     .buttonStyle(
                         GLinkButtonStyle(
-                            style: selected == category
+                            style: store.selectedCategory == category
                                 ? .active
                                 : .inactive)
                     )
