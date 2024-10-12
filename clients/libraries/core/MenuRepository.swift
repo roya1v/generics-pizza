@@ -13,6 +13,7 @@ public func buildMenuRepository(url: String, authenticationProvider: Authenticat
 @Spyable
 public protocol MenuRepository {
     func fetchMenu() async throws -> [MenuItem]
+    func fetchMenu(category: MenuItem.Category) async throws -> [MenuItem]
     func fetchMenu(showHidden: Bool) async throws -> [MenuItem]
     func fetchCategories() async throws -> [MenuItem.Category]
     func create(item: MenuItem) async throws -> MenuItem
@@ -45,6 +46,14 @@ final class MenuRepositoryImp: MenuRepository {
 
     public func fetchMenu() async throws -> [MenuItem] {
         try await fetchMenu(showHidden: false)
+    }
+
+    func fetchMenu(category: MenuItem.Category) async throws -> [MenuItem] {
+        return try await getRequest()
+            .method(.get)
+            .add(queryParameter: "category", value: "\(category.id!)")
+            .decode(to: [MenuItem].self)
+            .perform()
     }
 
     public func fetchMenu(showHidden: Bool) async throws -> [MenuItem] {

@@ -40,19 +40,24 @@ struct MenuController: RouteCollection {
 
     /// Get all menu items.
     func index(req: Request) async throws -> [MenuItem] {
+        var query = MenuEntry
+            .query(on: req.db)
+            .with(\.$category)
+
+        if let category: UUID = req.query["category"] {
+            query
+                .filter(\.$category.$id == category)
+        }
+
         if let showHidden: Bool = req.query["showHidden"],
            showHidden {
             try req.requireEmployeeOrAdminUser()
-            return try await MenuEntry
-                .query(on: req.db)
-                .with(\.$category)
+            return try await query
                 .all()
                 .toSharedModels()
         }
-        return try await MenuEntry
-            .query(on: req.db)
+        return try await query
             .filter(\.$isHidden == false)
-            .with(\.$category)
             .all()
             .toSharedModels()
     }
