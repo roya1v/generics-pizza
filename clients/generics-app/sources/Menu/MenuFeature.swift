@@ -11,6 +11,7 @@ struct MenuFeature {
     @ObservableState
     struct State: Equatable {
         @Presents var menuDetail: MenuDetailFeature.State?
+        var categories = IdentifiedArrayOf<MenuItem.Category>()
         var content = SimpleListState<Item>()
 
         struct Item: Equatable, Identifiable {
@@ -26,6 +27,7 @@ struct MenuFeature {
     enum Action {
         case appeared
         case loaded(Result<[MenuItem], Error>)
+        case loadedCategories(Result<[MenuItem.Category], Error>)
         case imageLoaded(id: UUID, result: Result<UIImage, Error>)
         case didSelect(UUID)
         case menuDetail(PresentationAction<MenuDetailFeature.Action>)
@@ -38,13 +40,22 @@ struct MenuFeature {
         Reduce<State, Action> { state, action in
             switch action {
             case .appeared:
-                return .run { send in
-                    await send(
-                        .loaded(
-                            Result { try await menuRepository.fetchMenu() }
+                return .merge(
+                    .run { send in
+                        await send(
+                            .loadedCategories(
+                                Result { try await menuRepository.fetchCategories() }
+                            )
                         )
-                    )
-                }
+                    },
+                    .run { send in
+                        await send(
+                            .loaded(
+                                Result { try await menuRepository.fetchMenu() }
+                            )
+                        )
+                    }
+                )
             case .loaded(.success(let items)):
                 state.content = .loaded(
                     IdentifiedArray(
@@ -69,6 +80,11 @@ struct MenuFeature {
                     }
                 )
             case .loaded(.failure(let error)):
+                return .none
+            case .loadedCategories(.success(let categories)):
+                state.categories = IdentifiedArray(uniqueElements: categories)
+                return .none
+            case .loadedCategories(.failure(let error)):
                 return .none
             case .didSelect(let id):
                 if let item = state.content.items[id: id] {

@@ -1,18 +1,13 @@
 import GenericsUI
 import SwiftUI
+import ComposableArchitecture
+import SharedModels
 
 struct MenuHeaderView: View {
 
-    private let items = [
-        "Sets",
-        "Pizza",
-        "Drinks",
-        "Alcohol",
-        "Deserts",
-        "Other"
-    ]
+    @State var selected: MenuItem.Category?
 
-    @State var selected = "Sets"
+    let store: StoreOf<MenuFeature>
 
     var body: some View {
         ScrollView(
@@ -20,13 +15,13 @@ struct MenuHeaderView: View {
             showsIndicators: false
         ) {
             HStack {
-                ForEach(items, id: \.self) { item in
-                    Button(item) {
-                        selected = item
+                ForEach(store.categories) { category in
+                    Button(category.name) {
+                        selected = category
                     }
                     .buttonStyle(
                         GLinkButtonStyle(
-                            style: selected == item
+                            style: selected == category
                                 ? .active
                                 : .inactive)
                     )
