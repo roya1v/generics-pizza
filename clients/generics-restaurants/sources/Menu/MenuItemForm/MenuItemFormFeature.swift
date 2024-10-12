@@ -19,6 +19,8 @@ struct MenuItemFormFeature {
         var errorMessage: String?
         var isHidden = true
         var categories = IdentifiedArrayOf<MenuItem.Category>()
+        var category: MenuItem.Category?
+        @Presents var newCategory: NewCategoryFeature.State?
 
         init(menuItem: MenuItem) {
             id = menuItem.id
@@ -56,40 +58,47 @@ struct MenuItemFormFeature {
         case existingImageLoaded(Result<ImageData, Error>)
         case existingCategoriesLoaded(Result<[MenuItem.Category], Error>)
         case createdNewItem(Result<MenuItem, Error>)
+        case newCategoryTapped
+        case newCategory(PresentationAction<NewCategoryFeature.Action>)
     }
 
     @Injected(\.menuRepository)
-    var repository
+    private var repository
 
     var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce<State, Action> { state, action in
             switch action {
             case .appeared:
-                if let id = state.id {
-                    return .run { [id] send in
+                return .merge(
+                    loadExistingItem(state: state),
+                    .run { send in
                         await send(
-                            .existingImageLoaded(
-                                Result { try await repository.getImage(forItemId: id) }
+                            .existingCategoriesLoaded(
+                                Result { try await repository.fetchCategories() }
                             )
                         )
                     }
-                } else {
-                    return .none
-                }
+                )
             case .existingImageLoaded(.success(let image)):
                 state.image = image
                 return .none
             case .existingImageLoaded(.failure):
                 return .none
             case .existingCategoriesLoaded(.success(let categories)):
-//                state.categories = IdentifiedArray(categories)
+                state.categories = IdentifiedArray(uniqueElements: categories)
                 return .none
             case .existingCategoriesLoaded(.failure):
                 return .none
             case .imageSelected(let image):
                 state.image = image
                 state.hasNewImage = true
+                return .none
+            case .newCategoryTapped:
+                state.newCategory = NewCategoryFeature.State()
+                return .none
+            case .newCategory(.presented(.cancelTapped)):
+                state.newCategory = nil
                 return .none
             case .submitTapped:
                 let item = MenuItem(
@@ -135,7 +144,26 @@ struct MenuItemFormFeature {
                 return .none
             case .binding:
                 return .none
+            case .newCategory:
+                return .none
             }
+        }
+        .ifLet(\.$newCategory, action: \.newCategory) {
+            NewCategoryFeature()
+        }
+    }
+
+    private func loadExistingItem(state: State) -> Effect<Action> {
+        if let id = state.id {
+            return .run { [id] send in
+                await send(
+                    .existingImageLoaded(
+                        Result { try await repository.getImage(forItemId: id) }
+                    )
+                )
+            }
+        } else {
+            return .none
         }
     }
 }

@@ -28,7 +28,7 @@ struct MenuController: RouteCollection {
 
         let categories = menu.grouped("categories")
 
-        let authenticatedCategories = menu.grouped(UserTokenEntry.authenticator())
+        let authenticatedCategories = categories.grouped(UserTokenEntry.authenticator())
         authenticatedCategories.get(use: indexCategories)
         authenticatedCategories.post(use: createCategory)
         authenticatedCategories.put(use: updateCategory)

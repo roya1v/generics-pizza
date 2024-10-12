@@ -3145,7 +3145,7 @@
       "general": {
         "bzlTransitiveDigest": "qvz2Ln2ubaVgWlFkVWTwkamdNhjTF1nPdfX0uBfwViY=",
         "recordedFileInputs": {
-          "@@//Package.resolved": "f090b849f212e1d8cc80a808e25ed6710575c1b4eefd831c810dd940fc59d8ad",
+          "@@//Package.resolved": "22812268904da829638c7d8912846a0e925c6fa55b6633b6e8414a14d6bf9dc1",
           "@@//Package.swift": "6e06c1b6276f7160a178c099083b5b3484b04c2b7dcab1a91e1c5abb6e435a48"
         },
         "recordedDirentsInputs": {},
@@ -3838,9 +3838,9 @@
             "ruleClassName": "swift_package",
             "attributes": {
               "bazel_package_name": "swiftpkg_swift_navigation",
-              "commit": "d1bdbd8a5d1d1dfd2e4bb1f5e2f6facb631404d4",
+              "commit": "16a27ab7ae0abfefbbcba73581b3e2380b47a579",
               "remote": "https://github.com/pointfreeco/swift-navigation",
-              "version": "2.2.1",
+              "version": "2.2.2",
               "init_submodules": false,
               "recursive_init_submodules": true,
               "patch_args": [
