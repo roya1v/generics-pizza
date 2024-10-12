@@ -16,8 +16,7 @@ struct MenuView: View {
                     .ignoresSafeArea()
 
                 VStack {
-                    // This will be used later
-                    // MenuHeaderView()
+                    MenuHeaderView(store: store)
                     switch store.content {
                     case .loading:
                         ProgressView()
