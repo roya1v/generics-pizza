@@ -100,6 +100,7 @@ final class MenuRepositoryImp: MenuRepository {
 
     func create(category: MenuItem.Category) async throws -> MenuItem.Category {
         try await getRequest()
+            .add(path: "categories")
             .method(.post)
             .authentication({
                 try? self.authenticationProvider?.getAuthentication()

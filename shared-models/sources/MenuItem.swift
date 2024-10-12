@@ -23,7 +23,7 @@ public struct MenuItem: Codable, Identifiable, Equatable {
     public let isHidden: Bool
     public let category: Category?
 
-    public struct Category: Codable, Identifiable, Equatable {
+    public struct Category: Codable, Identifiable, Equatable, Hashable {
 
         public init(id: UUID? = nil, name: String) {
             self.id = id

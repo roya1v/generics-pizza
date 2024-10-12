@@ -42,6 +42,9 @@ struct MenuItemFormView: View {
             }
             .padding()
             .frame(width: 400, height: 200)
+            .sheet(item: $store.scope(state: \.newCategory, action: \.newCategory)) { childStore in
+                NewCategoryView(store: childStore)
+            }
         }
         .task {
             store.send(.appeared)
@@ -50,6 +53,17 @@ struct MenuItemFormView: View {
 
     var form: some View {
         Form {
+            HStack {
+                Picker("Category", selection: $store.category) {
+                    ForEach(store.categories) { category in
+                        Text(category.name)
+                            .tag(category)
+                    }
+                }
+                Button("+") {
+                    store.send(.newCategoryTapped)
+                }
+            }
             TextField("Title", text: $store.title)
             TextField("Description", text: $store.description)
             TextField("Price", value: $store.price, format: .currency(code: "USD"))
