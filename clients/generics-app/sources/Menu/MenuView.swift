@@ -16,18 +16,16 @@ struct MenuView: View {
                     .ignoresSafeArea()
 
                 VStack {
-                    MenuHeaderView(store: store)
-                    switch store.content {
+                    switch store.contentState {
                     case .loading:
                         ProgressView()
-                    case .error(let error):
-                        Text(error)
+                    case .error:
+                        error
                     case .loaded:
-                        menu(state: store.state)
+                        menu
                     }
                 }
             }
-
             .fullScreenCover(
                 item: $store.scope(
                     state: \.menuDetail,
@@ -44,9 +42,10 @@ struct MenuView: View {
         }
     }
 
-    func menu(state: MenuFeature.State) -> some View {
+    var menu: some View {
         WithPerceptionTracking {
-            List(store.content.items) { item in
+            MenuHeaderView(store: store)
+            List(store.items) { item in
                 MenuRowView(
                     item: item
                 ) {
@@ -56,6 +55,34 @@ struct MenuView: View {
                 .listRowBackground(Color.clear)
             }
             .listStyle(.plain)
+        }
+    }
+
+    @ViewBuilder
+    var error: some View {
+        if #available(iOS 17.0, *) {
+            ContentUnavailableView {
+                Label("Server error", systemImage: "exclamationmark.icloud")
+            } description: {
+                Text("There was an error while fetching the menu")
+            } actions: {
+                Button("Refresh") {
+                    store.send(.refreshTapped)
+                }
+            }
+        } else {
+            VStack {
+                Text("Server error")
+                    .font(.largeTitle)
+                Image(systemName: "exclamationmark.icloud")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100.0, height: 100.0)
+                Text("There was an error while fetching the menu")
+                Button("Refresh") {
+                    store.send(.refreshTapped)
+                }
+            }
         }
     }
 }

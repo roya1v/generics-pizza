@@ -8,8 +8,35 @@ import GenericsHelpers
 
 @Reducer
 struct MenuFeature {
+
     @ObservableState
     struct State: Equatable {
+        var contentState = ContentState.loading
+        var selectedCategory: MenuItem.Category?
+
+        var categories = IdentifiedArrayOf<MenuItem.Category>()
+        var items = IdentifiedArrayOf<Item>()
+
+        @Presents var menuDetail: MenuDetailFeature.State?
+
+        enum ContentState {
+            case loading
+            case loaded
+            case error
+        }
+
+        struct Item: Equatable, Identifiable {
+            var item: MenuItem
+            var image: UIImage?
+
+            var id: UUID? {
+                item.id
+            }
+        }
+    }
+
+    @ObservableState
+    struct State2: Equatable {
         @Presents var menuDetail: MenuDetailFeature.State?
         var selectedCategory: MenuItem.Category? = nil
         var categories = IdentifiedArrayOf<MenuItem.Category>()
@@ -27,6 +54,7 @@ struct MenuFeature {
 
     enum Action {
         case appeared
+        case refreshTapped
         case loaded(Result<[MenuItem], Error>)
         case loadedCategories(Result<[MenuItem.Category], Error>)
         case imageLoaded(id: UUID, result: Result<UIImage, Error>)
@@ -49,15 +77,23 @@ struct MenuFeature {
                         )
                     )
                 }
-            case .loaded(.success(let items)):
-                state.content = .loaded(
-                    IdentifiedArray(
-                        uniqueElements: items.map {
-                            State.Item(
-                                item: $0)
-                        }
+            case .refreshTapped:
+                state.contentState = .loading
+                return .run { send in
+                    await send(
+                        .loadedCategories(
+                            Result { try await menuRepository.fetchCategories() }
+                        )
                     )
+                }
+            case .loaded(.success(let items)):
+                state.items = IdentifiedArray(
+                    uniqueElements: items.map {
+                        State.Item(
+                            item: $0)
+                    }
                 )
+                state.contentState = .loaded
                 return .merge(
                     items.map { item in
                             .run { send in
@@ -73,6 +109,7 @@ struct MenuFeature {
                     }
                 )
             case .loaded(.failure(let error)):
+                state.contentState = .error
                 return .none
             case .loadedCategories(.success(let categories)):
                 state.categories = IdentifiedArray(uniqueElements: categories)
@@ -85,9 +122,10 @@ struct MenuFeature {
                     )
                 }
             case .loadedCategories(.failure(let error)):
+                state.contentState = .error
                 return .none
             case .didSelect(let id):
-                if let item = state.content.items[id: id] {
+                if let item = state.items[id: id] {
                     state.menuDetail = MenuDetailFeature.State(image: item.image, item: item.item)
                 }
                 return .none
@@ -109,7 +147,7 @@ struct MenuFeature {
             case .menuDetail:
                 return .none
             case .imageLoaded(let id, result: .success(let image)):
-                state.content.items[id: id]?.image = image
+                state.items[id: id]?.image = image
                 return .none
             case .imageLoaded(let id, result: .failure(let error)):
                 return .none

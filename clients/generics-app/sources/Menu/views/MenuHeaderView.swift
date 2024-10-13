@@ -8,22 +8,24 @@ struct MenuHeaderView: View {
     let store: StoreOf<MenuFeature>
 
     var body: some View {
-        ScrollView(
-            .horizontal,
-            showsIndicators: false
-        ) {
-            HStack {
-                ForEach(store.categories) { category in
-                    Button(category.name) {
-                        store.send(.didSelectCategory(category.id!))
-                    }
-                    .buttonStyle(
-                        GLinkButtonStyle(
-                            style: store.selectedCategory == category
+        WithPerceptionTracking {
+            ScrollView(
+                .horizontal,
+                showsIndicators: false
+            ) {
+                HStack {
+                    ForEach(store.categories) { category in
+                        Button(category.name) {
+                            store.send(.didSelectCategory(category.id!))
+                        }
+                        .buttonStyle(
+                            GLinkButtonStyle(
+                                style: store.selectedCategory == category
                                 ? .active
                                 : .inactive)
-                    )
-                    .padding(.gNormal)
+                        )
+                        .padding(.gNormal)
+                    }
                 }
             }
         }
