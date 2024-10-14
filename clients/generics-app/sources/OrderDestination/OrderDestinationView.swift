@@ -47,18 +47,7 @@ struct OrderDestinationView: View {
                 .padding(.gBig)
             }
             .sheet(isPresented: .constant(true)) {
-                VStack {
-                    Text("Restaurant #1")
-                    Button {
-                        store.send(.confirm)
-                    } label: {
-                        Text("Order here")
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 32.0)
-                    }
-                    .buttonStyle(GPrimaryButtonStyle())
-
-                }
+                PickUpFormView(store: store)
                 .padding()
                 .presentationBackgroundInteraction(.enabled(upThrough: .height(120.0)))
                 .interactiveDismissDisabled()
