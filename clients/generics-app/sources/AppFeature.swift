@@ -71,13 +71,15 @@ struct AppFeature {
             case .tracking:
                 return .none
             case .orderDestination(.presented(.dismissTapped)),
-                .orderDestination(.presented(.confirm)):
+                    .orderDestination(.presented(.confirmTapped)):
                 state.orderDestination = nil
                 return .none
             case .orderDestination:
                 return .none
             case .showOrderDestination:
-                state.orderDestination = OrderDestinationFeature.State()
+                state.orderDestination = OrderDestinationFeature.State(
+                    destination: state.$destination
+                )
                 return .none
             }
         }

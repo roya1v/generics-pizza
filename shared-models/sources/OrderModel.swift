@@ -38,7 +38,21 @@ public struct OrderModel: Codable, Identifiable, Equatable {
     }
 
     public enum Destination: Codable, Equatable {
-        case delivery(address: String)
+        case delivery(Address)
         case pickUp
+
+        public struct Address: Codable, Equatable {
+            public init(street: String, floor: Int?, appartment: String? = nil, comment: String) {
+                self.street = street
+                self.floor = floor
+                self.appartment = appartment
+                self.comment = comment
+            }
+
+            public let street: String
+            public let floor: Int?
+            public let appartment: String?
+            public let comment: String
+        }
     }
 }
