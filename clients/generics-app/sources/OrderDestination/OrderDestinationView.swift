@@ -6,7 +6,8 @@ import SwiftUI
 
 struct OrderDestinationView: View {
 
-    @Perception.Bindable var store: StoreOf<OrderDestinationFeature>
+    @Perception.Bindable
+    var store: StoreOf<OrderDestinationFeature>
 
     var body: some View {
         WithPerceptionTracking {
@@ -34,24 +35,47 @@ struct OrderDestinationView: View {
                     }
                     Picker(
                         "type",
-                        selection: $store.destination
+                        selection: $store.picker.sending(\.pickerChanged).animation()
                     ) {
                         Text("Delivery")
-                            .tag(OrderDestinationFeature.State.Destination.delivery)
+                            .tag(OrderDestinationFeature.State.PickerThing.delivery)
                         Text("Restaurant")
-                            .tag(OrderDestinationFeature.State.Destination.restaurant)
+                            .tag(OrderDestinationFeature.State.PickerThing.restaurant)
                     }
                     .pickerStyle(.segmented)
-                    .disabled(true)
                 }
                 .padding(.gBig)
             }
             .sheet(isPresented: .constant(true)) {
-                PickUpFormView(store: store)
+                form
                 .padding()
-                .presentationBackgroundInteraction(.enabled(upThrough: .height(120.0)))
+                .presentationBackgroundInteraction(.enabled(upThrough: .height(180.0)))
                 .interactiveDismissDisabled()
-                .presentationDetents([.height(120.0)])
+                .presentationDetents([.height(180.0)])
+            }
+            .task {
+                store.send(.appeared)
+            }
+        }
+    }
+
+    @ViewBuilder
+    var form: some View {
+        WithPerceptionTracking {
+            VStack {
+                if let store = store.scope(state: \.deliveryForm, action: \.deliveryForm) {
+                    DeliveryFormView(store: store)
+                } else {
+                    PickUpFormView()
+                }
+                Button {
+                    store.send(.confirmTapped)
+                } label: {
+                    Text("Order here")
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 32.0)
+                }
+                .buttonStyle(GPrimaryButtonStyle())
             }
         }
     }
