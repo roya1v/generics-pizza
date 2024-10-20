@@ -5,6 +5,7 @@ import ComposableArchitecture
 enum Items: String {
     case now
     case orderHistory
+    case insights
     case menu
     case users
 }
@@ -22,6 +23,7 @@ struct DashboardView: View {
                         Section("Orders") {
                             NavigationLink("Current", value: Items.now)
                             NavigationLink("History", value: Items.orderHistory)
+                            NavigationLink("Insights", value: Items.insights)
                         }
                         Section("Other") {
                             NavigationLink("Menu", value: Items.menu)
@@ -36,6 +38,9 @@ struct DashboardView: View {
                     case .orderHistory:
                         OrderHistoryView(store: store.scope(state: \.orderHistory,
                                                             action: \.orderHistory))
+                    case .insights:
+                        InsightsView(store: store.scope(state: \.insights,
+                                                        action: \.insights))
                     case .menu:
                         MenuView(store: store.scope(state: \.menu,
                                                     action: \.menu))

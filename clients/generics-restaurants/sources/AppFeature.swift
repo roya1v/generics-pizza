@@ -37,6 +37,7 @@ struct AppFeature {
                         DashboardFeature.State(
                             now: NowFeature.State(),
                             orderHistory: OrderHistoryFeature.State(),
+                            insights: InsightsFeature.State(),
                             menu: MenuFeature.State(),
                             users: UsersFeature.State()
                         )
@@ -54,6 +55,7 @@ struct AppFeature {
                     DashboardFeature.State(
                         now: NowFeature.State(),
                         orderHistory: OrderHistoryFeature.State(),
+                        insights: InsightsFeature.State(),
                         menu: MenuFeature.State(),
                         users: UsersFeature.State()
                     )

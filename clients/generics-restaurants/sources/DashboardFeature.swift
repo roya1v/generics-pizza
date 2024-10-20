@@ -11,6 +11,7 @@ struct DashboardFeature {
     struct State: Equatable {
         var now: NowFeature.State
         var orderHistory: SimpleListState<OrderModel>
+        var insights: InsightsFeature.State
         var menu: MenuFeature.State
         var users: SimpleListState<UserModel>?
         var isLoggingOut = false
@@ -19,6 +20,7 @@ struct DashboardFeature {
     enum Action {
         case now(NowFeature.Action)
         case orderHistory(OrderHistoryFeature.Action)
+        case insights(InsightsFeature.Action)
         case menu(MenuFeature.Action)
         case users(UsersFeature.Action)
         case signOutTapped
@@ -35,6 +37,9 @@ struct DashboardFeature {
         Scope(state: \.orderHistory, action: \.orderHistory) {
             OrderHistoryFeature()
         }
+        Scope(state: \.insights, action: \.insights) {
+            InsightsFeature()
+        }
         Scope(state: \.menu, action: \.menu) {
             MenuFeature()
         }
@@ -43,6 +48,8 @@ struct DashboardFeature {
             case .now:
                 return .none
             case .orderHistory:
+                return .none
+            case .insights:
                 return .none
             case .menu:
                 return .none
