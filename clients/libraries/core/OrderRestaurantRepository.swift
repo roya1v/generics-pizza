@@ -11,7 +11,7 @@ public func buildOrderRestaurantRepository(
 }
 
 public protocol OrderRestaurantRepository {
-    func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error>
+    func getFeed() -> AnyPublisher<RestaurantFromServerMessage, Error>
     func send(message: RestaurantToServerMessage) async throws
     func getHistory() async throws -> [OrderModel]
 }
@@ -29,28 +29,34 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
 
     // MARK: - OrderRestaurantRepository
 
-    func getFeed() async throws -> AnyPublisher<RestaurantFromServerMessage, Error> {
+    func getFeed() -> AnyPublisher<RestaurantFromServerMessage, Error> {
+        return Future { fulfill in
+            Task {
+                self.socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
+                    .add(path: "order")
+                    .add(path: "activity")
+                    .websocket()
 
-        socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
-            .add(path: "order")
-            .add(path: "activity")
-            .websocket()
-
-        if case let .bearer(token) = try? authenticationProvider.getAuthentication() {
-            try await socket?.send(message: .string(token))
-        }
-
-        return socket!
-            .messagePublisher
-            .compactMap({
-                if case let .string(message) = $0 {
-                    return message.data(using: .utf8)
-                } else {
-                    return nil
+                if case let .bearer(token) = try? self.authenticationProvider.getAuthentication() {
+                    try await self.socket?.send(message: .string(token))
                 }
-            })
-            .decode(type: RestaurantFromServerMessage.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
+                fulfill(.success(self.socket!
+                    .messagePublisher
+                    .compactMap({
+                        if case let .string(message) = $0 {
+                            return message.data(using: .utf8)
+                        } else {
+                            return nil
+                        }
+                    })
+                    .decode(type: RestaurantFromServerMessage.self, decoder: JSONDecoder())
+                    .eraseToAnyPublisher()))
+
+            }
+        }
+        .switchToLatest()
+        .eraseToAnyPublisher()
+
     }
 
     func send(message: RestaurantToServerMessage) async throws {
