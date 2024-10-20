@@ -20,7 +20,6 @@ struct NowFeature {
 
     enum Action {
         case shown
-        case connected(Result<AnyPublisher<RestaurantFromServerMessage, any Error>, Error>)
         case newServerMessage(RestaurantFromServerMessage)
         case receivedError(Error)
         case update(orderId: UUID, state: OrderModel.State)
@@ -40,16 +39,8 @@ struct NowFeature {
                     return .none
                 }
                 state.connectionState = .connecting
-                return .run { send in
-                    await send(
-                        .connected(
-                            Result { try await repository.getFeed() }
-                        )
-                    )
-                }
-            case .connected(.success(let publisher)):
                 return .publisher {
-                    publisher
+                    repository.getFeed()
                         .map { message in
                             .newServerMessage(message)
                         }
@@ -59,9 +50,6 @@ struct NowFeature {
                         .receive(on: DispatchQueue.main)
                 }
                 .cancellable(id: CancelId.messages)
-            case .connected(.failure(let error)):
-                state.connectionState = .failure(error.localizedDescription)
-                return .none
             case .newServerMessage(let message):
                 if state.connectionState != .success {
                     state.connectionState = .success
