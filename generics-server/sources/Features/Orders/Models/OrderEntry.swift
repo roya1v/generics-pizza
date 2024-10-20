@@ -46,7 +46,9 @@ extension OrderEntry: SharedModelRepresentable {
             createdAt: createdAt,
             items: items.map { $0.toSharedModel() },
             state: state,
-            destination: address != nil ? .delivery(address: address!) : .pickUp
+            destination: address != nil
+            ? .delivery(OrderModel.Destination.Address(street: address!, floor: nil, comment: ""))
+            : .pickUp
         )
     }
 }

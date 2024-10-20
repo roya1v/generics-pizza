@@ -29,7 +29,7 @@ extension OrdersController {
         let address: String?
         switch orderModel.destination {
         case .delivery(let orderAddress):
-            address = orderAddress
+            address = orderAddress.street
         case .pickUp:
             address = nil
         }
