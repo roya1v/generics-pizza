@@ -10,9 +10,9 @@ struct InsightsFeature {
 
     @ObservableState
     struct State: Equatable {
-        var test = [Test]()
+        var itemsSales = [ItemSale]()
 
-        struct Test: Equatable, Identifiable {
+        struct ItemSale: Equatable, Identifiable {
             var itemName: String
             var count: Int
 
@@ -28,7 +28,7 @@ struct InsightsFeature {
     }
 
     @Injected(\.orderRestaurantRepository)
-    var repository
+    private var repository
 
     var body: some Reducer<State, Action> {
         Reduce<State, Action> { state, action in
@@ -44,7 +44,7 @@ struct InsightsFeature {
             case .loaded(.success(let items)):
                 var resut = [String: Int]()
                 items.flatMap(\.items).forEach { resut[$0.menuItem.title, default: 0] += $0.count }
-                state.test = resut.map { .init(itemName: $0.key, count: $0.value) }
+                state.itemsSales = resut.map { .init(itemName: $0.key, count: $0.value) }
                 return .none
             case .loaded(.failure(let error)):
                 return .none

@@ -12,8 +12,8 @@ struct InsightsView: View {
         WithPerceptionTracking {
             Text("Most sold items")
             Chart {
-                ForEach(store.test) {
-                    BarMark(x: .value("Test", $0.itemName), y: .value("Count", $0.count))
+                ForEach(store.itemsSales) {
+                    BarMark(x: .value("Item name", $0.itemName), y: .value("Number of orders", $0.count))
                 }
             }
             .padding()
