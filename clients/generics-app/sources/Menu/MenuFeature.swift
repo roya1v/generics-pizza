@@ -35,23 +35,6 @@ struct MenuFeature {
         }
     }
 
-    @ObservableState
-    struct State2: Equatable {
-        @Presents var menuDetail: MenuDetailFeature.State?
-        var selectedCategory: MenuItem.Category? = nil
-        var categories = IdentifiedArrayOf<MenuItem.Category>()
-        var content = SimpleListState<Item>()
-
-        struct Item: Equatable, Identifiable {
-            var item: MenuItem
-            var image: UIImage?
-
-            var id: UUID? {
-                item.id
-            }
-        }
-    }
-
     enum Action {
         case appeared
         case refreshTapped

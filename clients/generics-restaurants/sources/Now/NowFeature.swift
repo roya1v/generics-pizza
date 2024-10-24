@@ -23,7 +23,7 @@ struct NowFeature {
         case newServerMessage(RestaurantFromServerMessage)
         case receivedError(Error)
         case update(orderId: UUID, state: OrderModel.State)
-        case updated(orderId: UUID, state: OrderModel.State) // TODO: Find a better name for this?
+        case updateCompleted(orderId: UUID, state: OrderModel.State)
     }
 
     enum CancelId: Hashable { case messages }
@@ -65,9 +65,9 @@ struct NowFeature {
             case .update(orderId: let orderId, state: let state):
                 return .run { send in
                     try await repository.send(message: .update(orderId: orderId, state: state))
-                    await send(.updated(orderId: orderId, state: state))
+                    await send(.updateCompleted(orderId: orderId, state: state))
                 }
-            case .updated(orderId: let orderId, state: let orderState):
+            case .updateCompleted(orderId: let orderId, state: let orderState):
                 if orderState == .finished {
                     state.orders.remove(id: orderId)
                     return .none
