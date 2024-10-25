@@ -1,17 +1,18 @@
 import Fluent
 import FluentPostgresDriver
+import SotoS3
 import Vapor
 
-import SotoS3
-
 func getDatabase() throws -> DatabaseConfigurationFactory {
-    .postgres(configuration: SQLPostgresConfiguration(
-        hostname: Environment.get("DATABASE_HOST") ?? "localhost",
-        port: Environment.get("DATABASE_PORT").flatMap(Int.init(_:)) ?? SQLPostgresConfiguration.ianaPortNumber,
-        username: Environment.get("DATABASE_USERNAME") ?? "vapor_username",
-        password: Environment.get("DATABASE_PASSWORD") ?? "vapor_password",
-        database: Environment.get("DATABASE_NAME") ?? "vapor_database",
-        tls: .prefer(try .init(configuration: .clientDefault)))
+    .postgres(
+        configuration: SQLPostgresConfiguration(
+            hostname: Environment.get("DATABASE_HOST") ?? "localhost",
+            port: Environment.get("DATABASE_PORT").flatMap(Int.init(_:))
+                ?? SQLPostgresConfiguration.ianaPortNumber,
+            username: Environment.get("DATABASE_USERNAME") ?? "vapor_username",
+            password: Environment.get("DATABASE_PASSWORD") ?? "vapor_password",
+            database: Environment.get("DATABASE_NAME") ?? "vapor_database",
+            tls: .prefer(try .init(configuration: .clientDefault)))
     )
 }
 
@@ -43,12 +44,17 @@ public func configure(_ app: Application) async throws {
     app.migrations.add(MenuEntry.AddCategoriesMigration())
 
     // Should find a way to put that into migrations maybe?
-    if !((try await app.s3.listBuckets()).buckets?.contains(where: { $0.name == "menu-images"}) ?? true) {
+    if !((try await app.s3.listBuckets()).buckets?.contains(where: { $0.name == "menu-images" })
+        ?? true)
+    {
         app.logger.debug("Didn't find a 'menu-images' S3 bucket, so creating one.")
         _ = try await app.s3.createBucket(.init(bucket: "menu-images"))
     }
 
     app.routes.defaultMaxBodySize = "10MB"
+
+//    app.middleware.use(ErrorMiddleware())
+//    app.middleware.use(SlowdownMiddleware())
 
     try routes(app)
 }
