@@ -15,16 +15,18 @@ struct MenuHeaderView: View {
             ) {
                 HStack {
                     ForEach(store.categories) { category in
-                        Button(category.name) {
-                            store.send(.didSelectCategory(category.id!))
+                        WithPerceptionTracking {
+                            Button(category.name) {
+                                store.send(.didSelectCategory(category.id!))
+                            }
+                            .buttonStyle(
+                                GLinkButtonStyle(
+                                    style: store.selectedCategory == category
+                                    ? .active
+                                    : .inactive)
+                            )
+                            .padding(.gNormal)
                         }
-                        .buttonStyle(
-                            GLinkButtonStyle(
-                                style: store.selectedCategory == category
-                                ? .active
-                                : .inactive)
-                        )
-                        .padding(.gNormal)
                     }
                 }
             }

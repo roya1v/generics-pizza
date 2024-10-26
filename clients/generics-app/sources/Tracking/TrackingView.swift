@@ -9,39 +9,50 @@ struct TrackingView: View {
 
     var body: some View {
         WithPerceptionTracking {
-            map
-                .sheet(isPresented: .constant(true)) {
-                    VStack(alignment: .leading) {
-                        title
-                            .font(.largeTitle)
-                        HStack {
-                            ForEach([OrderModel.State.new,
-                                     .inProgress,
-                                     .readyForDelivery,
-                                     .inDelivery,
-                                     .finished],
-                                    id: \.rawValue) { state in
-                                WithPerceptionTracking {
-                                    RoundedRectangle(cornerRadius: 3.0)
-                                        .foregroundStyle(
-                                            store.orderState == state
-                                            ? Color.red
-                                            : Color.gray
-                                        )
-                                        .frame(height: 4.0)
-                                }
+            ZStack(alignment: .topLeading) {
+                map
+                Button {
+                    store.send(.dismissTapped)
+                } label: {
+                    Image(systemName: "xmark")
+                        .foregroundStyle(Color.white)
+                        .padding(.gNormal)
+                        .background(Circle().fill(Color.gAccent))
+                }
+                .padding()
+            }
+            .sheet(isPresented: .constant(true)) {
+                VStack(alignment: .leading) {
+                    title
+                        .font(.largeTitle)
+                    HStack {
+                        ForEach([OrderModel.State.new,
+                                 .inProgress,
+                                 .readyForDelivery,
+                                 .inDelivery,
+                                 .finished],
+                                id: \.rawValue) { state in
+                            WithPerceptionTracking {
+                                RoundedRectangle(cornerRadius: 3.0)
+                                    .foregroundStyle(
+                                        store.orderState == state
+                                        ? Color.red
+                                        : Color.gray
+                                    )
+                                    .frame(height: 4.0)
                             }
                         }
-                        .padding()
                     }
                     .padding()
-                    .presentationBackgroundInteraction(.enabled(upThrough: .height(120.0)))
-                    .interactiveDismissDisabled()
-                    .presentationDetents([.height(120.0)])
                 }
-                .task {
-                    store.send(.appeared)
-                }
+                .padding()
+                .presentationBackgroundInteraction(.enabled(upThrough: .height(120.0)))
+                .interactiveDismissDisabled()
+                .presentationDetents([.height(120.0)])
+            }
+            .task {
+                store.send(.appeared)
+            }
         }
     }
 

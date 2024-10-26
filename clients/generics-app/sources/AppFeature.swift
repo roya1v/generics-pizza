@@ -20,6 +20,7 @@ struct AppFeature {
     enum Action {
         case launched
         case showMenu
+        case showOrderTrackingTapped
         case showOrderDestination
         case menu(MenuFeature.Action)
         case cart(PresentationAction<CartFeature.Action>)
@@ -64,6 +65,15 @@ struct AppFeature {
                 state.cartState = nil
                 return .none
             case .cart:
+                return .none
+            case .showOrderTrackingTapped:
+                guard let order = state.currentOrder else {
+                    return .none
+                }
+                state.trackingState = TrackingFeature.State(order: order)
+                return .none
+            case .tracking(.presented(.dismissTapped)):
+                state.trackingState = nil
                 return .none
             case .tracking(.presented(.newState(.finished))):
                 state.currentOrder = nil

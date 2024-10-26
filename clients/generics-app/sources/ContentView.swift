@@ -41,7 +41,7 @@ struct ContentView: View {
                 }
                 if store.currentOrder != nil {
                     Button {
-                        store.send(.showMenu)
+                        store.send(.showOrderTrackingTapped)
                     } label: {
                         HStack {
                             Text("Track order")
