@@ -12,7 +12,10 @@ func getDatabase() throws -> DatabaseConfigurationFactory {
             username: Environment.get("DATABASE_USERNAME") ?? "vapor_username",
             password: Environment.get("DATABASE_PASSWORD") ?? "vapor_password",
             database: Environment.get("DATABASE_NAME") ?? "vapor_database",
-            tls: .prefer(try .init(configuration: .clientDefault)))
+            tls: Environment.get("DATABASE_TLS") == "FALSE"
+            ? .disable
+            : .prefer(try .init(configuration: .clientDefault))
+        )
     )
 }
 
