@@ -57,9 +57,9 @@
     "https://bcr.bazel.build/modules/protobuf/3.19.2/MODULE.bazel": "532ffe5f2186b69fdde039efe6df13ba726ff338c6bc82275ad433013fa10573",
     "https://bcr.bazel.build/modules/protobuf/3.19.6/MODULE.bazel": "9233edc5e1f2ee276a60de3eaa47ac4132302ef9643238f23128fea53ea12858",
     "https://bcr.bazel.build/modules/rules_apple/2.0.0/MODULE.bazel": "01218eea3b726bd23eb2a7626f36815c2f5b67a54308a06e5633272c33ff5557",
+    "https://bcr.bazel.build/modules/rules_apple/3.10.0/MODULE.bazel": "124d71917bab97f16460a2d5373c4f66662bd5814a19f8cb7ca3b48595f8b08c",
+    "https://bcr.bazel.build/modules/rules_apple/3.10.0/source.json": "63c868bd9bbafe07f934a0dbfa1c5f8c48a3b94e1d36173d3ce4ef37ff53e68c",
     "https://bcr.bazel.build/modules/rules_apple/3.6.0/MODULE.bazel": "7e3979510cbb7d6a20e8523a116cfc1252fe71821236c7340ca5bfd3a74b4479",
-    "https://bcr.bazel.build/modules/rules_apple/3.9.0/MODULE.bazel": "bf06e05bd4a71f686f253ecd952d1dd1b066a71b628823e2c865b202c8b29e57",
-    "https://bcr.bazel.build/modules/rules_apple/3.9.0/source.json": "83b5102188df93f9ba620cdb4ce9507982f4729a86f551ce7bc09e7b478996c6",
     "https://bcr.bazel.build/modules/rules_cc/0.0.1/MODULE.bazel": "cb2aa0747f84c6c3a78dad4e2049c154f08ab9d166b1273835a8174940365647",
     "https://bcr.bazel.build/modules/rules_cc/0.0.2/MODULE.bazel": "6915987c90970493ab97393024c156ea8fb9f3bea953b2f3ec05c34f19b5695c",
     "https://bcr.bazel.build/modules/rules_cc/0.0.6/MODULE.bazel": "abf360251023dfe3efcef65ab9d56beefa8394d4176dd29529750e1c57eaa33f",
@@ -120,7 +120,7 @@
     "@@apple_support~//crosstool:setup.bzl%apple_cc_configure_extension": {
       "general": {
         "bzlTransitiveDigest": "7ii+gFxWSxHhQPrBxfMEHhtrGvHmBTvsh+KOyGunP/s=",
-        "usagesDigest": "kv0B8RVQ+1E48LnGTylYVuMz/Q5lefy7eC3zcs4Z+0I=",
+        "usagesDigest": "6jdtYX2Fsa6qLMszu5WsyFumwiPiK7hFxc0Z7zE1KDQ=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -286,6 +286,79 @@
           }
         },
         "recordedRepoMappingEntries": []
+      }
+    },
+    "@@rules_apple~//apple:apple.bzl%provisioning_profile_repository_extension": {
+      "general": {
+        "bzlTransitiveDigest": "rub/HgKAQIcF7kybIIuqPG9/qiXaG1MgJDGIZo7Z+n4=",
+        "usagesDigest": "1NJgBIy2UwzDSckhG7+kUBhkoJYT3RraepnclQr2/zg=",
+        "recordedFileInputs": {},
+        "recordedDirentsInputs": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "local_provisioning_profiles": {
+            "bzlFile": "@@rules_apple~//apple/internal:local_provisioning_profiles.bzl",
+            "ruleClassName": "provisioning_profile_repository",
+            "attributes": {}
+          }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "apple_support~",
+            "bazel_skylib",
+            "bazel_skylib~"
+          ],
+          [
+            "rules_apple~",
+            "bazel_skylib",
+            "bazel_skylib~"
+          ],
+          [
+            "rules_apple~",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "rules_apple~",
+            "build_bazel_apple_support",
+            "apple_support~"
+          ],
+          [
+            "rules_apple~",
+            "build_bazel_rules_apple",
+            "rules_apple~"
+          ],
+          [
+            "rules_apple~",
+            "build_bazel_rules_swift",
+            "rules_swift~"
+          ],
+          [
+            "rules_swift~",
+            "bazel_skylib",
+            "bazel_skylib~"
+          ],
+          [
+            "rules_swift~",
+            "bazel_tools",
+            "bazel_tools"
+          ],
+          [
+            "rules_swift~",
+            "build_bazel_apple_support",
+            "apple_support~"
+          ],
+          [
+            "rules_swift~",
+            "build_bazel_rules_swift",
+            "rules_swift~"
+          ],
+          [
+            "rules_swift~",
+            "build_bazel_rules_swift_local_config",
+            "rules_swift~~non_module_deps~build_bazel_rules_swift_local_config"
+          ]
+        ]
       }
     },
     "@@rules_python~//python/extensions:python.bzl%python": {

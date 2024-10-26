@@ -25,7 +25,7 @@ ios_application(
     ],
     infoplists = ["Info.plist"],
     minimum_os_version = "16.4",
-    # provisioning_profile = ":xcode_profile",
+    provisioning_profile = ":xcode_profile",
     resources = glob(["resources/**/*"]),
     visibility = ["//visibility:public"],
     deps = [":generics-app"],
