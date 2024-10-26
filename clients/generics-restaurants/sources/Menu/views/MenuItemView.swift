@@ -20,8 +20,13 @@ struct MenuItemView: View {
                         .frame(width: 75.0)
                 }
                 VStack(alignment: .leading) {
-                    Text(store.item.title)
-                        .font(.title2)
+                    HStack {
+                        Text(store.item.title)
+                            .font(.title2)
+                        Text(store.item.category?.name ?? "No category")
+                            .font(.caption.italic())
+                            .foregroundStyle(.gray)
+                    }
                     Text(store.item.description)
                         .font(.caption)
                 }
