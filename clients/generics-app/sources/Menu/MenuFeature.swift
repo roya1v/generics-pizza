@@ -111,6 +111,9 @@ struct MenuFeature {
             case .list(.loaded(.failure(let error))):
                 state.contentState = .error
                 return .none
+            case .list(.updatedScroll):
+                state.list.scrolledTo = nil
+                return .none
             case .header(.loaded(.success(let categories))):
                 state.header.categories = IdentifiedArray(uniqueElements: categories)
                 state.header.selected = categories.first

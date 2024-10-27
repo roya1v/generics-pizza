@@ -13,6 +13,7 @@ struct MenuListFeature {
     }
 
     enum Action {
+        case updatedScroll
 
         // Internal
         case loaded(Result<[MenuItem], Error>)
