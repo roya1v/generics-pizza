@@ -57,6 +57,9 @@ struct MenuFeature {
                 return .none
             case .list(.row(.element(let id, action: .rowDisappeared))):
                 state.list.items[id: id]?.isVisible = false
+                if let newCategory = state.list.items.first(where: \.isVisible)?.item.category {
+                    state.header.selected = newCategory
+                }
                 return .none
             case .refreshTapped:
                 state.contentState = .loading

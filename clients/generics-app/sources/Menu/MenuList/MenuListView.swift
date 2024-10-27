@@ -25,7 +25,7 @@ struct MenuListView: View {
                     }
                 }
                 .listStyle(.plain)
-                .onReceive(store.publisher.map(\.scrolledTo)) { item in
+                .onReceive(store.publisher.scrolledTo) { item in
                     if let item {
                         withAnimation {
                             proxy.scrollTo(item.id)
