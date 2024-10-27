@@ -6,7 +6,8 @@ import SwiftUI
 
 struct MenuView: View {
 
-    @Perception.Bindable var store: StoreOf<MenuFeature>
+    @Perception.Bindable
+    var store: StoreOf<MenuFeature>
 
     var body: some View {
         WithPerceptionTracking {
@@ -44,17 +45,8 @@ struct MenuView: View {
 
     var menu: some View {
         WithPerceptionTracking {
-            MenuHeaderView(store: store)
-            List(store.items) { item in
-                MenuRowView(
-                    item: item
-                ) {
-                    store.send(.didSelect(item.id!))
-                }
-                .listRowSeparator(.hidden)
-                .listRowBackground(Color.clear)
-            }
-            .listStyle(.plain)
+            MenuHeaderView(store: store.scope(state: \.header, action: \.header))
+            MenuListView(store: store.scope(state: \.list, action: \.list))
         }
     }
 

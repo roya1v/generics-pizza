@@ -11,11 +11,10 @@ struct MenuFeature {
 
     @ObservableState
     struct State: Equatable {
-        var contentState = ContentState.loading
-        var selectedCategory: MenuItem.Category?
+        var header = MenuHeaderFeature.State()
+        var list = MenuListFeature.State()
 
-        var categories = IdentifiedArrayOf<MenuItem.Category>()
-        var items = IdentifiedArrayOf<Item>()
+        var contentState = ContentState.loading
 
         @Presents var menuDetail: MenuDetailFeature.State?
 
@@ -24,26 +23,17 @@ struct MenuFeature {
             case loaded
             case error
         }
-
-        struct Item: Equatable, Identifiable {
-            var item: MenuItem
-            var image: UIImage?
-
-            var id: UUID? {
-                item.id
-            }
-        }
     }
 
     enum Action {
+        // View
         case appeared
         case refreshTapped
-        case loaded(Result<[MenuItem], Error>)
-        case loadedCategories(Result<[MenuItem.Category], Error>)
-        case imageLoaded(id: UUID, result: Result<UIImage, Error>)
-        case didSelect(UUID)
+
+        // Child
+        case header(MenuHeaderFeature.Action)
+        case list(MenuListFeature.Action)
         case menuDetail(PresentationAction<MenuDetailFeature.Action>)
-        case didSelectCategory(UUID)
     }
 
     @Injected(\.menuRepository)
@@ -55,86 +45,105 @@ struct MenuFeature {
             case .appeared:
                 return .run { send in
                     await send(
-                        .loadedCategories(
-                            Result { try await menuRepository.fetchCategories() }
+                        .header(
+                            .loaded(
+                                Result { try await menuRepository.fetchCategories() }
+                            )
                         )
                     )
                 }
+            case .list(.row(.element(let id, action: .rowAppeared))):
+                state.list.items[id: id]?.isVisible = true
+                return .none
+            case .list(.row(.element(let id, action: .rowDisappeared))):
+                state.list.items[id: id]?.isVisible = false
+                return .none
             case .refreshTapped:
                 state.contentState = .loading
                 return .run { send in
                     await send(
-                        .loadedCategories(
-                            Result { try await menuRepository.fetchCategories() }
+                        .header(
+                            .loaded(
+                                Result { try await menuRepository.fetchCategories() }
+                            )
                         )
                     )
                 }
-            case .loaded(.success(let items)):
-                state.items = IdentifiedArray(
-                    uniqueElements: items.map {
-                        State.Item(
-                            item: $0)
-                    }
+            case .list(.loaded(.success(let items))):
+                state.list.items = IdentifiedArray(
+                    uniqueElements: items
+                        .sorted(by: { litem, ritem in
+                            guard let lcategory = litem.category,
+                                  let rcategory = ritem.category,
+                                  let lindex = state.header.categories.firstIndex(of: lcategory),
+                                  let rindex = state.header.categories.firstIndex(of: rcategory) else {
+                                return false
+                            }
+                            return lindex < rindex
+                        }) // TODO: Move this to the server
+                        .map {
+                            .init(
+                                item: $0)
+                        }
                 )
                 state.contentState = .loaded
                 return .merge(
                     items.map { item in
                             .run { send in
                                 await send(
-                                    .imageLoaded(
-                                        id: item.id!,
-                                        result: Result {
-                                            try await menuRepository.getImage(forItemId: item.id!)
-                                        }
+                                    .list(.row(.element(
+                                        id: item.id,
+                                        action: .imageLoaded(
+                                            Result {
+                                                try await menuRepository.getImage(forItemId: item.id!)
+                                            }
+                                        )
                                     )
+                                    )
+                                         )
                                 )
                             }
                     }
                 )
-            case .loaded(.failure(let error)):
+            case .list(.loaded(.failure(let error))):
                 state.contentState = .error
                 return .none
-            case .loadedCategories(.success(let categories)):
-                state.categories = IdentifiedArray(uniqueElements: categories)
-                state.selectedCategory = categories.first
+            case .header(.loaded(.success(let categories))):
+                state.header.categories = IdentifiedArray(uniqueElements: categories)
+                state.header.selected = categories.first
                 return .run { send in
                     await send(
-                        .loaded(
-                            Result { try await menuRepository.fetchMenu(category: categories.first!) }
+                        .list(
+                            .loaded(
+                                Result { try await menuRepository.fetchMenu() }
+                            )
                         )
                     )
                 }
-            case .loadedCategories(.failure(let error)):
+            case .header(.loaded(.failure(let error))):
                 state.contentState = .error
                 return .none
-            case .didSelect(let id):
-                if let item = state.items[id: id] {
+            case .list(.row(.element(let id, action: .rowTapped))):
+                if let item = state.list.items[id: id] {
                     state.menuDetail = MenuDetailFeature.State(image: item.image, item: item.item)
                 }
                 return .none
-            case .didSelectCategory(let id):
-                if let category = state.categories[id: id] {
-                    state.selectedCategory = category
-                    return .run { send in
-                        await send(
-                            .loaded(
-                                Result { try await menuRepository.fetchMenu(category: category) }
-                            )
-                        )
-                    }
-                }
+            case .header(.categorySelected(let id)):
+                state.list.scrolledTo = state.list.items.first(where: {$0.item.category?.id == id})
+                state.header.selected = state.header.categories[id: id]
                 return .none
             case .menuDetail(.presented(.dismissTapped)):
                 state.menuDetail = .none
                 return .none
+            case .list(.row(.element(id: let id, action: .imageLoaded(.success(let image))))):
+                state.list.items[id: id]?.image = image
+                return .none
+            case .header:
+                return .none
+            case .list:
+                return .none
             case .menuDetail:
                 return .none
-            case .imageLoaded(let id, result: .success(let image)):
-                state.items[id: id]?.image = image
-                return .none
-            case .imageLoaded(let id, result: .failure(let error)):
-                return .none
-
             }
         }
     }
