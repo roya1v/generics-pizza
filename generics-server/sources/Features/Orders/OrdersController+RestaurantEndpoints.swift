@@ -36,7 +36,7 @@ extension OrdersController {
                 try? await ws.close()
                 return
             }
-            self.restaurant = .init(ws: ws, eventLoop: req.eventLoop)
+            let restaurant = RestaurantMessenger(ws: ws, eventLoop: req.eventLoop)
             req.logger.debug("New restaurant joined.")
 
             try? await OrderEntry.query(on: req.db)
@@ -45,23 +45,10 @@ extension OrdersController {
                 .all()
                 .toSharedModels()
                 .forEach({ order in
-                    try? self.restaurant!.send(message: .newOrder(order))
+                    try? restaurant.send(message: .newOrder(order))
                 })
 
-            self.restaurant!.onMessage { message in
-                Task {
-                    switch message {
-                    case .update(let id, let state):
-                        if let order = try? await OrderEntry.find(id, on: req.db) {
-                            order.state = state
-                            try? await order.save(on: req.db)
-                            if let client = self.clients[id] {
-                                try? await client.send(message: .newState(state))
-                            }
-                        }
-                    }
-                }
-            }
+            req.dispatcher.restaurantJoined(restaurant)
         }
     }
 }

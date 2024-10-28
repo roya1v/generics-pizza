@@ -8,10 +8,6 @@ typealias DriverMessenger = Messenger<DriverToServerMessage, DriverFromServerMes
 
 final class OrdersController: RouteCollection {
 
-    var clients = [UUID: CustomerMessenger]()
-    var restaurant: RestaurantMessenger?
-    var drivers = [DriverMessenger]()
-
     func boot(routes: RoutesBuilder) throws {
         let order = routes.grouped("order")
 
