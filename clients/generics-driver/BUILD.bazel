@@ -1,0 +1,28 @@
+load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+swift_library(
+    name = "generics-driver",
+    srcs = glob(["sources/**/*.swift"]),
+    deps = [
+        "//:SharedModels",
+        "//clients/libraries:GenericsCore",
+        "//clients/libraries:GenericsHelpers",
+        "//clients/libraries:GenericsUI",
+        "@swiftpkg_factory//:Factory",
+        "@swiftpkg_swift_composable_architecture//:ComposableArchitecture",
+    ],
+)
+
+ios_application(
+    name = "GenericsDriver",
+    bundle_id = "com.roya1v.GenericsDriver",
+    families = [
+        "iphone",
+    ],
+    infoplists = ["Info.plist"],
+    minimum_os_version = "16.4",
+    resources = glob(["resources/**/*"]),
+    visibility = ["//visibility:public"],
+    deps = [":generics-driver"],
+)
