@@ -22,6 +22,13 @@ swift_binary(
     ],
 )
 
+test_suite(
+    name = "all_tests",
+    tests = [
+        "//clients/generics-restaurants:GenericsRestaurantsTests",
+    ],
+)
+
 xcodeproj(
     name = "xcodeproj",
     build_mode = "bazel",

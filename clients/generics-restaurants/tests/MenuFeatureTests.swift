@@ -64,7 +64,7 @@ class MenuFeatureTests: XCTestCase {
         menuRepositorySpy.getImageForItemIdReturnValue = NSImage()
         store.exhaustivity = .off(showSkippedAssertions: true)
         let mockItem = MenuItem(
-            id: UUID(), title: "mock", description: "mock", price: 123, isHidden: false)
+            id: UUID(), title: "mock", description: "mock", price: 123, isHidden: false, category: nil)
 
         await store.send(.loaded(.success([mockItem]))) {
             $0.menuState = .loaded([MenuItemFeature.State(item: mockItem)])
