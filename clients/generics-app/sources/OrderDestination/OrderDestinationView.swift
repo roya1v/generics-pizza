@@ -49,9 +49,9 @@ struct OrderDestinationView: View {
             .sheet(isPresented: .constant(true)) {
                 form
                 .padding()
-                .presentationBackgroundInteraction(.enabled(upThrough: .height(180.0)))
+                .presentationBackgroundInteraction(.enabled(upThrough: .height(240.0)))
                 .interactiveDismissDisabled()
-                .presentationDetents([.height(180.0)])
+                .presentationDetents([.height(240.0)])
             }
             .task {
                 store.send(.appeared)
@@ -65,6 +65,7 @@ struct OrderDestinationView: View {
             VStack {
                 if let store = store.scope(state: \.deliveryForm, action: \.deliveryForm) {
                     DeliveryFormView(store: store)
+                    Spacer()
                 } else {
                     PickUpFormView()
                 }

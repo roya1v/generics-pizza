@@ -6,7 +6,7 @@ struct MainHeaderView: View {
 
     let store: StoreOf<AppFeature>
 
-    public var body: some View {
+    var body: some View {
         HStack {
             VStack {
                 HStack {
@@ -17,7 +17,7 @@ struct MainHeaderView: View {
                         .foregroundStyle(Color.gAccent)
 
                 }
-                Text("Self pick up")
+                destinationLabel
                     .font(.gCaption)
             }
             .onTapGesture {
@@ -27,6 +27,18 @@ struct MainHeaderView: View {
             // Circle()
             //     .fill(Color.white)
             //     .frame(width: 40.0, height: 40.0)
+        }
+    }
+
+    @ViewBuilder
+    private var destinationLabel: some View {
+        WithPerceptionTracking {
+            switch store.destination {
+            case .pickUp:
+                Text("Self pick up")
+            case .delivery(let address):
+                Text("Delivery to \(address.street)")
+            }
         }
     }
 }
