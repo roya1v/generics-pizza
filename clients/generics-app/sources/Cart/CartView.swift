@@ -7,7 +7,8 @@ import ComposableArchitecture
 
 struct CartView: View {
 
-    let store: StoreOf<CartFeature>
+    @Perception.Bindable
+    var store: StoreOf<CartFeature>
 
     var body: some View {
         WithPerceptionTracking {
@@ -46,6 +47,7 @@ struct CartView: View {
 
                     }
                 }
+                .alert($store.scope(state: \.alert, action: \.alert))
             }
             .task {
                 store.send(.appeared)

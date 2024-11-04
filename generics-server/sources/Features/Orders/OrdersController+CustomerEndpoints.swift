@@ -26,7 +26,7 @@ extension OrdersController {
         let address: String?
         switch orderModel.destination {
         case .delivery(let orderAddress):
-            address = orderAddress.street
+            throw Abort(.notAcceptable, reason: "Delivered orders not supported")
         case .pickUp:
             address = nil
         }

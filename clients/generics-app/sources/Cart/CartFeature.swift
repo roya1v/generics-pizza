@@ -12,6 +12,8 @@ struct CartFeature {
         @Shared var items: IdentifiedArrayOf<CartItemFeature.State>
         @Shared var destination: OrderModel.Destination
         var subtotal = [SubtotalModel]()
+
+        @Presents var alert: AlertState<Action.Alert>?
     }
 
     enum Action {
@@ -21,6 +23,12 @@ struct CartFeature {
         case estimateUpdated(Result<[SubtotalModel], Error>)
         case orderPlaced(Result<OrderModel, Error>)
         case item(IdentifiedActionOf<CartItemFeature>)
+        case alert(PresentationAction<Alert>)
+
+        @CasePathable
+        enum Alert {
+          case incrementButtonTapped
+        }
     }
 
     @Injected(\.orderRepository)
@@ -123,13 +131,20 @@ struct CartFeature {
                 print(error)
                 return .none
             case .orderPlaced(.failure(let error)):
-                print(error)  // TODO: Add error handling
+                state.alert = AlertState(title: {
+                    TextState("Something didn't work!")
+                }, message: {
+                    TextState("The order can't be place at this moment.")
+                })
                 return .none
             case .orderPlaced:
                 return .none
             case .dismissTapped:
                 return .none
+            case .alert:
+                return .none
             }
         }
+        .ifLet(\.$alert, action: \.alert)
     }
 }
