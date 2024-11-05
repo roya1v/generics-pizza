@@ -41,6 +41,7 @@ struct MenuRowView: View {
                     Text(store.item.description)
                         .font(.gCaption)
                         .foregroundStyle(.secondary)
+                        .lineLimit(3)
                     Button {
                         store.send(.rowTapped)
                     } label: {
@@ -49,6 +50,9 @@ struct MenuRowView: View {
                     }
                     .buttonStyle(GPrimaryButtonStyle())
                 }
+            }
+            .onTapGesture {
+                store.send(.rowTapped)
             }
         }
     }
