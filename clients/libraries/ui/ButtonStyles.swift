@@ -6,7 +6,8 @@ public struct GPrimaryButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(.gNormal)
+            .frame(maxWidth: .infinity)
+            .padding(.gBig)
             .background(Color.gAccent)
             .foregroundStyle(.white)
             .clipShape(Capsule())
