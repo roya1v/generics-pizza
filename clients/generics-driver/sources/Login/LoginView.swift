@@ -9,27 +9,35 @@ struct LoginView: View {
 
     var body: some View {
         WithPerceptionTracking {
-            VStack {
-                Text("Welcome Driver!")
-                    .font(.largeTitle)
-                TextField("Login", text: .constant(""))
-                    .textFieldStyle(.roundedBorder)
-                SecureField("Password", text: .constant(""))
-                    .textFieldStyle(.roundedBorder)
-                Spacer()
-                Button {
-                    store.send(.loginTapped)
-                } label: {
-                    if store.isLoading {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
-                    } else {
-                        Text("Login")
+            ZStack {
+                GradientBackgroundView()
+                    .ignoresSafeArea()
+                VStack {
+                    Text("Welcome Driver!")
+                        .font(.system(size: 32.0, weight: .bold))
+
+                    VStack {
+                        TextField("Login", text: $store.email)
+                            .textFieldStyle(GPrimary())
+                        SecureField("Password", text: $store.password)
+                            .textFieldStyle(GPrimary())
+                        Spacer()
+                        Button {
+                            store.send(.loginTapped)
+                        } label: {
+                            if store.isLoading {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                            } else {
+                                Text("Login")
+                            }
+                        }
+                        .buttonStyle(GPrimaryButtonStyle())
                     }
+                    .padding()
+                    .background(.ultraThickMaterial)
                 }
-                .buttonStyle(GPrimaryButtonStyle())
             }
-            .padding()
         }
     }
 }

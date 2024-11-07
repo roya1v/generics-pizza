@@ -43,7 +43,13 @@ xcodeproj(
                 "simulator",
             ],
         ),
-        "//clients/generics-driver:GenericsDriver",
+        top_level_target(
+            "//clients/generics-driver:GenericsDriver",
+            target_environments = [
+                "device",
+                "simulator",
+            ],
+        ),
         "//clients/generics-restaurants:GenericsRestaurants",
         "//clients/generics-restaurants:GenericsRestaurantsTests",
         "//clients/bot:bot",
