@@ -72,7 +72,8 @@ struct OrderDestinationFeature {
                             street: address.street,
                             floor: Int(address.floor),
                             appartment: address.appartment,
-                            comment: address.comment
+                            comment: address.comment,
+                            coordinates: .init(latitude: 0.0, longitude: 0.0)
                         )
                     )
                 } else {

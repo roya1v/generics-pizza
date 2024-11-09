@@ -42,17 +42,25 @@ public struct OrderModel: Codable, Identifiable, Equatable {
         case pickUp
 
         public struct Address: Codable, Equatable {
-            public init(street: String, floor: Int?, appartment: String? = nil, comment: String) {
+            public init(
+                street: String,
+                floor: Int?,
+                appartment: String? = nil,
+                comment: String,
+                coordinates: MapPointModel
+            ) {
                 self.street = street
                 self.floor = floor
                 self.appartment = appartment
                 self.comment = comment
+                self.coordinates = coordinates
             }
 
             public let street: String
             public let floor: Int?
             public let appartment: String?
             public let comment: String
+            public let coordinates: MapPointModel
         }
     }
 }

@@ -1,17 +1,6 @@
 import Foundation
 
-public struct AddressModel: Codable {
-
-    public init(coordinate: MapPointModel, details: String) {
-        self.coordinate = coordinate
-        self.details = details
-    }
-
-    public let coordinate: MapPointModel
-    public let details: String
-}
-
-public struct MapPointModel: Codable {
+public struct MapPointModel: Codable, Equatable {
 
     public init(latitude: Double, longitude: Double) {
         self.latitude = latitude

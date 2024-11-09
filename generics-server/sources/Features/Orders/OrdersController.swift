@@ -13,7 +13,6 @@ final class OrdersController: RouteCollection {
 
         // Customer endpoints
         order.post("check_price", use: checkPrice)
-        order.post("check_location", use: checkRestaurantLocation)
         order.post(use: new)
         order.grouped("activity").grouped(":orderId").webSocket(onUpgrade: orderActivity)
 
