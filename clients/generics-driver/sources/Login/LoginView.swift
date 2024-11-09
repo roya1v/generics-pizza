@@ -35,7 +35,7 @@ struct LoginView: View {
                         .buttonStyle(GPrimaryButtonStyle())
                     }
                     .padding()
-                    .background(.ultraThickMaterial)
+                    .background(.thinMaterial)
                 }
             }
         }

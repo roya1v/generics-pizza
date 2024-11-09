@@ -55,13 +55,17 @@ struct MenuItemFormView: View {
     var form: some View {
         Form {
             HStack {
-                Picker("Category", selection: $store.category) {
-                    ForEach(store.categories) { category in
-                        Text(category.name)
-                            .tag(category)
+                if store.categories.isEmpty {
+                    ProgressView()
+                } else {
+                    Picker("Category", selection: $store.category) {
+                        ForEach(store.categories) { category in
+                            Text(category.name)
+                                .tag(category)
+                        }
+                        Text("None")
+                            .tag(Optional<MenuItem.Category>.none)
                     }
-                    Text("None")
-                        .tag(Optional<MenuItem.Category>.none)
                 }
                 Button("+") {
                     store.send(.newCategoryTapped)

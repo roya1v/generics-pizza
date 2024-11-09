@@ -10,8 +10,8 @@ struct GradientBackgroundView: View {
                 Color.white.visualEffect { content, proxy in
                     content
                         .colorEffect(
-                            ShaderLibrary.gradient(
-                                .float2(proxy.size),
+                            ShaderLibrary.psychodelics(
+                                .boundingRect,
                                 .float(startDate.timeIntervalSinceNow)
                             )
                         )
