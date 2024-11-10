@@ -30,7 +30,7 @@ final class OrderRestaurantRepositoryImpl: OrderRestaurantRepository {
     // MARK: - OrderRestaurantRepository
 
     func getFeed() -> AnyPublisher<RestaurantFromServerMessage, Error> {
-        return Future { fulfill in
+        Future { fulfill in
             Task {
                 self.socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
                     .add(path: "order")

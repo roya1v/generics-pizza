@@ -16,9 +16,7 @@ public protocol OrderRepository {
         -> [SubtotalModel]
     func placeOrder(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws
         -> OrderModel
-    func trackOrder(_ order: OrderModel) async throws -> AnyPublisher<
-        CustomerFromServerMessage, Error
-    >
+    func trackOrder(_ order: OrderModel) -> AnyPublisher<CustomerFromServerMessage, Error>
 }
 
 final class OrderRepositoryImpl: OrderRepository {
@@ -52,26 +50,31 @@ final class OrderRepositoryImpl: OrderRepository {
             .perform()
     }
 
-    func trackOrder(_ order: OrderModel) async throws -> AnyPublisher<
-        CustomerFromServerMessage, Error
-    > {
-        socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
-            .add(path: "order")
-            .add(path: "activity")
-            .add(path: order.id!.uuidString)
-            .websocket()
+    func trackOrder(_ order: OrderModel) -> AnyPublisher<CustomerFromServerMessage, Error> {
+        Future { fulfill in
+            Task {
+                self.socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
+                    .add(path: "order")
+                    .add(path: "activity")
+                    .add(path: order.id!.uuidString)
+                    .websocket()
 
-        return socket!
-            .messagePublisher
-            .compactMap({
-                if case let .string(message) = $0 {
-                    return message.data(using: .utf8)
-                } else {
-                    return nil
-                }
-            })
-            .decode(type: CustomerFromServerMessage.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
+                fulfill(.success(self.socket!
+                    .messagePublisher
+                    .compactMap({
+                        if case let .string(message) = $0 {
+                            return message.data(using: .utf8)
+                        } else {
+                            return nil
+                        }
+                    })
+                    .decode(type: CustomerFromServerMessage.self, decoder: JSONDecoder())
+                    .eraseToAnyPublisher()))
+
+            }
+        }
+        .switchToLatest()
+        .eraseToAnyPublisher()
     }
 
     private func getRequest() -> SwiftlyHttp {

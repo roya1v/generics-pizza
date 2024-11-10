@@ -2,6 +2,7 @@ import ArgumentParser
 import Foundation
 import GenericsCore
 import SharedModels
+@preconcurrency import Combine
 
 struct Customer: AsyncParsableCommand {
 
@@ -52,13 +53,41 @@ struct Customer: AsyncParsableCommand {
             destination: destination
         )
         if shouldTrack {
-            let cancellable = try await orderRepository.trackOrder(order)
-                .sink { _ in
-
-                } receiveValue: { message in
-                    print(message)
+            for await message in orderRepository.trackOrder(order).assertNoFailure().stream {
+                print("New message from server:")
+                switch message {
+                case .accepted:
+                    print("\t - Order accepted")
+                case .newState(let state):
+                    switch state {
+                    case .new:
+                        print("\t - Order accepted")
+                    case .inProgress:
+                        print("\t - Order is being prepared")
+                    case .readyForDelivery:
+                        print("\t - Order is ready for delivery")
+                    case .inDelivery:
+                        print("\t - Order is being delivered")
+                    case .finished:
+                        print("\t - Order has been delivered")
+                    }
                 }
-            try await Task.sleep(for: .seconds(99999999))
+            }
+        }
+    }
+}
+
+extension Publisher where Failure == Never {
+    public var stream: AsyncStream<Output> {
+        AsyncStream { continuation in
+            let cancellable = self.sink { _ in
+                continuation.finish()
+            } receiveValue: { value in
+                continuation.yield(value)
+            }
+            continuation.onTermination = { _ in
+                cancellable.cancel()
+            }
         }
     }
 }
