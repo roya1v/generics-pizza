@@ -51,4 +51,24 @@ extension OrdersController {
             req.dispatcher.restaurantJoined(restaurant)
         }
     }
+
+    /// Connect to order activity as a driver.
+    func driverActivity(req: Request, ws: WebSocket) async {
+
+        ws.onText { ws, text in
+            guard let token = try? await  UserTokenEntry
+                .query(on: req.db)
+                .filter(\.$value == text)
+                .with(\.$user)
+                .first(),
+                  token.user.access != .client else {
+                try? await ws.close()
+                return
+            }
+            let driver = DriverMessenger(ws: ws, eventLoop: req.eventLoop)
+            req.logger.debug("New driver joined.")
+
+            req.dispatcher.driverJoined(driver)
+        }
+    }
 }

@@ -21,5 +21,8 @@ final class OrdersController: RouteCollection {
         authenticated.get("current", use: getCurrent)
         authenticated.get("history", use: getHistory)
         authenticated.grouped("activity").webSocket(onUpgrade: restaurantActivity)
+
+        // Driver endpoints
+        authenticated.grouped("activity").grouped("driver").webSocket(onUpgrade: driverActivity)
     }
 }

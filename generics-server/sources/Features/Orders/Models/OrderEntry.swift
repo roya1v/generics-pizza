@@ -40,12 +40,25 @@ extension OrderEntry: Hashable {
 
 extension OrderEntry: SharedModelRepresentable {
     func toSharedModel() -> OrderModel {
-        OrderModel(
+        let destination: OrderModel.Destination
+        if let address {
+            destination = .delivery(
+                .init(street: address.street,
+                      floor: address.floor,
+                      appartment: address.appartment,
+                      comment: address.comment ?? "",
+                      coordinates: .init(latitude: address.latitude, longitude: address.longitude)
+                     )
+            )
+        } else {
+            destination = .pickUp
+        }
+        return OrderModel(
             id: id,
             createdAt: createdAt,
             items: items.map { $0.toSharedModel() },
             state: state,
-            destination: .pickUp
+            destination: destination
         )
     }
 }

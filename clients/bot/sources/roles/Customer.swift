@@ -11,6 +11,9 @@ struct Customer: AsyncParsableCommand {
     @Flag(name: [.customLong("track")])
     var shouldTrack: Bool = false
 
+    @Flag(name: [.customLong("delivery")])
+    var delivery: Bool = false
+
     func run() async throws {
         let menuRepository = buildMenuRepository(url: baseUrl)
 
@@ -24,10 +27,29 @@ struct Customer: AsyncParsableCommand {
 
         let orderRepository = buildOrderRepository(url: baseUrl)
 
+        let destination: OrderModel.Destination
+
+        if delivery {
+            destination = .delivery(
+                .init(
+                    street: "",
+                    floor: 1,
+                    appartment: "",
+                    comment: "",
+                    coordinates: .init(
+                        latitude: 0.0,
+                        longitude: 0.0
+                    )
+                )
+            )
+        } else {
+            destination = .pickUp
+        }
+
         print("Placing order...")
         let order = try await orderRepository.placeOrder(
             for: [OrderModel.Item(menuItem: item, count: 1)],
-            destination: .pickUp
+            destination: destination
         )
         if shouldTrack {
             let cancellable = try await orderRepository.trackOrder(order)

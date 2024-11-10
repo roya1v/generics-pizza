@@ -10,6 +10,7 @@ extension Application {
     var dispatcher: OrderDispatcher {
         guard let dispatcher = self.storage[OrderDispatcherKey.self] else {
             let newDispatcher = OrderDispatcher(logger: logger) { updatedOrder in
+                self.logger.debug("Trying to update order")
                 if let order = try? await OrderEntry.find(updatedOrder.id, on: self.db) {
                     order.state = updatedOrder.state!
                     try? await order.save(on: self.db)

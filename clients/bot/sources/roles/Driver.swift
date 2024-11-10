@@ -26,12 +26,30 @@ struct Driver: AsyncParsableCommand {
             return
         }
 
-        let orderRepository = buildOrderRestaurantRepository(
+        let driverRepository = buildDriverRepository(
             url: baseUrl,
             authenticationProvider: InMemoryAuthenticationProvider(
                 token: token
             )
         )
+
+        let cancellable = driverRepository
+            .getFeed()
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+
+            } receiveValue: { message in
+                switch message {
+                case .offerOrder(let model):
+                    Task {
+                        try? await driverRepository.send(.acceptOrder(model.id))
+                        print("Accepted order with id: \(model.id)")
+                        try await Task.sleep(for: .seconds(2))
+                        try await driverRepository.send(.delivered(model.id))
+                        print("Order delivered")
+                    }
+                }
+            }
 
         try await Task.sleep(for: .seconds(9_999_999))
     }

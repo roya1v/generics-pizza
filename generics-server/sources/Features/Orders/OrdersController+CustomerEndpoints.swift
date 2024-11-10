@@ -18,13 +18,6 @@ extension OrdersController {
     func new(req: Request) async throws -> OrderModel {
         let orderModel = try req.content.decode(OrderModel.self)
 
-//        switch orderModel.destination {
-//        case .delivery:
-//            throw Abort(.notAcceptable, reason: "Delivered orders not supported")
-//        case .pickUp:
-//            addressId = nil
-//        }
-
         let order = OrderEntry(state: .new)
         try await order.save(on: req.db)
 

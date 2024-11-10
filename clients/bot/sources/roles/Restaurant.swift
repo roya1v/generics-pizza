@@ -32,8 +32,7 @@ struct Restaurant: AsyncParsableCommand {
             )
         )
 
-        let cancellable =
-            try await orderRepository
+        let cancellable = orderRepository
             .getFeed()
             .receive(on: DispatchQueue.main)
             .sink { _ in

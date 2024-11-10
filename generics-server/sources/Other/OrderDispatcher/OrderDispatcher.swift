@@ -12,6 +12,7 @@ class OrderDispatcher {
 
     var customers = [OrderModel.ID: CustomerMessenger]()
     var restaurant: RestaurantMessenger?
+    var drivers = [DriverMessenger]()
     var orders = [OrderModel.ID: OrderModel]()
 
     var updateInDb: (OrderModel) async throws -> Void
@@ -25,6 +26,12 @@ class OrderDispatcher {
     func restaurantJoined(_ messenger: RestaurantMessenger) {
         restaurant = messenger
         messenger.onMessage(newRestaurantMessage)
+    }
+
+    func driverJoined(_ messenger: DriverMessenger) {
+        logger.debug("New driver joined")
+        drivers.append(messenger)
+        messenger.onMessage(newDriverMessage)
     }
 
     func customerJoined(_ messenger: CustomerMessenger, forId id: OrderModel.ID) throws {
@@ -47,12 +54,13 @@ class OrderDispatcher {
     }
 
     private func newRestaurantMessage(_ message: RestaurantToServerMessage) {
+        logger.debug("New message from restaurant: \(message)")
         switch message {
         case .update(let orderId, let state):
             switch state {
             case .new:
                 fatalError()
-            case .inProgress, .readyForDelivery, .inDelivery, .finished:
+            case .inProgress, .inDelivery, .finished:
                 guard let order = orders[orderId] else {
                     return
                 }
@@ -66,7 +74,60 @@ class OrderDispatcher {
                     try? await updateInDb(updatedOrder)
                 }
                 notifyCustomer(orderId: orderId, newState: state)
+            case .readyForDelivery:
+                guard let order = orders[orderId] else {
+                    return
+                }
+                if order.destination == .pickUp {
+                    let updatedOrder = OrderModel(id: order.id,
+                                                 createdAt: order.createdAt,
+                                                 items: order.items,
+                                                 state: state,
+                                                 destination: order.destination)
+                    orders[orderId] = updatedOrder
+                    Task {
+                        try? await updateInDb(updatedOrder)
+                    }
+                    notifyCustomer(orderId: orderId, newState: state)
+                    return
+                }
+                Task {
+                    try? await drivers.first?.send(message: .offerOrder(order))
+                }
             }
+        }
+    }
+
+    private func newDriverMessage(_ message: DriverToServerMessage) {
+        switch message {
+        case .acceptOrder(let id):
+            guard let order = orders[id] else {
+                return
+            }
+            let updatedOrder = OrderModel(id: order.id,
+                                         createdAt: order.createdAt,
+                                         items: order.items,
+                                          state: .inDelivery,
+                                         destination: order.destination)
+            orders[id] = updatedOrder
+            Task {
+                try? await updateInDb(updatedOrder)
+            }
+            notifyCustomer(orderId: id, newState: .inDelivery)
+        case .delivered(let id):
+            guard let order = orders[id] else {
+                return
+            }
+            let updatedOrder = OrderModel(id: order.id,
+                                         createdAt: order.createdAt,
+                                         items: order.items,
+                                          state: .finished,
+                                         destination: order.destination)
+            orders[id] = updatedOrder
+            Task {
+                try? await updateInDb(updatedOrder)
+            }
+            notifyCustomer(orderId: id, newState: .finished)
         }
     }
 

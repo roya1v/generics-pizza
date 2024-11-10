@@ -5,9 +5,9 @@ import SwiftlyHttp
 
 public func buildDriverRepository(
     url: String,
-    authenticationRepository: AuthenticationRepository
+    authenticationProvider: some AuthenticationProvider
 ) -> DriverRepository {
-    DriverRepositoryImpl(baseURL: url, authenticationRepository: authenticationRepository)
+    DriverRepositoryImpl(baseURL: url, authenticationProvider: authenticationProvider)
 }
 
 public func mockDriverRepository() -> DriverRepository {
@@ -15,7 +15,7 @@ public func mockDriverRepository() -> DriverRepository {
 }
 
 public protocol DriverRepository {
-    func getFeed() async throws -> AnyPublisher<DriverFromServerMessage, Error>
+    func getFeed() -> AnyPublisher<DriverFromServerMessage, Error>
     func send(_ message: DriverToServerMessage) async throws
 }
 
@@ -25,42 +25,46 @@ public enum DriverFeedError: Error {
 
 final class DriverRepositoryImpl: DriverRepository {
     private let baseURL: String
-    private let authenticationRepository: AuthenticationRepository
+    private let authenticationProvider: AuthenticationProvider
 
     private var socket: SwiftlyWebSocketConnection?
 
     init(
         baseURL: String,
-        authenticationRepository: AuthenticationRepository
+        authenticationProvider: AuthenticationProvider
     ) {
         self.baseURL = baseURL
-        self.authenticationRepository = authenticationRepository
+        self.authenticationProvider = authenticationProvider
     }
 
-    func getFeed() async throws -> AnyPublisher<DriverFromServerMessage, Error> {
-        if socket == nil {
-            socket = try await SwiftlyHttp(baseURL: baseURL)!
-                .add(path: "order")
-                .add(path: "activity")
-                .add(path: "driver")
-                .authentication({
-                    return try? self.authenticationRepository.getAuthentication()
-                })
-                .websocket()
-        }
+    func getFeed() -> AnyPublisher<DriverFromServerMessage, Error> {
+        return Future { fulfill in
+            Task {
+                self.socket = try await SwiftlyHttp(baseURL: "ws://localhost:8080")!
+                    .add(path: "order")
+                    .add(path: "activity")
+                    .add(path: "driver")
+                    .websocket()
 
-        return socket!
-            .messagePublisher
-            .tryMap({
-                if case let .string(message) = $0,
-                    let data = message.data(using: .utf8) {
-                    return data
-                } else {
-                    throw DriverFeedError.unknownMessage($0)
+                if case let .bearer(token) = try? self.authenticationProvider.getAuthentication() {
+                    try await self.socket?.send(message: .string(token))
                 }
-            })
-            .decode(type: DriverFromServerMessage.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
+                fulfill(.success(self.socket!
+                    .messagePublisher
+                    .compactMap({
+                        if case let .string(message) = $0 {
+                            return message.data(using: .utf8)
+                        } else {
+                            return nil
+                        }
+                    })
+                        .decode(type: DriverFromServerMessage.self, decoder: JSONDecoder())
+                        .eraseToAnyPublisher()))
+
+            }
+        }
+        .switchToLatest()
+        .eraseToAnyPublisher()
     }
 
     func send(_ message: DriverToServerMessage) async throws {
