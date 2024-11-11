@@ -8,7 +8,7 @@ func getDatabase() throws -> DatabaseConfigurationFactory {
         configuration: SQLPostgresConfiguration(
             hostname: Environment.get("DATABASE_HOST") ?? "localhost",
             port: Environment.get("DATABASE_PORT").flatMap(Int.init(_:))
-                ?? SQLPostgresConfiguration.ianaPortNumber,
+            ?? SQLPostgresConfiguration.ianaPortNumber,
             username: Environment.get("DATABASE_USERNAME") ?? "vapor_username",
             password: Environment.get("DATABASE_PASSWORD") ?? "vapor_password",
             database: Environment.get("DATABASE_NAME") ?? "vapor_database",
@@ -48,17 +48,27 @@ public func configure(_ app: Application) async throws {
     app.migrations.add(MenuEntry.AddCategoriesMigration())
 
     // Should find a way to put that into migrations maybe?
-    if !((try await app.s3.listBuckets()).buckets?.contains(where: { $0.name == "menu-images" })
-        ?? true)
-    {
+    if !((try await app.s3.listBuckets()).buckets?.contains(where: { $0.name == "menu-images" }) ?? true) {
         app.logger.debug("Didn't find a 'menu-images' S3 bucket, so creating one.")
         _ = try await app.s3.createBucket(.init(bucket: "menu-images"))
     }
 
     app.routes.defaultMaxBodySize = "10MB"
 
-//    app.middleware.use(ErrorMiddleware())
-//    app.middleware.use(SlowdownMiddleware())
+    //    app.middleware.use(ErrorMiddleware())
+    //    app.middleware.use(SlowdownMiddleware())
+
+    if Environment.get("EXPERIMENTAL_CORS") {
+        app.middleware.use(
+            CORSMiddleware(
+                configuration: CORSMiddleware.Configuration(
+                    allowedOrigin: .all,
+                    allowedMethods: [.GET, .POST, .PUT, .OPTIONS, .DELETE, .PATCH],
+                    allowedHeaders: [.accept, .authorization, .contentType, .origin, .xRequestedWith, .userAgent, .accessControlAllowOrigin]
+                )
+            ),
+            at: .beginning)
+    }
 
     try routes(app)
 }

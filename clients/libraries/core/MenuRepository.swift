@@ -5,8 +5,7 @@ import Spyable
 import SwiftlyHttp
 
 // Kept temporarily for restaurant app
-public func buildMenuRepository(url: String, authenticationProvider: AuthenticationProvider? = nil)
-    -> MenuRepository {
+public func buildMenuRepository(url: String, authenticationProvider: AuthenticationProvider? = nil) -> MenuRepository {
     MenuRepositoryImp(baseURL: url, authenticationProvider: authenticationProvider)
 }
 

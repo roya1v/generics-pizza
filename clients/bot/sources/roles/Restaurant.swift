@@ -32,19 +32,12 @@ struct Restaurant: AsyncParsableCommand {
             )
         )
 
-        let cancellable = orderRepository
-            .getFeed()
-            .receive(on: DispatchQueue.main)
-            .sink { _ in
-
-            } receiveValue: { message in
-                switch message {
-                case .newOrder(let order):
-                    handleOrder(order, orderRepository: orderRepository)
-                }
+        for await message in orderRepository.getFeed().assertNoFailure().stream {
+            switch message {
+            case .newOrder(let order):
+                handleOrder(order, orderRepository: orderRepository)
             }
-
-        try await Task.sleep(for: .seconds(9_999_999))
+        }
     }
 
     private func handleOrder(_ order: OrderModel,

@@ -12,10 +12,8 @@ public enum OrderError: Error {
 }
 
 public protocol OrderRepository {
-    func checkPrice(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws
-        -> [SubtotalModel]
-    func placeOrder(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws
-        -> OrderModel
+    func checkPrice(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws -> [SubtotalModel]
+    func placeOrder(for items: [OrderModel.Item], destination: OrderModel.Destination) async throws -> OrderModel
     func trackOrder(_ order: OrderModel) -> AnyPublisher<CustomerFromServerMessage, Error>
 }
 

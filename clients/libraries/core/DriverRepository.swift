@@ -10,10 +10,6 @@ public func buildDriverRepository(
     DriverRepositoryImpl(baseURL: url, authenticationProvider: authenticationProvider)
 }
 
-public func mockDriverRepository() -> DriverRepository {
-    fatalError("Not yet implemented")
-}
-
 public protocol DriverRepository {
     func getFeed() -> AnyPublisher<DriverFromServerMessage, Error>
     func send(_ message: DriverToServerMessage) async throws

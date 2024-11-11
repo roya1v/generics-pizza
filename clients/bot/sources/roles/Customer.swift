@@ -2,7 +2,9 @@ import ArgumentParser
 import Foundation
 import GenericsCore
 import SharedModels
-@preconcurrency import Combine
+
+private let menuRepository = buildMenuRepository(url: baseUrl)
+private let orderRepository = buildOrderRepository(url: baseUrl)
 
 struct Customer: AsyncParsableCommand {
 
@@ -16,42 +18,8 @@ struct Customer: AsyncParsableCommand {
     var delivery: Bool = false
 
     func run() async throws {
-        let menuRepository = buildMenuRepository(url: baseUrl)
+        let order = try await placeOrder()
 
-        print("Fetching menu:")
-        let menuItems = try await menuRepository.fetchMenu()
-        print("Fetched \(menuItems.count) items")
-
-        print("Choosing random item for oder:")
-        let item = menuItems.shuffled().first!
-        print(item)
-
-        let orderRepository = buildOrderRepository(url: baseUrl)
-
-        let destination: OrderModel.Destination
-
-        if delivery {
-            destination = .delivery(
-                .init(
-                    street: "",
-                    floor: 1,
-                    appartment: "",
-                    comment: "",
-                    coordinates: .init(
-                        latitude: 0.0,
-                        longitude: 0.0
-                    )
-                )
-            )
-        } else {
-            destination = .pickUp
-        }
-
-        print("Placing order...")
-        let order = try await orderRepository.placeOrder(
-            for: [OrderModel.Item(menuItem: item, count: 1)],
-            destination: destination
-        )
         if shouldTrack {
             for await message in orderRepository.trackOrder(order).assertNoFailure().stream {
                 print("New message from server:")
@@ -75,19 +43,39 @@ struct Customer: AsyncParsableCommand {
             }
         }
     }
-}
 
-extension Publisher where Failure == Never {
-    public var stream: AsyncStream<Output> {
-        AsyncStream { continuation in
-            let cancellable = self.sink { _ in
-                continuation.finish()
-            } receiveValue: { value in
-                continuation.yield(value)
-            }
-            continuation.onTermination = { _ in
-                cancellable.cancel()
-            }
+    private func placeOrder() async throws -> OrderModel {
+        print("Fetching menu:")
+        let menuItems = try await menuRepository.fetchMenu()
+        print("Fetched \(menuItems.count) items")
+
+        print("Choosing random item for oder:")
+        let item = menuItems.shuffled().first!
+        print(item)
+
+        let destination: OrderModel.Destination
+
+        if delivery {
+            destination = .delivery(
+                .init(
+                    street: "",
+                    floor: 1,
+                    appartment: "",
+                    comment: "",
+                    coordinates: .init(
+                        latitude: 0.0,
+                        longitude: 0.0
+                    )
+                )
+            )
+        } else {
+            destination = .pickUp
         }
+
+        print("Placing order...")
+        return try await orderRepository.placeOrder(
+            for: [OrderModel.Item(menuItem: item, count: 1)],
+            destination: destination
+        )
     }
 }
