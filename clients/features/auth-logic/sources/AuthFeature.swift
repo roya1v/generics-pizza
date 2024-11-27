@@ -4,14 +4,14 @@ import Foundation
 import GenericsCore
 
 @Reducer
-struct AuthFeature {
+public struct AuthFeature {
     @ObservableState
-    enum State: Equatable {
+    public enum State: Equatable {
         case login(LoginFeature.State)
         case createAccount(CreateAccountFeature.State)
     }
 
-    enum Action {
+    public enum Action {
         case login(LoginFeature.Action)
         case createAccount(CreateAccountFeature.Action)
     }
@@ -19,7 +19,9 @@ struct AuthFeature {
     @Injected(\.authenticationRepository)
     var repository
 
-    var body: some ReducerOf<Self> {
+    public init() { }
+
+    public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
             case .login(.goToCreateAccountTapped):

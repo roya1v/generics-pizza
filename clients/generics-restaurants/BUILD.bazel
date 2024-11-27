@@ -29,6 +29,7 @@ swift_library(
     ]),
     deps = [
         "//:SharedModels",
+        "//clients/features/auth-logic:AuthLogic",
         "//clients/libraries:GenericsCore",
         "//clients/libraries:GenericsHelpers",
         "@swiftpkg_factory//:Factory",

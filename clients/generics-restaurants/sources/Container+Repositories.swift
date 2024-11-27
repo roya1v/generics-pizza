@@ -1,13 +1,9 @@
 import Factory
 import Foundation
 import GenericsCore
+import AuthLogic
 
 extension Container {
-    var authenticationRepository: Factory<AuthenticationRepository> {
-        self { buildAuthenticationRepository(url: self.serverUrl()) }
-            .singleton
-    }
-
     var orderRestaurantRepository: Factory<OrderRestaurantRepository> {
         self {
             buildOrderRestaurantRepository(

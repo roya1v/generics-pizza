@@ -2,6 +2,7 @@ import ComposableArchitecture
 import Factory
 import Foundation
 import GenericsCore
+import AuthLogic
 
 @Reducer
 struct AppFeature {

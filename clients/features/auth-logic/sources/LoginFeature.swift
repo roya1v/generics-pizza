@@ -3,16 +3,18 @@ import ComposableArchitecture
 import Factory
 
 @Reducer
-struct LoginFeature {
+public struct LoginFeature {
     @ObservableState
-    struct State: Equatable {
-        var isLoading = false
-        var errorMessage: String?
-        var email = ""
-        var password = ""
+    public struct State: Equatable {
+        public var isLoading = false
+        public var errorMessage: String?
+        public var email = ""
+        public var password = ""
+
+        public init() { }
     }
 
-    enum Action: BindableAction {
+    public enum Action: BindableAction {
         case loginTapped
         case loginCompleted(Error?)
         case goToCreateAccountTapped
@@ -22,7 +24,9 @@ struct LoginFeature {
     @Injected(\.authenticationRepository)
     var repository
 
-    var body: some ReducerOf<Self> {
+    public init() { }
+
+    public var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce { state, action in
             switch action {
