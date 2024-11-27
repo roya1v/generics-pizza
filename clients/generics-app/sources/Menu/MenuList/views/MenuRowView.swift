@@ -48,7 +48,7 @@ struct MenuRowView: View {
                         Text(store.item.formattedPrice())
                             .font(.caption)
                     }
-                    .buttonStyle(GPrimaryButtonStyle())
+                    .buttonStyle(GPrimaryPillButtonStyle())
                 }
             }
             .onTapGesture {

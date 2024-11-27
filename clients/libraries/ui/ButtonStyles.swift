@@ -16,6 +16,21 @@ public struct GPrimaryButtonStyle: ButtonStyle {
     }
 }
 
+public struct GPrimaryPillButtonStyle: ButtonStyle {
+
+    public init() { }
+
+    public func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(.gNormal)
+            .background(Color.gAccent)
+            .foregroundStyle(.white)
+            .clipShape(Capsule())
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
+            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
+    }
+}
+
 public struct GLinkButtonStyle: ButtonStyle {
 
     public enum Style: Equatable {
