@@ -1,7 +1,6 @@
 load("@build_bazel_rules_apple//apple:apple.bzl", "local_provisioning_profile")
 load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
-load("@rules_xcodeproj//xcodeproj:defs.bzl", "xcode_provisioning_profile")
 
 swift_library(
     name = "generics-app",
@@ -25,7 +24,7 @@ ios_application(
     ],
     infoplists = ["Info.plist"],
     minimum_os_version = "16.4",
-    provisioning_profile = ":xcode_profile",
+    provisioning_profile = ":the_profile",
     resources = glob(["resources/**/*"]),
     visibility = ["//visibility:public"],
     deps = [":generics-app"],
@@ -34,12 +33,4 @@ ios_application(
 local_provisioning_profile(
     name = "the_profile",
     profile_name = "iOS Team Provisioning Profile: com.roya1v.GenericsApp",
-    team_id = "1234567898",
-)
-
-xcode_provisioning_profile(
-    name = "xcode_profile",
-    managed_by_xcode = True,
-    provisioning_profile = ":the_profile",
-    team_id = "1234567898",
 )
