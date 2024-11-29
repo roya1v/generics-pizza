@@ -1,4 +1,5 @@
 import ComposableArchitecture
+import AuthLogic
 
 @Reducer
 struct AppFeature {
@@ -31,8 +32,12 @@ struct AppFeature {
                     state = .auth(LoginFeature.State())
                 }
                 return .none
-            case .auth(.loginCompleted(.success)):
-                state = .dashboard
+            case .auth(.loginCompleted(let error)):
+                if let error {
+
+                } else {
+                    state = .dashboard
+                }
                 return .none
             case .auth:
                 return .none

@@ -8,6 +8,7 @@ swift_library(
     srcs = glob(["sources/**/*.swift"]),
     deps = [
         "//:SharedModels",
+        "//clients/features/auth-logic:AuthLogic",
         "//clients/libraries:GenericsCore",
         "//clients/libraries:GenericsHelpers",
         "//clients/libraries:GenericsUI",
@@ -33,12 +34,12 @@ ios_application(
 local_provisioning_profile(
     name = "the_profile",
     profile_name = "iOS Team Provisioning Profile: com.roya1v.GenericsDriver",
-    team_id = "1234567898",
+    team_id = "4S3J7NRC9R",
 )
 
 xcode_provisioning_profile(
     name = "xcode_profile",
     managed_by_xcode = True,
     provisioning_profile = ":the_profile",
-    team_id = "1234567898",
+    team_id = "4S3J7NRC9R",
 )
