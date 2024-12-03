@@ -15,7 +15,11 @@ struct ContentView: View {
                         store.send(.appeared)
                     }
             case .dashboard:
-                Text("Hello world")
+                if let store = store.scope(
+                    state: \.dashboard,
+                    action: \.dashboard) {
+                    DashboardView(store: store)
+                }
             case .auth:
                 if let store = store.scope(
                     state: \.auth,
