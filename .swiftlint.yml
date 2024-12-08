@@ -4,6 +4,8 @@ excluded:
 
 force_try: warning
 force_cast: warning
+line_length:
+  severety: warning
 disabled_rules: 
   - nesting
   - identifier_name
