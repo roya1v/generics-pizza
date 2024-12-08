@@ -4,20 +4,13 @@ import MapKit
 
 struct DashboardView: View {
 
-    let store: StoreOf<DashboardFeature>
+    @Perception.Bindable
+    var store: StoreOf<DashboardFeature>
 
     var body: some View {
         WithPerceptionTracking {
             Map(
-                coordinateRegion: .constant(
-                    MKCoordinateRegion(
-                        center: restaurantCoordinates,
-                        span: MKCoordinateSpan(
-                            latitudeDelta: 0.01,
-                            longitudeDelta: 0.01
-                        )
-                    )
-                )
+                coordinateRegion: $store.mapRegion.sending(\.mapMoved)
             )
             .ignoresSafeArea()
         }
@@ -36,7 +29,7 @@ struct DashboardView: View {
     @ViewBuilder
     var sheetContent: some View {
         WithPerceptionTracking {
-            switch store.state {
+            switch store.state.order {
             case .idle:
                 Text("Waiting for an order")
             case .incommingOffer:
