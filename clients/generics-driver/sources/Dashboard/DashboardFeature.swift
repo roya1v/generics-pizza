@@ -11,8 +11,8 @@ struct DashboardFeature {
     @ObservableState
     enum State: Equatable {
         case idle
-        case incommingOffer(OrderModel.ID)
-        case delivering(OrderModel.ID)
+        case incommingOffer(OrderModel)
+        case delivering(OrderModel)
 
         init() {
             self = .idle
@@ -20,11 +20,15 @@ struct DashboardFeature {
     }
 
     enum Action {
+        // View
         case appeared
         case acceptOffer
-        case orderDelivered
+        case orderDeliveredTapped
 
+        // Internal
         case newServerMessage(DriverFromServerMessage)
+        case orderAccepted(OrderModel)
+        case orderDelivered
         case receivedError(Error)
     }
 
@@ -46,24 +50,31 @@ struct DashboardFeature {
                         .receive(on: DispatchQueue.main)
                 }
             case .newServerMessage(.offerOrder(let order)):
-                state = .incommingOffer(order.id)
+                state = .incommingOffer(order)
                 return .none
             case .acceptOffer:
-                guard case let .incommingOffer(id) = state else {
+                guard case let .incommingOffer(order) = state else {
                     return .none
                 }
-                state = .delivering(id)
-                return .run { [id] send in
-                    try await repository.send(.acceptOrder(id))
+                return .run { [order] send in
+                    try await repository.send(.acceptOrder(order.id))
+                    await send(.orderAccepted(order))
+                }
+            case .orderAccepted(let order):
+                state = .delivering(order)
+                return .none
+            case .orderDeliveredTapped:
+                guard case let .delivering(order) = state else {
+                    return .none
+                }
+
+                return .run { [order] send in
+                    try await repository.send(.delivered(order.id))
+                    await send(.orderDelivered)
                 }
             case .orderDelivered:
-                guard case let .delivering(id) = state else {
-                    return .none
-                }
                 state = .idle
-                return .run { [id] send in
-                    try await repository.send(.delivered(id))
-                }
+                return .none
             case .receivedError(let error):
                 print("Error happened \(error)")
                 return .none

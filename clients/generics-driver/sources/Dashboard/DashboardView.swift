@@ -16,7 +16,7 @@ struct DashboardView: View {
                 }
             case .delivering:
                 Button("Delivery complete") {
-                    store.send(.orderDelivered)
+                    store.send(.orderDeliveredTapped)
                 }
             }
         }
