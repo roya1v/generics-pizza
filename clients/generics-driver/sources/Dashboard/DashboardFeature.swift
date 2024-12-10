@@ -20,6 +20,19 @@ struct DashboardFeature {
             )
         )
 
+        var restaurantPin = MapPin(coordinate: restaurantCoordinates, kind: .restaurant)
+
+        // TODO: Change to stored property
+        var clientPin: MapPin? {
+            if case let .incommingOffer(orderModel) = order,
+               case let .delivery(address) = orderModel.destination {
+                return MapPin(coordinate: .init(latitude: address.coordinates.latitude, longitude: address.coordinates.longitude), kind: .client)
+
+            } else {
+                return nil
+            }
+        }
+
         var order = OrderState.idle
 
         enum OrderState: Equatable {
@@ -29,6 +42,19 @@ struct DashboardFeature {
 
             init() {
                 self = .idle
+            }
+        }
+
+        struct MapPin: Equatable, Identifiable {
+            let coordinate: CLLocationCoordinate2D
+            let kind: Kind
+
+            var id: Kind {
+                kind
+            }
+
+            enum Kind {
+                case restaurant, client
             }
         }
     }

@@ -10,8 +10,16 @@ struct DashboardView: View {
     var body: some View {
         WithPerceptionTracking {
             Map(
-                coordinateRegion: $store.mapRegion.sending(\.mapMoved)
-            )
+                coordinateRegion: $store.mapRegion.sending(\.mapMoved),
+                annotationItems: [store.restaurantPin, store.clientPin].compactMap(\.self)
+            ) { pin in
+                switch pin.kind {
+                case .client:
+                    MapMarker(coordinate: pin.coordinate, tint: .black)
+                case .restaurant:
+                    MapMarker(coordinate: pin.coordinate, tint: .green)
+                }
+            }
             .ignoresSafeArea()
         }
         .sheet(isPresented: .constant(true)) {
