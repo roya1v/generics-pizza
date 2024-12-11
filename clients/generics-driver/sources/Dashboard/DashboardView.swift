@@ -8,26 +8,37 @@ struct DashboardView: View {
     var store: StoreOf<DashboardFeature>
 
     var body: some View {
-        WithPerceptionTracking {
-            ZStack(alignment: .bottom) {
-                Map(
-                    coordinateRegion: $store.mapRegion.sending(\.mapMoved),
-                    annotationItems: [store.restaurantPin, store.clientPin].compactMap(\.self)
-                ) { pin in
-                    switch pin.kind {
-                    case .client:
-                        MapMarker(coordinate: pin.coordinate, tint: .black)
-                    case .restaurant:
-                        MapMarker(coordinate: pin.coordinate, tint: .green)
+        NavigationStack {
+            WithPerceptionTracking {
+                ZStack(alignment: .topTrailing) {
+                    ZStack(alignment: .bottom) {
+                        Map(
+                            coordinateRegion: $store.mapRegion.sending(\.mapMoved),
+                            annotationItems: [store.restaurantPin, store.clientPin].compactMap(\.self)
+                        ) { pin in
+                            switch pin.kind {
+                            case .client:
+                                MapMarker(coordinate: pin.coordinate, tint: .black)
+                            case .restaurant:
+                                MapMarker(coordinate: pin.coordinate, tint: .green)
+                            }
+                        }
+                        .ignoresSafeArea()
+                        DetailsTile(store: store.scope(state: \.detailsTile, action: \.detailsTile))
+                            .padding()
+                    }
+                    Button("Profile") {
+                        store.send(.profileTapped)
                     }
                 }
-                .ignoresSafeArea()
-                DetailsTile(store: store.scope(state: \.detailsTile, action: \.detailsTile))
-                    .padding()
+
             }
-        }
-        .task {
-            store.send(.appeared)
+            .navigationDestination(item: $store.scope(state: \.profile, action: \.profile)) { childStore in
+                ProfileView(store: childStore)
+            }
+            .task {
+                store.send(.appeared)
+            }
         }
     }
 }

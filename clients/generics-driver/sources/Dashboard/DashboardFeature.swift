@@ -12,6 +12,9 @@ struct DashboardFeature {
 
     @ObservableState
     struct State: Equatable {
+        @Presents var profile: ProfileFeature.State?
+
+
         var mapRegion: MKCoordinateRegion = .init(
             center: restaurantCoordinates,
             span: .init(
@@ -54,9 +57,11 @@ struct DashboardFeature {
         // View
         case appeared
         case mapMoved(MKCoordinateRegion)
+        case profileTapped
 
         // Child
         case detailsTile(DetailsTileFeature.Action)
+        case profile(PresentationAction<ProfileFeature.Action>)
 
         // Internal
         case newServerMessage(DriverFromServerMessage)
@@ -123,11 +128,19 @@ struct DashboardFeature {
             case .receivedError(let error):
                 print("Error happened \(error)")
                 return .none
+            case .profileTapped:
+                state.profile = ProfileFeature.State()
+                return .none
             case .mapMoved:
                 return .none
             case .detailsTile:
                 return .none
+            case .profile:
+                return .none
             }
+        }
+        .ifLet(\.$profile, action: \.profile) {
+            ProfileFeature()
         }
     }
 }

@@ -41,6 +41,9 @@ struct AppFeature {
             case .auth(.loginCompleted(.none)):
                 state = .dashboard(DashboardFeature.State())
                 return .none
+            case .dashboard(.profile(.presented(.loggedOut(.success)))):
+                state = .auth(LoginFeature.State())
+                return .none
             case .auth:
                 return .none
             case .dashboard:
