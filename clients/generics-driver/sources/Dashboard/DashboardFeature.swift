@@ -24,8 +24,8 @@ struct DashboardFeature {
 
         // TODO: Change to stored property
         var clientPin: MapPin? {
-            if case let .incommingOffer(orderModel) = order,
-               case let .delivery(address) = orderModel.destination {
+            if let order,
+               case let .delivery(address) = order.destination {
                 return MapPin(coordinate: .init(latitude: address.coordinates.latitude, longitude: address.coordinates.longitude), kind: .client)
 
             } else {
@@ -33,17 +33,8 @@ struct DashboardFeature {
             }
         }
 
-        var order = OrderState.idle
-
-        enum OrderState: Equatable {
-            case idle
-            case incommingOffer(OrderModel)
-            case delivering(OrderModel)
-
-            init() {
-                self = .idle
-            }
-        }
+        var detailsTile = DetailsTileFeature.State.idle
+        var order: OrderModel?
 
         struct MapPin: Equatable, Identifiable {
             let coordinate: CLLocationCoordinate2D
@@ -62,9 +53,10 @@ struct DashboardFeature {
     enum Action {
         // View
         case appeared
-        case acceptOffer
-        case orderDeliveredTapped
         case mapMoved(MKCoordinateRegion)
+
+        // Child
+        case detailsTile(DetailsTileFeature.Action)
 
         // Internal
         case newServerMessage(DriverFromServerMessage)
@@ -91,40 +83,49 @@ struct DashboardFeature {
                         .receive(on: DispatchQueue.main)
                 }
             case .newServerMessage(.offerOrder(let order)):
-                state.order = .incommingOffer(order)
                 guard case let .delivery(address) = order.destination else {
                     return .none
                 }
                 state.mapRegion.center.latitude = address.coordinates.latitude
                 state.mapRegion.center.longitude = address.coordinates.longitude
+                state.detailsTile = .offerOrder(details: "\(address)")
+                state.order = order
                 return .none
-            case .acceptOffer:
-                guard case let .incommingOffer(order) = state.order else {
-                    return .none
+            case .detailsTile(.buttonTapped):
+                guard let order = state.order else {
+                    fatalError("You can't tap any buttons without an order!")
                 }
-                return .run { [order] send in
-                    try await repository.send(.acceptOrder(order.id))
-                    await send(.orderAccepted(order))
+                switch state.detailsTile {
+                case .idle:
+                    fatalError("You can't tap any buttons when idle!")
+                case .offerOrder:
+                    return .run { [order] send in
+                        try await repository.send(.acceptOrder(order.id))
+                        await send(.orderAccepted(order))
+                    }
+                case .delivering:
+                    return .run { [order] send in
+                        try await repository.send(.delivered(order.id))
+                        await send(.orderDelivered)
+                    }
                 }
+                return .none
             case .orderAccepted(let order):
-                state.order = .delivering(order)
-                return .none
-            case .orderDeliveredTapped:
-                guard case let .delivering(order) = state.order else {
+                guard case let .delivery(address) = order.destination else {
                     return .none
                 }
-
-                return .run { [order] send in
-                    try await repository.send(.delivered(order.id))
-                    await send(.orderDelivered)
-                }
+                state.detailsTile = .delivering(details: "\(address)")
+                return .none
             case .orderDelivered:
-                state.order = .idle
+                state.detailsTile = .idle
+                state.order = nil
                 return .none
             case .receivedError(let error):
                 print("Error happened \(error)")
                 return .none
             case .mapMoved:
+                return .none
+            case .detailsTile:
                 return .none
             }
         }
@@ -143,7 +144,7 @@ extension CLLocationCoordinate2D: @retroactive Equatable {
     }
 }
 
-extension MKCoordinateSpan: @retroactive Equatable {
+extension MKCoordinateSpan:  @retroactive Equatable {
     public static func == (lhs: MKCoordinateSpan, rhs: MKCoordinateSpan) -> Bool {
         lhs.longitudeDelta == rhs.longitudeDelta && lhs.latitudeDelta == rhs.latitudeDelta
     }
