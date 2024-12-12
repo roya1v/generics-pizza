@@ -58,13 +58,13 @@ struct Customer: AsyncParsableCommand {
         if delivery {
             destination = .delivery(
                 .init(
-                    street: "",
-                    floor: 1,
-                    appartment: "",
-                    comment: "",
+                    street: "Bagno 2c",
+                    floor: 0,
+                    appartment: "2",
+                    comment: "Intercom doesn't work",
                     coordinates: .init(
-                        latitude: 0.0,
-                        longitude: 0.0
+                        latitude: 52.2358652,
+                        longitude: 21.0055067
                     )
                 )
             )

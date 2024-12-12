@@ -14,7 +14,6 @@ struct DashboardFeature {
     struct State: Equatable {
         @Presents var profile: ProfileFeature.State?
 
-
         var mapRegion: MKCoordinateRegion = .init(
             center: restaurantCoordinates,
             span: .init(
@@ -24,17 +23,7 @@ struct DashboardFeature {
         )
 
         var restaurantPin = MapPin(coordinate: restaurantCoordinates, kind: .restaurant)
-
-        // TODO: Change to stored property
-        var clientPin: MapPin? {
-            if let order,
-               case let .delivery(address) = order.destination {
-                return MapPin(coordinate: .init(latitude: address.coordinates.latitude, longitude: address.coordinates.longitude), kind: .client)
-
-            } else {
-                return nil
-            }
-        }
+        var clientPin: MapPin?
 
         var detailsTile = DetailsTileFeature.State.idle
         var order: OrderModel?
@@ -120,6 +109,12 @@ struct DashboardFeature {
                     return .none
                 }
                 state.detailsTile = .delivering(details: "\(address)")
+                state.clientPin = State.MapPin(
+                    coordinate: .init(
+                        latitude: address.coordinates.latitude,
+                        longitude: address.coordinates.longitude),
+                    kind: .client
+                )
                 return .none
             case .orderDelivered:
                 state.detailsTile = .idle

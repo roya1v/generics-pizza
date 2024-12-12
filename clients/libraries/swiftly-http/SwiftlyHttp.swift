@@ -184,6 +184,7 @@ public class SwiftlyHttp {
     ///  - Returns: A tuple of `Data` and `URLResponse`. Same way as an `URLRequest`.
     @discardableResult
     public func perform() async throws -> (Data, URLResponse) {
+        // TODO: Handle non 2xx responses somehow
         try await urlSession.data(for: await getRequest())
     }
 
