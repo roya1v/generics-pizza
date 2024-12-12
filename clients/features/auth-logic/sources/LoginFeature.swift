@@ -40,10 +40,10 @@ public struct LoginFeature {
                 return .run { [state] send in
                     do {
                         try await repository.login(email: state.email, password: state.password)
+                        await send(.loginCompleted(nil))
                     } catch {
                         await send(.loginCompleted(error))
                     }
-                    await send(.loginCompleted(nil))
                 }
             case .loginCompleted(let error):
                 state.isLoading = false

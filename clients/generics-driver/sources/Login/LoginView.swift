@@ -39,6 +39,11 @@ struct LoginView: View {
                     .background(.thinMaterial)
                 }
             }
+            .alert("Error!", isPresented: Binding($store.errorMessage)) {
+                Button("Ok", role: .cancel) { }
+            } message: {
+                Text(store.errorMessage ?? "")
+            }
         }
     }
 }
