@@ -48,7 +48,7 @@ struct DetailsTile: View {
         }
         .padding()
         .background {
-            RoundedRectangle(cornerRadius: .gBig)
+            RoundedRectangle(cornerRadius: .gM)
                 .fill(.background)
         }
     }

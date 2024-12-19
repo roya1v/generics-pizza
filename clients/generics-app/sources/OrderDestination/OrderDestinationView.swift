@@ -30,7 +30,7 @@ struct OrderDestinationView: View {
                     } label: {
                         Image(systemName: "xmark")
                             .foregroundStyle(Color.white)
-                            .padding(.gNormal)
+                            .padding(.gXS)
                             .background(Circle().fill(Color.gAccent))
                     }
                     Picker(
@@ -44,7 +44,7 @@ struct OrderDestinationView: View {
                     }
                     .pickerStyle(.segmented)
                 }
-                .padding(.gBig)
+                .padding(.gM)
             }
             .sheet(isPresented: .constant(true)) {
                 form

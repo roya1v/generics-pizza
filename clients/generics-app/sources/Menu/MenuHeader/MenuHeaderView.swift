@@ -25,7 +25,7 @@ struct MenuHeaderView: View {
                                     ? .active
                                     : .inactive)
                             )
-                            .padding(.gNormal)
+                            .padding(.gXS)
                         }
                     }
                 }

@@ -110,7 +110,7 @@ struct MenuDetailView: View {
                     } label: {
                         Image(systemName: "xmark")
                             .foregroundStyle(Color.white)
-                            .padding(.gNormal)
+                            .padding(.gXS)
                             .background(Circle().fill(Color.gAccent))
                     }
                 }

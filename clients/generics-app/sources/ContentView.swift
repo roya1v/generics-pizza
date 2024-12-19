@@ -34,7 +34,7 @@ struct ContentView: View {
                             Text("Cart")
                             Image(systemName: "cart")
                         }
-                        .padding(.gNormal)
+                        .padding(.gXS)
                     }
                     .buttonStyle(GPrimaryButtonStyle())
                     .padding()
@@ -47,7 +47,7 @@ struct ContentView: View {
                             Text("Track order")
                             Image(systemName: "cart")
                         }
-                        .padding(.gNormal)
+                        .padding(.gXS)
                     }
                     .buttonStyle(GPrimaryButtonStyle())
                     .padding()

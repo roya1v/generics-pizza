@@ -12,7 +12,7 @@ struct MenuView: View {
     var body: some View {
         WithPerceptionTracking {
             ZStack {
-                RoundedRectangle(cornerRadius: .gBig)
+                RoundedRectangle(cornerRadius: .gM)
                     .fill(Color.white)
                     .ignoresSafeArea()
 
