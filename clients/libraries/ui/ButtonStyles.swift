@@ -7,7 +7,7 @@ public struct GPrimaryButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(maxWidth: .infinity)
-            .padding(.gBig)
+            .padding(.gXS)
             .background(Color.gAccent)
             .foregroundStyle(.white)
             .clipShape(Capsule())
@@ -22,7 +22,7 @@ public struct GPrimaryPillButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(.gNormal)
+            .padding(.gM)
             .background(Color.gAccent)
             .foregroundStyle(.white)
             .clipShape(Capsule())
