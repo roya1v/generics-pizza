@@ -27,8 +27,12 @@ struct DashboardView: View {
                         DetailsTile(store: store.scope(state: \.detailsTile, action: \.detailsTile))
                             .padding()
                     }
-                    Button("Profile") {
+                    Button {
                         store.send(.profileTapped)
+                    } label: {
+                        AvatarView("JK", size: .compact)
+                            .frame(width: .g2XL)
+                            .padding()
                     }
                 }
 

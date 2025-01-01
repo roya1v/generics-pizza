@@ -45,23 +45,4 @@ struct ProfileView: View {
     }
 }
 
-struct AvatarView: View {
 
-    let content: String
-
-    init(_ content: String = "") {
-        self.content = content
-    }
-
-    var body: some View {
-        ZStack {
-            Circle()
-                .fill(.blue)
-            Text(content)
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundStyle(.white)
-        }
-
-    }
-}
