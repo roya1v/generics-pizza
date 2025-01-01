@@ -45,7 +45,7 @@ public struct GLinkButtonStyle: ButtonStyle {
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(.gNormal)
+            .padding(.gS)
             .foregroundStyle(style == .active
                              ? Color.gAccent
                              : Color.gInactive)
