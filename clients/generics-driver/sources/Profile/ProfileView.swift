@@ -9,19 +9,20 @@ struct ProfileView: View {
     var body: some View {
         List {
             Section {
+                HStack {
+                    AvatarView("JK")
+                        .frame(width: .g3XL)
+                    VStack(alignment: .leading) {
+                        Text("Jan Kowalski")
+                            .font(.title)
+                        Text("Driver #1234")
+                            .font(.caption)
+                    }
+                }
                 NavigationLink {
                     Text("Hello, world!")
                 } label: {
-                    HStack {
-                        AvatarView("JK")
-                            .frame(width: .g3XL)
-                        VStack(alignment: .leading) {
-                            Text("Jan Kowalski")
-                                .font(.title)
-                            Text("Profile details")
-                                .font(.caption)
-                        }
-                    }
+                    Text("Contact support")
                 }
             }
             Section("Order History") {
