@@ -22,3 +22,5 @@ extension MenuItem.Category: EntryRepresentable, @retroactive Content {
         CategoryEntry(id: id, name: name)
     }
 }
+
+extension DriverDetails: @retroactive Content { }

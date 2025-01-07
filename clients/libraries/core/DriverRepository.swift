@@ -13,6 +13,7 @@ public func buildDriverRepository(
 public protocol DriverRepository {
     func getFeed() -> AnyPublisher<DriverFromServerMessage, Error>
     func send(_ message: DriverToServerMessage) async throws
+    func getDetails() async throws -> DriverDetails
 }
 
 public enum DriverFeedError: Error {
@@ -67,5 +68,13 @@ final class DriverRepositoryImpl: DriverRepository {
         let data = try JSONEncoder().encode(message)
         let string = String(decoding: data, as: UTF8.self)
         try await socket?.send(message: .string(string))
+    }
+
+    func getDetails() async throws -> DriverDetails {
+        try await SwiftlyHttp(baseURL: baseURL)!
+            .add(path: "driver")
+            .add(path: "details")
+            .decode(to: DriverDetails.self)
+            .perform()
     }
 }
