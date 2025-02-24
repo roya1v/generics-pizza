@@ -3,6 +3,8 @@ import Combine
 
 public enum SwiftlyHttpError: Error {
     case badScheme
+    case unexpectedResponse
+    case serverError(Data, URLResponse)
 }
 
 public class SwiftlyHttp {
@@ -184,8 +186,15 @@ public class SwiftlyHttp {
     ///  - Returns: A tuple of `Data` and `URLResponse`. Same way as an `URLRequest`.
     @discardableResult
     public func perform() async throws -> (Data, URLResponse) {
-        // TODO: Handle non 2xx responses somehow
-        try await urlSession.data(for: await getRequest())
+        let (data, response) = try await urlSession.data(for: await getRequest())
+        guard let response = response as? HTTPURLResponse else {
+            throw SwiftlyHttpError.unexpectedResponse
+        }
+
+        guard (200...299).contains(response.statusCode) else {
+            throw SwiftlyHttpError.serverError(data, response)
+        }
+        return (data, response)
     }
 
     private func getRequest() async -> URLRequest {

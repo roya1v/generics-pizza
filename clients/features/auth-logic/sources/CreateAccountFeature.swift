@@ -43,10 +43,10 @@ public struct CreateAccountFeature {
                         try await repository.createAccount(email: state.email,
                                                            password: state.password,
                                                            confirmPassword: state.confirmPassword)
+                        await send(.createAccountCompleted(nil))
                     } catch {
                         await send(.createAccountCompleted(error))
                     }
-                    await send(.createAccountCompleted(nil))
                 }
             case .createAccountCompleted(let error):
                 state.isLoading = false
