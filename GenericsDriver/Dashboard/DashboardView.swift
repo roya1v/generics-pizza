@@ -46,3 +46,31 @@ struct DashboardView: View {
         }
     }
 }
+
+#Preview {
+    DashboardView(
+        store: Store(
+            initialState: DashboardFeature.State(
+                profile: nil,
+                mapRegion: .init(
+                    center: restaurantCoordinates,
+                    latitudinalMeters: 20.0,
+                    longitudinalMeters: 20.0
+                ),
+                restaurantPin: .init(
+                    coordinate: restaurantCoordinates,
+                    kind: .restaurant
+                ),
+                clientPin: .init(
+                    coordinate: restaurantCoordinates,
+                    kind: .client
+                ),
+                detailsTile: DetailsTileFeature.State.offerOrder(
+                    details: "Hello, World!"
+                ),
+                order: nil
+            )
+        ) {
+        EmptyReducer()
+    })
+}
