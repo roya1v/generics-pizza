@@ -6,6 +6,8 @@ import SharedModels
 import Combine
 import Foundation
 import MapKit
+import SwiftUI
+import CoreLocation
 
 @Reducer
 struct DashboardFeature {
@@ -14,16 +16,13 @@ struct DashboardFeature {
     struct State: Equatable {
         @Presents var profile: ProfileFeature.State?
 
-        var mapRegion: MKCoordinateRegion = .init(
-            center: restaurantCoordinates,
-            span: .init(
-                latitudeDelta: 0.01,
-                longitudeDelta: 0.01
-            )
+        var mapPosition = MapCameraPosition.region(
+            MKCoordinateRegion(center: .restaurant, latitudinalMeters: 0.1, longitudinalMeters: 0.1)
         )
 
-        var restaurantPin = MapPin(coordinate: restaurantCoordinates, kind: .restaurant)
-        var clientPin: MapPin?
+        var restaurant: CLLocationCoordinate2D = .restaurant
+        var client: CLLocationCoordinate2D?
+        var route: MKRoute?
 
         var detailsTile = DetailsTileFeature.State.idle
         var order: OrderModel?
@@ -45,7 +44,7 @@ struct DashboardFeature {
     enum Action {
         // View
         case appeared
-        case mapMoved(MKCoordinateRegion)
+        case mapMoved(MapCameraPosition)
         case profileTapped
 
         // Child
@@ -54,6 +53,7 @@ struct DashboardFeature {
 
         // Internal
         case newServerMessage(DriverFromServerMessage)
+        case routeLoaded(MKRoute)
         case orderAccepted(OrderModel)
         case orderDelivered
         case receivedError(Error)
@@ -80,8 +80,9 @@ struct DashboardFeature {
                 guard case let .delivery(address) = order.destination else {
                     return .none
                 }
-                state.mapRegion.center.latitude = address.coordinates.latitude
-                state.mapRegion.center.longitude = address.coordinates.longitude
+                // TODO: Fix
+//                state.mapPosition.camera?.centerCoordinate.latitude = address.coordinates.latitude
+//                state.mapPosition.camera?.centerCoordinate.longitude = address.coordinates.longitude
                 state.detailsTile = .offerOrder(details: "\(address)")
                 state.order = order
                 return .none
@@ -109,12 +110,13 @@ struct DashboardFeature {
                     return .none
                 }
                 state.detailsTile = .delivering(details: "\(address)")
-                state.clientPin = State.MapPin(
-                    coordinate: .init(
-                        latitude: address.coordinates.latitude,
-                        longitude: address.coordinates.longitude),
-                    kind: .client
-                )
+                // TODO: Fix
+//                state.clientPin = State.MapPin(
+//                    coordinate: .init(
+//                        latitude: address.coordinates.latitude,
+//                        longitude: address.coordinates.longitude),
+//                    kind: .client
+//                )
                 return .none
             case .orderDelivered:
                 state.detailsTile = .idle
@@ -125,6 +127,8 @@ struct DashboardFeature {
                 return .none
             case .profileTapped:
                 state.profile = ProfileFeature.State()
+                return .none
+            case .routeLoaded(_):
                 return .none
             case .mapMoved:
                 return .none

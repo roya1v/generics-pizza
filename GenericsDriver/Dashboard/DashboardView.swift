@@ -9,20 +9,9 @@ struct DashboardView: View {
 
     var body: some View {
         NavigationStack {
-            WithPerceptionTracking {
                 ZStack(alignment: .topTrailing) {
                     ZStack(alignment: .bottom) {
-                        Map(
-                            coordinateRegion: $store.mapRegion.sending(\.mapMoved),
-                            annotationItems: [store.restaurantPin, store.clientPin].compactMap(\.self)
-                        ) { pin in
-                            switch pin.kind {
-                            case .client:
-                                MapMarker(coordinate: pin.coordinate, tint: .black)
-                            case .restaurant:
-                                MapMarker(coordinate: pin.coordinate, tint: .green)
-                            }
-                        }
+                        map
                         .ignoresSafeArea()
                         DetailsTile(store: store.scope(state: \.detailsTile, action: \.detailsTile))
                             .padding()
@@ -35,13 +24,30 @@ struct DashboardView: View {
                             .padding()
                     }
                 }
-
-            }
             .navigationDestination(item: $store.scope(state: \.profile, action: \.profile)) { childStore in
                 ProfileView(store: childStore)
             }
             .task {
                 store.send(.appeared)
+            }
+        }
+    }
+
+    private var map: some View {
+        Map(position: $store.mapPosition.sending(\.mapMoved)) {
+            Marker(coordinate: store.restaurant) {
+                Image(systemName: "fork.knife")
+            }
+
+            if let client = store.client {
+                Marker(coordinate: client) {
+                    Image(systemName: "flag.pattern.checkered")
+                }
+                .tint(.black)
+            }
+            if let route = store.route {
+                MapPolyline(route.polyline)
+                    .stroke(.blue, lineWidth: 5)
             }
         }
     }
@@ -52,25 +58,41 @@ struct DashboardView: View {
         store: Store(
             initialState: DashboardFeature.State(
                 profile: nil,
-                mapRegion: .init(
-                    center: restaurantCoordinates,
-                    latitudinalMeters: 20.0,
-                    longitudinalMeters: 20.0
+                mapPosition: .region(
+                    .init(
+                        center: .restaurant,
+                        latitudinalMeters: 1000.0,
+                        longitudinalMeters: 1000.0
+                    )
                 ),
-                restaurantPin: .init(
-                    coordinate: restaurantCoordinates,
-                    kind: .restaurant
-                ),
-                clientPin: .init(
-                    coordinate: restaurantCoordinates,
-                    kind: .client
-                ),
+                restaurant: .restaurant,
+                client: .client,
+                route: nil,
                 detailsTile: DetailsTileFeature.State.offerOrder(
                     details: "Hello, World!"
                 ),
                 order: nil
             )
         ) {
-        EmptyReducer()
+            Reduce<DashboardFeature.State, DashboardFeature.Action> { state, action in
+                switch action {
+                case .appeared:
+                    return .run { send in
+                        let request = MKDirections.Request()
+                        request.source = .init(placemark: .init(coordinate: .restaurant))
+                        request.destination = .init(placemark: .init(coordinate: .client))
+                        request.transportType = .any
+                        let directions = MKDirections(request: request)
+                               let response = try? await directions.calculate()
+                               let route = response!.routes.first!
+                        await send(.routeLoaded(route))
+                    }
+                case .routeLoaded(let route):
+                    state.route = route
+                    return .none
+                default:
+                    return .none
+                }
+            }
     })
 }
