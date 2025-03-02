@@ -18,7 +18,7 @@ struct DetailsTileFeature {
 
 struct DetailsTile: View {
 
-    @Perception.Bindable
+    @Bindable
     var store: StoreOf<DetailsTileFeature>
 
     var body: some View {

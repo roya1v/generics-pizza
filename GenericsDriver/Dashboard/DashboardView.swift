@@ -4,7 +4,7 @@ import MapKit
 
 struct DashboardView: View {
 
-    @Perception.Bindable
+    @Bindable
     var store: StoreOf<DashboardFeature>
 
     var body: some View {

@@ -5,7 +5,7 @@ import AuthLogic
 
 struct LoginView: View {
 
-    @Perception.Bindable
+    @Bindable
     var store: StoreOf<LoginFeature>
 
     var body: some View {
