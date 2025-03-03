@@ -38,7 +38,7 @@ struct AppFeature {
                     state = .welcome(.auth(LoginFeature.State()))
                 }
                 return .none
-            case .welcome(.auth(.loginCompleted(.none))):
+            case .welcome(.permissions(.authorizationChanged(.authorizedWhenInUse))):
                 state = .dashboard(DashboardFeature.State())
                 return .none
             case .dashboard(.profile(.presented(.loggedOut(.success)))):
