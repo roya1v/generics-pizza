@@ -30,6 +30,7 @@ struct DashboardView: View {
             .task {
                 store.send(.appeared)
             }
+            .toolbar(.hidden)
         }
     }
 
@@ -38,6 +39,7 @@ struct DashboardView: View {
             Marker(coordinate: store.restaurant) {
                 Image(systemName: "fork.knife")
             }
+            UserAnnotation()
 
             if let client = store.client {
                 Marker(coordinate: client) {
