@@ -9,20 +9,18 @@ struct LoginView: View {
     var store: StoreOf<LoginFeature>
 
     var body: some View {
-        WithPerceptionTracking {
             ZStack {
                 GradientBackgroundView()
                     .ignoresSafeArea()
-                VStack {
-                    Text("Welcome Driver!")
-                        .font(.system(size: 32.0, weight: .bold))
-
                     VStack {
+                        Text("Welcome Driver!")
+                            .font(.system(size: 32.0, weight: .bold))
+                        Text("Login in using your credentials to start delivering the most generic pizza!")
+                            .multilineTextAlignment(.center)
                         TextField("Login", text: $store.email)
                             .textFieldStyle(GPrimary())
                         SecureField("Password", text: $store.password)
                             .textFieldStyle(GPrimary())
-                        Spacer()
                         Button {
                             store.send(.loginTapped)
                         } label: {
@@ -34,16 +32,33 @@ struct LoginView: View {
                             }
                         }
                         .buttonStyle(GPrimaryButtonStyle())
+                        Button("Forgot password") {
+
+                        }
+                        .buttonStyle(GLinkButtonStyle())
                     }
                     .padding()
-                    .background(.thinMaterial)
-                }
+                    .background(
+                        RoundedRectangle(
+                            cornerRadius: 32.0)
+                        .fill(.thinMaterial)
+                    )
+                    .padding()
+
             }
             .alert("Error!", isPresented: Binding($store.errorMessage)) {
                 Button("Ok", role: .cancel) { }
             } message: {
                 Text(store.errorMessage ?? "")
             }
-        }
     }
+}
+
+#Preview {
+    LoginView(
+        store: Store(
+            initialState: LoginFeature.State()
+        ) {
+        EmptyReducer()
+    })
 }

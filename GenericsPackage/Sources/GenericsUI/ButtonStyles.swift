@@ -7,7 +7,7 @@ public struct GPrimaryButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(maxWidth: .infinity)
-            .padding(.gXS)
+            .padding(.gM)
             .background(Color.gAccent)
             .foregroundStyle(.white)
             .clipShape(Capsule())
@@ -50,4 +50,14 @@ public struct GLinkButtonStyle: ButtonStyle {
                              ? Color.gAccent
                              : Color.gInactive)
     }
+}
+
+#Preview {
+    VStack {
+        Button("Hello, World!") {
+
+        }
+        .buttonStyle(GPrimaryButtonStyle())
+    }
+    .padding()
 }
