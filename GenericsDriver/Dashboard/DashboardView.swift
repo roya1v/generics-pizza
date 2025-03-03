@@ -83,11 +83,17 @@ struct DashboardView: View {
                         request.destination = .init(placemark: .init(coordinate: .client))
                         request.transportType = .any
                         let directions = MKDirections(request: request)
-                               let response = try? await directions.calculate()
-                               let route = response!.routes.first!
-                        await send(.routeLoaded(route))
+                        let response = try? await directions.calculate()
+                        let route = response!.routes.first!
+                        await send(
+                            .newOrder(
+                                details: "Hello, World!",
+                                client: .client,
+                                route: route
+                            )
+                        )
                     }
-                case .routeLoaded(let route):
+                case .newOrder(let details, let client, let route):
                     state.route = route
                     return .none
                 default:

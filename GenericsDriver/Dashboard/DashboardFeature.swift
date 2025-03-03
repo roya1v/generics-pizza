@@ -53,7 +53,7 @@ struct DashboardFeature {
 
         // Internal
         case newServerMessage(DriverFromServerMessage)
-        case routeLoaded(MKRoute)
+        case newOrder(details: String, client: CLLocationCoordinate2D, route: MKRoute?)
         case orderAccepted(OrderModel)
         case orderDelivered
         case receivedError(Error)
@@ -77,15 +77,26 @@ struct DashboardFeature {
                         .receive(on: DispatchQueue.main)
                 }
             case .newServerMessage(.offerOrder(let order)):
-                guard case let .delivery(address) = order.destination else {
-                    return .none
-                }
-                // TODO: Fix
-//                state.mapPosition.camera?.centerCoordinate.latitude = address.coordinates.latitude
-//                state.mapPosition.camera?.centerCoordinate.longitude = address.coordinates.longitude
-                state.detailsTile = .offerOrder(details: "\(address)")
                 state.order = order
-                return .none
+                return .run { [order] send in
+                    guard case let .delivery(address) = order.destination else {
+                        return
+                    }
+                    let request = MKDirections.Request()
+                    request.source = .init(placemark: .init(coordinate: .restaurant))
+                    request.destination = .init(placemark: .init(coordinate: .client))
+                    request.transportType = .any
+                    let directions = MKDirections(request: request)
+                    let response = try? await directions.calculate()
+                    let route = response?.routes.first
+                    await send(
+                        .newOrder(
+                            details: "\(address)",
+                            client: address.coordinates.clCoordinate,
+                            route: route
+                        )
+                    )
+                }
             case .detailsTile(.buttonTapped):
                 guard let order = state.order else {
                     fatalError("You can't tap any buttons without an order!")
@@ -105,18 +116,17 @@ struct DashboardFeature {
                     }
                 }
                 return .none
+            case .newOrder(let details, let client, let route):
+                state.detailsTile = .offerOrder(details: details)
+                state.client = client
+                state.route = route
+                // TODO: Center map on route
+                return .none
             case .orderAccepted(let order):
                 guard case let .delivery(address) = order.destination else {
                     return .none
                 }
                 state.detailsTile = .delivering(details: "\(address)")
-                // TODO: Fix
-//                state.clientPin = State.MapPin(
-//                    coordinate: .init(
-//                        latitude: address.coordinates.latitude,
-//                        longitude: address.coordinates.longitude),
-//                    kind: .client
-//                )
                 return .none
             case .orderDelivered:
                 state.detailsTile = .idle
@@ -127,8 +137,6 @@ struct DashboardFeature {
                 return .none
             case .profileTapped:
                 state.profile = ProfileFeature.State()
-                return .none
-            case .routeLoaded(_):
                 return .none
             case .mapMoved:
                 return .none
@@ -159,5 +167,11 @@ extension CLLocationCoordinate2D: @retroactive Equatable {
 extension MKCoordinateSpan:  @retroactive Equatable {
     public static func == (lhs: MKCoordinateSpan, rhs: MKCoordinateSpan) -> Bool {
         lhs.longitudeDelta == rhs.longitudeDelta && lhs.latitudeDelta == rhs.latitudeDelta
+    }
+}
+
+extension MapPointModel {
+    var clCoordinate: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 }
