@@ -4,7 +4,7 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @Perception.Bindable var store: StoreOf<AppFeature>
+    @Bindable var store: StoreOf<AppFeature>
 
     var body: some View {
         WithPerceptionTracking {

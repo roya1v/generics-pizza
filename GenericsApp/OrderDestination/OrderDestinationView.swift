@@ -6,7 +6,7 @@ import SwiftUI
 
 struct OrderDestinationView: View {
 
-    @Perception.Bindable
+    @Bindable
     var store: StoreOf<OrderDestinationFeature>
 
     var body: some View {

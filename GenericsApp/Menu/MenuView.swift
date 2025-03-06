@@ -6,7 +6,7 @@ import SwiftUI
 
 struct MenuView: View {
 
-    @Perception.Bindable
+    @Bindable
     var store: StoreOf<MenuFeature>
 
     var body: some View {

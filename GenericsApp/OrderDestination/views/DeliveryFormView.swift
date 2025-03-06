@@ -27,7 +27,7 @@ struct DeliveryFormView: View {
         case street, floor, appartment, comment
     }
 
-    @Perception.Bindable
+    @Bindable
     var store: StoreOf<DeliveryFormFeature>
 
     @FocusState

@@ -7,7 +7,7 @@ import ComposableArchitecture
 
 struct CartView: View {
 
-    @Perception.Bindable
+    @Bindable
     var store: StoreOf<CartFeature>
 
     var body: some View {
