@@ -38,6 +38,7 @@ struct Customer: AsyncParsableCommand {
                         print("\t - Order is being delivered")
                     case .finished:
                         print("\t - Order has been delivered")
+                        return
                     }
                 }
             }

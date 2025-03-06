@@ -9,7 +9,7 @@ let baseUrl = "http://localhost:8080"
 struct Bot: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         abstract: "A set of bots for generics pizza.",
-        subcommands: [Restaurant.self, Customer.self, Driver.self],
-        defaultSubcommand: Restaurant.self
+        subcommands: [Actor.self, Scenario.self],
+        defaultSubcommand: Scenario.self
     )
 }
