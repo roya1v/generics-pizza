@@ -8,37 +8,55 @@ struct MainHeaderView: View {
 
     var body: some View {
         HStack {
-            VStack {
+            destinationIcon
+            VStack(alignment: .leading) {
                 HStack {
-                    Spacer()
                     Text("Generic's restaurant #1")
-                    Spacer()
+                        .font(.subheadline)
                     Image(systemName: "chevron.down")
                         .foregroundStyle(Color.gAccent)
 
                 }
                 destinationLabel
                     .font(.gCaption)
+                    .foregroundStyle(.gray)
             }
             .onTapGesture {
                 store.send(.showOrderDestination)
             }
-            // This will be used later
-            // Circle()
-            //     .fill(Color.white)
-            //     .frame(width: 40.0, height: 40.0)
+            Spacer()
+            avatar
         }
+        .padding(.horizontal, .gS)
     }
 
     @ViewBuilder
     private var destinationLabel: some View {
-        WithPerceptionTracking {
-            switch store.destination {
-            case .pickUp:
-                Text("Self pick up")
-            case .delivery(let address):
-                Text("Delivery to \(address.street)")
-            }
+        switch store.destination {
+        case .pickUp:
+            Text("Self pick up")
+        case .delivery(let address):
+            Text("Delivery to \(address.street)")
         }
+    }
+
+    private var avatar: some View {
+        ZStack {
+            Circle()
+                .fill(.gray.gradient)
+            Image(systemName: "person.fill")
+                .foregroundStyle(.white)
+        }
+        .frame(width: 40.0, height: 40.0)
+    }
+
+    private var destinationIcon: some View {
+        ZStack {
+            Circle()
+                .fill(.gray.gradient)
+            Image(systemName: "fork.knife")
+                .foregroundStyle(.white)
+        }
+        .frame(width: 40.0, height: 40.0)
     }
 }

@@ -10,36 +10,34 @@ struct MenuView: View {
     var store: StoreOf<MenuFeature>
 
     var body: some View {
-        WithPerceptionTracking {
-            ZStack {
-                RoundedRectangle(cornerRadius: .gM)
-                    .fill(Color.white)
-                    .ignoresSafeArea()
+        ZStack {
+            RoundedRectangle(cornerRadius: .gXL)
+                .fill(Color.white)
+                .ignoresSafeArea()
 
-                VStack {
-                    switch store.contentState {
-                    case .loading:
-                        ProgressView()
-                    case .error:
-                        error
-                    case .loaded:
-                        menu
-                    }
+            VStack {
+                switch store.contentState {
+                case .loading:
+                    ProgressView()
+                case .error:
+                    error
+                case .loaded:
+                    menu
                 }
             }
-            .fullScreenCover(
-                item: $store.scope(
-                    state: \.menuDetail,
-                    action: \.menuDetail
-                )
-            ) { item in
-                NavigationView {  // So we see the nav title
-                    MenuDetailView(store: item)
-                }
+        }
+        .fullScreenCover(
+            item: $store.scope(
+                state: \.menuDetail,
+                action: \.menuDetail
+            )
+        ) { item in
+            NavigationView {  // So we see the nav title
+                MenuDetailView(store: item)
             }
-            .task {
-                store.send(.appeared)
-            }
+        }
+        .task {
+            store.send(.appeared)
         }
     }
 

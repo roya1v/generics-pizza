@@ -15,7 +15,6 @@ struct ContentView: View {
                         .ignoresSafeArea()
                     VStack {
                         MainHeaderView(store: store)
-                            .padding()
                         MenuView(
                             store: store.scope(
                                 state: \.menu,
@@ -92,35 +91,8 @@ struct ContentView: View {
                 trackingState: nil,
                 orderDestination: nil,
                 menu: MenuFeature.State(
-                    header: MenuHeaderFeature.State(
-                        categories: [
-                            MenuItem.Category(
-                                id: nil,
-                                name: "Pizza"
-                            )
-                        ],
-                        selected: MenuItem.Category(
-                            id: nil,
-                            name: "Pizza"
-                        )
-                    ),
-                    list: MenuListFeature.State(
-                        items: [
-                            MenuRowFeature.State(
-                                item: MenuItem(
-                                    id: UUID(),
-                                    title: "Test",
-                                    description: "Test",
-                                    price: 999,
-                                    isHidden: false,
-                                    category: nil
-                                ),
-                                image: nil,
-                                isVisible: true
-                            )
-                        ],
-                        scrolledTo: nil
-                    ),
+                    header: .preview,
+                    list: .preview,
                     contentState: .loaded,
                     menuDetail: nil),
                 cart: Shared([]),

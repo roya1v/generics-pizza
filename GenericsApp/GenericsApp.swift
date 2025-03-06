@@ -9,10 +9,11 @@ let restaurantCoordinates = CLLocationCoordinate2D(
 
 @main
 struct GenericsApp: App {
-    static let store = Store(initialState: AppFeature.State(cart: Shared([]),
-                                                            destination: Shared(.pickUp))) {
+    static let store = Store(
+        initialState: AppFeature.State(
+            cart: Shared([]),
+            destination: Shared(.pickUp))) {
         AppFeature()
-            ._printChanges()
     }
 
     var body: some Scene {

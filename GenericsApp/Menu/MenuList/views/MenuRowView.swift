@@ -32,45 +32,43 @@ struct MenuRowView: View {
     let store: StoreOf<MenuRowFeature>
 
     var body: some View {
-        WithPerceptionTracking {
-            HStack {
-                image
-                VStack(alignment: .leading) {
-                    Text(store.item.title)
-                        .font(.headline)
-                    Text(store.item.description)
-                        .font(.gCaption)
-                        .foregroundStyle(.secondary)
-                        .lineLimit(3)
-                    Button {
-                        store.send(.rowTapped)
-                    } label: {
-                        Text(store.item.formattedPrice())
-                            .font(.caption)
-                    }
-                    .buttonStyle(GPrimaryPillButtonStyle())
+        HStack {
+            image
+                .frame(width: 160.0)
+            VStack(alignment: .leading) {
+                Text(store.item.title)
+                    .font(.headline)
+                Text(store.item.description)
+                    .font(.gCaption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(3)
+                Button {
+                    store.send(.rowTapped)
+                } label: {
+                    Text("for \(store.item.formattedPrice())")
+                        .font(.footnote)
+                        .padding(.horizontal, .gXS)
                 }
+                .buttonStyle(GPrimaryPillButtonStyle())
             }
-            .onTapGesture {
-                store.send(.rowTapped)
-            }
+        }
+        .listRowInsets(EdgeInsets())
+        .padding(.trailing, .gXS)
+        .onTapGesture {
+            store.send(.rowTapped)
         }
     }
 
     @ViewBuilder
     private var image: some View {
-        WithPerceptionTracking {
-            if let image = store.image {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 75.0)
-            } else {
-                Image("pizzza_placeholder")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 75.0)
-            }
+        if let image = store.image {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFit()
+        } else {
+            Image("pizzza_placeholder")
+                .resizable()
+                .scaledToFit()
         }
     }
 }
