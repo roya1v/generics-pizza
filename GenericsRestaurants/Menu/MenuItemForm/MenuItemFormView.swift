@@ -5,7 +5,7 @@ import SharedModels
 
 struct MenuItemFormView: View {
 
-    @Perception.Bindable var store: StoreOf<MenuItemFormFeature>
+    @Bindable var store: StoreOf<MenuItemFormFeature>
     @State var isSelectingImage = false
 
     var body: some View {

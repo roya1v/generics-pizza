@@ -3,7 +3,7 @@ import ComposableArchitecture
 
 struct NewCategoryView: View {
 
-    @Perception.Bindable
+    @Bindable
     var store: StoreOf<NewCategoryFeature>
 
     var body: some View {

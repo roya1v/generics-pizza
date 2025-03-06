@@ -4,7 +4,7 @@ import AuthLogic
 
 struct CreateAccountView: View {
 
-    @Perception.Bindable var store: StoreOf<CreateAccountFeature>
+    @Bindable var store: StoreOf<CreateAccountFeature>
 
     var body: some View {
         WithPerceptionTracking {

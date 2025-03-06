@@ -46,6 +46,10 @@ let package = Package(
         .executableTarget(
             name: "GenericsBot",
             dependencies: [
+                "SwiftlyHttp",
+                "SharedModels",
+                "GenericsCore",
+                .product(name: "ArgumentParser", package: "swift-argument-parser")
             ]
         ),
         .target(
