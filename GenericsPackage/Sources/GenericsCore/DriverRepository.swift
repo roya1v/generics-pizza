@@ -2,6 +2,7 @@ import Combine
 import Foundation
 import SharedModels
 import SwiftlyHttp
+import Spyable
 
 public func buildDriverRepository(
     url: String,
@@ -10,6 +11,7 @@ public func buildDriverRepository(
     DriverRepositoryImpl(baseURL: url, authenticationProvider: authenticationProvider)
 }
 
+@Spyable
 public protocol DriverRepository {
     func getFeed() -> AnyPublisher<DriverFromServerMessage, Error>
     func send(_ message: DriverToServerMessage) async throws

@@ -38,6 +38,13 @@
 			remoteGlobalIDString = 01D4CEF32D71D2C8008975CD;
 			remoteInfo = GenericsRestaurants;
 		};
+		01DA7FBB2DCB89A8003F3F93 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01D4CD532D71C83E008975CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01D4CEAD2D71D181008975CD;
+			remoteInfo = GenericsDriver;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +53,7 @@
 		01D4CEAE2D71D181008975CD /* GenericsDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01D4CEF42D71D2C8008975CD /* GenericsRestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsRestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01D4CF592D71D625008975CD /* GenericsRestaurantsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsRestaurantsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		01DA7FB72DCB89A8003F3F93 /* GenericsDriverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsDriverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -67,6 +75,11 @@
 		01D4CF5A2D71D625008975CD /* GenericsRestaurantsTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = GenericsRestaurantsTests;
+			sourceTree = "<group>";
+		};
+		01DA7FB82DCB89A8003F3F93 /* GenericsDriverTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GenericsDriverTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -121,6 +134,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		01DA7FB42DCB89A8003F3F93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -131,6 +151,7 @@
 				01D4CEAF2D71D182008975CD /* GenericsDriver */,
 				01D4CEF52D71D2C9008975CD /* GenericsRestaurants */,
 				01D4CF5A2D71D625008975CD /* GenericsRestaurantsTests */,
+				01DA7FB82DCB89A8003F3F93 /* GenericsDriverTests */,
 				01D4CD5C2D71C83E008975CD /* Products */,
 				01D4CD882D71C97C008975CD /* GenericsPackage */,
 				01D4CE592D71CB03008975CD /* Frameworks */,
@@ -144,6 +165,7 @@
 				01D4CEAE2D71D181008975CD /* GenericsDriver.app */,
 				01D4CEF42D71D2C8008975CD /* GenericsRestaurants.app */,
 				01D4CF592D71D625008975CD /* GenericsRestaurantsTests.xctest */,
+				01DA7FB72DCB89A8003F3F93 /* GenericsDriverTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -268,6 +290,29 @@
 			productReference = 01D4CF592D71D625008975CD /* GenericsRestaurantsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		01DA7FB62DCB89A8003F3F93 /* GenericsDriverTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01DA7FBD2DCB89A8003F3F93 /* Build configuration list for PBXNativeTarget "GenericsDriverTests" */;
+			buildPhases = (
+				01DA7FB32DCB89A8003F3F93 /* Sources */,
+				01DA7FB42DCB89A8003F3F93 /* Frameworks */,
+				01DA7FB52DCB89A8003F3F93 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01DA7FBC2DCB89A8003F3F93 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				01DA7FB82DCB89A8003F3F93 /* GenericsDriverTests */,
+			);
+			name = GenericsDriverTests;
+			packageProductDependencies = (
+			);
+			productName = GenericsDriverTests;
+			productReference = 01DA7FB72DCB89A8003F3F93 /* GenericsDriverTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -290,6 +335,10 @@
 					01D4CF582D71D625008975CD = {
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = 01D4CEF32D71D2C8008975CD;
+					};
+					01DA7FB62DCB89A8003F3F93 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 01D4CEAD2D71D181008975CD;
 					};
 				};
 			};
@@ -317,6 +366,7 @@
 				01D4CEAD2D71D181008975CD /* GenericsDriver */,
 				01D4CEF32D71D2C8008975CD /* GenericsRestaurants */,
 				01D4CF582D71D625008975CD /* GenericsRestaurantsTests */,
+				01DA7FB62DCB89A8003F3F93 /* GenericsDriverTests */,
 			);
 		};
 /* End PBXProject section */
@@ -344,6 +394,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		01D4CF572D71D625008975CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01DA7FB52DCB89A8003F3F93 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -381,6 +438,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		01DA7FB32DCB89A8003F3F93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -388,6 +452,11 @@
 			isa = PBXTargetDependency;
 			target = 01D4CEF32D71D2C8008975CD /* GenericsRestaurants */;
 			targetProxy = 01D4CF5D2D71D625008975CD /* PBXContainerItemProxy */;
+		};
+		01DA7FBC2DCB89A8003F3F93 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01D4CEAD2D71D181008975CD /* GenericsDriver */;
+			targetProxy = 01DA7FBB2DCB89A8003F3F93 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -577,6 +646,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GenericsDriver/Preview Content\"";
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need access to your location to provide a good expirience for everyone";
@@ -607,6 +677,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"GenericsDriver/Preview Content\"";
+				DEVELOPMENT_TEAM = 4S3J7NRC9R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need access to your location to provide a good expirience for everyone";
@@ -719,6 +790,40 @@
 			};
 			name = Release;
 		};
+		01DA7FBE2DCB89A8003F3F93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsDriverTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericsDriver.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GenericsDriver";
+			};
+			name = Debug;
+		};
+		01DA7FBF2DCB89A8003F3F93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsDriverTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenericsDriver.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/GenericsDriver";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -763,6 +868,15 @@
 			buildConfigurations = (
 				01D4CF602D71D625008975CD /* Debug */,
 				01D4CF612D71D625008975CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01DA7FBD2DCB89A8003F3F93 /* Build configuration list for PBXNativeTarget "GenericsDriverTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01DA7FBE2DCB89A8003F3F93 /* Debug */,
+				01DA7FBF2DCB89A8003F3F93 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
