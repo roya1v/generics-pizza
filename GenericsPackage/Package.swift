@@ -90,5 +90,14 @@ let package = Package(
                 "GenericsCore"
             ]
         ),
+        .testTarget(
+            name: "AuthLogicTests",
+            dependencies: [
+                "GenericsCore",
+                "AuthLogic",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "Factory", package: "Factory"),
+            ]
+        )
     ]
 )
