@@ -49,6 +49,8 @@ struct LoginFeatureTests {
         }
 
         #expect(authRepository.loginEmailPasswordCalled == true)
+        #expect(authRepository.loginEmailPasswordReceivedArguments?.email == mockEmail)
+        #expect(authRepository.loginEmailPasswordReceivedArguments?.password == mockPassword)
     }
 
     @Test
@@ -84,6 +86,8 @@ struct LoginFeatureTests {
         }
 
         #expect(authRepository.loginEmailPasswordCalled == true)
+        #expect(authRepository.loginEmailPasswordReceivedArguments?.email == mockEmail)
+        #expect(authRepository.loginEmailPasswordReceivedArguments?.password == mockPassword)
     }
 }
 
