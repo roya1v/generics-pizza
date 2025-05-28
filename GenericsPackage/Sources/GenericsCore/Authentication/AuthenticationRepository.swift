@@ -3,9 +3,13 @@ import Foundation
 import SharedModels
 import Spyable
 import SwiftlyHttp
+import Factory
 
-public func buildAuthenticationRepository(url: String) -> AuthenticationRepository {
-    AuthenticationRepositoryImpl(baseURL: url)
+extension Container {
+    public var authenticationRepository: Factory<AuthenticationRepository> {
+        self { AuthenticationRepositoryImpl() }
+            .singleton
+    }
 }
 
 @Spyable
@@ -22,11 +26,7 @@ public protocol AuthenticationRepository: AuthenticationProvider {
 final class AuthenticationRepositoryImpl: AuthenticationRepository {
 
     private let settingsService = LocalSettingsServiceImpl()
-    private let authenticationService: AuthenticationService
-
-    init(baseURL: String) {
-        self.authenticationService = AuthenticationService(baseURL: baseURL)
-    }
+    private let authenticationService = AuthenticationService()
 
     // MARK: - AuthenticationRepository
 

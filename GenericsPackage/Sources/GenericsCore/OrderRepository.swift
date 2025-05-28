@@ -2,9 +2,13 @@ import Combine
 import Foundation
 import SharedModels
 import SwiftlyHttp
+import Factory
 
-public func buildOrderRepository(url: String) -> OrderRepository {
-    OrderRepositoryImpl(baseURL: url)
+extension Container {
+    public var orderRepository: Factory<OrderRepository> {
+        self { OrderRepositoryImpl() }
+            .singleton
+    }
 }
 
 public enum OrderError: Error {
@@ -20,11 +24,9 @@ public protocol OrderRepository {
 final class OrderRepositoryImpl: OrderRepository {
 
     private var socket: SwiftlyWebSocketConnection?
-    private let baseURL: String
 
-    init(baseURL: String) {
-        self.baseURL = baseURL
-    }
+    @Injected(\.serverURL)
+    private var serverURL
 
     // MARK: - OrderRepository
 
@@ -76,7 +78,7 @@ final class OrderRepositoryImpl: OrderRepository {
     }
 
     private func getRequest() -> SwiftlyHttp {
-        SwiftlyHttp(baseURL: baseURL)!
+        SwiftlyHttp(baseURL: serverURL)
             .add(path: "order")
             .method(.post)
     }
