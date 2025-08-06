@@ -34,7 +34,7 @@ services:
   app:
     image: generics-server:latest
     build:
-      context: .
+      context: ./GenericsPackage
     environment:
       <<: *shared_environment
     depends_on:
@@ -47,7 +47,7 @@ services:
   migrate:
     image: generics-server:latest
     build:
-      context: .
+      context: ./GenericsPackage
     environment:
       <<: *shared_environment
     depends_on:
@@ -59,7 +59,7 @@ services:
   revert:
     image: generics-server:latest
     build:
-      context: .
+      context: ./GenericsPackage
     environment:
       <<: *shared_environment
     depends_on:
