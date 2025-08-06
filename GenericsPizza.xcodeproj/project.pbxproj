@@ -31,6 +31,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0109761C2E43FDFC00637482 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01D4CD532D71C83E008975CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01D4CD702D71C94B008975CD;
+			remoteInfo = GenericsApp;
+		};
 		01D4CF5D2D71D625008975CD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 01D4CD532D71C83E008975CD /* Project object */;
@@ -48,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		010976162E43FDFC00637482 /* GenericsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenericsAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01D4CD712D71C94B008975CD /* GenericsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01D4CD882D71C97C008975CD /* GenericsPackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = GenericsPackage; sourceTree = "<group>"; };
 		01D4CEAE2D71D181008975CD /* GenericsDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericsDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +65,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		010976172E43FDFC00637482 /* GenericsAppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = GenericsAppUITests;
+			sourceTree = "<group>";
+		};
 		01D4CD722D71C94B008975CD /* GenericsApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = GenericsApp;
@@ -85,6 +98,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		010976132E43FDFC00637482 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		01D4CD6E2D71C94B008975CD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -152,6 +172,7 @@
 				01D4CEF52D71D2C9008975CD /* GenericsRestaurants */,
 				01D4CF5A2D71D625008975CD /* GenericsRestaurantsTests */,
 				01DA7FB82DCB89A8003F3F93 /* GenericsDriverTests */,
+				010976172E43FDFC00637482 /* GenericsAppUITests */,
 				01D4CD5C2D71C83E008975CD /* Products */,
 				01D4CD882D71C97C008975CD /* GenericsPackage */,
 				01D4CE592D71CB03008975CD /* Frameworks */,
@@ -166,6 +187,7 @@
 				01D4CEF42D71D2C8008975CD /* GenericsRestaurants.app */,
 				01D4CF592D71D625008975CD /* GenericsRestaurantsTests.xctest */,
 				01DA7FB72DCB89A8003F3F93 /* GenericsDriverTests.xctest */,
+				010976162E43FDFC00637482 /* GenericsAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -180,6 +202,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		010976152E43FDFC00637482 /* GenericsAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 010976202E43FDFD00637482 /* Build configuration list for PBXNativeTarget "GenericsAppUITests" */;
+			buildPhases = (
+				010976122E43FDFC00637482 /* Sources */,
+				010976132E43FDFC00637482 /* Frameworks */,
+				010976142E43FDFC00637482 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0109761D2E43FDFC00637482 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				010976172E43FDFC00637482 /* GenericsAppUITests */,
+			);
+			name = GenericsAppUITests;
+			packageProductDependencies = (
+			);
+			productName = GenericsAppUITests;
+			productReference = 010976162E43FDFC00637482 /* GenericsAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		01D4CD702D71C94B008975CD /* GenericsApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01D4CD7C2D71C94D008975CD /* Build configuration list for PBXNativeTarget "GenericsApp" */;
@@ -323,6 +368,10 @@
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					010976152E43FDFC00637482 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 01D4CD702D71C94B008975CD;
+					};
 					01D4CD702D71C94B008975CD = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -367,11 +416,19 @@
 				01D4CEF32D71D2C8008975CD /* GenericsRestaurants */,
 				01D4CF582D71D625008975CD /* GenericsRestaurantsTests */,
 				01DA7FB62DCB89A8003F3F93 /* GenericsDriverTests */,
+				010976152E43FDFC00637482 /* GenericsAppUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		010976142E43FDFC00637482 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		01D4CD6F2D71C94B008975CD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -410,6 +467,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		010976122E43FDFC00637482 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		01D4CD6D2D71C94B008975CD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -448,6 +512,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0109761D2E43FDFC00637482 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01D4CD702D71C94B008975CD /* GenericsApp */;
+			targetProxy = 0109761C2E43FDFC00637482 /* PBXContainerItemProxy */;
+		};
 		01D4CF5E2D71D625008975CD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 01D4CEF32D71D2C8008975CD /* GenericsRestaurants */;
@@ -461,6 +530,48 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		0109761E2E43FDFC00637482 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = GenericsApp;
+			};
+			name = Debug;
+		};
+		0109761F2E43FDFC00637482 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roya1v.GenericsAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = GenericsApp;
+			};
+			name = Release;
+		};
 		01D4CD672D71C840008975CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -829,6 +940,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		010976202E43FDFD00637482 /* Build configuration list for PBXNativeTarget "GenericsAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0109761E2E43FDFC00637482 /* Debug */,
+				0109761F2E43FDFC00637482 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		01D4CD562D71C83E008975CD /* Build configuration list for PBXProject "GenericsPizza" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
