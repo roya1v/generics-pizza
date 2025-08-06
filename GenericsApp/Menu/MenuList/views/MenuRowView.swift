@@ -72,3 +72,26 @@ struct MenuRowView: View {
         }
     }
 }
+
+#Preview(traits: .sizeThatFitsLayout) {
+    MenuRowView(
+        store: StoreOf<MenuRowFeature>(
+            initialState: MenuRowFeature.State(
+                item: MenuItem(
+                    id: nil,
+                    title: "Preview pizza",
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    price: 999,
+                    isHidden: false,
+                    category: MenuItem.Category(
+                        id: nil,
+                        name: "")
+                ),
+                image: UIImage(named: "preview_pizza"),
+                isVisible: true
+            )
+        ) {
+            EmptyReducer()
+        }
+    )
+}
