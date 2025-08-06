@@ -32,3 +32,40 @@ struct OrderListRowView: View {
         }
     }
 }
+
+#Preview(traits: .sizeThatFitsLayout) {
+    OrderListRowView(
+        order: OrderModel(
+            id: UUID(),
+            createdAt: .now,
+            items: [
+                OrderModel.Item(
+                    menuItem: MenuItem(
+                        id: nil,
+                        title: "Preview pizza",
+                        description: "",
+                        price: 999,
+                        isHidden: false,
+                        category: nil
+                    ),
+                    count: 3
+                ),
+                OrderModel.Item(
+                    menuItem: MenuItem(
+                        id: nil,
+                        title: "Other preview pizza",
+                        description: "",
+                        price: 699,
+                        isHidden: false,
+                        category: nil
+                    ),
+                    count: 1
+                ),
+            ],
+            state: .inProgress,
+            destination: .pickUp
+        )
+    ) {
+
+    }
+}
