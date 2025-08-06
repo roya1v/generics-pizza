@@ -21,11 +21,6 @@ extension Container {
         }
     }
 
-    var orderRepository: Factory<OrderRepository> {
-        self { buildOrderRepository(url: self.serverUrl()) }
-            .singleton
-    }
-
     var usersRepository: Factory<UsersRepository> {
         self {
             buildUsersRepository(
