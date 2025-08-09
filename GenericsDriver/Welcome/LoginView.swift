@@ -28,7 +28,7 @@ struct LoginView: View {
                     Text("Login")
                 }
             }
-            .buttonStyle(GPrimaryButtonStyle())
+            .buttonStyle(GPrimaryButtonStyle(isWide: true))
             Button("Forgot password") {
 
             }

@@ -2,11 +2,15 @@ import SwiftUI
 
 public struct GPrimaryButtonStyle: ButtonStyle {
 
-    public init() { }
+    private let isWide: Bool
+
+    public init(isWide: Bool = false) {
+        self.isWide = isWide
+    }
 
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: isWide ? .infinity : nil)
             .padding(.gM)
             .background(Color.gAccent)
             .foregroundStyle(.white)

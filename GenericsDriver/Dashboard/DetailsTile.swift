@@ -35,7 +35,7 @@ struct DetailsTile: View {
                 Button("Accept") {
                     store.send(.buttonTapped)
                 }
-                .buttonStyle(GPrimaryButtonStyle())
+                .buttonStyle(GPrimaryButtonStyle(isWide: true))
             case .delivering(let details):
                 Text("New order")
                     .font(.largeTitle)
@@ -43,7 +43,7 @@ struct DetailsTile: View {
                 Button("Delivered") {
                     store.send(.buttonTapped)
                 }
-                .buttonStyle(GPrimaryButtonStyle())
+                .buttonStyle(GPrimaryButtonStyle(isWide: true))
             }
         }
         .padding()

@@ -19,7 +19,7 @@ struct PermissionsView: View {
             } label: {
                 Text("Grant permission")
             }
-            .buttonStyle(GPrimaryButtonStyle())
+            .buttonStyle(GPrimaryButtonStyle(isWide: true))
             Button("Skip") {
 
             }

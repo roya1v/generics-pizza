@@ -29,7 +29,7 @@ struct CartView: View {
                             .frame(maxWidth: .infinity)
                             .frame(height: 32.0)
                     }
-                    .buttonStyle(GPrimaryButtonStyle())
+                    .buttonStyle(GPrimaryButtonStyle(isWide: true))
                     .padding()
                     .padding([.bottom])
                     .background(.thinMaterial)
